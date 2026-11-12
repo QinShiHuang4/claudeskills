@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contact Bundle</title>
+<meta name="description" content="Questions, feedback, safety reports or press. Get in touch with the Bundle team.">
+<link rel="canonical" href="https://meetbundle.com/contact/">
+<meta name="robots" content="index, follow">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/icon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#05070B">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Bundle">
+<meta property="og:url" content="https://meetbundle.com/contact/">
+<meta property="og:title" content="Contact Bundle">
+<meta property="og:description" content="Questions, feedback, safety reports or press. Get in touch with the Bundle team.">
+<meta property="og:image" content="https://meetbundle.com/og.png">
+<meta property="og:image:alt" content="The Bundle heart logo on a black background">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Work+Sans:wght@400;500;600&family=Roboto:wght@800&display=swap">
+<link rel="stylesheet" href="/site.css">
+<script src="/config.js"></script>
+</head>
+<body>
+<header><div class="wrap"><a class="logo" href="/"><img src="/logo.png" alt="" width="28" height="28">bundle</a><a class="btn" href="/#download">Get the app</a></div></header>
+<main><div class="wrap">
+
+<div class="eyebrow">Contact</div>
+<h1>Talk to the Bundle team.</h1>
+<p class="lead">Questions, feedback, a safety concern or a press request. We reply within 2 business days.</p>
+<div class="card">
+<form id="f" novalidate data-ok="Thanks. Your message is on its way, and we’ll reply by email.">
+  <label for="name">Your name<input id="name" name="name" autocomplete="name" required></label>
+  <label for="email">Email<input id="email" name="email" type="email" autocomplete="email" required></label>
+  <label for="topic">Topic<select id="topic" name="topic"><option>General question</option><option>Account or login</option><option>Safety or report a user</option><option>Feedback or idea</option><option>Press or partnerships</option></select></label>
+  <label for="message">Message<textarea id="message" name="message" required minlength="10"></textarea></label>
+  <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
+  <div><button class="btn" type="submit"><span class="spin" aria-hidden="true"></span>Send message</button></div>
+  <p class="status" role="status" aria-live="polite"></p>
+</form>
+</div>
+<p class="muted" style="margin-top:24px">Prefer email? Write to <a href="mailto:support@meetbundle.com">support@meetbundle.com</a>. To report someone, you can also use <b>Report</b> on their profile or chat in the app.</p>
+</div></main>
+<footer><div class="wrap"><span>© 2026 Meet Bundle</span><nav aria-label="Footer"><a href="/privacy/">Privacy</a><a href="/contact/">Contact</a><a href="/delete-account/">Delete account</a></nav></div></footer>
+<script src="/forms.js"></script><script>bundleForm(document.getElementById("f"),"Bundle contact form")</script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Delete your Bundle account</title>
+<meta name="description" content="How to delete your Bundle account and data, in the app or by sending a request to Meet Bundle.">
+<link rel="canonical" href="https://meetbundle.com/delete-account/">
+<meta name="robots" content="index, follow">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/icon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#05070B">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Bundle">
+<meta property="og:url" content="https://meetbundle.com/delete-account/">
+<meta property="og:title" content="Delete your Bundle account">
+<meta property="og:description" content="How to delete your Bundle account and data, in the app or by sending a request to Meet Bundle.">
+<meta property="og:image" content="https://meetbundle.com/og.png">
+<meta property="og:image:alt" content="The Bundle heart logo on a black background">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Work+Sans:wght@400;500;600&family=Roboto:wght@800&display=swap">
+<link rel="stylesheet" href="/site.css">
+<script src="/config.js"></script>
+</head>
+<body>
+<header><div class="wrap"><a class="logo" href="/"><img src="/logo.png" alt="" width="28" height="28">bundle</a><a class="btn" href="/#download">Get the app</a></div></header>
+<main><div class="wrap">
+
+<div class="eyebrow">Account</div>
+<h1>Delete your Bundle account.</h1>
+<p class="lead">This page explains how to delete your account with Bundle, the dating app run by Meet Bundle, and what happens to your data.</p>
+
+<h2>Delete it in the app</h2>
+<ol class="steps">
+  <li>Open Bundle and go to the <b>Profile</b> tab.</li>
+  <li>Tap <b>Settings</b> (the gear icon).</li>
+  <li>Open <b>Account details</b>.</li>
+  <li>Tap <b>Delete account</b> and confirm.</li>
+</ol>
+
+<h2>Request deletion here</h2>
+<p>Can’t open the app, or already uninstalled it? Send a request and we’ll delete your account within 30 days. We’ll email you to confirm it’s really you before we delete anything.</p>
+<div class="card">
+<form id="f" novalidate data-ok="Request received. We’ll email you to confirm, then delete your account within 30 days.">
+  <label for="email">Email on your Bundle account<input id="email" name="email" type="email" autocomplete="email" required></label>
+  <label for="name">First name on your profile <small>Optional. Helps us find the right account.</small><input id="name" name="profile_name" autocomplete="given-name"></label>
+  <label for="reason">Reason <small>Optional</small><select id="reason" name="reason"><option value="">Prefer not to say</option><option>I met someone</option><option>Taking a break</option><option>Not enough people near me</option><option>Privacy concerns</option><option>Something else</option></select></label>
+  <label class="check"><input type="checkbox" id="confirm" name="confirm" value="yes" required>I understand my profile, photos, matches and messages will be permanently deleted and can’t be recovered.</label>
+  <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
+  <div><button class="btn danger" type="submit"><span class="spin" aria-hidden="true"></span>Request account deletion</button></div>
+  <p class="status" role="status" aria-live="polite"></p>
+</form>
+</div>
+
+<h2>What we delete</h2>
+<ul>
+  <li>Your profile, photos, interests and answers</li>
+  <li>Your Likes, Winks, Sparks, matches and chats</li>
+  <li>Your email sign-in and account settings</li>
+</ul>
+<h2>What we keep, and for how long</h2>
+<ul>
+  <li>Reports and safety records about your account, for up to 12 months, to keep people safe and stop banned users from returning.</li>
+  <li>Records we must keep by law, only as long as the law requires.</li>
+  <li>Backups are overwritten within 30 days.</li>
+</ul>
+<p class="muted">Questions? Email <a href="mailto:support@meetbundle.com">support@meetbundle.com</a>.</p>
+</div></main>
+<footer><div class="wrap"><span>© 2026 Meet Bundle</span><nav aria-label="Footer"><a href="/privacy/">Privacy</a><a href="/contact/">Contact</a><a href="/delete-account/">Delete account</a></nav></div></footer>
+<script src="/forms.js"></script><script>bundleForm(document.getElementById("f"),"Bundle account deletion request")</script>
+</body>
+</html>

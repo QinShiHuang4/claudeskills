@@ -1,17 +1,23 @@
 <!doctype html>
 <html lang="en">
 <head>
-<title>Bundle</title>
+<title>Bundle: Dating app for real connections</title>
 <meta name="description" content="Bundle is a dating app for iOS and Android. Wink, Like or send a Spark with a message, and start chatting the moment it's mutual.">
-<link rel="icon" type="image/png" href="favicon.png">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="canonical" href="https://meetbundle.com/">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/icon-16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#05070B">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://meetbundle.com/">
 <meta property="og:title" content="Bundle: A little spark. A real connection.">
 <meta property="og:description" content="Meet people one profile at a time. Wink, Like or send a Spark, and start chatting the moment it's mutual.">
 <meta property="og:image" content="https://meetbundle.com/og.png">
+<meta property="og:image:alt" content="The Bundle heart logo on a black background">
 <meta name="twitter:card" content="summary_large_image">
+<script src="/config.js"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -72,7 +78,9 @@ h1,h2,h3{font-family:var(--head);letter-spacing:-.02em;margin:0;text-wrap:balanc
 
 /* device frame; the screen is a 360×780 app canvas scaled to fit */
 .phone{width:min(300px,78vw);aspect-ratio:360/780;border-radius:42px;padding:9px;background:#0B0E15;box-shadow:inset 0 0 0 1.5px #2C3546,0 40px 80px -30px rgba(36,104,242,.55);position:relative;flex:none;max-width:100%}
-.scr{position:absolute;inset:9px;border-radius:33px;overflow:hidden;background:var(--a-bg)}
+.phone::before{content:"";position:absolute;inset:9px;border-radius:33px;background:linear-gradient(110deg,#E9EEF6 30%,#F7F9FC 50%,#E9EEF6 70%);background-size:200% 100%;animation:skl 1.4s ease-in-out infinite}
+@keyframes skl{to{background-position:-200% 0}}
+.scr{position:absolute;inset:9px;z-index:1;border-radius:33px;overflow:hidden;background:var(--a-bg)}
 .cv{position:absolute;left:0;top:0;width:360px;height:780px;transform-origin:0 0;transform:scale(var(--k,.78));font-family:var(--app);color:var(--a-fg);background:var(--a-bg);display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}
 .cv *{box-sizing:border-box}
 
@@ -404,13 +412,13 @@ footer a:hover{color:var(--fg)}
         <a class="store" href="#download"><svg class="ico" aria-hidden="true"><use href="#apple"/></svg><span><small>Download on the</small><b>App Store</b></span></a>
         <a class="store" href="#download"><svg class="ico" aria-hidden="true"><use href="#play"/></svg><span><small>Get it on</small><b>Google Play</b></span></a>
       </div>
-      <p class="note">People shown in app screens are illustrated models, not Bundle members.</p>
+      <p class="note">People shown in app screens are illustrated models, not Bundle members. Questions? <a href="/contact/">Contact us</a>.</p>
     </div>
   </div>
 </section>
 </main>
 
-<footer><div class="wrap"><span>© 2026 Bundle</span><span><a href="#top">Terms</a><a href="#top">Privacy</a><a href="#safety">Safety</a></span></div></footer>
+<footer><div class="wrap"><span>© 2026 Meet Bundle</span><span><a href="/privacy/">Privacy</a><a href="/contact/">Contact</a><a href="/delete-account/">Delete account</a></span></div></footer>
 
 <script>
 /* ---------- illustrated people (stand-ins until AI photos are dropped in) ---------- */
