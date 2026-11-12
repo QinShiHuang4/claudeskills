@@ -1,13 +1,16 @@
 <title>Bundle App Store Page</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Work+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Work+Sans:wght@400;500;600&family=Roboto:wght@400;500;700;900&display=swap">
 <style>
-/* Layout (ui-ux-pro-max "App Store Style Landing"): hero with device mockup → screenshots carousel → features with SVG icons → safety → download CTA. Black theme per brief. */
+/* Layout (ui-ux-pro-max "App Store Style Landing"): hero with device → screen carousel → live Spark/match preview → features → safety → download.
+   Page is black; the phones show the app's real white theme. App tokens mirror lib/theme/app_theme.dart. */
 :root{
   --bg:#05070B; --surface:#0E1522; --surface-2:#172130; --line:#2A3547;
   --fg:#F5F7FC; --muted:#AFBACB; --blue:#2468F2; --blue-hi:#76A6FF; --blue-soft:#152B50;
-  --head:'Outfit',system-ui,sans-serif; --body:'Work Sans',system-ui,sans-serif;
+  /* app (light) */
+  --a-bg:#FFFFFF; --a-surface:#F3F6FB; --a-fg:#182132; --a-muted:#596273; --a-outline:#DCE2EB; --a-blue:#2468F2; --a-blue-soft:#EAF1FF; --a-like:#D9415A;
+  --head:'Outfit',system-ui,sans-serif; --body:'Work Sans',system-ui,sans-serif; --app:'Roboto',system-ui,sans-serif;
   --z-nav:50; --t:200ms;
   color-scheme:dark;
 }
@@ -22,20 +25,19 @@ h1,h2,h3{font-family:var(--head);letter-spacing:-.02em;margin:0;text-wrap:balanc
 .muted{color:var(--muted)}
 .sec{padding-block:clamp(64px,9vw,112px)}
 .ico{width:24px;height:24px;flex:none}
+.h2{font-size:clamp(32px,4.4vw,52px);font-weight:800;line-height:1.05;max-width:18ch}
 
-/* floating nav */
+/* nav */
 .nav{position:fixed;z-index:var(--z-nav);top:calc(12px + env(safe-area-inset-top,0px));left:max(12px,env(safe-area-inset-left,0px));right:max(12px,env(safe-area-inset-right,0px));max-width:1176px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 8px 8px 18px;border-radius:999px;background:rgba(14,21,34,.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
-.logo{display:flex;align-items:center;gap:8px;font:800 20px var(--head);text-decoration:none;min-height:44px}
-.logo svg{width:24px;height:24px}
+.logo{display:flex;align-items:center;gap:8px;font:800 21px var(--app);letter-spacing:-.02em;text-decoration:none;min-height:44px}
+.logo svg{width:28px;height:28px}
 .links{display:flex;gap:4px}
 .links a{min-height:44px;display:inline-flex;align-items:center;padding:0 14px;border-radius:999px;text-decoration:none;color:var(--muted);font-weight:500;transition:color var(--t),background var(--t)}
 .links a:hover{color:var(--fg);background:var(--surface-2)}
 .btn{min-height:48px;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:0 22px;border-radius:999px;border:0;font:600 15px var(--body);text-decoration:none;cursor:pointer;background:var(--blue);color:#fff;transition:background var(--t)}
 .btn:hover{background:#1958D6}
-.btn.sec-btn{background:var(--surface-2);color:var(--fg)}
-.btn.sec-btn:hover{background:var(--line)}
-
-/* store badges */
+.btn.ghost{background:var(--surface-2);color:var(--fg)}
+.btn.ghost:hover{background:var(--line)}
 .stores{display:flex;flex-wrap:wrap;gap:12px}
 .store{min-height:56px;display:inline-flex;align-items:center;gap:12px;padding:0 20px;border-radius:14px;background:var(--fg);color:var(--bg);text-decoration:none;cursor:pointer;transition:background var(--t)}
 .store:hover{background:#DCE4F2}
@@ -43,7 +45,7 @@ h1,h2,h3{font-family:var(--head);letter-spacing:-.02em;margin:0;text-wrap:balanc
 .store b{display:block;font:700 17px/1.2 var(--head)}
 
 /* hero */
-.hero{padding-top:calc(120px + env(safe-area-inset-top,0px));padding-bottom:clamp(48px,7vw,96px);background:radial-gradient(60% 50% at 75% 45%,rgba(36,104,242,.28),transparent 70%)}
+.hero{padding-top:calc(120px + env(safe-area-inset-top,0px));padding-bottom:clamp(48px,7vw,96px);background:radial-gradient(60% 50% at 75% 45%,rgba(36,104,242,.3),transparent 70%)}
 .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
 .hero h1{font-weight:800;font-size:clamp(44px,6.4vw,84px);line-height:1}
 .hero h1 span{color:var(--blue-hi)}
@@ -52,134 +54,250 @@ h1,h2,h3{font-family:var(--head);letter-spacing:-.02em;margin:0;text-wrap:balanc
 .trust{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:28px;font-size:14px;color:var(--muted)}
 .trust span{display:inline-flex;align-items:center;gap:8px}
 .trust svg{width:18px;height:18px;color:var(--blue-hi)}
-
-/* phone frame */
-.phone{width:min(300px,78vw);aspect-ratio:9/19.5;border-radius:44px;padding:10px;background:#0A0D14;box-shadow:inset 0 0 0 1.5px #2C3546,0 40px 80px -30px rgba(36,104,242,.55);position:relative;flex:none;max-width:100%}
-.scr{position:absolute;inset:10px;border-radius:34px;overflow:hidden;background:var(--surface);display:flex;flex-direction:column;font-size:12px}
-.notch{position:absolute;top:18px;left:50%;transform:translateX(-50%);width:34%;height:22px;border-radius:20px;background:#000;z-index:3}
-.app-bar{display:flex;align-items:center;justify-content:space-between;padding:48px 16px 10px;font:700 15px var(--head)}
-.app-bar svg{width:18px;height:18px;color:var(--muted)}
-.tabbar{margin-top:auto;display:flex;justify-content:space-around;padding:10px 0 16px;border-top:1px solid var(--line)}
-.tabbar svg{width:20px;height:20px;color:var(--muted)}
-.tabbar svg.on{color:var(--blue-hi)}
-.photo{position:relative;flex:1;margin:0 12px;border-radius:22px;overflow:hidden;background:radial-gradient(90% 70% at 70% 20%,#3366E6,transparent 60%),radial-gradient(80% 60% at 20% 90%,#0B2E8A,transparent 60%),linear-gradient(160deg,#1A2236,#06080D)}
-.photo .sil{position:absolute;inset:18% 15% 0;opacity:.85}
-.photo .dots{position:absolute;top:10px;left:12px;right:12px;display:flex;gap:4px}
-.photo .dots i{flex:1;height:3px;border-radius:3px;background:rgba(255,255,255,.3)}
-.photo .dots i:first-child{background:#fff}
-.photo .meta{position:absolute;left:0;right:0;bottom:0;padding:14px;background:linear-gradient(transparent,rgba(0,0,0,.85))}
-.photo .meta b{font:700 22px var(--head)}
-.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
-.tags span{font-size:10px;padding:4px 9px;border-radius:99px;background:rgba(255,255,255,.14)}
-.acts{display:flex;justify-content:center;align-items:center;gap:12px;padding:14px 0 6px}
-.acts span{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--surface-2)}
-.acts span.like{width:56px;height:56px;background:var(--blue)}
-.acts svg{width:20px;height:20px}
-.banner{margin:0 12px 10px;padding:8px 12px;border-radius:12px;background:var(--blue-soft);color:#B6D0FF;font-size:11px;display:flex;gap:8px;align-items:center}
-.list{display:flex;flex-direction:column;padding:0 12px;gap:4px}
-.li{display:flex;align-items:center;gap:10px;padding:10px 6px;border-bottom:1px solid var(--line)}
-.av{width:38px;height:38px;border-radius:50%;flex:none;background:linear-gradient(140deg,#76A6FF,#1B2D57);position:relative}
-.av.ring{box-shadow:0 0 0 2px var(--surface),0 0 0 4px var(--blue)}
-.av .on{position:absolute;right:0;bottom:0;width:10px;height:10px;border-radius:50%;background:#34C77B;border:2px solid var(--surface)}
-.li b{display:block;font-size:13px}
-.li small{color:var(--muted);font-size:11px}
-.badge{margin-left:auto;min-width:20px;height:20px;border-radius:10px;background:var(--blue);display:grid;place-items:center;font-size:10px;font-weight:700;padding:0 6px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 12px}
-.grid2 div{aspect-ratio:3/4;border-radius:14px;position:relative;background:linear-gradient(160deg,#1C2740,#07080C);overflow:hidden}
-.grid2 div.glow{box-shadow:0 0 0 2px var(--blue-hi),0 0 18px rgba(118,166,255,.55)}
-.grid2 em{position:absolute;top:6px;right:6px;font-style:normal;font-size:9px;font-weight:700;padding:3px 7px;border-radius:99px;background:var(--blue)}
-.grid2 span{position:absolute;left:8px;bottom:7px;font-size:11px;font-weight:600}
-.msgs{flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;padding:12px}
-.m{max-width:80%;padding:9px 12px;border-radius:16px 16px 16px 4px;background:var(--surface-2)}
-.m.me{align-self:flex-end;background:var(--blue);border-radius:16px 16px 4px 16px}
-.m small{display:block;text-align:right;font-size:9px;opacity:.8}
-.input{margin:0 12px 14px;padding:11px 14px;border-radius:99px;background:var(--surface-2);color:var(--muted)}
-.ob{padding:0 18px;display:flex;flex-direction:column;gap:12px;flex:1}
-.prog{display:flex;gap:4px}
-.prog i{flex:1;height:4px;border-radius:4px;background:var(--line)}
-.prog i.f{background:var(--blue)}
-.ob h4{font:800 24px/1.05 var(--head);margin:8px 0 0}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips span{padding:7px 11px;border-radius:99px;border:1px solid var(--line);font-size:11px}
-.chips span.s{background:var(--blue);border-color:var(--blue)}
-.cta-in{margin:auto 0 16px;padding:12px;border-radius:99px;background:var(--blue);text-align:center;font-weight:600}
-.spark{margin:0 12px;padding:14px;border-radius:16px;background:var(--surface-2);font:500 15px var(--head)}
 .hero-phone{display:flex;justify-content:center}
 
-/* screenshots carousel */
+/* device frame; the screen is a 360×780 app canvas scaled to fit */
+.phone{width:min(300px,78vw);aspect-ratio:360/780;border-radius:42px;padding:9px;background:#0B0E15;box-shadow:inset 0 0 0 1.5px #2C3546,0 40px 80px -30px rgba(36,104,242,.55);position:relative;flex:none;max-width:100%}
+.scr{position:absolute;inset:9px;border-radius:33px;overflow:hidden;background:var(--a-bg)}
+.cv{position:absolute;left:0;top:0;width:360px;height:780px;transform-origin:0 0;transform:scale(var(--k,.78));font-family:var(--app);color:var(--a-fg);background:var(--a-bg);display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}
+.cv *{box-sizing:border-box}
+
+/* --- app components (white theme) --- */
+.st{height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font-size:14px;font-weight:500;flex:none}
+.st .cam{width:22px;height:22px;border-radius:50%;background:#111}
+.st .r{display:flex;gap:5px;align-items:center}
+.st .bat{width:24px;height:11px;border-radius:3px;background:#2BC55B}
+.top{height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;flex:none}
+.top .side{width:72px;display:flex;gap:16px;align-items:center}
+.top .side.r{justify-content:flex-end}
+.top svg.i{width:24px;height:24px;color:var(--a-fg)}
+.wm{display:flex;align-items:center;gap:5px;color:var(--a-blue);font:700 24px var(--app);letter-spacing:-.03em}
+.wm svg{width:26px;height:26px}
+.ttl{font:700 28px var(--app);letter-spacing:-.01em;padding:6px 18px 12px;display:flex;justify-content:space-between;align-items:baseline}
+.ttl span{font-size:15px;color:var(--a-blue);font-weight:500}
+.tabs{margin-top:auto;display:grid;grid-template-columns:repeat(4,1fr);padding:10px 0 6px;background:var(--a-bg);flex:none;border-top:1px solid #EEF1F6}
+.tabs div{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:12px;color:var(--a-muted)}
+.tabs svg{width:24px;height:24px}
+.tabs .on{color:var(--a-blue);font-weight:700}
+.navbar{height:34px;display:flex;justify-content:center;gap:76px;align-items:center;flex:none}
+.navbar i{display:block;width:13px;height:13px;background:#555;border-radius:2px}
+.navbar i:nth-child(1){clip-path:polygon(100% 0,0 50%,100% 100%)}
+.navbar i:nth-child(2){border-radius:50%}
+.pic{position:absolute;inset:0;width:100%;height:100%;display:block}
+.pic svg{width:100%;height:100%;display:block}
+
+/* discover */
+.dcard{position:relative;margin:0 10px;flex:1;border-radius:24px;overflow:hidden;background:#ccc}
+.dcard .shade{position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,.42),transparent 22%,transparent 60%,rgba(0,0,0,.55))}
+.dcard .bars{position:absolute;top:10px;left:16px;right:16px;display:flex;gap:4px}
+.dcard .bars i{flex:1;height:3px;border-radius:3px;background:rgba(255,255,255,.4)}
+.dcard .bars i.on{background:#fff}
+.dcard .cnt{position:absolute;top:22px;right:14px;font-size:12px;color:#fff;background:rgba(0,0,0,.35);padding:3px 9px;border-radius:99px}
+.dcard .nm{position:absolute;top:22px;left:16px;color:#fff;font:700 26px var(--app);display:flex;align-items:center;gap:6px;text-shadow:0 1px 6px rgba(0,0,0,.4)}
+.dcard .nm svg{width:22px;height:22px}
+.dcard .loc{position:absolute;top:58px;left:16px;color:#fff;font-size:13px;display:flex;gap:5px;align-items:center;opacity:.95}
+.dcard .vp{position:absolute;left:20px;bottom:86px;color:#fff;font-size:13px;font-weight:500}
+.dcard .shared{position:absolute;left:12px;bottom:34px;color:#fff;font-size:13px;padding:9px 14px;border-radius:99px;border:1px solid rgba(255,255,255,.55);background:rgba(0,0,0,.25);display:flex;gap:8px;align-items:center}
+.dcard .wk{position:absolute;right:12px;bottom:26px;display:flex;flex-direction:column;align-items:center;gap:4px;color:#fff;font-size:12px}
+.dcard .wk b{width:46px;height:46px;border-radius:50%;background:#fff;display:grid;place-items:center;color:var(--a-blue)}
+.dacts{display:flex;justify-content:center;gap:28px;margin-top:-32px;position:relative;z-index:2;padding-bottom:8px;flex:none}
+.dacts div{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:12px;color:var(--a-muted)}
+.dacts b{width:58px;height:58px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 4px 12px rgba(24,33,50,.14)}
+.dacts .sp b{width:68px;height:68px;border-radius:20px;background:var(--a-blue-soft);box-shadow:0 4px 0 #BFD3FB}
+.dacts .sp{color:var(--a-blue);font-weight:500}
+.dacts .lk b{width:68px;height:68px;background:var(--a-like);box-shadow:0 0 0 4px #fff,0 6px 14px rgba(217,65,90,.35)}
+.dacts .lk{color:var(--a-like);font-weight:500}
+
+/* likes */
+.lgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 14px;overflow:hidden;flex:1}
+.lc{border-radius:16px;overflow:hidden;background:var(--a-surface);display:flex;flex-direction:column;height:262px}
+.lc.wnk{box-shadow:0 0 0 2px var(--a-blue)}
+.lc .ph{position:relative;flex:1}
+.lc .ph .g{position:absolute;inset:0;background:linear-gradient(transparent 55%,rgba(0,0,0,.6))}
+.lc .n{position:absolute;left:12px;bottom:22px;color:#fff;font-weight:700;font-size:15px}
+.lc .c{position:absolute;left:12px;bottom:6px;color:rgba(255,255,255,.85);font-size:11px}
+.lc .tag{position:absolute;top:8px;left:8px;font-size:11px;padding:5px 9px;border-radius:99px;background:rgba(255,255,255,.88);color:var(--a-blue)}
+.lc .tag.w{background:rgba(24,60,140,.85);color:#fff;display:flex;gap:5px;align-items:center;border:1px solid rgba(255,255,255,.4)}
+.lc .bt{display:grid;grid-template-columns:1fr 1.15fr;gap:6px;padding:6px;height:60px}
+.lc .bt div{display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:11px;color:var(--a-muted);gap:2px;border-radius:12px}
+.lc .bt div.l{background:var(--a-like);color:#fff;font-weight:700}
+.lc .bt svg{width:18px;height:18px}
+
+/* matches */
+.search{margin:0 16px 8px;height:46px;border-radius:14px;background:var(--a-surface);display:flex;align-items:center;gap:14px;padding:0 16px;color:var(--a-muted);font-size:15px}
+.mrow{display:flex;align-items:center;gap:14px;padding:11px 16px;border-bottom:1px solid #E9EDF3;margin:0 0}
+.av{width:46px;height:46px;border-radius:50%;overflow:hidden;flex:none;position:relative;background:#ddd}
+.mrow b{display:block;font-size:15px}
+.mrow small{font-size:13px;color:var(--a-fg);opacity:.8}
+.mrow .dt{margin-left:auto;font-size:11px;color:var(--a-muted);align-self:flex-start;margin-top:10px}
+.mrow .un{margin-left:auto;min-width:20px;height:20px;border-radius:10px;background:var(--a-blue);color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center;padding:0 6px}
+
+/* chat */
+.chead{display:flex;align-items:center;gap:12px;padding:6px 16px 12px;border-bottom:1px solid #E4E8EF;flex:none}
+.chead .av{width:48px;height:48px}
+.chead b{font-size:17px}
+.chead small{display:block;font-size:12px;color:var(--a-muted)}
+.cempty{flex:1;position:relative;display:grid;place-items:center;text-align:center}
+.cempty svg.wmk{position:absolute;width:150px;height:150px;opacity:.07}
+.cempty b{font-size:16px;display:block}
+.cempty span{font-size:14px}
+.msgs{flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;padding:14px}
+.bub{max-width:76%;padding:10px 14px;border-radius:18px 18px 18px 6px;background:var(--a-surface);font-size:14px}
+.bub.me{align-self:flex-end;background:var(--a-blue);color:#fff;border-radius:18px 18px 6px 18px}
+.bub small{display:block;text-align:right;font-size:10px;opacity:.8}
+.cin{display:flex;gap:10px;padding:8px 12px 10px;flex:none}
+.cin div{flex:1;height:44px;border-radius:22px;background:var(--a-surface);display:flex;align-items:center;padding:0 18px;color:var(--a-muted);font-size:15px}
+.cin b{width:44px;height:44px;border-radius:50%;background:#E6E8EC;display:grid;place-items:center;color:#9AA1AC}
+
+/* profile */
+.prof{display:flex;gap:16px;align-items:center;padding:0 18px 12px}
+.ring{width:84px;height:84px;border-radius:50%;padding:3px;background:conic-gradient(var(--a-blue),#9DBEFF,var(--a-blue));position:relative;flex:none}
+.ring .av{width:100%;height:100%;border:3px solid #fff}
+.ring i{position:absolute;right:-2px;bottom:2px;width:24px;height:24px;border-radius:50%;background:var(--a-blue);color:#fff;display:grid;place-items:center;border:2px solid #fff;font-style:normal;font-size:16px;line-height:1}
+.prof h4{margin:0;font-size:22px}
+.prof .ci{font-size:13px;color:var(--a-muted);display:flex;gap:4px;align-items:center}
+.pv{margin-top:8px;display:inline-flex;gap:6px;align-items:center;font-size:13px;font-weight:500;color:var(--a-blue);background:var(--a-blue-soft);padding:7px 14px;border-radius:99px}
+.pbar{padding:0 18px 12px;font-size:13px}
+.pbar div{display:flex;justify-content:space-between;margin-bottom:6px}
+.pbar i{display:block;height:4px;border-radius:4px;background:#E2E6F3;position:relative;overflow:hidden}
+.pbar i::after{content:"";position:absolute;inset:0 43% 0 0;background:var(--a-blue)}
+.prow{margin:0 16px 8px;padding:12px 16px;border-radius:14px;background:var(--a-surface);border:1px solid var(--a-outline);display:flex;align-items:center;gap:16px}
+.prow svg{width:22px;height:22px;color:var(--a-blue);flex:none}
+.prow b{display:block;font-size:15px;font-weight:500}
+.prow small{font-size:12px;color:var(--a-muted)}
+.prow .chev{margin-left:auto;color:var(--a-muted);width:18px;height:18px}
+.psub{padding:6px 18px 8px;font-size:15px;font-weight:500}
+
+/* carousel */
 .shots-head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:36px}
-.shots-head h2{font-size:clamp(32px,4.4vw,52px);font-weight:800;line-height:1.05}
 .arrows{display:flex;gap:8px}
 .arrows button{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--fg);display:grid;place-items:center;cursor:pointer;transition:background var(--t),border-color var(--t)}
 .arrows button:hover{background:var(--surface-2);border-color:var(--blue-hi)}
 .rail{display:flex;gap:28px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 4px 28px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
-.shot{scroll-snap-align:start;flex:none;display:flex;flex-direction:column;gap:16px;width:min(280px,76vw)}
+.shot{scroll-snap-align:start;flex:none;display:flex;flex-direction:column;gap:16px;width:min(280px,76vw);margin:0}
 .shot .phone{width:100%}
 .shot h3{font-size:19px;font-weight:700}
 .shot p{margin:2px 0 0;font-size:15px;color:var(--muted)}
 
-/* features */
+/* live preview */
+.live{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
+.steps{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:10px}
+.steps li{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:18px;background:var(--surface);border:1px solid transparent;transition:border-color .3s,background .3s}
+.steps li.on{border-color:var(--blue-hi);background:var(--surface-2)}
+.steps li b{display:block;font-family:var(--head);font-size:17px}
+.steps li span{color:var(--muted);font-size:15px}
+.steps .n{width:28px;height:28px;border-radius:50%;flex:none;display:grid;place-items:center;background:var(--blue-soft);color:var(--blue-hi);font:600 13px var(--head)}
+.replay{margin-top:18px}
+
+/* animation layers inside the preview canvas */
+.layer{position:absolute;inset:0;transition:opacity .45s ease}
+.toast{position:absolute;left:12px;right:12px;top:52px;z-index:5;background:#fff;border-radius:20px;padding:12px 14px;display:flex;gap:12px;align-items:center;box-shadow:0 12px 30px rgba(24,33,50,.25);transform:translateY(-220%);transition:transform .6s cubic-bezier(.16,1,.3,1)}
+.toast .av{width:42px;height:42px}
+.toast b{font-size:14px;display:block}
+.toast span{font-size:13px;color:var(--a-muted)}
+.toast .sp{margin-left:auto;width:34px;height:34px;border-radius:10px;background:var(--a-blue-soft);display:grid;place-items:center}
+.sparkpg{background:#fff;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .6s cubic-bezier(.16,1,.3,1)}
+.sparkpg .ph{position:relative;margin:4px 16px 0;height:360px;border-radius:22px;overflow:hidden}
+.sparkpg .q{margin:16px 16px 0;padding:16px 18px;border-radius:18px 18px 18px 6px;background:var(--a-blue-soft);font-size:17px;font-weight:500;color:#173E9A;opacity:0;transform:translateY(12px);transition:all .5s .35s ease}
+.sparkpg .btns{margin:auto 16px 22px;display:grid;gap:10px}
+.sparkpg .lb{height:54px;border-radius:27px;background:var(--a-like);color:#fff;display:flex;gap:8px;align-items:center;justify-content:center;font-weight:700;font-size:16px;transition:transform .2s}
+.sparkpg .lb.press{transform:scale(.94)}
+.sparkpg .rm{text-align:center;color:var(--a-muted);font-size:14px}
+.celebrate{background:radial-gradient(80% 55% at 50% 42%,#DCE8FF,#fff 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;opacity:0;pointer-events:none}
+.celebrate .duo{position:relative;width:260px;height:150px}
+.celebrate .duo .av{position:absolute;top:10px;width:124px;height:124px;border:5px solid #fff;box-shadow:0 14px 30px rgba(36,104,242,.3);transition:transform .8s cubic-bezier(.16,1,.3,1)}
+.celebrate .duo .a1{left:10px;transform:translateX(-220px) rotate(-12deg)}
+.celebrate .duo .a2{right:10px;transform:translateX(220px) rotate(12deg)}
+.celebrate .lg{position:absolute;left:50%;top:72px;width:66px;height:66px;margin-left:-33px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 8px 20px rgba(36,104,242,.35);transform:scale(0);transition:transform .6s .55s cubic-bezier(.34,1.56,.64,1);z-index:2}
+.celebrate .lg svg{width:40px;height:40px}
+.celebrate h4{margin:0;font:900 32px var(--app);letter-spacing:-.02em;color:var(--a-fg);opacity:0;transform:translateY(14px);transition:all .5s .8s ease}
+.celebrate p{margin:0;font-size:15px;color:var(--a-muted);opacity:0;transition:opacity .5s 1s}
+.celebrate .cta{margin-top:10px;width:260px;height:52px;border-radius:26px;background:var(--a-blue);color:#fff;display:grid;place-items:center;font-weight:700;opacity:0;transition:opacity .5s 1.15s}
+.celebrate .later{font-size:14px;color:var(--a-muted);opacity:0;transition:opacity .5s 1.25s}
+.burst{position:absolute;left:50%;top:41%;width:0;height:0}
+.burst i{position:absolute;width:14px;height:13px;opacity:0}
+/* states */
+.s1 .toast{transform:translateY(0)}
+.s2 .sparkpg,.s3 .sparkpg{transform:translateY(0)}
+.s2 .sparkpg .q,.s3 .sparkpg .q{opacity:1;transform:none}
+.s4 .celebrate{opacity:1}
+.s4 .celebrate .a1{transform:translateX(0) rotate(-6deg)}
+.s4 .celebrate .a2{transform:translateX(0) rotate(6deg)}
+.s4 .celebrate .lg{transform:scale(1)}
+.s4 .celebrate h4{opacity:1;transform:none}
+.s4 .celebrate p,.s4 .celebrate .cta,.s4 .celebrate .later{opacity:1}
+.s4 .burst i{animation:fly 1.4s .6s cubic-bezier(.2,.7,.3,1) forwards}
+@keyframes fly{0%{opacity:0;transform:translate(0,0) scale(.3)}15%{opacity:1}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(1) rotate(var(--r))}}
+
+/* features / safety / cta */
 .feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
 .feat{padding:26px;border-radius:24px;background:var(--surface);border:1px solid var(--line);display:flex;flex-direction:column;gap:12px;transition:border-color var(--t)}
 .feat:hover{border-color:var(--blue-hi)}
 .feat .ic{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:var(--blue-soft);color:var(--blue-hi)}
+.feat .ic.red{background:#3A1520;color:#FF7A8E}
 .feat h3{font-size:20px;font-weight:700}
 .feat p{margin:0;color:var(--muted);font-size:15px}
-.h2{font-size:clamp(32px,4.4vw,52px);font-weight:800;line-height:1.05;max-width:18ch}
-
-/* safety */
 .safe{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
 .safe ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
 .safe li{display:flex;gap:14px;padding:18px;border-radius:18px;background:var(--surface)}
 .safe li svg{color:var(--blue-hi);margin-top:2px}
 .safe li b{display:block;font-family:var(--head);font-size:17px}
 .safe li span{color:var(--muted);font-size:15px}
-
-/* final cta */
-.final{border-radius:32px;padding:clamp(36px,6vw,72px);background:radial-gradient(80% 120% at 100% 0%,rgba(36,104,242,.55),transparent 60%),var(--surface);border:1px solid var(--line);display:grid;grid-template-columns:1.3fr .7fr;gap:32px;align-items:center}
+.final{border-radius:32px;padding:clamp(36px,6vw,72px);background:radial-gradient(80% 120% at 100% 0%,rgba(36,104,242,.55),transparent 60%),var(--surface);border:1px solid var(--line)}
 .final h2{font-size:clamp(36px,5vw,64px);font-weight:800;line-height:1}
-.qr{justify-self:end;display:grid;gap:10px;justify-items:center;text-align:center;font-size:13px;color:var(--muted)}
-.qr svg{width:148px;height:148px;border-radius:16px;background:#fff;padding:10px}
+.note{font-size:13px;color:var(--muted);margin-top:28px}
 footer{padding-block:32px;color:var(--muted);font-size:14px}
 footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
 footer a{text-decoration:none;min-height:44px;display:inline-flex;align-items:center;padding:0 8px}
 footer a:hover{color:var(--fg)}
 
 @media (max-width:1024px){.feat-grid{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:860px){
-  .hero-grid,.safe,.final{grid-template-columns:1fr}
-  .links{display:none}
-  .qr{justify-self:start}
-}
-@media (max-width:520px){
-  .feat-grid{grid-template-columns:1fr}
-  .nav .btn{padding:0 16px}
-}
-@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media (max-width:860px){.hero-grid,.safe,.live{grid-template-columns:1fr}.links{display:none}.live .phone{margin:0 auto}}
+@media (max-width:520px){.feat-grid{grid-template-columns:1fr}.nav .btn{padding:0 16px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-  <linearGradient id="hg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9DBEFF"/><stop offset=".5" stop-color="#2468F2"/><stop offset="1" stop-color="#0B2E8A"/></linearGradient>
+  <linearGradient id="lg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5B95FF"/><stop offset="1" stop-color="#1E5BE0"/></linearGradient>
+  <linearGradient id="lg2" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2468F2"/><stop offset="1" stop-color="#0F44B8"/></linearGradient>
+  <!-- Bundle mark: two linked loops forming a heart -->
+  <symbol id="mark" viewBox="0 0 40 40"><g fill="none" stroke-width="6.2" stroke-linecap="round"><rect x="3" y="9" width="21" height="13" rx="6.5" transform="rotate(42 13.5 15.5)" stroke="url(#lg1)"/><rect x="16" y="9" width="21" height="13" rx="6.5" transform="rotate(-42 26.5 15.5)" stroke="url(#lg2)"/></g></symbol>
   <symbol id="heart" viewBox="0 0 24 24"><path d="M12 21s-8.5-5.2-8.5-11.3C3.5 6.9 5.6 5 8 5c1.7 0 3.1.9 4 2.3C12.9 5.9 14.3 5 16 5c2.4 0 4.5 1.9 4.5 4.7C20.5 15.8 12 21 12 21Z"/></symbol>
-  <symbol id="x" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></symbol>
-  <symbol id="bolt" viewBox="0 0 24 24"><path fill="currentColor" d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></symbol>
+  <symbol id="heart-o" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 20s-7.5-4.6-7.5-10C4.5 7.4 6.4 5.8 8.5 5.8c1.5 0 2.7.8 3.5 2 .8-1.2 2-2 3.5-2 2.1 0 4 1.6 4 4.2 0 5.4-7.5 10-7.5 10Z"/></symbol>
+  <symbol id="x" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="smile" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5c1.8 1.8 5.2 1.8 7 0"/><circle cx="9" cy="10" r=".6" fill="currentColor"/><circle cx="15" cy="10" r=".6" fill="currentColor"/></g></symbol>
   <symbol id="wink" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M8 10h2M14 9l2 1-2 1M8.5 15c1.8 1.6 5.2 1.6 7 0"/></g></symbol>
-  <symbol id="chat" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M4 5h16v11H9l-5 4V5Z"/></symbol>
+  <symbol id="spark" viewBox="0 0 40 40"><g fill="none" stroke-width="5" stroke-linecap="round"><rect x="3" y="12" width="18" height="11" rx="5.5" transform="rotate(42 12 17.5)" stroke="url(#lg1)"/><rect x="14" y="12" width="18" height="11" rx="5.5" transform="rotate(-42 23 17.5)" stroke="url(#lg2)"/></g><path d="M31 3l1.6 3.8L36.5 8l-3.9 1.4L31 13l-1.6-3.6L25.5 8l3.9-1.2Z" fill="#2468F2"/></symbol>
+  <symbol id="compass" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5 5-2Z" stroke-linejoin="round"/></g></symbol>
+  <symbol id="compass-f" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="m16 8-2.4 5.6L8 16l2.4-5.6L16 8Z" fill="#fff"/></symbol>
+  <symbol id="chats" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 4h12v9H7l-4 3V4Z"/><path d="M15 8h6v11l-3-2.5H9V13"/></g></symbol>
+  <symbol id="chats-f" viewBox="0 0 24 24"><path fill="currentColor" d="M2 3h14v11H6l-4 3.5V3Zm16 4h4v14l-3.5-3H8v-2h10V7Z"/></symbol>
   <symbol id="user" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></g></symbol>
-  <symbol id="cards" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="6" y="3" width="12" height="17" rx="2"/><path d="M3 7v11M21 7v11"/></g></symbol>
-  <symbol id="shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></g></symbol>
-  <symbol id="eye" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></g></symbol>
-  <symbol id="flag" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" d="M5 21V4h11l-2 4 2 4H5"/></symbol>
+  <symbol id="user-f" viewBox="0 0 24 24"><circle cx="12" cy="7.5" r="4.5" fill="currentColor"/><path d="M3.5 21c0-4.8 3.8-7.5 8.5-7.5s8.5 2.7 8.5 7.5Z" fill="currentColor"/></symbol>
+  <symbol id="moon" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/></symbol>
+  <symbol id="refresh" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M19 12a7 7 0 1 1-2-4.9"/><path d="M19 4v4h-4"/></g></symbol>
+  <symbol id="tune" viewBox="0 0 24 24"><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h9M17 7h3M4 12h3M11 12h9M4 17h11M19 17h1"/><path d="M15 5v4M9 10v4M17 15v4"/></g></symbol>
+  <symbol id="gear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2.5l1.6 2.3 2.7-.7.6 2.7 2.6 1-1 2.6 1.9 2-2.2 1.7.4 2.8-2.8.3-1.1 2.6-2.5-1.3-2.5 1.3-1.1-2.6-2.8-.3.4-2.8L2.6 12l1.9-2-1-2.6 2.6-1 .6-2.7 2.7.7Z" stroke-linejoin="round"/></g></symbol>
+  <symbol id="back" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M20 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="dots" viewBox="0 0 24 24"><g fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></g></symbol>
   <symbol id="pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></g></symbol>
-  <symbol id="cal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></g></symbol>
+  <symbol id="verified" viewBox="0 0 24 24"><path fill="#4D8BFF" d="m12 1.5 2.6 2 3.2-.3.9 3.1 2.8 1.6-1 3.1 1 3.1-2.8 1.6-.9 3.1-3.2-.3-2.6 2-2.6-2-3.2.3-.9-3.1-2.8-1.6 1-3.1-1-3.1 2.8-1.6.9-3.1 3.2.3Z"/><path d="m8 12 2.7 2.7L16.2 9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="chev" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="m9 6 6 6-6 6"/></symbol>
+  <symbol id="search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5"/></g></symbol>
+  <symbol id="up" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M6 11l6-6 6 6"/></symbol>
+  <symbol id="eye" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></g></symbol>
+  <symbol id="photos" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="7" y="3" width="14" height="14" rx="2"/><path d="M3 7v14h14M9 14l3-4 3 3 2-2 2 3"/></g></symbol>
+  <symbol id="lines" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h10"/></symbol>
+  <symbol id="lang" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h10M8 4v2M5 6c1 4 4 7 7 8M11 6c-1 4-4 7-7 8"/><path d="m13 21 4-9 4 9M14.5 18h5"/></g></symbol>
+  <symbol id="shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></g></symbol>
+  <symbol id="flag" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" d="M5 21V4h11l-2 4 2 4H5"/></symbol>
   <symbol id="apple" viewBox="0 0 24 24"><path fill="currentColor" d="M16.4 12.6c0-2.5 2-3.6 2.1-3.7-1.2-1.7-3-1.9-3.6-2-1.5-.2-3 .9-3.8.9-.8 0-2-.9-3.3-.8-1.7 0-3.3 1-4.1 2.5-1.8 3.1-.5 7.6 1.3 10.1.8 1.2 1.8 2.6 3.1 2.5 1.2 0 1.7-.8 3.2-.8s1.9.8 3.2.8c1.3 0 2.2-1.2 3-2.4.9-1.4 1.3-2.7 1.3-2.8-.1 0-2.4-.9-2.4-3.3ZM14 5.2c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1 .1 2.1-.6 2.8-1.4Z"/></symbol>
   <symbol id="play" viewBox="0 0 24 26"><path fill="currentColor" d="M1 1.5v23c0 .4.4.6.7.4L14 13 1.7 1.1c-.3-.2-.7 0-.7.4Zm14.2 10.3 3.3-3.3L3.6.2l11.6 11.6Zm0 2.4L3.6 25.8l14.9-8.3-3.3-3.3Zm7.3-2.6-3-1.7-3.5 3.5 3.5 3.5 3-1.7c1-.6 1-2 0-2.6Z"/></symbol>
-  <symbol id="sil" viewBox="0 0 100 120"><circle cx="50" cy="40" r="22" fill="rgba(255,255,255,.16)"/><path d="M10 120c0-27 18-43 40-43s40 16 40 43" fill="rgba(255,255,255,.11)"/></symbol>
 </defs></svg>
 
 <nav class="nav" aria-label="Main">
-  <a class="logo" href="#top"><svg fill="url(#hg)" aria-hidden="true"><use href="#heart"/></svg>bundle</a>
-  <div class="links"><a href="#screens">Screens</a><a href="#features">Features</a><a href="#safety">Safety</a></div>
+  <a class="logo" href="#top"><svg aria-hidden="true"><use href="#mark"/></svg>bundle</a>
+  <div class="links"><a href="#screens">Screens</a><a href="#preview">Spark preview</a><a href="#safety">Safety</a></div>
   <a class="btn" href="#download">Get the app</a>
 </nav>
 
@@ -195,102 +313,65 @@ footer a:hover{color:var(--fg)}
         <a class="store" href="#download"><svg class="ico" aria-hidden="true"><use href="#play"/></svg><span><small>Get it on</small><b>Google Play</b></span></a>
       </div>
       <div class="trust">
-        <span><svg aria-hidden="true"><use href="#shield"/></svg>Every photo reviewed</span>
+        <span><svg aria-hidden="true"><use href="#shield"/></svg>Verified profiles</span>
         <span><svg aria-hidden="true"><use href="#user"/></svg>18+ only</span>
         <span><svg aria-hidden="true"><use href="#pin"/></svg>City shown, never your exact location</span>
       </div>
     </div>
-    <div class="hero-phone">
-      <div class="phone" role="img" aria-label="Bundle Discover screen showing Maya, 26, with Pass, Spark, Like and Wink buttons">
-        <div class="notch"></div><div class="scr">
-          <div class="app-bar"><svg aria-hidden="true"><use href="#eye"/></svg>bundle<svg aria-hidden="true"><use href="#cal"/></svg></div>
-          <div class="photo"><div class="dots"><i></i><i></i><i></i><i></i></div><svg class="sil" aria-hidden="true"><use href="#sil"/></svg>
-            <div class="meta"><b>Maya, 26</b><div class="tags"><span>Coffee</span><span>Hiking</span><span>Music</span></div></div></div>
-          <div class="acts">
-            <span><svg style="color:#AFBACB"><use href="#x"/></svg></span>
-            <span><svg style="color:#76A6FF"><use href="#bolt"/></svg></span>
-            <span class="like"><svg fill="#fff" style="width:26px;height:26px"><use href="#heart"/></svg></span>
-            <span><svg style="color:#76A6FF"><use href="#wink"/></svg></span>
-          </div>
-          <div class="tabbar"><svg class="on"><use href="#cards"/></svg><svg><use href="#heart"/></svg><svg><use href="#chat"/></svg><svg><use href="#user"/></svg></div>
-        </div>
-      </div>
-    </div>
+    <div class="hero-phone"><div class="phone" data-screen="discover" role="img" aria-label="Bundle Discover screen: Noa, 26, verified, with Pass, Spark, Like and Wink"></div></div>
   </div>
 </section>
 
 <section class="sec" id="screens" style="padding-top:24px">
   <div class="wrap">
     <div class="shots-head">
-      <div><div class="eyebrow">Inside the app</div><h2 style="margin-top:10px">From hello to<br>“see you Sunday.”</h2></div>
-      <div class="arrows"><button type="button" id="prev" aria-label="Previous screen"><svg class="ico"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><button type="button" id="next" aria-label="Next screen"><svg class="ico"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div>
+      <div><div class="eyebrow">Inside the app</div><h2 class="h2" style="margin-top:10px">From hello to “see you Sunday.”</h2></div>
+      <div class="arrows"><button type="button" id="prev" aria-label="Previous screen"><svg class="ico"><use href="#back"/></svg></button><button type="button" id="next" aria-label="Next screen"><svg class="ico" style="transform:scaleX(-1)"><use href="#back"/></svg></button></div>
     </div>
     <div class="rail" id="rail" tabindex="0" aria-label="App screens">
-
-      <figure class="shot" style="margin:0"><div class="phone" role="img" aria-label="Onboarding: pick your interests"><div class="notch"></div><div class="scr">
-        <div class="ob" style="padding-top:52px"><div class="prog"><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i></div>
-          <h4>What are<br>you into?</h4><div class="muted">Pick 5 to 10.</div>
-          <div class="chips"><span class="s">Music</span><span>Travel</span><span class="s">Coffee</span><span class="s">Hiking</span><span>Art</span><span class="s">Cooking</span><span>Film</span><span class="s">Dogs</span></div>
-          <div class="cta-in">Continue</div></div></div></div>
-        <figcaption><h3>Show your good side</h3><p>One question per screen. Your answers save as you go.</p></figcaption></figure>
-
-      <figure class="shot" style="margin:0"><div class="phone" role="img" aria-label="Discover with profile under review banner"><div class="notch"></div><div class="scr">
-        <div class="app-bar">Discover<svg><use href="#cal"/></svg></div>
-        <div class="banner"><svg style="width:14px;height:14px"><use href="#shield"/></svg>Profile under review</div>
-        <div class="photo"><svg class="sil"><use href="#sil"/></svg><div class="meta"><b>Dana, 28</b><div class="tags"><span>Art</span><span>Travel</span></div></div></div>
-        <div class="acts"><span><svg style="color:#AFBACB"><use href="#x"/></svg></span><span><svg style="color:#76A6FF"><use href="#bolt"/></svg></span><span class="like"><svg fill="#fff" style="width:26px;height:26px"><use href="#heart"/></svg></span><span><svg style="color:#76A6FF"><use href="#wink"/></svg></span></div>
-        <div class="tabbar"><svg class="on"><use href="#cards"/></svg><svg><use href="#heart"/></svg><svg><use href="#chat"/></svg><svg><use href="#user"/></svg></div></div></div>
-        <figcaption><h3>Four ways to say hi</h3><p>Pass, Spark, Like or Wink. One profile at a time.</p></figcaption></figure>
-
-      <figure class="shot" style="margin:0"><div class="phone" role="img" aria-label="Likes you grid"><div class="notch"></div><div class="scr">
-        <div class="app-bar">Likes you <span class="badge" style="margin-left:0">3</span></div>
-        <div class="grid2"><div class="glow"><em>WINK</em><span>Noy, 25</span></div><div><em>SPARK</em><span>Tal, 30</span></div><div><em>LIKE</em><span>Shir, 27</span></div><div><em>LIKE</em><span>Lior, 29</span></div></div>
-        <div class="tabbar"><svg><use href="#cards"/></svg><svg class="on"><use href="#heart"/></svg><svg><use href="#chat"/></svg><svg><use href="#user"/></svg></div></div></div>
-        <figcaption><h3>See who likes you</h3><p>One card per person. A Wink glows blue.</p></figcaption></figure>
-
-      <figure class="shot" style="margin:0"><div class="phone" role="img" aria-label="A received Spark with a message"><div class="notch"></div><div class="scr">
-        <div class="app-bar">Sparks</div><div class="muted" style="padding:0 16px 10px">A little more personal.</div>
-        <div class="photo" style="flex:0 0 46%"><svg class="sil"><use href="#sil"/></svg><div class="meta"><b>Noy, 25</b></div></div>
-        <div class="spark" style="margin-top:12px">“Hey! Saw you like hiking”</div>
-        <div class="cta-in" style="margin:12px 12px 6px">Like back</div><div class="muted" style="text-align:center;padding-bottom:12px">Remove</div></div></div>
-        <figcaption><h3>Sparks come with words</h3><p>Like back and it's a match.</p></figcaption></figure>
-
-      <figure class="shot" style="margin:0"><div class="phone" role="img" aria-label="Matches list with unread counts"><div class="notch"></div><div class="scr">
-        <div class="app-bar">Matches</div>
-        <div class="list">
-          <div class="li"><div class="av ring"><i class="on"></i></div><div><b>Noy</b><small>✓✓ See you Sunday</small></div></div>
-          <div class="li"><div class="av"></div><div><b>Tal</b><small>Hello!</small></div><span class="badge">2</span></div>
-          <div class="li"><div class="av"></div><div><b>Shir</b><small>Say hello. You matched!</small></div></div>
-        </div>
-        <div class="tabbar"><svg><use href="#cards"/></svg><svg><use href="#heart"/></svg><svg class="on"><use href="#chat"/></svg><svg><use href="#user"/></svg></div></div></div>
-        <figcaption><h3>Matches</h3><p>Newest activity on top, with unread counts.</p></figcaption></figure>
-
-      <figure class="shot" style="margin:0"><div class="phone" role="img" aria-label="Chat ending with See you Sunday"><div class="notch"></div><div class="scr">
-        <div class="app-bar" style="justify-content:flex-start;gap:10px"><div class="av" style="width:30px;height:30px"></div>Noy</div>
-        <div class="msgs"><div class="m">Hey! Saw you like hiking</div><div class="m me">Always. Which trail is your favourite?<small>✓✓</small></div><div class="m">Coffee after a walk on Sunday?</div><div class="m me">See you Sunday<small>✓✓</small></div></div>
-        <div class="input">Message…</div></div></div>
-        <figcaption><h3>Chat with read ticks</h3><p>Tap the header to see their full profile.</p></figcaption></figure>
+      <figure class="shot"><div class="phone" data-screen="likes" role="img" aria-label="Likes you grid with a Wink highlighted"></div><figcaption><h3>Likes you</h3><p>One card per person. A Wink glows blue.</p></figcaption></figure>
+      <figure class="shot"><div class="phone" data-screen="matches" role="img" aria-label="Matches list"></div><figcaption><h3>Matches</h3><p>Newest first, with search and unread counts.</p></figcaption></figure>
+      <figure class="shot"><div class="phone" data-screen="chat" role="img" aria-label="New chat: You and Noa connected"></div><figcaption><h3>Say hello in your own words</h3><p>Every match opens a fresh, private chat.</p></figcaption></figure>
+      <figure class="shot"><div class="phone" data-screen="convo" role="img" aria-label="Chat with read ticks"></div><figcaption><h3>Chat with read ticks</h3><p>Tap the header to see their full profile.</p></figcaption></figure>
+      <figure class="shot"><div class="phone" data-screen="profile" role="img" aria-label="My profile with completion progress"></div><figcaption><h3>Your profile, step by step</h3><p>A progress bar shows what's left to add.</p></figcaption></figure>
     </div>
   </div>
 </section>
 
-<section class="sec" id="features" style="background:linear-gradient(var(--bg),#081020 50%,var(--bg))">
+<section class="sec" id="preview" style="background:linear-gradient(var(--bg),#081020 50%,var(--bg))">
+  <div class="wrap live">
+    <div>
+      <div class="eyebrow">Live preview</div>
+      <h2 class="h2" style="margin-top:10px">When a Spark lands.</h2>
+      <ol class="steps" id="steps">
+        <li data-s="1"><span class="n">1</span><div><b>A Spark arrives</b><span>Noa sends a Like with a message.</span></div></li>
+        <li data-s="2"><span class="n">2</span><div><b>Read it first</b><span>Her photo and words, before you decide.</span></div></li>
+        <li data-s="3"><span class="n">3</span><div><b>Like back</b><span>One tap on the heart.</span></div></li>
+        <li data-s="4"><span class="n">4</span><div><b>It's a match</b><span>The chat opens, ready for hello.</span></div></li>
+      </ol>
+      <button class="btn ghost replay" type="button" id="replay">Replay preview</button>
+    </div>
+    <div class="phone" id="anim" data-screen="likes" role="img" aria-label="Animated preview: a Spark from Noa arrives, you like back, and it's a match"></div>
+  </div>
+</section>
+
+<section class="sec" id="features">
   <div class="wrap">
     <div class="eyebrow">How Bundle works</div>
     <h2 class="h2" style="margin-top:10px">Small gestures. Clear signals.</h2>
     <div class="feat-grid">
-      <article class="feat"><div class="ic"><svg class="ico"><use href="#wink"/></svg></div><h3>Wink</h3><p>A light hello. They see it glow blue on your card.</p></article>
-      <article class="feat"><div class="ic"><svg class="ico" fill="currentColor"><use href="#heart"/></svg></div><h3>Like</h3><p>The blue heart. If they like you back, it's a match.</p></article>
-      <article class="feat"><div class="ic"><svg class="ico"><use href="#bolt"/></svg></div><h3>Spark</h3><p>A Like with a short message, for when you have something to say.</p></article>
+      <article class="feat"><div class="ic"><svg class="ico"><use href="#smile"/></svg></div><h3>Wink</h3><p>A light hello. It glows blue on your card in their Likes.</p></article>
+      <article class="feat"><div class="ic red"><svg class="ico" fill="currentColor"><use href="#heart"/></svg></div><h3>Like</h3><p>If they like you back, it's a match.</p></article>
+      <article class="feat"><div class="ic"><svg class="ico"><use href="#spark"/></svg></div><h3>Spark</h3><p>A Like with a short message, for when you have something to say.</p></article>
       <article class="feat"><div class="ic"><svg class="ico"><use href="#x"/></svg></div><h3>Pass</h3><p>Move on quietly. They're never told.</p></article>
     </div>
   </div>
 </section>
 
-<section class="sec" id="safety">
+<section class="sec" id="safety" style="padding-top:0">
   <div class="wrap safe">
     <div><div class="eyebrow">Safety</div><h2 class="h2" style="margin-top:10px">Good people. Good energy.</h2>
-      <p class="muted" style="max-width:46ch;margin-top:18px">Everyone accepts the same Terms before entering Bundle. New profiles start under review, and you choose whether others see when you're online.</p></div>
+      <p class="muted" style="max-width:46ch;margin-top:18px">Everyone accepts the same Terms before entering Bundle. New profiles start under review, and you choose whether others see when you were last online.</p></div>
     <ul>
       <li><svg class="ico"><use href="#shield"/></svg><div><b>Photo review</b><span>Every photo is checked before anyone else sees it.</span></div></li>
       <li><svg class="ico"><use href="#pin"/></svg><div><b>Private by default</b><span>Your profile shows your age and city, not your birth date or exact location.</span></div></li>
@@ -302,12 +383,13 @@ footer a:hover{color:var(--fg)}
 <section class="sec" id="download" style="padding-top:0">
   <div class="wrap">
     <div class="final">
-      <div><h2>Catch your next connection.</h2><p class="muted" style="margin:16px 0 28px;font-size:18px">Free to download on iOS and Android.</p>
-        <div class="stores">
-          <a class="store" href="#download"><svg class="ico" aria-hidden="true"><use href="#apple"/></svg><span><small>Download on the</small><b>App Store</b></span></a>
-          <a class="store" href="#download"><svg class="ico" aria-hidden="true"><use href="#play"/></svg><span><small>Get it on</small><b>Google Play</b></span></a>
-        </div></div>
-      <div class="qr"><svg viewBox="0 0 21 21" aria-hidden="true" shape-rendering="crispEdges"><g fill="#05070B" id="qrg"></g></svg><span>Placeholder QR code.<br>Swap in your store link.</span></div>
+      <h2>Catch your next connection.</h2>
+      <p class="muted" style="margin:16px 0 28px;font-size:18px">Free to download on iOS and Android.</p>
+      <div class="stores">
+        <a class="store" href="#download"><svg class="ico" aria-hidden="true"><use href="#apple"/></svg><span><small>Download on the</small><b>App Store</b></span></a>
+        <a class="store" href="#download"><svg class="ico" aria-hidden="true"><use href="#play"/></svg><span><small>Get it on</small><b>Google Play</b></span></a>
+      </div>
+      <p class="note">People shown in app screens are illustrated models, not Bundle members.</p>
     </div>
   </div>
 </section>
@@ -316,13 +398,147 @@ footer a:hover{color:var(--fg)}
 <footer><div class="wrap"><span>© 2026 Bundle</span><span><a href="#top">Terms</a><a href="#top">Privacy</a><a href="#safety">Safety</a></span></div></footer>
 
 <script>
-const rail=document.getElementById('rail');
-const step=()=>rail.querySelector('.shot').offsetWidth+28;
+/* ---------- illustrated people (stand-ins until AI photos are dropped in) ---------- */
+const SKIN=['#F6D2B8','#E8B796','#C98E68','#A86F4C','#7A4B30','#F1C6A4'];
+const HAIR=['#1E1612','#3B2618','#6B4226','#A6743F','#D9B26F','#2B2B2B'];
+const SCENE=[['#9CC3F5','#E8F1FB'],['#F4C7A1','#FBE9D9'],['#B8D8C2','#EAF4EC'],['#CFC4F0','#F0ECFB'],['#F2B8B8','#FBE8E4'],['#A7D3E0','#E4F3F7']];
+const TOP=['#2468F2','#1F2937','#E0435F','#F2F2EE','#3E7B5A','#C98A2B','#6B5BD6'];
+function person(o){
+  const s=SKIN[o.skin],h=HAIR[o.hair],sc=SCENE[o.bg],tp=TOP[o.top];const f=o.g==='f';const id='p'+Math.random().toString(36).slice(2,8);
+  let back='',front='',extra='';
+  if(f){
+    back=o.style===1?`<path d="M88 150c-10 70-6 150 10 190h104c16-40 20-120 10-190Z" fill="${h}"/>`
+       :o.style===2?`<circle cx="150" cy="78" r="30" fill="${h}"/><path d="M98 150c-4 40 0 70 8 86h88c8-16 12-46 8-86Z" fill="${h}"/>`
+       :`<path d="M92 150c-12 50-10 100 2 130h112c12-30 14-80 2-130Z" fill="${h}"/>`;
+    front=`<path d="M100 160c-2-46 22-72 50-72s52 26 50 72c-8-26-26-42-52-44-20 8-38 22-48 44Z" fill="${h}"/>`;
+    extra=`<path d="M138 205q12 7 24 0" stroke="#B4505A" stroke-width="4" fill="none" stroke-linecap="round"/>`;
+  }else{
+    front=o.style===1?`<path d="M104 150c0-40 20-58 46-58s46 18 46 58c-6-20-22-30-46-30s-40 10-46 30Z" fill="${h}"/>`
+       :o.style===2?`<path d="M106 140c4-30 22-44 44-44s40 14 44 44c-14-10-30-14-44-14s-30 4-44 14Z" fill="${h}"/>`
+       :`<path d="M102 156c-4-48 18-66 48-66 26 0 50 16 46 62-6-18-14-26-22-28-14 8-40 6-60 2-6 8-10 18-12 30Z" fill="${h}"/>`;
+    extra=(o.beard?`<path d="M112 180c2 40 18 56 38 56s36-16 38-56c-6 18-20 26-38 26s-32-8-38-26Z" fill="${h}" opacity=".9"/>`:'')
+         +`<path d="M140 206q10 5 20 0" stroke="#7A3B30" stroke-width="4" fill="none" stroke-linecap="round"/>`;
+  }
+  const glasses=o.glasses?`<g fill="none" stroke="#1B1B1B" stroke-width="3.5"><circle cx="132" cy="168" r="13"/><circle cx="168" cy="168" r="13"/><path d="M145 168h10"/></g>`:'';
+  return `<svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${sc[0]}"/><stop offset="1" stop-color="${sc[1]}"/></linearGradient>
+  <radialGradient id="${id}l" cx=".3" cy=".2" r=".8"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>
+  <rect width="300" height="400" fill="url(#${id})"/><circle cx="${60+o.bg*30}" cy="80" r="70" fill="#fff" opacity=".25"/>
+  ${back}
+  <path d="M40 400c4-70 46-108 110-108s106 38 110 108Z" fill="${tp}"/>
+  <path d="M132 250h36v46c-6 10-30 10-36 0Z" fill="${s}"/><path d="M132 270c10 8 26 8 36 0v8c-10 6-26 6-36 0Z" fill="#000" opacity=".08"/>
+  <ellipse cx="104" cy="178" rx="9" ry="14" fill="${s}"/><ellipse cx="196" cy="178" rx="9" ry="14" fill="${s}"/>
+  <ellipse cx="150" cy="172" rx="47" ry="${f?60:62}" fill="${s}"/>
+  ${front}
+  <g fill="#2A1C16"><ellipse cx="132" cy="170" rx="4.5" ry="5.5"/><ellipse cx="168" cy="170" rx="4.5" ry="5.5"/></g>
+  <g stroke="${h}" stroke-width="4" stroke-linecap="round"><path d="M122 154q10-5 20-1"/><path d="M158 153q10-4 20 1"/></g>
+  <path d="M150 176q-4 12 0 16" stroke="#000" stroke-opacity=".18" stroke-width="3" fill="none" stroke-linecap="round"/>
+  ${f?`<g fill="#E36F7A" opacity=".18"><circle cx="122" cy="192" r="9"/><circle cx="178" cy="192" r="9"/></g>`:''}
+  ${extra}${glasses}
+  <rect width="300" height="400" fill="url(#${id}l)"/></svg>`;
+}
+const P={
+  noa:{g:'f',skin:1,hair:2,bg:1,top:3,style:0},
+  daniel:{g:'m',skin:2,hair:0,bg:0,top:1,style:1,beard:1},
+  maya:{g:'f',skin:0,hair:4,bg:3,top:0,style:1},
+  yonatan:{g:'m',skin:0,hair:3,bg:2,top:4,style:0,glasses:1},
+  shira:{g:'f',skin:4,hair:0,bg:4,top:5,style:2},
+  ido:{g:'m',skin:3,hair:5,bg:5,top:2,style:2},
+  tamar:{g:'f',skin:2,hair:1,bg:5,top:6,style:0},
+  amit:{g:'m',skin:1,hair:1,bg:3,top:3,style:0,beard:1},
+  me:{g:'m',skin:1,hair:1,bg:2,top:0,style:1}
+};
+const pic=n=>`<div class="pic">${person(P[n])}</div>`;
+const av=(n,cls='')=>`<div class="av ${cls}">${pic(n)}</div>`;
+
+/* ---------- app chrome ---------- */
+const st=t=>`<div class="st"><span>${t}</span><span class="cam"></span><span class="r"><svg width="18" height="12" viewBox="0 0 18 12"><g fill="#222"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1" opacity=".3"/></g></svg><svg width="16" height="12" viewBox="0 0 16 12"><path d="M8 11.5 1 4.2a10 10 0 0 1 14 0Z" fill="#222"/></svg><span class="bat"></span></span></div>`;
+const wm=`<div class="wm"><svg><use href="#mark"/></svg>bundle</div>`;
+const appTop=(l,r)=>`<div class="top"><div class="side">${l}</div>${wm}<div class="side r">${r}</div></div>`;
+const i=n=>`<svg class="i"><use href="#${n}"/></svg>`;
+function tabs(a){const t=[['Discover','compass'],['Likes','heart-o'],['Matches','chats'],['Profile','user']];
+  return `<div class="tabs">${t.map(([l,ic],k)=>{const on=k===a;const icon=on?(ic==='heart-o'?'heart':ic+'-f'):ic;return `<div class="${on?'on':''}"><svg ${icon==='heart'?'fill="currentColor"':''}><use href="#${icon}"/></svg>${l}</div>`}).join('')}</div><div class="navbar"><i></i><i></i><i></i></div>`}
+
+const SCREENS={
+discover:()=>`${st('10:04')}${appTop(i('moon'),i('refresh')+i('tune'))}
+  <div class="dcard">${pic('noa')}<div class="shade"></div>
+    <div class="bars"><i></i><i class="on"></i><i></i></div><span class="cnt">2 / 3</span>
+    <div class="nm">Noa, 26 <svg><use href="#verified"/></svg></div>
+    <div class="loc"><svg width="15" height="15"><use href="#pin"/></svg>Tel Aviv, Israel · About 3 km away</div>
+    <div class="vp">View profile</div>
+    <div class="shared">60% · Shared interests <svg width="14" height="14"><use href="#chev"/></svg></div>
+    <div class="wk"><b><svg width="28" height="28"><use href="#smile"/></svg></b>Wink</div>
+  </div>
+  <div class="dacts"><div><b style="color:var(--a-blue)"><svg width="30" height="30"><use href="#x"/></svg></b>Pass</div>
+    <div class="sp"><b><svg width="42" height="42"><use href="#spark"/></svg></b>Spark</div>
+    <div class="lk"><b><svg width="32" height="32" fill="#fff"><use href="#heart"/></svg></b>Like</div></div>
+  ${tabs(0)}`,
+likes:()=>`${st('10:05')}${appTop(i('moon'),i('refresh'))}<div class="ttl">Likes you <span>14</span></div>
+  <div class="lgrid">${[['maya','Maya, 29','Haifa',''],['daniel','Daniel, 31','Ramat Gan','w'],['tamar','Tamar, 27','Herzliya','Pets 🐾'],['yonatan','Yonatan, 30','Netanya','']].map(([n,a,c,t])=>`
+    <div class="lc ${t==='w'?'wnk':''}"><div class="ph">${pic(n)}<div class="g"></div>${t==='w'?'<span class="tag w"><svg width="14" height="14"><use href="#wink"/></svg>Winked at you</span>':t?`<span class="tag">${t}</span>`:''}<div class="n">${a}</div><div class="c">${c}</div></div>
+    <div class="bt"><div><svg><use href="#x"/></svg>Remove</div><div class="l"><svg fill="#fff"><use href="#heart"/></svg>Like</div></div></div>`).join('')}</div>
+  ${tabs(1)}`,
+matches:()=>`${st('10:05')}${appTop(i('moon'),'')}<div class="ttl">Matches</div>
+  <div class="search"><svg width="20" height="20"><use href="#search"/></svg>Search matches</div>
+  ${[['noa','Noa','Say hello — you matched!','Yesterday'],['daniel','Daniel','See you Sunday','Nov 10',1],['shira','Shira','Haha, deal 😄','Nov 10',0,2],['ido','Ido','Say hello — you matched!','Nov 4'],['maya','Maya','heyy','Nov 2',1],['amit','Amit','Say hello — you matched!','Nov 1']].map(([n,a,m,d,tick,un])=>`
+    <div class="mrow">${av(n)}<div><b>${a}</b><small>${tick?'✓✓ ':''}${m}</small></div>${un?`<span class="un">${un}</span>`:`<span class="dt">${d}</span>`}</div>`).join('')}
+  ${tabs(2)}`,
+chat:()=>`${st('10:06')}${appTop(i('back'),'')}
+  <div class="chead">${av('noa')}<div><b>Noa</b><small>Last seen today at 9:41 AM</small></div><svg class="i" style="margin-left:auto;width:24px;height:24px"><use href="#dots"/></svg></div>
+  <div class="cempty"><svg class="wmk"><use href="#mark"/></svg><div><b>You and Noa connected.</b><span>Say hello in your own words.</span></div></div>
+  <div class="cin"><div>Message...</div><b><svg width="22" height="22"><use href="#up"/></svg></b></div>${tabs(2)}`,
+convo:()=>`${st('10:12')}${appTop(i('back'),'')}
+  <div class="chead">${av('daniel')}<div><b>Daniel</b><small>Online</small></div><svg class="i" style="margin-left:auto;width:24px;height:24px"><use href="#dots"/></svg></div>
+  <div class="msgs"><div class="bub">Hey! Your Spark made me laugh</div><div class="bub me">Ha, glad it landed. Coffee this week?<small>✓✓</small></div><div class="bub">Sunday morning, by the beach?</div><div class="bub me">See you Sunday<small>✓✓</small></div></div>
+  <div class="cin"><div>Message...</div><b style="background:var(--a-blue);color:#fff"><svg width="22" height="22"><use href="#up"/></svg></b></div>${tabs(2)}`,
+profile:()=>`${st('10:05')}${appTop(i('moon'),i('gear'))}<div class="ttl">My profile</div>
+  <div class="prof"><div class="ring">${av('me')}<i>+</i></div><div><h4>Alex, 26</h4><div class="ci"><svg width="14" height="14"><use href="#pin"/></svg>Tel Aviv</div><span class="pv"><svg width="16" height="16"><use href="#eye"/></svg>Preview profile</span></div></div>
+  <div class="pbar"><div><span>4 of 7 sections complete</span><span>57%</span></div><i></i></div>
+  <div class="prow"><svg><use href="#photos"/></svg><div><b>Photos</b><small>3 of 6 photos</small></div><svg class="chev"><use href="#chev"/></svg></div>
+  <div class="psub">About you</div>
+  <div class="prow"><svg><use href="#user"/></svg><div><b>Basics</b><small>Alex, 26 · man</small></div><svg class="chev"><use href="#chev"/></svg></div>
+  <div class="prow"><svg><use href="#pin"/></svg><div><b>Location</b><small>Tel Aviv</small></div><svg class="chev"><use href="#chev"/></svg></div>
+  <div class="prow"><svg><use href="#lines"/></svg><div><b>About me</b><small>Add a little about yourself</small></div><svg class="chev"><use href="#chev"/></svg></div>
+  <div class="prow"><svg><use href="#lang"/></svg><div><b>Languages</b><small>Add languages</small></div><svg class="chev"><use href="#chev"/></svg></div>
+  ${tabs(3)}`
+};
+
+function mount(ph){
+  const scr=document.createElement('div');scr.className='scr';
+  const cv=document.createElement('div');cv.className='cv';cv.innerHTML=SCREENS[ph.dataset.screen]();
+  scr.appendChild(cv);ph.appendChild(scr);
+  if(!ph.querySelector('.notch')){} return cv;
+}
+const ro=new ResizeObserver(es=>es.forEach(e=>e.target.querySelector('.cv')?.style.setProperty('--k',e.contentRect.width/360)));
+document.querySelectorAll('.phone[data-screen]').forEach(ph=>{mount(ph);ro.observe(ph.querySelector('.scr'))});
+
+/* ---------- Spark → match animation ---------- */
+const anim=document.getElementById('anim').querySelector('.cv');
+anim.insertAdjacentHTML('beforeend',`
+  <div class="toast">${av('noa')}<div><b>Noa sent you a Spark</b><span>“Okay, your hiking photos…”</span></div><span class="sp"><svg width="24" height="24"><use href="#spark"/></svg></span></div>
+  <div class="layer sparkpg">${st('10:07')}<div class="top"><div class="side">${i('back')}</div><b style="font-size:18px">Sparks</b><div class="side r"></div></div>
+    <div style="padding:0 16px 8px;color:var(--a-muted);font-size:14px">A little more personal.</div>
+    <div class="ph">${pic('noa')}<div class="g" style="position:absolute;inset:0;background:linear-gradient(transparent 60%,rgba(0,0,0,.55))"></div><div style="position:absolute;left:16px;bottom:14px;color:#fff;font:700 24px var(--app)">Noa, 26</div></div>
+    <div class="q">“Okay, your hiking photos are unfair. Which trail is that?”</div>
+    <div class="btns"><div class="lb"><svg width="22" height="22" fill="#fff"><use href="#heart"/></svg>Like back</div><div class="rm">Remove</div></div></div>
+  <div class="layer celebrate"><div class="burst"></div>
+    <div class="duo">${av('me','a1')}${av('noa','a2')}<div class="lg"><svg><use href="#mark"/></svg></div></div>
+    <h4>It's a match!</h4><p>You and Noa liked each other.</p><div class="cta">Say hello</div><div class="later">Keep browsing</div></div>`);
+const burst=anim.querySelector('.burst');
+for(let k=0;k<14;k++){const a=k/14*Math.PI*2,d=110+Math.random()*60;burst.insertAdjacentHTML('beforeend',`<i style="--x:${Math.cos(a)*d}px;--y:${Math.sin(a)*d}px;--r:${(Math.random()*80-40)|0}deg"><svg width="14" height="13" viewBox="0 0 24 24" fill="${k%3?'#2468F2':'#D9415A'}"><use href="#heart"/></svg></i>`)}
+const steps=[...document.querySelectorAll('#steps li')];let timers=[];
+function setS(n){anim.classList.remove('s1','s2','s3','s4');for(let k=1;k<=n;k++)anim.classList.add('s'+k);
+  if(n>=2)anim.classList.remove('s1');
+  anim.querySelector('.lb').classList.toggle('press',n===3);
+  steps.forEach(li=>li.classList.toggle('on',+li.dataset.s===n));}
+function run(){timers.forEach(clearTimeout);timers=[];setS(0);
+  [[700,1],[2600,2],[4800,3],[5400,4],[10500,0]].forEach(([t,n])=>timers.push(setTimeout(()=>{setS(n);if(t===10500)run()},t)));}
+if(matchMedia('(prefers-reduced-motion: reduce)').matches){setS(4)}
+else{const io=new IntersectionObserver(([e])=>{if(e.isIntersecting){run()}else{timers.forEach(clearTimeout);setS(4)}},{threshold:.35});io.observe(document.getElementById('anim'));setS(4)}
+document.getElementById('replay').onclick=run;
+
+/* carousel */
+const rail=document.getElementById('rail');const step=()=>rail.querySelector('.shot').offsetWidth+28;
 document.getElementById('prev').onclick=()=>rail.scrollBy({left:-step(),behavior:'smooth'});
 document.getElementById('next').onclick=()=>rail.scrollBy({left:step(),behavior:'smooth'});
-// decorative placeholder QR pattern
-const g=document.getElementById('qrg');let seed=7;const r=()=>(seed=(seed*9301+49297)%233280)/233280;
-const finder=(x,y)=>{for(let i=0;i<7;i++)for(let j=0;j<7;j++){if(i==0||j==0||i==6||j==6||(i>1&&i<5&&j>1&&j<5))g.insertAdjacentHTML('beforeend',`<rect x="${x+i}" y="${y+j}" width="1" height="1"/>`)}};
-finder(0,0);finder(14,0);finder(0,14);
-for(let x=0;x<21;x++)for(let y=0;y<21;y++){if((x<8&&y<8)||(x>12&&y<8)||(x<8&&y>12))continue;if(r()>.5)g.insertAdjacentHTML('beforeend',`<rect x="${x}" y="${y}" width="1" height="1"/>`)}
 </script>
