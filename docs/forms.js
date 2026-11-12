@@ -1,6 +1,13 @@
 /* Sends a form to Formspree; falls back to a pre-filled email when no Formspree ID is set. */
 function bundleForm(form,subject){
   const st=form.querySelector('.status'),btn=form.querySelector('button[type=submit]');
+  if(!(window.BUNDLE||{}).formspreeId){
+    const lbl=[...btn.childNodes].find(n=>n.nodeType===3&&n.textContent.trim());
+    if(lbl)lbl.textContent=form.dataset.mail||'Continue in your email app';
+    const hint=document.createElement('p');hint.className='muted';hint.style.margin='0';hint.style.fontSize='14px';
+    hint.textContent='This opens your email app with your request filled in. Just press send.';
+    btn.parentNode.after(hint);
+  }
   form.addEventListener('submit',async e=>{
     e.preventDefault();st.className='status';st.textContent='';
     if(!form.checkValidity()){form.reportValidity();return}
