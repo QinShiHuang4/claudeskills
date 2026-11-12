@@ -198,6 +198,7 @@ h1,h2,h3{font-family:var(--head);letter-spacing:-.02em;margin:0;text-wrap:balanc
 .rail{display:flex;gap:28px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 4px 28px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
 .shot{scroll-snap-align:start;flex:none;display:flex;flex-direction:column;gap:16px;width:min(280px,76vw);margin:0}
 .shot .phone{width:100%}
+.shot-img{display:block;width:100%;height:auto;aspect-ratio:9/16;border-radius:28px;border:1px solid var(--line);background:#0B0E15}
 .shot h3{font-size:19px;font-weight:700}
 .shot p{margin:2px 0 0;font-size:15px;color:var(--muted)}
 
@@ -212,7 +213,7 @@ h1,h2,h3{font-family:var(--head);letter-spacing:-.02em;margin:0;text-wrap:balanc
 .replay{margin-top:18px}
 
 /* animation layers inside the preview canvas */
-.layer{position:absolute;inset:0;transition:opacity .45s ease}
+.layer{position:absolute;inset:0;z-index:4;transition:opacity .45s ease}
 .toast{position:absolute;left:12px;right:12px;top:52px;z-index:5;background:#fff;border-radius:20px;padding:12px 14px;display:flex;gap:12px;align-items:center;box-shadow:0 12px 30px rgba(24,33,50,.25);transform:translateY(-220%);transition:transform .6s cubic-bezier(.16,1,.3,1)}
 .toast .av{width:42px;height:42px}
 .toast b{font-size:14px;display:block}
@@ -341,22 +342,25 @@ footer a:hover{color:var(--fg)}
         <span><svg aria-hidden="true"><use href="#pin"/></svg>City shown, never your exact location</span>
       </div>
     </div>
-    <div class="hero-phone"><div class="phone" data-screen="discover" role="img" aria-label="Bundle Discover screen: Noa, 26, verified, with Pass, Spark, Like and Wink"></div></div>
+    <div class="hero-phone"><div class="phone" data-screen="discover" role="img" aria-label="Bundle Discover screen: Maya, 26, verified, with Pass, Spark, Like and Wink"></div></div>
   </div>
 </section>
 
 <section class="sec" id="screens" style="padding-top:24px">
   <div class="wrap">
     <div class="shots-head">
-      <div><div class="eyebrow">Inside the app</div><h2 class="h2" style="margin-top:10px">From hello to “see you Sunday.”</h2></div>
+      <div><div class="eyebrow">Inside the app</div><h2 class="h2" style="margin-top:10px">From hello to “see you Saturday.”</h2></div>
       <div class="arrows"><button type="button" id="prev" aria-label="Previous screen"><svg class="ico"><use href="#back"/></svg></button><button type="button" id="next" aria-label="Next screen"><svg class="ico" style="transform:scaleX(-1)"><use href="#back"/></svg></button></div>
     </div>
     <div class="rail" id="rail" tabindex="0" aria-label="App screens">
-      <figure class="shot"><div class="phone" data-screen="likes" role="img" aria-label="Likes you grid with a Wink highlighted"></div><figcaption><h3>Likes you</h3><p>One card per person. A Wink glows blue.</p></figcaption></figure>
-      <figure class="shot"><div class="phone" data-screen="matches" role="img" aria-label="Matches list"></div><figcaption><h3>Matches</h3><p>Newest first, with search and unread counts.</p></figcaption></figure>
-      <figure class="shot"><div class="phone" data-screen="chat" role="img" aria-label="New chat: You and Noa connected"></div><figcaption><h3>Say hello in your own words</h3><p>Every match opens a fresh, private chat.</p></figcaption></figure>
-      <figure class="shot"><div class="phone" data-screen="convo" role="img" aria-label="Chat with read ticks"></div><figcaption><h3>Chat with read ticks</h3><p>Tap the header to see their full profile.</p></figcaption></figure>
-      <figure class="shot"><div class="phone" data-screen="profile" role="img" aria-label="My profile with completion progress"></div><figcaption><h3>Your profile, step by step</h3><p>A progress bar shows what's left to add.</p></figcaption></figure>
+      <figure class="shot"><img class="shot-img" src="/img/screens/01-free.webp" width="720" height="1280" loading="lazy" decoding="async" alt="Dating. Actually free. Maya on Discover"><figcaption><h3>Free to use</h3><p>Meet, match and chat without paying.</p></figcaption></figure>
+      <figure class="shot"><img class="shot-img" src="/img/screens/02-scroll.webp" width="720" height="1280" loading="lazy" decoding="async" alt="Just scroll. Meet someone. A Like sent while scrolling profiles"><figcaption><h3>Scroll your way</h3><p>Take control of your feed.</p></figcaption></figure>
+      <figure class="shot"><img class="shot-img" src="/img/screens/03-spark.webp" width="720" height="1280" loading="lazy" decoding="async" alt="Don’t just like. Spark. A Spark from Maya"><figcaption><h3>Sparks</h3><p>A Like with a message, read first.</p></figcaption></figure>
+      <figure class="shot"><img class="shot-img" src="/img/screens/04-safe.webp" width="720" height="1280" loading="lazy" decoding="async" alt="Real people. Reviewed photos. Shachar’s verified profile"><figcaption><h3>Reviewed photos</h3><p>Every photo is checked before anyone sees it.</p></figcaption></figure>
+      <figure class="shot"><img class="shot-img" src="/img/screens/05-interests.webp" width="720" height="1280" loading="lazy" decoding="async" alt="Shared interests. Real chemistry. Choosing interests"><figcaption><h3>Shared interests</h3><p>Pick what you love, meet people who love it too.</p></figcaption></figure>
+      <figure class="shot"><img class="shot-img" src="/img/screens/06-match.webp" width="720" height="1280" loading="lazy" decoding="async" alt="It’s mutual. Match screen with Shachar and Maya"><figcaption><h3>It’s mutual</h3><p>Like back and your chat opens instantly.</p></figcaption></figure>
+      <figure class="shot"><img class="shot-img" src="/img/screens/07-chat.webp" width="720" height="1280" loading="lazy" decoding="async" alt="From hey to Saturday. Chat between Shachar and Maya"><figcaption><h3>From hey to Saturday</h3><p>Chat with read receipts.</p></figcaption></figure>
+
     </div>
   </div>
 </section>
@@ -367,14 +371,14 @@ footer a:hover{color:var(--fg)}
       <div class="eyebrow">Live preview</div>
       <h2 class="h2" style="margin-top:10px">When a Spark lands.</h2>
       <ol class="steps" id="steps">
-        <li data-s="1"><span class="n">1</span><div><b>A Spark arrives</b><span>Noa sends a Like with a message.</span></div></li>
+        <li data-s="1"><span class="n">1</span><div><b>A Spark arrives</b><span>Maya sends a Like with a message.</span></div></li>
         <li data-s="2"><span class="n">2</span><div><b>Read it first</b><span>Her photo and words, before you decide.</span></div></li>
         <li data-s="3"><span class="n">3</span><div><b>Like back</b><span>One tap on the heart.</span></div></li>
         <li data-s="4"><span class="n">4</span><div><b>It's a match</b><span>The chat opens, ready for hello.</span></div></li>
       </ol>
       <button class="btn ghost replay" type="button" id="replay">Replay preview</button>
     </div>
-    <div class="phone" id="anim" data-screen="likes" role="img" aria-label="Animated preview: a Spark from Noa arrives, you like back, and it's a match"></div>
+    <div class="phone" id="anim" data-screen="discover" role="img" aria-label="Animated preview: a Spark from Maya arrives, you like back, and it's a match"></div>
   </div>
 </section>
 
@@ -471,6 +475,8 @@ const P={
   amit:{g:'m',skin:1,hair:1,bg:3,top:3,style:0,beard:1},
   me:{g:'m',skin:1,hair:1,bg:2,top:0,style:1}
 };
+P.noa.photo='/img/maya-cafe.jpg';P.me.photo='/img/shachar-face.jpg';
+const __person=person;person=o=>o.photo?`<img src="${o.photo}" alt="" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:50% 22%;display:block">`:__person(o);
 const pic=n=>`<div class="pic">${person(P[n])}</div>`;
 const av=(n,cls='')=>`<div class="av ${cls}">${pic(n)}</div>`;
 
@@ -486,7 +492,7 @@ const SCREENS={
 discover:()=>`${st('10:04')}${appTop(i('moon'),i('refresh')+i('tune'))}
   <div class="dcard">${pic('noa')}<div class="shade"></div>
     <div class="bars"><i></i><i class="on"></i><i></i></div><span class="cnt">2 / 3</span>
-    <div class="nm">Noa, 26 <svg><use href="#verified"/></svg></div>
+    <div class="nm">Maya, 26 <svg><use href="#verified"/></svg></div>
     <div class="loc"><svg width="15" height="15"><use href="#pin"/></svg>Tel Aviv, Israel · About 3 km away</div>
     <div class="vp">View profile</div>
     <div class="shared">60% · Shared interests <svg width="14" height="14"><use href="#chev"/></svg></div>
@@ -503,12 +509,12 @@ likes:()=>`${st('10:05')}${appTop(i('moon'),i('refresh'))}<div class="ttl">Likes
   ${tabs(1)}`,
 matches:()=>`${st('10:05')}${appTop(i('moon'),'')}<div class="ttl">Matches</div>
   <div class="search"><svg width="20" height="20"><use href="#search"/></svg>Search matches</div>
-  ${[['noa','Noa','Say hello — you matched!','Yesterday'],['daniel','Daniel','See you Sunday','Nov 10',1],['shira','Shira','Haha, deal 😄','Nov 10',0,2],['ido','Ido','Say hello — you matched!','Nov 4'],['maya','Maya','heyy','Nov 2',1],['amit','Amit','Say hello — you matched!','Nov 1']].map(([n,a,m,d,tick,un])=>`
+  ${[['noa','Maya','Say hello — you matched!','Yesterday'],['daniel','Daniel','See you Sunday','Nov 10',1],['shira','Shira','Haha, deal 😄','Nov 10',0,2],['ido','Ido','Say hello — you matched!','Nov 4'],['maya','Maya','heyy','Nov 2',1],['amit','Amit','Say hello — you matched!','Nov 1']].map(([n,a,m,d,tick,un])=>`
     <div class="mrow">${av(n)}<div><b>${a}</b><small>${tick?'✓✓ ':''}${m}</small></div>${un?`<span class="un">${un}</span>`:`<span class="dt">${d}</span>`}</div>`).join('')}
   ${tabs(2)}`,
 chat:()=>`${st('10:06')}${appTop(i('back'),'')}
-  <div class="chead">${av('noa')}<div><b>Noa</b><small>Last seen today at 9:41 AM</small></div><svg class="i" style="margin-left:auto;width:24px;height:24px"><use href="#dots"/></svg></div>
-  <div class="cempty"><svg class="wmk" style="opacity:.06"><use href="#mark"/></svg><div><b>You and Noa connected.</b><span>Say hello in your own words.</span></div></div>
+  <div class="chead">${av('noa')}<div><b>Maya</b><small>Last seen today at 9:41 AM</small></div><svg class="i" style="margin-left:auto;width:24px;height:24px"><use href="#dots"/></svg></div>
+  <div class="cempty"><svg class="wmk" style="opacity:.06"><use href="#mark"/></svg><div><b>You and Maya connected.</b><span>Say hello in your own words.</span></div></div>
   <div class="cin"><div>Message...</div><b><svg width="22" height="22"><use href="#up"/></svg></b></div>${tabs(2)}`,
 convo:()=>`${st('10:12')}${appTop(i('back'),'')}
   <div class="chead">${av('daniel')}<div><b>Daniel</b><small>Online</small></div><svg class="i" style="margin-left:auto;width:24px;height:24px"><use href="#dots"/></svg></div>
@@ -538,15 +544,15 @@ document.querySelectorAll('.phone[data-screen]').forEach(ph=>{mount(ph);ro.obser
 /* ---------- Spark → match animation ---------- */
 const anim=document.getElementById('anim').querySelector('.cv');
 anim.insertAdjacentHTML('beforeend',`
-  <div class="toast">${av('noa')}<div><b>Noa sent you a Spark</b><span>“Okay, your hiking photos…”</span></div><span class="sp"><svg width="40" height="40"><use href="#spark"/></svg></span></div>
+  <div class="toast">${av('noa')}<div><b>Maya sent you a Spark</b><span>“Okay, that crater view…”</span></div><span class="sp"><svg width="40" height="40"><use href="#spark"/></svg></span></div>
   <div class="layer sparkpg">${st('10:07')}<div class="top"><div class="side">${i('back')}</div><b style="font-size:18px">Sparks</b><div class="side r"></div></div>
     <div style="padding:0 16px 8px;color:var(--a-muted);font-size:14px">A little more personal.</div>
-    <div class="ph">${pic('noa')}<div class="g" style="position:absolute;inset:0;background:linear-gradient(transparent 60%,rgba(0,0,0,.55))"></div><div style="position:absolute;left:16px;bottom:14px;color:#fff;font:700 24px var(--app)">Noa, 26</div></div>
-    <div class="q">“Okay, your hiking photos are unfair. Which trail is that?”</div>
+    <div class="ph">${pic('noa')}<div class="g" style="position:absolute;inset:0;background:linear-gradient(transparent 60%,rgba(0,0,0,.55))"></div><div style="position:absolute;left:16px;bottom:14px;color:#fff;font:700 24px var(--app)">Maya, 26</div></div>
+    <div class="q">“Okay, that crater view is unreal. Mitzpe Ramon?”</div>
     <div class="btns"><div class="lb"><svg width="22" height="22" fill="#fff"><use href="#heart"/></svg>Like back</div><div class="rm">Remove</div></div></div>
   <div class="layer celebrate"><div class="burst"></div>
     <div class="duo">${av('me','a1')}${av('noa','a2')}<div class="lg"><svg><use href="#mark"/></svg></div></div>
-    <h4>It's a match!</h4><p>You and Noa liked each other.</p><div class="cta">Say hello</div><div class="later">Keep browsing</div></div>`);
+    <h4>It's a match!</h4><p>You and Maya liked each other.</p><div class="cta">Say hello</div><div class="later">Keep browsing</div></div>`);
 const burst=anim.querySelector('.burst');
 for(let k=0;k<14;k++){const a=k/14*Math.PI*2,d=110+Math.random()*60;burst.insertAdjacentHTML('beforeend',`<i style="--x:${Math.cos(a)*d}px;--y:${Math.sin(a)*d}px;--r:${(Math.random()*80-40)|0}deg"><svg width="14" height="13" viewBox="0 0 24 24" fill="${k%3?'#2468F2':'#D9415A'}"><use href="#heart"/></svg></i>`)}
 const steps=[...document.querySelectorAll('#steps li')];let timers=[];
