@@ -1,7 +1,7 @@
 /* Site settings — fill these in, then push. Empty values switch the feature off safely. */
 window.BUNDLE = {
   formspreeId: "",          // e.g. "xyzabcd" from https://formspree.io/f/xyzabcd
-  cloudflareToken: "",      // Cloudflare Web Analytics token
+  cloudflareToken: "b0a4aba7d6284431ac012ee062acd86c",      // Cloudflare Web Analytics token
   supportEmail: "support@meetbundle.com",
   company: "Meet Bundle"
 };
