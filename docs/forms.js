@@ -1,3 +1,4 @@
+function T(k){return (window.I18N&&window.I18N[k])||k}
 /* Sends a form to Formspree; falls back to a pre-filled email when no Formspree ID is set. */
 function bundleForm(form,subject){
   const st=form.querySelector('.status'),btn=form.querySelector('button[type=submit]');
@@ -5,7 +6,7 @@ function bundleForm(form,subject){
     const lbl=[...btn.childNodes].find(n=>n.nodeType===3&&n.textContent.trim());
     if(lbl)lbl.textContent=form.dataset.mail||'Continue in your email app';
     const hint=document.createElement('p');hint.className='muted';hint.style.margin='0';hint.style.fontSize='14px';
-    hint.textContent='This opens your email app with your request filled in. Just press send.';
+    hint.textContent=T('This opens your email app with your request filled in. Just press send.');
     btn.parentNode.after(hint);
   }
   form.addEventListener('submit',async e=>{
@@ -16,14 +17,14 @@ function bundleForm(form,subject){
     if(!id){
       const body=[...data.entries()].filter(([k])=>!k.startsWith('_')).map(([k,v])=>k+': '+v).join('\n');
       location.href='mailto:'+BUNDLE.supportEmail+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
-      st.className='status ok';st.textContent='Your email app should open with the request filled in. If it doesn’t, email '+BUNDLE.supportEmail+'.';return;
+      st.className='status ok';st.textContent=T('Your email app should open with the request filled in. If it doesn’t, email')+' '+BUNDLE.supportEmail;return;
     }
     btn.disabled=true;btn.classList.add('loading');
     try{
       const r=await fetch('https://formspree.io/f/'+id,{method:'POST',body:data,headers:{Accept:'application/json'}});
       if(!r.ok)throw new Error();
       form.reset();st.className='status ok';st.textContent=form.dataset.ok;
-    }catch(_){st.className='status err';st.textContent='We couldn’t send that. Check your connection and try again, or email '+BUNDLE.supportEmail+'.'}
+    }catch(_){st.className='status err';st.textContent=T('We couldn’t send that. Check your connection and try again, or email')+' '+BUNDLE.supportEmail}
     finally{btn.disabled=false;btn.classList.remove('loading')}
   });
 }

@@ -25,6 +25,14 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Work+Sans:wght@400;500;600&family=Roboto:wght@800&display=swap">
 <link rel="stylesheet" href="/site.css">
 <script src="/config.js"></script>
+
+
+
+
+
+
+
+<!--i18n--><link rel="alternate" hreflang="en" href="https://meetbundle.com/contact/"><link rel="alternate" hreflang="he" href="https://meetbundle.com/he/contact/"><link rel="alternate" hreflang="ar" href="https://meetbundle.com/ar/contact/"><link rel="alternate" hreflang="ru" href="https://meetbundle.com/ru/contact/"><link rel="alternate" hreflang="uk" href="https://meetbundle.com/uk/contact/"><link rel="alternate" hreflang="de" href="https://meetbundle.com/de/contact/"><link rel="alternate" hreflang="fr" href="https://meetbundle.com/fr/contact/"><link rel="alternate" hreflang="es" href="https://meetbundle.com/es/contact/"><link rel="alternate" hreflang="pt" href="https://meetbundle.com/pt/contact/"><link rel="alternate" hreflang="it" href="https://meetbundle.com/it/contact/"><link rel="alternate" hreflang="nl" href="https://meetbundle.com/nl/contact/"><link rel="alternate" hreflang="zh-Hans" href="https://meetbundle.com/zh/contact/"><link rel="alternate" hreflang="ja" href="https://meetbundle.com/ja/contact/"><link rel="alternate" hreflang="vi" href="https://meetbundle.com/vi/contact/"><link rel="alternate" hreflang="th" href="https://meetbundle.com/th/contact/"><link rel="alternate" hreflang="x-default" href="https://meetbundle.com/contact/"><script>(function(){try{var s=localStorage.getItem("bundle-lang");if(s)return}catch(e){}var A=["he", "ar", "ru", "uk", "de", "fr", "es", "pt", "it", "nl", "zh", "ja", "vi", "th"],L=(navigator.languages||[navigator.language||""]);for(var i=0;i<L.length;i++){var l=(L[i]||"").toLowerCase(),c=l.split("-")[0];if(c==="iw")c="he";if(c==="en")return;if(A.indexOf(c)>-1){location.replace("/"+c+location.pathname+location.search+location.hash);return}}})();</script><!--/i18n-->
 </head>
 <body>
 <header><div class="wrap"><a class="logo" href="/"><img src="/logo.png" alt="" width="28" height="28">bundle</a><a class="btn" href="/#download">Get the app</a></div></header>
@@ -44,9 +52,10 @@
   <p class="status" role="status" aria-live="polite"></p>
 </form>
 </div>
-<p class="muted" style="margin-top:24px">Prefer email? Write to <a href="mailto:support@meetbundle.com">support@meetbundle.com</a>. To report someone, you can also use <b>Report</b> on their profile or chat in the app.</p>
+<p class="muted" style="margin-top:24px">Prefer email? Write to us: <a href="mailto:support@meetbundle.com">support@meetbundle.com</a></p>
+<p class="muted">To report someone, you can also use Report on their profile or chat in the app.</p>
 </div></main>
-<footer><div class="wrap"><span>© 2026 Meet Bundle</span><nav aria-label="Footer"><a href="/privacy/">Privacy</a><a href="/contact/">Contact</a><a href="/delete-account/">Delete account</a><a href="/child-safety/">Child safety</a></nav></div></footer>
+<footer><div class="wrap"><span>© 2026 Meet Bundle</span><nav aria-label="Footer"><a href="/privacy/">Privacy</a><a href="/contact/">Contact</a><a href="/delete-account/">Delete account</a><a href="/child-safety/">Child safety</a></nav><!--i18n--><label class="langsw"><span class="sr">Language</span><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3Z"/></g></svg><select onchange="bundleLang(this.value)"><option value="en" selected>English</option><option value="he">עברית</option><option value="ar">العربية</option><option value="ru">Русский</option><option value="uk">Українська</option><option value="de">Deutsch</option><option value="fr">Français</option><option value="es">Español</option><option value="pt">Português</option><option value="it">Italiano</option><option value="nl">Nederlands</option><option value="zh">简体中文</option><option value="ja">日本語</option><option value="vi">Tiếng Việt</option><option value="th">ไทย</option></select></label><script>function bundleLang(v){try{localStorage.setItem('bundle-lang',v)}catch(e){}var p=location.pathname.replace(/^\/(he|ar|ru|uk|de|fr|es|pt|it|nl|zh|ja|vi|th)(?=\/)/,'');location.href=(v==='en'?'':'/'+v)+p+location.hash}</script><style>.langsw{position:relative;display:inline-flex;align-items:center;gap:6px;color:inherit;min-height:44px;padding:0 8px}.langsw select{background:transparent;color:inherit;border:1px solid currentColor;border-radius:999px;padding:6px 10px;font:inherit;font-size:14px;min-height:36px;opacity:.85}.langsw select option{color:#000}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}</style><!--/i18n--></div></footer>
 <script src="/forms.js"></script><script>bundleForm(document.getElementById("f"),"Bundle contact form")</script>
 </body>
 </html>
