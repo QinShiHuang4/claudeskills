@@ -20,3 +20,8 @@ landing pages `/free-dating-app/` and `/safe-dating/` in en, zh, ja, vi, th). Th
 sitemap entries, footer links and language switcher only include those languages; switching
 to another language goes to that language's homepage. To add a language to them, translate
 the page's strings and add the code to `ASIA` (or the page's list).
+
+## Traditional Chinese
+`zh-hant.json` is generated from `zh.json` by `zh_hant.py` (Taiwan wording, then character
+conversion) every time the build runs. Edit Simplified Chinese, not `zh-hant.json`. To change a
+Traditional-only word, add it to the phrase list `PH` in `zh_hant.py`.
