@@ -9,7 +9,7 @@ PAGES=['index.html','404.html','contact/index.html','delete-account/index.html',
 ROUTES=['/privacy/','/contact/','/delete-account/','/child-safety/']
 ATTR=('alt','aria-label','placeholder','data-ok','data-mail')
 JS=["This opens your email app with your request filled in. Just press send.","Your email app should open with the request filled in. If it doesn’t, email","We couldn’t send that. Check your connection and try again, or email","Language"]
-SKIP={'bundle','Bundle','Meet Bundle','App Store','Google Play','support@meetbundle.com','Meet Bundle ·','NCMEC CyberTipline','INHOPE'}
+SKIP={'Meet Bundle - Dating & Connections','bundle','Bundle','Meet Bundle','App Store','Google Play','support@meetbundle.com','Meet Bundle ·','NCMEC CyberTipline','INHOPE'}
 LANGS={ # code: (native name, dir, google fonts family param, head font, body font, og locale)
  'en':('English','ltr','','',"",'en_US'),
  'he':('עברית','rtl','Heebo:wght@400;500;700;800','Heebo','Heebo','he_IL'),
@@ -23,7 +23,7 @@ LANGS={ # code: (native name, dir, google fonts family param, head font, body fo
  'vi':('Tiếng Việt','ltr','Be+Vietnam+Pro:wght@400;500;600;800','Be Vietnam Pro','Be Vietnam Pro','vi_VN'),
  'th':('ไทย','ltr','Noto+Sans+Thai:wght@400;500;600;800','Noto Sans Thai','Noto Sans Thai','th_TH')}
 HREFLANG={'zh':'zh-Hans','pt':'pt'}
-FAQ=[('Is Meet Bundle free?',['Yes. You can create a profile, meet people, match and chat without paying.']),
+FAQ=[('Is Meet Bundle free?',['Yes. Meet Bundle is currently subscription-free, with no payments. You can create a profile, meet people, match and chat without paying.']),
 ('What is a Spark?',['A Spark is a Like with a short message, so the other person reads your words before they decide.']),
 ('What’s the difference between a Wink, a Like and a Spark?',['A Wink is a light hello. A Like says you’re interested, and if they like you back, it’s a match. A Spark is a Like with a message.']),
 ('Is Meet Bundle safe?',['Every photo is reviewed before anyone sees it, new profiles start under review, and you can block or report anyone from their profile or chat.']),
@@ -127,6 +127,7 @@ def build():
         out=out.replace('<meta property="og:type"',f'<meta property="og:locale" content="{loc}">\n<meta property="og:type"',1)
         out=out.replace('<meta name="robots" content="noindex">','<meta name="robots" content="noindex">')
       out=brand(out.replace('<meta property="og:site_name" content="Bundle">','<meta property="og:site_name" content="Meet Bundle">'))
+      if f=='index.html':out=re.sub(r'<title>.*?</title>','<title>Meet Bundle - Dating &amp; Connections</title>',out,count=1)
       if f=='404.html':out=re.sub(r'<link rel="canonical"[^>]*>\n?','',out)
       # inject head + switcher
       out=out.replace('</head>',head_inj+'\n</head>',1) if '</head>' in out else out.replace('</title>','</title>'+head_inj,1)
