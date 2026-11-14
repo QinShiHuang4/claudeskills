@@ -8,8 +8,8 @@ After editing any English page or translation, rebuild:
     python3 i18n/build.py
 
 This regenerates `i18n/en.json`, every `docs/<code>/` folder and `docs/sitemap.xml`.
-If you add or change English text, `en.json` changes too: add the new line at the same
-position in every language file (the build stops and tells you if a file is out of step).
+New or changed English text is appended to the end of `en.json`; append its translation to
+the end of every language file (the build stops and tells you if a file is out of step).
 
 Language choice: first visit to an English page redirects to the visitor's phone/browser
 language when we have it; the footer switcher overrides and remembers the choice.

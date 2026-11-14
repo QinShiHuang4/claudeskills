@@ -57,7 +57,10 @@ def translate(src,M):
   return ''.join(parts)
 def page_path(f):return '/' if f=='index.html' else ('/404.html' if f=='404.html' else '/'+f[:-len('index.html')])
 def build():
-  en=extract();json.dump(en,open(os.path.join(I,'en.json'),'w'),ensure_ascii=False,indent=0)
+  cur=extract();ef=os.path.join(I,'en.json')
+  prev=json.load(open(ef)) if os.path.exists(ef) else []
+  en=prev+[x for x in cur if x not in prev]  # stable order: new strings are appended
+  json.dump(en,open(ef,'w'),ensure_ascii=False,indent=0)
   avail=['en']+[c for c in LANGS if c!='en' and os.path.exists(os.path.join(I,c+'.json'))]
   opts=''.join(f'<option value="{c}">{LANGS[c][0]}</option>' for c in avail)
   for code in avail:
