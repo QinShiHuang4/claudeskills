@@ -7,7 +7,7 @@ from html.parser import HTMLParser
 ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__)));DOCS=os.path.join(ROOT,'docs');I=os.path.join(ROOT,'i18n')
 PAGES=['index.html','404.html','contact/index.html','delete-account/index.html','privacy/index.html','child-safety/index.html','free-dating-app/index.html','safe-dating/index.html']
 ROUTES=['/privacy/','/contact/','/delete-account/','/child-safety/','/free-dating-app/','/safe-dating/']
-ASIA=['en','zh','zh-hant','ja','vi','th']
+ASIA=['en','zh','zh-hant','ja','ko','vi','th']
 LIMITED={'free-dating-app/index.html':ASIA,'safe-dating/index.html':ASIA}  # pages offered in some languages only
 LIMITED_ROUTES={'/free-dating-app/':ASIA,'/safe-dating/':ASIA}
 ATTR=('alt','aria-label','placeholder','data-ok','data-mail')
@@ -23,6 +23,7 @@ LANGS={ # code: (native name, dir, google fonts family param, head font, body fo
  'pt':('Português','ltr','','','','pt_BR'),'it':('Italiano','ltr','','','','it_IT'),'nl':('Nederlands','ltr','','','','nl_NL'),
  'zh':('简体中文','ltr','Noto+Sans+SC:wght@400;500;700;900','Noto Sans SC','Noto Sans SC','zh_CN'),
  'zh-hant':('繁體中文','ltr','Noto+Sans+TC:wght@400;500;700;900','Noto Sans TC','Noto Sans TC','zh_TW'),
+ 'ko':('한국어','ltr','Noto+Sans+KR:wght@400;500;700;900','Noto Sans KR','Noto Sans KR','ko_KR'),
  'ja':('日本語','ltr','Noto+Sans+JP:wght@400;500;700;900','Noto Sans JP','Noto Sans JP','ja_JP'),
  'vi':('Tiếng Việt','ltr','Be+Vietnam+Pro:wght@400;500;600;800','Be Vietnam Pro','Be Vietnam Pro','vi_VN'),
  'th':('ไทย','ltr','Noto+Sans+Thai:wght@400;500;600;800','Noto Sans Thai','Noto Sans Thai','th_TH')}
@@ -115,6 +116,7 @@ def build():
       det='' if code!='en' else '<script>(function(){try{var s=localStorage.getItem("bundle-lang");if(s)return}catch(e){}var A=%s,L=(navigator.languages||[navigator.language||""]);for(var i=0;i<L.length;i++){var l=(L[i]||"").toLowerCase(),c=l.split("-")[0];if(c==="iw")c="he";if(c==="zh"&&/-(tw|hk|mo|hant)/.test(l))c="zh-hant";if(c==="en")return;if(A.indexOf(c)>-1){location.replace("/"+c+location.pathname+location.search+location.hash);return}}})();</script>'%json.dumps([c for c in pl if c!='en'])
       font=''
       if fam:font=f'<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family={fam}&display=swap"><style>:root{{--head:"{hf}",system-ui,sans-serif!important;--body:"{bf}",system-ui,sans-serif!important}}body,h1,h2,h3,.hd h1,.eyebrow,.btn,input,select,textarea{{font-family:var(--body)}}h1,h2,h3{{font-family:var(--head)}}</style>'
+      if code=='ko':font+='<style>body{word-break:keep-all;overflow-wrap:break-word}</style>'
       rtl='<style>[dir=rtl] .phone,[dir=rtl] .shot-img{direction:ltr}[dir=rtl] ol.steps,[dir=rtl] ul{padding-inline-start:20px;padding-left:0}[dir=rtl] #prev svg{transform:scaleX(-1)}[dir=rtl] #next svg{transform:none!important}[dir=rtl] .h2,[dir=rtl] h1,[dir=rtl] h2{letter-spacing:0}</style>' if d=='rtl' else ''
       i18njs='' if code=='en' else '<script>window.I18N=%s</script>'%json.dumps({k:M.get(k,k) for k in JS},ensure_ascii=False)
       ld='' if f!='index.html' else jsonld(code,({} if code=='en' else M),(M.get(en[1],en[1]) if code!='en' else en[1]))
