@@ -13,3 +13,10 @@ the end of every language file (the build stops and tells you if a file is out o
 
 Language choice: first visit to an English page redirects to the visitor's phone/browser
 language when we have it; the footer switcher overrides and remembers the choice.
+
+## Pages in some languages only
+`LIMITED` in `build.py` lists pages offered in a subset of languages (currently the Asia
+landing pages `/free-dating-app/` and `/safe-dating/` in en, zh, ja, vi, th). Their hreflang,
+sitemap entries, footer links and language switcher only include those languages; switching
+to another language goes to that language's homepage. To add a language to them, translate
+the page's strings and add the code to `ASIA` (or the page's list).

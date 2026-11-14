@@ -5,8 +5,11 @@ English pages in docs/ are the source. Translations live in i18n/<lang>.json as
 import json,re,os,html
 from html.parser import HTMLParser
 ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__)));DOCS=os.path.join(ROOT,'docs');I=os.path.join(ROOT,'i18n')
-PAGES=['index.html','404.html','contact/index.html','delete-account/index.html','privacy/index.html','child-safety/index.html']
-ROUTES=['/privacy/','/contact/','/delete-account/','/child-safety/']
+PAGES=['index.html','404.html','contact/index.html','delete-account/index.html','privacy/index.html','child-safety/index.html','free-dating-app/index.html','safe-dating/index.html']
+ROUTES=['/privacy/','/contact/','/delete-account/','/child-safety/','/free-dating-app/','/safe-dating/']
+ASIA=['en','zh','ja','vi','th']
+LIMITED={'free-dating-app/index.html':ASIA,'safe-dating/index.html':ASIA}  # pages offered in some languages only
+LIMITED_ROUTES={'/free-dating-app/':ASIA,'/safe-dating/':ASIA}
 ATTR=('alt','aria-label','placeholder','data-ok','data-mail')
 JS=["This opens your email app with your request filled in. Just press send.","Your email app should open with the request filled in. If it doesn’t, email","We couldn’t send that. Check your connection and try again, or email","Language"]
 SKIP={'Meet Bundle - Dating & Connections','bundle','Bundle','Meet Bundle','App Store','Google Play','support@meetbundle.com','Meet Bundle ·','NCMEC CyberTipline','INHOPE'}
@@ -48,7 +51,7 @@ def jsonld(code,M,desc):
 SW=('<!--i18n--><label class="langsw"><span class="sr">%LABEL%</span>'
  '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3Z"/></g></svg>'
  '<select onchange="bundleLang(this.value)">%OPTS%</select></label>'
- '<script>function bundleLang(v){try{localStorage.setItem(\'bundle-lang\',v)}catch(e){}var p=location.pathname.replace(/^\\/(%RE%)(?=\\/)/,\'\');location.href=(v===\'en\'?\'\':\'/\'+v)+p+location.hash}</script>'
+ '<script>function bundleLang(v){try{localStorage.setItem(\'bundle-lang\',v)}catch(e){}var p=location.pathname.replace(/^\\/(%RE%)(?=\\/)/,\'\');if(window.PAGE_LANGS&&PAGE_LANGS.indexOf(v)<0)p=\'/\';location.href=(v===\'en\'?\'\':\'/\'+v)+p+location.hash}</script>'
  '<style>.langsw{position:relative;display:inline-flex;align-items:center;gap:6px;color:inherit;min-height:44px;padding:0 8px}.langsw select{background:transparent;color:inherit;border:1px solid currentColor;border-radius:999px;padding:6px 10px;font:inherit;font-size:14px;min-height:36px;opacity:.85}.langsw select option{color:#000}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}</style><!--/i18n-->')
 class X(HTMLParser):
   def __init__(s):super().__init__();s.skip=0;s.out=[]
@@ -94,17 +97,20 @@ def build():
           j=next((j for j in range(len(T)) if fx(en[j])==en[i] and en[j]!=en[i]),None)
           if j is None:break
           T.append(fx(T[j]))
-        assert len(T)==len(en),(code,len(T),len(en));T={str(i):v for i,v in enumerate(T)}
+        T={str(i):v for i,v in enumerate(T)}
       M={e:T[str(k)] for k,e in enumerate(en) if str(k) in T and T[str(k)].strip()}
-      miss=[k for k in range(len(en)) if str(k) not in T];
-      if miss:print(code,'missing',len(miss),miss[:10])
     for f in PAGES:
+      pl=[c for c in avail if c in LIMITED.get(f,avail)]
+      if code not in pl:continue
       src=open(os.path.join(DOCS,f)).read()
       src=re.sub(r'\n?<!--i18n-->.*?<!--/i18n-->','',src,flags=re.S)  # strip previous injections on en
+      if code!='en':
+        px=X();px.feed(src);need=[x for x in dict.fromkeys(px.out) if x not in SKIP and x not in M]
+        if need:raise SystemExit(f'{code}: {f} needs translations for {len(need)} strings, e.g. {need[:3]}')
       pp=page_path(f)
       name,d,fam,hf,bf,loc=LANGS[code]
-      alt='' if f=='404.html' else ''.join(f'<link rel="alternate" hreflang="{HREFLANG.get(c,c)}" href="https://meetbundle.com{url(c,pp)}">' for c in avail)+f'<link rel="alternate" hreflang="x-default" href="https://meetbundle.com{pp}">'
-      det='' if code!='en' else '<script>(function(){try{var s=localStorage.getItem("bundle-lang");if(s)return}catch(e){}var A=%s,L=(navigator.languages||[navigator.language||""]);for(var i=0;i<L.length;i++){var l=(L[i]||"").toLowerCase(),c=l.split("-")[0];if(c==="iw")c="he";if(c==="en")return;if(A.indexOf(c)>-1){location.replace("/"+c+location.pathname+location.search+location.hash);return}}})();</script>'%json.dumps([c for c in avail if c!='en'])
+      alt='' if f=='404.html' else ''.join(f'<link rel="alternate" hreflang="{HREFLANG.get(c,c)}" href="https://meetbundle.com{url(c,pp)}">' for c in pl)+f'<link rel="alternate" hreflang="x-default" href="https://meetbundle.com{pp}">'
+      det='' if code!='en' else '<script>(function(){try{var s=localStorage.getItem("bundle-lang");if(s)return}catch(e){}var A=%s,L=(navigator.languages||[navigator.language||""]);for(var i=0;i<L.length;i++){var l=(L[i]||"").toLowerCase(),c=l.split("-")[0];if(c==="iw")c="he";if(c==="en")return;if(A.indexOf(c)>-1){location.replace("/"+c+location.pathname+location.search+location.hash);return}}})();</script>'%json.dumps([c for c in pl if c!='en'])
       font=''
       if fam:font=f'<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family={fam}&display=swap"><style>:root{{--head:"{hf}",system-ui,sans-serif!important;--body:"{bf}",system-ui,sans-serif!important}}body,h1,h2,h3,.hd h1,.eyebrow,.btn,input,select,textarea{{font-family:var(--body)}}h1,h2,h3{{font-family:var(--head)}}</style>'
       rtl='<style>[dir=rtl] .phone,[dir=rtl] .shot-img{direction:ltr}[dir=rtl] ol.steps,[dir=rtl] ul{padding-inline-start:20px;padding-left:0}[dir=rtl] #prev svg{transform:scaleX(-1)}[dir=rtl] #next svg{transform:none!important}[dir=rtl] .h2,[dir=rtl] h1,[dir=rtl] h2{letter-spacing:0}</style>' if d=='rtl' else ''
@@ -115,6 +121,7 @@ def build():
       langre='|'.join(c for c in avail if c!='en')
       label='Language' if code=='en' else M.get('Language','Language')
       sw=SW.replace('%LABEL%',label).replace('%RE%',langre).replace('%OPTS%',sel)
+      if f in LIMITED:sw=sw.replace('<!--i18n-->','<!--i18n--><script>window.PAGE_LANGS=%s</script>'%json.dumps(pl),1)
       out=src
       if code!='en':
         out=translate(out,M)
@@ -129,6 +136,16 @@ def build():
       out=brand(out.replace('<meta property="og:site_name" content="Bundle">','<meta property="og:site_name" content="Meet Bundle">'))
       if f=='index.html':out=re.sub(r'<title>.*?</title>','<title>Meet Bundle - Dating &amp; Connections</title>',out,count=1)
       if f=='404.html':out=re.sub(r'<link rel="canonical"[^>]*>\n?','',out)
+      if f in LIMITED:  # FAQ + breadcrumb structured data from the page itself
+        qs=[(html.unescape(re.sub('<[^>]+>','',a)),html.unescape(re.sub('<[^>]+>','',b))) for a,b in re.findall(r'<details class="qa"><summary>(.*?)</summary><p>(.*?)</p>',out)]
+        cr=html.unescape(re.sub('<[^>]+>','',re.search(r'<nav class="crumbs".*?<span>(.*?)</span></nav>',out,re.S)[1]))
+        lang=HREFLANG.get(code,code)
+        g=[{'@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'Meet Bundle','item':'https://meetbundle.com'+url(code,'/')},{'@type':'ListItem','position':2,'name':cr,'item':'https://meetbundle.com'+url(code,pp)}]},
+           {'@type':'FAQPage','inLanguage':lang,'mainEntity':[{'@type':'Question','name':q,'acceptedAnswer':{'@type':'Answer','text':a}} for q,a in qs]}]
+        head_inj=head_inj.replace('<!--/i18n-->','<script type="application/ld+json">'+json.dumps({'@context':'https://schema.org','@graph':g},ensure_ascii=False).replace('</','<\\/')+'</script><!--/i18n-->')
+      if code in ASIA:  # footer links to the Asia landing pages
+        lk=''.join(f'<a href="{url(code,r)}">{(t if code=="en" else M.get(t,t))}</a>' for t,r in [('Free dating app','/free-dating-app/'),('Safe dating','/safe-dating/')])
+        out=re.sub(r'(<footer>.*?child-safety/">[^<]*</a>)',lambda m:m[1]+'<!--i18n-->'+lk+'<!--/i18n-->',out,count=1,flags=re.S)
       # inject head + switcher
       out=out.replace('</head>',head_inj+'\n</head>',1) if '</head>' in out else out.replace('</title>','</title>'+head_inj,1)
       out=re.sub(r'(<footer>.*?)(</div></footer>)',lambda m:m[1]+sw+m[2],out,count=1,flags=re.S)
@@ -139,8 +156,9 @@ def build():
   # sitemap
   sm=['<?xml version="1.0" encoding="UTF-8"?>','<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">']
   for pp in ['/']+ROUTES:
-    for c in avail:
-      sm.append(f'  <url><loc>https://meetbundle.com{url(c,pp)}</loc>'+''.join(f'<xhtml:link rel="alternate" hreflang="{HREFLANG.get(o,o)}" href="https://meetbundle.com{url(o,pp)}"/>' for o in avail)+'</url>')
+    pl=[c for c in avail if c in LIMITED_ROUTES.get(pp,avail)]
+    for c in pl:
+      sm.append(f'  <url><loc>https://meetbundle.com{url(c,pp)}</loc>'+''.join(f'<xhtml:link rel="alternate" hreflang="{HREFLANG.get(o,o)}" href="https://meetbundle.com{url(o,pp)}"/>' for o in pl)+'</url>')
   sm.append('</urlset>');open(os.path.join(DOCS,'sitemap.xml'),'w').write('\n'.join(sm)+'\n')
   print('built',avail,len(en),'strings')
 if __name__=='__main__':build()
