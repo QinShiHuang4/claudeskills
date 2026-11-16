@@ -12,7 +12,7 @@ LIMITED={'free-dating-app/index.html':ASIA,'safe-dating/index.html':ASIA}  # pag
 LIMITED_ROUTES={'/free-dating-app/':ASIA,'/safe-dating/':ASIA}
 ATTR=('alt','aria-label','placeholder','data-ok','data-mail')
 JS=["This opens your email app with your request filled in. Just press send.","Your email app should open with the request filled in. If it doesn’t, email","We couldn’t send that. Check your connection and try again, or email","Language"]
-SKIP={'Meet Bundle - Dating & Connections','bundle','Bundle','Meet Bundle','App Store','Google Play','support@meetbundle.com','Meet Bundle ·','NCMEC CyberTipline','INHOPE'}
+SKIP={'Meet Bundle - Dating & Social','bundle','Bundle','Meet Bundle','App Store','Google Play','support@meetbundle.com','Meet Bundle ·','NCMEC CyberTipline','INHOPE'}
 LANGS={ # code: (native name, dir, google fonts family param, head font, body font, og locale)
  'en':('English','ltr','','',"",'en_US'),
  'he':('עברית','rtl','Heebo:wght@400;500;700;800','Heebo','Heebo','he_IL'),
@@ -38,7 +38,11 @@ FAQ=[('Is Meet Bundle free?',['Yes. Meet Bundle is currently subscription-free, 
 def brand(out):
   # Trademark rule: formal brand mentions read 'Meet Bundle'
   fix=lambda t:re.sub(r'(?<!Meet )\bBundle\b','Meet Bundle',t)
-  out=re.sub(r'<title>(.*?)</title>',lambda m:'<title>'+fix(m[1])+'</title>',out,count=1)
+  parts=re.split(r'(<script\b.*?</script>|<style\b.*?</style>|<svg\b.*?</svg>)',out,flags=re.S)
+  for i in range(0,len(parts),2):  # every visible text and attribute outside scripts/app mockups
+    parts[i]=re.sub(r'(^|>)([^<]+)',lambda m:m[1]+fix(m[2]),parts[i])
+    parts[i]=re.sub(r'\b(alt|aria-label|placeholder|data-ok|data-mail|content|title)="([^"]*)"',lambda m:m[1]+'="'+fix(m[2])+'"',parts[i])
+  out=''.join(parts)
   out=re.sub(r'(<meta (?:name="description"|property="og:title"|property="og:description"|property="og:site_name"|property="og:image:alt") content=")([^"]*)(")',lambda m:m[1]+fix(m[2])+m[3],out)
   return out
 def jsonld(code,M,desc):
@@ -46,8 +50,8 @@ def jsonld(code,M,desc):
   home='https://meetbundle.com'+('/' if code=='en' else '/'+code+'/')
   lang=HREFLANG.get(code,code)
   g=[{'@type':'Organization','@id':'https://meetbundle.com/#org','name':'Meet Bundle','url':'https://meetbundle.com/','logo':'https://meetbundle.com/icon-512.png','email':'support@meetbundle.com','contactPoint':{'@type':'ContactPoint','contactType':'customer support','email':'support@meetbundle.com'}},
-   {'@type':'WebSite','@id':'https://meetbundle.com/#website','name':'Meet Bundle','alternateName':'Bundle','url':'https://meetbundle.com/','publisher':{'@id':'https://meetbundle.com/#org'},'inLanguage':[HREFLANG.get(c,c) for c in LANGS]},
-   {'@type':'MobileApplication','name':'Meet Bundle','alternateName':'Bundle - Dating & Connections','operatingSystem':'Android, iOS','applicationCategory':'LifestyleApplication','applicationSubCategory':'Dating','description':re.sub(r'(?<!Meet )\bBundle\b','Meet Bundle',desc),'url':home,'inLanguage':lang,'image':'https://meetbundle.com/og.png','publisher':{'@id':'https://meetbundle.com/#org'},'offers':{'@type':'Offer','price':'0','priceCurrency':'USD'}},
+   {'@type':'WebSite','@id':'https://meetbundle.com/#website','name':'Meet Bundle','url':'https://meetbundle.com/','publisher':{'@id':'https://meetbundle.com/#org'},'inLanguage':[HREFLANG.get(c,c) for c in LANGS]},
+   {'@type':'MobileApplication','name':'Meet Bundle','alternateName':'Meet Bundle - Dating & Social','operatingSystem':'Android, iOS','applicationCategory':'LifestyleApplication','applicationSubCategory':'Dating','description':re.sub(r'(?<!Meet )\bBundle\b','Meet Bundle',desc),'url':home,'inLanguage':lang,'image':'https://meetbundle.com/og.png','publisher':{'@id':'https://meetbundle.com/#org'},'offers':{'@type':'Offer','price':'0','priceCurrency':'USD'}},
    {'@type':'FAQPage','inLanguage':lang,'mainEntity':[{'@type':'Question','name':t(q),'acceptedAnswer':{'@type':'Answer','text':' '.join(t(a) for a in ans)}} for q,ans in FAQ]}]
   return '<script type="application/ld+json">'+json.dumps({'@context':'https://schema.org','@graph':g},ensure_ascii=False).replace('</','<\\/')+'</script>'
 SW=('<!--i18n--><label class="langsw"><span class="sr">%LABEL%</span>'
@@ -97,9 +101,8 @@ def build():
       if isinstance(T,list):
         fx=lambda t:re.sub(r'(?<!Meet )\bBundle\b','Meet Bundle',t)
         for i in range(len(T),len(en)):  # auto-derive trademark variants of existing strings
-          j=next((j for j in range(len(T)) if fx(en[j])==en[i] and en[j]!=en[i]),None)
-          if j is None:break
-          T.append(fx(T[j]))
+          j=next((j for j in range(len(T)) if fx(en[j])==en[i] and en[j]!=en[i] and T[j]),None)
+          T.append(fx(T[j]) if j is not None else '')
         T={str(i):v for i,v in enumerate(T)}
       M={e:T[str(k)] for k,e in enumerate(en) if str(k) in T and T[str(k)].strip()}
     for f in PAGES:
@@ -138,7 +141,8 @@ def build():
         out=out.replace('<meta property="og:type"',f'<meta property="og:locale" content="{loc}">\n<meta property="og:type"',1)
         out=out.replace('<meta name="robots" content="noindex">','<meta name="robots" content="noindex">')
       out=brand(out.replace('<meta property="og:site_name" content="Bundle">','<meta property="og:site_name" content="Meet Bundle">'))
-      if f=='index.html':out=re.sub(r'<title>.*?</title>','<title>Meet Bundle - Dating &amp; Connections</title>',out,count=1)
+      if code=='de':out=out.replace('Meet Bundle-','Meet-Bundle-')
+      if f=='index.html':out=re.sub(r'<title>.*?</title>','<title>Meet Bundle - Dating &amp; Social</title>',out,count=1)
       if f=='404.html':out=re.sub(r'<link rel="canonical"[^>]*>\n?','',out)
       if f in LIMITED:  # FAQ + breadcrumb structured data from the page itself
         qs=[(html.unescape(re.sub('<[^>]+>','',a)),html.unescape(re.sub('<[^>]+>','',b))) for a,b in re.findall(r'<details class="qa"><summary>(.*?)</summary><p>(.*?)</p>',out)]
