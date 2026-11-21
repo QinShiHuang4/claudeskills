@@ -5,8 +5,8 @@ English pages in docs/ are the source. Translations live in i18n/<lang>.json as
 import json,re,os,html
 from html.parser import HTMLParser
 ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__)));DOCS=os.path.join(ROOT,'docs');I=os.path.join(ROOT,'i18n')
-PAGES=['index.html','404.html','contact/index.html','delete-account/index.html','privacy/index.html','child-safety/index.html','free-dating-app/index.html','safe-dating/index.html']
-ROUTES=['/privacy/','/contact/','/delete-account/','/child-safety/','/free-dating-app/','/safe-dating/']
+PAGES=['index.html','404.html','contact/index.html','delete-account/index.html','privacy/index.html','terms/index.html','child-safety/index.html','free-dating-app/index.html','safe-dating/index.html']
+ROUTES=['/privacy/','/terms/','/contact/','/delete-account/','/child-safety/','/free-dating-app/','/safe-dating/']
 ASIA=['en','zh','zh-hant','ja','ko','vi','th']
 LIMITED={'free-dating-app/index.html':ASIA,'safe-dating/index.html':ASIA}  # pages offered in some languages only
 LIMITED_ROUTES={'/free-dating-app/':ASIA,'/safe-dating/':ASIA}
