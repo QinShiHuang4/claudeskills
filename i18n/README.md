@@ -23,5 +23,6 @@ the page's strings and add the code to `ASIA` (or the page's list).
 
 ## Traditional Chinese
 `zh-hant.json` is generated from `zh.json` by `zh_hant.py` (Taiwan wording, then character
-conversion) every time the build runs. Edit Simplified Chinese, not `zh-hant.json`. To change a
-Traditional-only word, add it to the phrase list `PH` in `zh_hant.py`.
+conversion) every time the build runs. Edit Simplified Chinese, not `zh-hant.json`. For a
+Traditional-only word, use the phrase list `PH` in `zh_hant.py`. For a whole sentence that needs
+Taiwan-specific wording, add it to `zh-hant-overrides.json`, keyed by its Simplified Chinese text.

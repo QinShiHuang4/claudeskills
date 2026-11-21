@@ -81,25 +81,17 @@
   <label for="email">你的 Meet Bundle 账户邮箱<input id="email" name="email" type="email" autocomplete="email" required></label>
   <label for="name">资料中的名字 <small>选填。帮助我们找到正确的账户。</small><input id="name" name="profile_name" autocomplete="given-name"></label>
   <label for="reason">原因 <small>选填</small><select id="reason" name="reason"><option value="">不想说</option><option>我遇到了合适的人</option><option>想休息一下</option><option>附近的人太少</option><option>隐私顾虑</option><option>其他原因</option></select></label>
-  <label class="check"><input type="checkbox" id="confirm" name="confirm" value="yes" required>我了解我的资料、照片、配对和消息将被永久删除，且无法恢复。</label>
+  <label class="check"><input type="checkbox" id="confirm" name="confirm" value="yes" required>我了解删除账户是永久性的操作。</label>
   <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
   <div><button class="btn danger" type="submit"><span class="spin" aria-hidden="true"></span>申请删除账户</button></div>
   <p class="status" role="status" aria-live="polite"></p>
 </form>
 </div>
 
-<h2>我们会删除什么</h2>
-<ul>
-  <li>你的资料、照片、兴趣和回答</li>
-  <li>你的 Likes、Winks、Sparks、配对和聊天</li>
-  <li>你的邮箱登录信息和账户设置</li>
-</ul>
-<h2>我们会保留什么，以及保留多久</h2>
-<ul>
-  <li>与你账户相关的举报和安全记录，最长保留 12 个月，用于保护用户安全并防止被封禁的用户回来。</li>
-  <li>法律要求我们保留的记录，仅在法律要求的期限内保留。</li>
-  <li>备份会在 30 天内被覆盖。</li>
-</ul>
+<h2>我们保留多久</h2>
+<p>删除账户后，我们会隐藏你的个人资料、结束你的配对，并移除你发出的消息内容。部分账户、配对和消息记录仍会保留。照片将在后台删除，私有恢复副本和备份分别按各自的期限到期。</p>
+<p>屏蔽、取消配对或删除账户后，举报及其中的消息副本可能仍会保留。我们会根据调查、规则执行和法律索赔的需要保留安全记录，并按法律要求保留其他记录。</p>
+<p><a href="/zh/privacy/">隐私政策</a></p>
 <p class="muted">有问题？写信给我们： <a href="mailto:support@meetbundle.com">support@meetbundle.com</a></p>
 </div></main>
 <footer><div class="wrap"><span>© 2026 Meet Bundle</span><nav aria-label="页脚"><a href="/zh/privacy/">隐私</a><a href="/zh/contact/">联系</a><a href="/zh/delete-account/">删除账户</a><a href="/zh/child-safety/">儿童安全</a><!--i18n--><a href="/zh/free-dating-app/">免费约会应用</a><a href="/zh/safe-dating/">安全约会</a><!--/i18n--></nav><!--i18n--><label class="langsw"><span class="sr">语言</span><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3Z"/></g></svg><select onchange="bundleLang(this.value)"><option value="en">English</option><option value="he">עברית</option><option value="ar">العربية</option><option value="ru">Русский</option><option value="uk">Українська</option><option value="de">Deutsch</option><option value="fr">Français</option><option value="es">Español</option><option value="pt">Português</option><option value="it">Italiano</option><option value="nl">Nederlands</option><option value="zh" selected>简体中文</option><option value="zh-hant">繁體中文</option><option value="ko">한국어</option><option value="ja">日本語</option><option value="vi">Tiếng Việt</option><option value="th">ไทย</option></select></label><script>function bundleLang(v){try{localStorage.setItem('bundle-lang',v)}catch(e){}var p=location.pathname.replace(/^\/(he|ar|ru|uk|de|fr|es|pt|it|nl|zh|zh-hant|ko|ja|vi|th)(?=\/)/,'');if(window.PAGE_LANGS&&PAGE_LANGS.indexOf(v)<0)p='/';location.href=(v==='en'?'':'/'+v)+p+location.hash}</script><style>.langsw{position:relative;display:inline-flex;align-items:center;gap:6px;color:inherit;min-height:44px;padding:0 8px}.langsw select{background:transparent;color:inherit;border:1px solid currentColor;border-radius:999px;padding:6px 10px;font:inherit;font-size:14px;min-height:36px;opacity:.85}.langsw select option{color:#000}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}</style><!--/i18n--></div></footer>

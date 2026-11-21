@@ -81,25 +81,17 @@
   <label for="email">האימייל של חשבון Meet Bundle שלכם<input id="email" name="email" type="email" autocomplete="email" required></label>
   <label for="name">השם הפרטי בפרופיל <small>לא חובה. עוזר לנו למצוא את החשבון הנכון.</small><input id="name" name="profile_name" autocomplete="given-name"></label>
   <label for="reason">סיבה <small>לא חובה</small><select id="reason" name="reason"><option value="">מעדיפים לא לומר</option><option>הכרתי מישהו</option><option>לוקח הפסקה</option><option>אין מספיק אנשים באזור שלי</option><option>חששות לפרטיות</option><option>משהו אחר</option></select></label>
-  <label class="check"><input type="checkbox" id="confirm" name="confirm" value="yes" required>אני מבין/ה שהפרופיל, התמונות, ההתאמות וההודעות שלי יימחקו לצמיתות ולא יהיה אפשר לשחזר אותם.</label>
+  <label class="check"><input type="checkbox" id="confirm" name="confirm" value="yes" required>ברור לי שמחיקת החשבון שלי היא סופית.</label>
   <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
   <div><button class="btn danger" type="submit"><span class="spin" aria-hidden="true"></span>בקשה למחיקת חשבון</button></div>
   <p class="status" role="status" aria-live="polite"></p>
 </form>
 </div>
 
-<h2>מה אנחנו מוחקים</h2>
-<ul>
-  <li>הפרופיל, התמונות, תחומי העניין והתשובות שלכם</li>
-  <li>ה-Likes,‏ Winks,‏ Sparks, ההתאמות והצ'אטים שלכם</li>
-  <li>פרטי ההתחברות במייל והגדרות החשבון</li>
-</ul>
-<h2>מה אנחנו שומרים, ולכמה זמן</h2>
-<ul>
-  <li>דיווחים ורשומות בטיחות על החשבון שלכם, עד 12 חודשים, כדי לשמור על בטיחות אנשים ולמנוע ממשתמשים חסומים לחזור.</li>
-  <li>רשומות שעלינו לשמור לפי חוק, רק כל עוד החוק מחייב.</li>
-  <li>גיבויים נדרסים תוך 30 יום.</li>
-</ul>
+<h2>כמה זמן אנחנו שומרים את המידע</h2>
+<p>כשמוחקים חשבון, אנחנו מסתירים את הפרופיל, מסיימים את ההתאמות ומסירים את התוכן של ההודעות שנשלחו. חלק מרשומות החשבון, ההתאמות וההודעות נשארות. תמונות מוסרות ברקע, ולעותקי שחזור פרטיים ולגיבויים יש מועדי תפוגה נפרדים.</p>
+<p>דיווחים ועותקים של הודעות שנכללו בהם עשויים להישמר גם אחרי חסימה, ביטול התאמה או מחיקת חשבון. אנחנו שומרים תיעוד בטיחות לפי הצורך לצורך בירורים, אכיפת כללים ותביעות משפטיות, ותיעוד אחר כנדרש בחוק.</p>
+<p><a href="/he/privacy/">מדיניות פרטיות</a></p>
 <p class="muted">שאלות? כתבו לנו: <a href="mailto:support@meetbundle.com">support@meetbundle.com</a></p>
 </div></main>
 <footer><div class="wrap"><span>© 2026 Meet Bundle</span><nav aria-label="כותרת תחתונה"><a href="/he/privacy/">פרטיות</a><a href="/he/contact/">יצירת קשר</a><a href="/he/delete-account/">מחיקת חשבון</a><a href="/he/child-safety/">בטיחות ילדים</a></nav><!--i18n--><label class="langsw"><span class="sr">שפה</span><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3Z"/></g></svg><select onchange="bundleLang(this.value)"><option value="en">English</option><option value="he" selected>עברית</option><option value="ar">العربية</option><option value="ru">Русский</option><option value="uk">Українська</option><option value="de">Deutsch</option><option value="fr">Français</option><option value="es">Español</option><option value="pt">Português</option><option value="it">Italiano</option><option value="nl">Nederlands</option><option value="zh">简体中文</option><option value="zh-hant">繁體中文</option><option value="ko">한국어</option><option value="ja">日本語</option><option value="vi">Tiếng Việt</option><option value="th">ไทย</option></select></label><script>function bundleLang(v){try{localStorage.setItem('bundle-lang',v)}catch(e){}var p=location.pathname.replace(/^\/(he|ar|ru|uk|de|fr|es|pt|it|nl|zh|zh-hant|ko|ja|vi|th)(?=\/)/,'');if(window.PAGE_LANGS&&PAGE_LANGS.indexOf(v)<0)p='/';location.href=(v==='en'?'':'/'+v)+p+location.hash}</script><style>.langsw{position:relative;display:inline-flex;align-items:center;gap:6px;color:inherit;min-height:44px;padding:0 8px}.langsw select{background:transparent;color:inherit;border:1px solid currentColor;border-radius:999px;padding:6px 10px;font:inherit;font-size:14px;min-height:36px;opacity:.85}.langsw select option{color:#000}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}</style><!--/i18n--></div></footer>

@@ -81,25 +81,17 @@
   <label for="email">E-Mail deines Meet-Bundle-Kontos<input id="email" name="email" type="email" autocomplete="email" required></label>
   <label for="name">Vorname in deinem Profil <small>Optional. Hilft uns, das richtige Konto zu finden.</small><input id="name" name="profile_name" autocomplete="given-name"></label>
   <label for="reason">Grund <small>Optional</small><select id="reason" name="reason"><option value="">Möchte ich nicht sagen</option><option>Ich habe jemanden kennengelernt</option><option>Ich mache eine Pause</option><option>Zu wenige Leute in meiner Nähe</option><option>Datenschutzbedenken</option><option>Etwas anderes</option></select></label>
-  <label class="check"><input type="checkbox" id="confirm" name="confirm" value="yes" required>Mir ist klar, dass mein Profil, meine Fotos, Matches und Nachrichten dauerhaft gelöscht werden und nicht wiederhergestellt werden können.</label>
+  <label class="check"><input type="checkbox" id="confirm" name="confirm" value="yes" required>Ich verstehe, dass die Löschung meines Kontos endgültig ist.</label>
   <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
   <div><button class="btn danger" type="submit"><span class="spin" aria-hidden="true"></span>Kontolöschung beantragen</button></div>
   <p class="status" role="status" aria-live="polite"></p>
 </form>
 </div>
 
-<h2>Was wir löschen</h2>
-<ul>
-  <li>Dein Profil, deine Fotos, Interessen und Antworten</li>
-  <li>Deine Likes, Winks, Sparks, Matches und Chats</li>
-  <li>Deine E-Mail-Anmeldung und Kontoeinstellungen</li>
-</ul>
-<h2>Was wir behalten und wie lange</h2>
-<ul>
-  <li>Meldungen und Sicherheitsdaten zu deinem Konto, bis zu 12 Monate, um Menschen zu schützen und gesperrte Nutzer fernzuhalten.</li>
-  <li>Daten, die wir gesetzlich aufbewahren müssen, nur so lange wie gesetzlich vorgeschrieben.</li>
-  <li>Backups werden innerhalb von 30 Tagen überschrieben.</li>
-</ul>
+<h2>Wie lange wir sie speichern</h2>
+<p>Wenn du dein Konto löschst, blenden wir dein Profil aus, beenden deine Matches und machen deine gesendeten Nachrichteninhalte unkenntlich. Einige Konto-, Match- und Nachrichtendatensätze bleiben erhalten. Fotos werden im Hintergrund entfernt. Für private Wiederherstellungskopien und Backups gelten separate Fristen.</p>
+<p>Meldungen und die darin enthaltenen Nachrichtenkopien können auch nach dem Blockieren, Auflösen eines Matches oder Löschen eines Kontos erhalten bleiben. Sicherheitsdaten speichern wir, solange dies für Ermittlungen, die Durchsetzung unserer Regeln oder Rechtsansprüche erforderlich ist. Weitere Daten behalten wir, soweit das Gesetz dies verlangt.</p>
+<p><a href="/de/privacy/">Datenschutzerklärung</a></p>
 <p class="muted">Fragen? Schreib uns: <a href="mailto:support@meetbundle.com">support@meetbundle.com</a></p>
 </div></main>
 <footer><div class="wrap"><span>© 2026 Meet Bundle</span><nav aria-label="Fußzeile"><a href="/de/privacy/">Datenschutz</a><a href="/de/contact/">Kontakt</a><a href="/de/delete-account/">Konto löschen</a><a href="/de/child-safety/">Kinderschutz</a></nav><!--i18n--><label class="langsw"><span class="sr">Sprache</span><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3Z"/></g></svg><select onchange="bundleLang(this.value)"><option value="en">English</option><option value="he">עברית</option><option value="ar">العربية</option><option value="ru">Русский</option><option value="uk">Українська</option><option value="de" selected>Deutsch</option><option value="fr">Français</option><option value="es">Español</option><option value="pt">Português</option><option value="it">Italiano</option><option value="nl">Nederlands</option><option value="zh">简体中文</option><option value="zh-hant">繁體中文</option><option value="ko">한국어</option><option value="ja">日本語</option><option value="vi">Tiếng Việt</option><option value="th">ไทย</option></select></label><script>function bundleLang(v){try{localStorage.setItem('bundle-lang',v)}catch(e){}var p=location.pathname.replace(/^\/(he|ar|ru|uk|de|fr|es|pt|it|nl|zh|zh-hant|ko|ja|vi|th)(?=\/)/,'');if(window.PAGE_LANGS&&PAGE_LANGS.indexOf(v)<0)p='/';location.href=(v==='en'?'':'/'+v)+p+location.hash}</script><style>.langsw{position:relative;display:inline-flex;align-items:center;gap:6px;color:inherit;min-height:44px;padding:0 8px}.langsw select{background:transparent;color:inherit;border:1px solid currentColor;border-radius:999px;padding:6px 10px;font:inherit;font-size:14px;min-height:36px;opacity:.85}.langsw select option{color:#000}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}</style><!--/i18n--></div></footer>

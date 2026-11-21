@@ -81,25 +81,17 @@
   <label for="email">Email del tuo account Meet Bundle<input id="email" name="email" type="email" autocomplete="email" required></label>
   <label for="name">Nome sul tuo profilo <small>Facoltativo. Ci aiuta a trovare l’account giusto.</small><input id="name" name="profile_name" autocomplete="given-name"></label>
   <label for="reason">Motivo <small>Facoltativo</small><select id="reason" name="reason"><option value="">Preferisco non dirlo</option><option>Ho conosciuto qualcuno</option><option>Mi prendo una pausa</option><option>Non ci sono abbastanza persone vicino a me</option><option>Dubbi sulla privacy</option><option>Altro</option></select></label>
-  <label class="check"><input type="checkbox" id="confirm" name="confirm" value="yes" required>Capisco che il mio profilo, le foto, i match e i messaggi verranno eliminati in modo permanente e non potranno essere recuperati.</label>
+  <label class="check"><input type="checkbox" id="confirm" name="confirm" value="yes" required>Ho capito che l’eliminazione del mio account è definitiva.</label>
   <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
   <div><button class="btn danger" type="submit"><span class="spin" aria-hidden="true"></span>Richiedi l’eliminazione dell’account</button></div>
   <p class="status" role="status" aria-live="polite"></p>
 </form>
 </div>
 
-<h2>Cosa eliminiamo</h2>
-<ul>
-  <li>Il tuo profilo, le foto, gli interessi e le risposte</li>
-  <li>I tuoi Likes, Winks, Sparks, match e chat</li>
-  <li>L’accesso via email e le impostazioni dell’account</li>
-</ul>
-<h2>Cosa conserviamo e per quanto tempo</h2>
-<ul>
-  <li>Segnalazioni e dati di sicurezza relativi al tuo account, fino a 12 mesi, per proteggere le persone e impedire agli utenti bannati di tornare.</li>
-  <li>Dati che la legge ci obbliga a conservare, solo per il tempo richiesto dalla legge.</li>
-  <li>I backup vengono sovrascritti entro 30 giorni.</li>
-</ul>
+<h2>Per quanto tempo le conserviamo</h2>
+<p>Quando elimini il tuo account, nascondiamo il tuo profilo, chiudiamo i tuoi match e oscuriamo il contenuto dei messaggi che hai inviato. Alcuni dati relativi ad account, match e messaggi restano. Le foto vengono rimosse in background. Le copie private di ripristino e i backup scadono con tempi distinti.</p>
+<p>Le segnalazioni e le copie dei messaggi inclusi possono restare dopo un blocco, la fine di un match o l’eliminazione dell’account. Conserviamo i dati di sicurezza per il tempo necessario a indagini, applicazione delle regole e azioni legali, e altri dati se richiesto dalla legge.</p>
+<p><a href="/it/privacy/">Informativa sulla privacy</a></p>
 <p class="muted">Domande? Scrivici: <a href="mailto:support@meetbundle.com">support@meetbundle.com</a></p>
 </div></main>
 <footer><div class="wrap"><span>© 2026 Meet Bundle</span><nav aria-label="Piè di pagina"><a href="/it/privacy/">Privacy</a><a href="/it/contact/">Contatti</a><a href="/it/delete-account/">Elimina account</a><a href="/it/child-safety/">Sicurezza dei minori</a></nav><!--i18n--><label class="langsw"><span class="sr">Lingua</span><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3Z"/></g></svg><select onchange="bundleLang(this.value)"><option value="en">English</option><option value="he">עברית</option><option value="ar">العربية</option><option value="ru">Русский</option><option value="uk">Українська</option><option value="de">Deutsch</option><option value="fr">Français</option><option value="es">Español</option><option value="pt">Português</option><option value="it" selected>Italiano</option><option value="nl">Nederlands</option><option value="zh">简体中文</option><option value="zh-hant">繁體中文</option><option value="ko">한국어</option><option value="ja">日本語</option><option value="vi">Tiếng Việt</option><option value="th">ไทย</option></select></label><script>function bundleLang(v){try{localStorage.setItem('bundle-lang',v)}catch(e){}var p=location.pathname.replace(/^\/(he|ar|ru|uk|de|fr|es|pt|it|nl|zh|zh-hant|ko|ja|vi|th)(?=\/)/,'');if(window.PAGE_LANGS&&PAGE_LANGS.indexOf(v)<0)p='/';location.href=(v==='en'?'':'/'+v)+p+location.hash}</script><style>.langsw{position:relative;display:inline-flex;align-items:center;gap:6px;color:inherit;min-height:44px;padding:0 8px}.langsw select{background:transparent;color:inherit;border:1px solid currentColor;border-radius:999px;padding:6px 10px;font:inherit;font-size:14px;min-height:36px;opacity:.85}.langsw select option{color:#000}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}</style><!--/i18n--></div></footer>

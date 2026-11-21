@@ -81,25 +81,17 @@
   <label for="email">Email tài khoản Meet Bundle của bạn<input id="email" name="email" type="email" autocomplete="email" required></label>
   <label for="name">Tên trên hồ sơ của bạn <small>Không bắt buộc. Giúp chúng tôi tìm đúng tài khoản.</small><input id="name" name="profile_name" autocomplete="given-name"></label>
   <label for="reason">Lý do <small>Không bắt buộc</small><select id="reason" name="reason"><option value="">Không muốn nói</option><option>Tôi đã gặp được người ấy</option><option>Tạm nghỉ một thời gian</option><option>Không đủ người ở gần tôi</option><option>Lo ngại về quyền riêng tư</option><option>Lý do khác</option></select></label>
-  <label class="check"><input type="checkbox" id="confirm" name="confirm" value="yes" required>Tôi hiểu rằng hồ sơ, ảnh, các lượt ghép đôi và tin nhắn của tôi sẽ bị xóa vĩnh viễn và không thể khôi phục.</label>
+  <label class="check"><input type="checkbox" id="confirm" name="confirm" value="yes" required>Tôi hiểu rằng việc xóa tài khoản là vĩnh viễn.</label>
   <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
   <div><button class="btn danger" type="submit"><span class="spin" aria-hidden="true"></span>Yêu cầu xóa tài khoản</button></div>
   <p class="status" role="status" aria-live="polite"></p>
 </form>
 </div>
 
-<h2>Những gì chúng tôi xóa</h2>
-<ul>
-  <li>Hồ sơ, ảnh, sở thích và câu trả lời của bạn</li>
-  <li>Likes, Winks, Sparks, các lượt ghép đôi và cuộc trò chuyện của bạn</li>
-  <li>Thông tin đăng nhập bằng email và cài đặt tài khoản</li>
-</ul>
-<h2>Những gì chúng tôi giữ lại, và trong bao lâu</h2>
-<ul>
-  <li>Báo cáo và hồ sơ an toàn liên quan đến tài khoản của bạn, tối đa 12 tháng, để bảo vệ mọi người và ngăn người dùng bị cấm quay lại.</li>
-  <li>Hồ sơ mà pháp luật buộc chúng tôi lưu giữ, chỉ trong thời gian pháp luật yêu cầu.</li>
-  <li>Bản sao lưu được ghi đè trong vòng 30 ngày.</li>
-</ul>
+<h2>Chúng tôi lưu giữ trong bao lâu</h2>
+<p>Khi bạn xóa tài khoản, chúng tôi ẩn hồ sơ, kết thúc các lượt ghép đôi và xóa nội dung tin nhắn bạn đã gửi. Một phần hồ sơ về tài khoản, lượt ghép đôi và tin nhắn vẫn được giữ lại. Ảnh được xóa trong nền. Bản sao khôi phục riêng tư và bản sao lưu có thời hạn riêng.</p>
+<p>Báo cáo và bản sao tin nhắn đính kèm có thể được giữ lại sau khi chặn, hủy ghép đôi hoặc xóa tài khoản. Chúng tôi lưu hồ sơ an toàn theo nhu cầu điều tra, thực thi các quy tắc và xử lý yêu cầu pháp lý, đồng thời lưu hồ sơ khác theo quy định của pháp luật.</p>
+<p><a href="/vi/privacy/">Chính sách quyền riêng tư</a></p>
 <p class="muted">Có câu hỏi? Viết cho chúng tôi: <a href="mailto:support@meetbundle.com">support@meetbundle.com</a></p>
 </div></main>
 <footer><div class="wrap"><span>© 2026 Meet Bundle</span><nav aria-label="Chân trang"><a href="/vi/privacy/">Quyền riêng tư</a><a href="/vi/contact/">Liên hệ</a><a href="/vi/delete-account/">Xóa tài khoản</a><a href="/vi/child-safety/">An toàn trẻ em</a><!--i18n--><a href="/vi/free-dating-app/">Ứng dụng hẹn hò miễn phí</a><a href="/vi/safe-dating/">Hẹn hò an toàn</a><!--/i18n--></nav><!--i18n--><label class="langsw"><span class="sr">Ngôn ngữ</span><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3Z"/></g></svg><select onchange="bundleLang(this.value)"><option value="en">English</option><option value="he">עברית</option><option value="ar">العربية</option><option value="ru">Русский</option><option value="uk">Українська</option><option value="de">Deutsch</option><option value="fr">Français</option><option value="es">Español</option><option value="pt">Português</option><option value="it">Italiano</option><option value="nl">Nederlands</option><option value="zh">简体中文</option><option value="zh-hant">繁體中文</option><option value="ko">한국어</option><option value="ja">日本語</option><option value="vi" selected>Tiếng Việt</option><option value="th">ไทย</option></select></label><script>function bundleLang(v){try{localStorage.setItem('bundle-lang',v)}catch(e){}var p=location.pathname.replace(/^\/(he|ar|ru|uk|de|fr|es|pt|it|nl|zh|zh-hant|ko|ja|vi|th)(?=\/)/,'');if(window.PAGE_LANGS&&PAGE_LANGS.indexOf(v)<0)p='/';location.href=(v==='en'?'':'/'+v)+p+location.hash}</script><style>.langsw{position:relative;display:inline-flex;align-items:center;gap:6px;color:inherit;min-height:44px;padding:0 8px}.langsw select{background:transparent;color:inherit;border:1px solid currentColor;border-radius:999px;padding:6px 10px;font:inherit;font-size:14px;min-height:36px;opacity:.85}.langsw select option{color:#000}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}</style><!--/i18n--></div></footer>
