@@ -81,25 +81,17 @@
   <label for="email">Почта вашего аккаунта Meet Bundle<input id="email" name="email" type="email" autocomplete="email" required></label>
   <label for="name">Имя в вашем профиле <small>Необязательно. Поможет найти нужный аккаунт.</small><input id="name" name="profile_name" autocomplete="given-name"></label>
   <label for="reason">Причина <small>Необязательно</small><select id="reason" name="reason"><option value="">Предпочитаю не говорить</option><option>Я с кем-то познакомился(-ась)</option><option>Беру паузу</option><option>Мало людей рядом</option><option>Вопросы конфиденциальности</option><option>Другое</option></select></label>
-  <label class="check"><input type="checkbox" id="confirm" name="confirm" value="yes" required>Я понимаю, что мой профиль, фото, совпадения и сообщения будут удалены навсегда без возможности восстановления.</label>
+  <label class="check"><input type="checkbox" id="confirm" name="confirm" value="yes" required>Я понимаю, что удаление моего аккаунта необратимо.</label>
   <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
   <div><button class="btn danger" type="submit"><span class="spin" aria-hidden="true"></span>Запросить удаление аккаунта</button></div>
   <p class="status" role="status" aria-live="polite"></p>
 </form>
 </div>
 
-<h2>Что мы удаляем</h2>
-<ul>
-  <li>Ваш профиль, фото, интересы и ответы</li>
-  <li>Ваши Likes, Winks, Sparks, совпадения и чаты</li>
-  <li>Вход по почте и настройки аккаунта</li>
-</ul>
-<h2>Что мы храним и как долго</h2>
-<ul>
-  <li>Жалобы и записи о безопасности, связанные с аккаунтом, — до 12 месяцев, чтобы защищать людей и не допускать возвращения заблокированных пользователей.</li>
-  <li>Записи, которые мы обязаны хранить по закону, — только столько, сколько требует закон.</li>
-  <li>Резервные копии перезаписываются в течение 30 дней.</li>
-</ul>
+<h2>Как долго мы храним данные</h2>
+<p>При удалении аккаунта мы скрываем профиль, прекращаем совпадения и удаляем содержимое отправленных вами сообщений. Некоторые записи об аккаунте, совпадениях и сообщениях сохраняются. Фотографии удаляются в фоновом режиме. Для закрытых копий восстановления и резервных копий действуют разные сроки.</p>
+<p>Жалобы и включённые в них копии сообщений могут сохраняться после блокировки, отмены совпадения или удаления аккаунта. Мы храним данные о безопасности, пока они нужны для расследований, применения правил и правовых требований, а другие записи — если того требует закон.</p>
+<p><a href="/ru/privacy/">Политика конфиденциальности</a></p>
 <p class="muted">Есть вопросы? Пишите нам: <a href="mailto:support@meetbundle.com">support@meetbundle.com</a></p>
 </div></main>
 <footer><div class="wrap"><span>© 2026 Meet Bundle</span><nav aria-label="Подвал сайта"><a href="/ru/privacy/">Конфиденциальность</a><a href="/ru/contact/">Контакты</a><a href="/ru/delete-account/">Удалить аккаунт</a><a href="/ru/child-safety/">Безопасность детей</a></nav><!--i18n--><label class="langsw"><span class="sr">Язык</span><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3Z"/></g></svg><select onchange="bundleLang(this.value)"><option value="en">English</option><option value="he">עברית</option><option value="ar">العربية</option><option value="ru" selected>Русский</option><option value="uk">Українська</option><option value="de">Deutsch</option><option value="fr">Français</option><option value="es">Español</option><option value="pt">Português</option><option value="it">Italiano</option><option value="nl">Nederlands</option><option value="zh">简体中文</option><option value="zh-hant">繁體中文</option><option value="ko">한국어</option><option value="ja">日本語</option><option value="vi">Tiếng Việt</option><option value="th">ไทย</option></select></label><script>function bundleLang(v){try{localStorage.setItem('bundle-lang',v)}catch(e){}var p=location.pathname.replace(/^\/(he|ar|ru|uk|de|fr|es|pt|it|nl|zh|zh-hant|ko|ja|vi|th)(?=\/)/,'');if(window.PAGE_LANGS&&PAGE_LANGS.indexOf(v)<0)p='/';location.href=(v==='en'?'':'/'+v)+p+location.hash}</script><style>.langsw{position:relative;display:inline-flex;align-items:center;gap:6px;color:inherit;min-height:44px;padding:0 8px}.langsw select{background:transparent;color:inherit;border:1px solid currentColor;border-radius:999px;padding:6px 10px;font:inherit;font-size:14px;min-height:36px;opacity:.85}.langsw select option{color:#000}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}</style><!--/i18n--></div></footer>

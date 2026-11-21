@@ -81,25 +81,17 @@
   <label for="email">E-mail van je Meet Bundle-account<input id="email" name="email" type="email" autocomplete="email" required></label>
   <label for="name">Voornaam op je profiel <small>Optioneel. Helpt ons het juiste account te vinden.</small><input id="name" name="profile_name" autocomplete="given-name"></label>
   <label for="reason">Reden <small>Optioneel</small><select id="reason" name="reason"><option value="">Zeg ik liever niet</option><option>Ik heb iemand ontmoet</option><option>Ik neem een pauze</option><option>Te weinig mensen in mijn buurt</option><option>Zorgen over privacy</option><option>Iets anders</option></select></label>
-  <label class="check"><input type="checkbox" id="confirm" name="confirm" value="yes" required>Ik begrijp dat mijn profiel, foto’s, matches en berichten definitief worden verwijderd en niet kunnen worden hersteld.</label>
+  <label class="check"><input type="checkbox" id="confirm" name="confirm" value="yes" required>Ik begrijp dat het verwijderen van mijn account definitief is.</label>
   <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
   <div><button class="btn danger" type="submit"><span class="spin" aria-hidden="true"></span>Accountverwijdering aanvragen</button></div>
   <p class="status" role="status" aria-live="polite"></p>
 </form>
 </div>
 
-<h2>Wat we verwijderen</h2>
-<ul>
-  <li>Je profiel, foto’s, interesses en antwoorden</li>
-  <li>Je Likes, Winks, Sparks, matches en chats</li>
-  <li>Je e-mailaanmelding en accountinstellingen</li>
-</ul>
-<h2>Wat we bewaren, en hoe lang</h2>
-<ul>
-  <li>Meldingen en veiligheidsgegevens over je account, tot 12 maanden, om mensen te beschermen en verbannen gebruikers buiten te houden.</li>
-  <li>Gegevens die we wettelijk moeten bewaren, alleen zo lang als de wet vereist.</li>
-  <li>Back-ups worden binnen 30 dagen overschreven.</li>
-</ul>
+<h2>Hoe lang we ze bewaren</h2>
+<p>Als je je account verwijdert, verbergen we je profiel, beëindigen we je matches en wissen we de inhoud van je verzonden berichten. Sommige account-, match- en berichtgegevens blijven bewaard. Foto’s worden op de achtergrond verwijderd. Voor privéherstelkopieën en back-ups gelden aparte termijnen.</p>
+<p>Meldingen en opgenomen berichtkopieën kunnen na een blokkade, het beëindigen van een match of het verwijderen van een account bewaard blijven. We bewaren veiligheidsgegevens zolang dat nodig is voor onderzoek, handhaving en juridische claims. Andere gegevens bewaren we als de wet dat vereist.</p>
+<p><a href="/nl/privacy/">Privacybeleid</a></p>
 <p class="muted">Vragen? Mail ons: <a href="mailto:support@meetbundle.com">support@meetbundle.com</a></p>
 </div></main>
 <footer><div class="wrap"><span>© 2026 Meet Bundle</span><nav aria-label="Voettekst"><a href="/nl/privacy/">Privacy</a><a href="/nl/contact/">Contact</a><a href="/nl/delete-account/">Account verwijderen</a><a href="/nl/child-safety/">Kinderveiligheid</a></nav><!--i18n--><label class="langsw"><span class="sr">Taal</span><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3Z"/></g></svg><select onchange="bundleLang(this.value)"><option value="en">English</option><option value="he">עברית</option><option value="ar">العربية</option><option value="ru">Русский</option><option value="uk">Українська</option><option value="de">Deutsch</option><option value="fr">Français</option><option value="es">Español</option><option value="pt">Português</option><option value="it">Italiano</option><option value="nl" selected>Nederlands</option><option value="zh">简体中文</option><option value="zh-hant">繁體中文</option><option value="ko">한국어</option><option value="ja">日本語</option><option value="vi">Tiếng Việt</option><option value="th">ไทย</option></select></label><script>function bundleLang(v){try{localStorage.setItem('bundle-lang',v)}catch(e){}var p=location.pathname.replace(/^\/(he|ar|ru|uk|de|fr|es|pt|it|nl|zh|zh-hant|ko|ja|vi|th)(?=\/)/,'');if(window.PAGE_LANGS&&PAGE_LANGS.indexOf(v)<0)p='/';location.href=(v==='en'?'':'/'+v)+p+location.hash}</script><style>.langsw{position:relative;display:inline-flex;align-items:center;gap:6px;color:inherit;min-height:44px;padding:0 8px}.langsw select{background:transparent;color:inherit;border:1px solid currentColor;border-radius:999px;padding:6px 10px;font:inherit;font-size:14px;min-height:36px;opacity:.85}.langsw select option{color:#000}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}</style><!--/i18n--></div></footer>

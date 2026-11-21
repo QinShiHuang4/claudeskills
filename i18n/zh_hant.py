@@ -11,5 +11,7 @@ def conv(s):
   return ''.join(CM.get(c,c) for c in s)
 if __name__=='__main__':
   z=json.load(open(os.path.join(I,'zh.json')))
-  json.dump([conv(x) for x in z],open(os.path.join(I,'zh-hant.json'),'w'),ensure_ascii=False,indent=0)
+  with open(os.path.join(I,'zh-hant-overrides.json'),encoding='utf-8') as f:
+    overrides=json.load(f)
+  json.dump([overrides[x] if x in overrides else conv(x) for x in z],open(os.path.join(I,'zh-hant.json'),'w'),ensure_ascii=False,indent=0)
   print('zh-hant',len(z))

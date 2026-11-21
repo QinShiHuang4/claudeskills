@@ -81,25 +81,17 @@
   <label for="email">Meet Bundle アカウントのメールアドレス<input id="email" name="email" type="email" autocomplete="email" required></label>
   <label for="name">プロフィールの名前 <small>任意。正しいアカウントを見つけるのに役立ちます。</small><input id="name" name="profile_name" autocomplete="given-name"></label>
   <label for="reason">理由 <small>任意</small><select id="reason" name="reason"><option value="">答えたくない</option><option>いい人に出会えた</option><option>少し休みたい</option><option>近くに人が少ない</option><option>プライバシーが心配</option><option>その他</option></select></label>
-  <label class="check"><input type="checkbox" id="confirm" name="confirm" value="yes" required>プロフィール、写真、マッチ、メッセージが完全に削除され、復元できないことを理解しました。</label>
+  <label class="check"><input type="checkbox" id="confirm" name="confirm" value="yes" required>アカウントを削除すると元に戻せないことを理解しました。</label>
   <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
   <div><button class="btn danger" type="submit"><span class="spin" aria-hidden="true"></span>アカウントの削除をリクエスト</button></div>
   <p class="status" role="status" aria-live="polite"></p>
 </form>
 </div>
 
-<h2>削除するもの</h2>
-<ul>
-  <li>プロフィール、写真、趣味、回答</li>
-  <li>Likes、Winks、Sparks、マッチ、チャット</li>
-  <li>メールでのログイン情報とアカウント設定</li>
-</ul>
-<h2>保持するものと期間</h2>
-<ul>
-  <li>安全を守り、利用停止になったユーザーの再登録を防ぐため、アカウントに関する通報や安全記録を最長 12 か月保持します。</li>
-  <li>法律で保持が義務付けられている記録は、法律が定める期間のみ保持します。</li>
-  <li>バックアップは 30 日以内に上書きされます。</li>
-</ul>
+<h2>保持期間</h2>
+<p>アカウントを削除すると、プロフィールが非表示になり、マッチが終了し、あなたが送信したメッセージの本文が消去されます。一部のアカウント、マッチ、メッセージの記録は残ります。写真の削除はバックグラウンドで行われ、非公開の復元用コピーとバックアップにはそれぞれ別の保存期限があります。</p>
+<p>ブロック、マッチの解除、アカウント削除の後も、通報とそこに含まれるメッセージのコピーが残ることがあります。調査、ルールの適用、法的請求に必要な範囲で安全対策の記録を保持し、その他の記録は法令に従って保持します。</p>
+<p><a href="/ja/privacy/">プライバシーポリシー</a></p>
 <p class="muted">ご質問はこちらへ： <a href="mailto:support@meetbundle.com">support@meetbundle.com</a></p>
 </div></main>
 <footer><div class="wrap"><span>© 2026 Meet Bundle</span><nav aria-label="フッター"><a href="/ja/privacy/">プライバシー</a><a href="/ja/contact/">お問い合わせ</a><a href="/ja/delete-account/">アカウント削除</a><a href="/ja/child-safety/">子どもの安全</a><!--i18n--><a href="/ja/free-dating-app/">無料マッチングアプリ</a><a href="/ja/safe-dating/">安全なマッチング</a><!--/i18n--></nav><!--i18n--><label class="langsw"><span class="sr">言語</span><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3Z"/></g></svg><select onchange="bundleLang(this.value)"><option value="en">English</option><option value="he">עברית</option><option value="ar">العربية</option><option value="ru">Русский</option><option value="uk">Українська</option><option value="de">Deutsch</option><option value="fr">Français</option><option value="es">Español</option><option value="pt">Português</option><option value="it">Italiano</option><option value="nl">Nederlands</option><option value="zh">简体中文</option><option value="zh-hant">繁體中文</option><option value="ko">한국어</option><option value="ja" selected>日本語</option><option value="vi">Tiếng Việt</option><option value="th">ไทย</option></select></label><script>function bundleLang(v){try{localStorage.setItem('bundle-lang',v)}catch(e){}var p=location.pathname.replace(/^\/(he|ar|ru|uk|de|fr|es|pt|it|nl|zh|zh-hant|ko|ja|vi|th)(?=\/)/,'');if(window.PAGE_LANGS&&PAGE_LANGS.indexOf(v)<0)p='/';location.href=(v==='en'?'':'/'+v)+p+location.hash}</script><style>.langsw{position:relative;display:inline-flex;align-items:center;gap:6px;color:inherit;min-height:44px;padding:0 8px}.langsw select{background:transparent;color:inherit;border:1px solid currentColor;border-radius:999px;padding:6px 10px;font:inherit;font-size:14px;min-height:36px;opacity:.85}.langsw select option{color:#000}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}</style><!--/i18n--></div></footer>
