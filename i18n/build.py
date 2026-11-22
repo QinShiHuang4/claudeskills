@@ -33,7 +33,7 @@ FAQ=[('Is Meet Bundle free?',['Yes. Meet Bundle is currently subscription-free, 
 ('What’s the difference between a Wink, a Like and a Spark?',['A Wink is a light hello. A Like says you’re interested, and if they like you back, it’s a match. A Spark is a Like with a message.']),
 ('Is Meet Bundle safe?',['Every photo is reviewed before anyone sees it, new profiles start under review, and you can block or report anyone from their profile or chat.']),
 ('Who can join Meet Bundle?',['Meet Bundle is for adults 18 and over. Everyone gives a date of birth when they sign up.']),
-('Can people see my exact location?',['No. Others see your city and an approximate distance, never your exact location.']),
+('Can people see my exact location?',['No. Others see your city, never your exact location.']),
 ('How do I delete my account?',['In the app, go to Profile, then Settings, then Account details, and tap Delete account.','You can also request deletion on our website.'])]
 def brand(out):
   # Trademark rule: formal brand mentions read 'Meet Bundle'
