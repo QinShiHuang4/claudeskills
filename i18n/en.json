@@ -445,5 +445,9 @@
 "We keep the IP address and browser or app information of a sign-in session for 90 days after the session ends, and then delete them.",
 "If an account is closed because its owner is under 18, or is deleted while banned, we keep a one-way coded version of its email address, never the address itself, so it can’t be used to sign up again. We keep it for 90 days after an under-18 closure, and permanently after a ban.",
 "Others see your city, never your exact location.",
-"No. Others see your city, never your exact location or address."
+"No. Others see your city, never your exact location or address.",
+"Last updated: November 23, 2026",
+"Email, password (stored as a secure hash), sign-in method, and your Google account ID if you sign in with Google",
+"If you sign in with Google, Google shares your verified email address and your Google account ID with us. We use them to create your account and recognise you when you sign in again. We never receive your Google password and don’t keep Google sign-in tokens.",
+"Service providers include Render for hosting, AWS for photo storage, Resend for email, Firebase Cloud Messaging for push notifications, Google for sign-in with Google, Sentry for error diagnostics, and Cloudflare for website analytics. We may also disclose data when legally required."
 ]

@@ -445,5 +445,9 @@
 "Het IP-adres en de browser- of appgegevens van een inlogsessie bewaren we tot 90 dagen na het einde van de sessie, daarna verwijderen we ze.",
 "Als een account wordt gesloten omdat de eigenaar jonger is dan 18, of wordt verwijderd terwijl het verbannen is, bewaren we een onomkeerbaar gecodeerde versie van het e-mailadres, nooit het adres zelf, zodat het niet opnieuw kan worden gebruikt om je aan te melden. We bewaren die 90 dagen na een sluiting wegens leeftijd en permanent na een verbanning.",
 "",
-""
+"",
+"Laatst bijgewerkt op 23 november 2026",
+"E-mailadres, wachtwoord (opgeslagen als veilige hash), aanmeldmethode en je Google-account-ID als je inlogt met Google",
+"Als je inlogt met Google, deelt Google je geverifieerde e-mailadres en je Google-account-ID met ons. We gebruiken ze om je account aan te maken en je te herkennen als je opnieuw inlogt. We ontvangen nooit je Google-wachtwoord en bewaren geen Google-inlogtokens.",
+"Onze dienstverleners zijn onder meer Render voor hosting, AWS voor foto-opslag, Resend voor e-mail, Firebase Cloud Messaging voor pushmeldingen, Google voor inloggen met Google, Sentry voor foutdiagnose en Cloudflare voor websiteanalyse. We kunnen ook gegevens verstrekken als de wet dat vereist."
 ]

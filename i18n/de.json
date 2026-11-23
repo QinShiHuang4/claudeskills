@@ -445,5 +445,9 @@
 "IP-Adresse sowie Browser- oder App-Informationen einer Anmeldesitzung speichern wir 90 Tage nach Ende der Sitzung und löschen sie dann.",
 "Wird ein Konto geschlossen, weil die Person unter 18 ist, oder während einer Sperre gelöscht, speichern wir eine nicht umkehrbar verschlüsselte Form der E-Mail-Adresse, nie die Adresse selbst, damit sie nicht erneut für eine Registrierung genutzt werden kann. Wir speichern sie 90 Tage nach einer Schließung wegen Minderjährigkeit und dauerhaft nach einer Sperre.",
 "",
-""
+"",
+"Zuletzt aktualisiert am 23. November 2026",
+"E-Mail-Adresse, Passwort (als sicherer Hash gespeichert), Anmeldemethode und deine Google-Konto-ID, wenn du dich mit Google anmeldest",
+"Wenn du dich mit Google anmeldest, teilt Google uns deine bestätigte E-Mail-Adresse und deine Google-Konto-ID mit. Wir nutzen sie, um dein Konto zu erstellen und dich bei der nächsten Anmeldung wiederzuerkennen. Dein Google-Passwort erhalten wir nie, und Google-Anmeldetokens speichern wir nicht.",
+"Zu unseren Dienstleistern gehören Render (Hosting), AWS (Fotospeicher), Resend (E-Mail), Firebase Cloud Messaging (Push-Mitteilungen), Google (Anmeldung mit Google), Sentry (Fehlerdiagnose) und Cloudflare (Webanalyse). Wir können Daten auch offenlegen, wenn dies gesetzlich vorgeschrieben ist."
 ]

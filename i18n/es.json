@@ -445,5 +445,9 @@
 "Conservamos la dirección IP y la información del navegador o de la app de una sesión durante 90 días después de que termine y luego las eliminamos.",
 "Si una cuenta se cierra porque su titular es menor de 18 años, o se elimina mientras está bloqueada, conservamos una versión codificada e irreversible de su dirección de correo, nunca la dirección en sí, para que no pueda usarse para registrarse de nuevo. La conservamos 90 días tras un cierre por edad y de forma permanente tras un bloqueo.",
 "",
-""
+"",
+"Última actualización el 23 de noviembre de 2026",
+"Correo electrónico, contraseña (guardada como un hash seguro), método de inicio de sesión y tu ID de cuenta de Google si inicias sesión con Google",
+"Si inicias sesión con Google, Google nos comparte tu correo electrónico verificado y tu ID de cuenta de Google. Los usamos para crear tu cuenta y reconocerte cuando vuelvas a iniciar sesión. Nunca recibimos tu contraseña de Google ni guardamos tokens de inicio de sesión de Google.",
+"Nuestros proveedores incluyen Render para alojamiento, AWS para almacenar fotos, Resend para correo, Firebase Cloud Messaging para notificaciones push, Google para el inicio de sesión con Google, Sentry para diagnóstico de errores y Cloudflare para la analítica web. También podemos divulgar datos cuando lo exija la ley."
 ]

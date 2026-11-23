@@ -445,5 +445,9 @@
 "Mantemos o endereço IP e as informações do navegador ou do app de uma sessão de login por 90 dias após o fim da sessão e depois os excluímos.",
 "Se uma conta for encerrada porque o titular tem menos de 18 anos, ou excluída enquanto estava banida, mantemos uma versão codificada e irreversível do endereço de e-mail, nunca o endereço em si, para que ele não possa ser usado em um novo cadastro. Ela é mantida por 90 dias após um encerramento por idade e permanentemente após um banimento.",
 "",
-""
+"",
+"Última atualização em 23 de novembro de 2026",
+"E-mail, senha (armazenada como hash seguro), método de login e o ID da sua conta Google, se você entrar com o Google",
+"Se você entrar com o Google, o Google compartilha conosco seu e-mail verificado e o ID da sua conta Google. Usamos esses dados para criar sua conta e reconhecer você quando entrar novamente. Nunca recebemos sua senha do Google nem guardamos tokens de login do Google.",
+"Nossos prestadores incluem Render para hospedagem, AWS para armazenamento de fotos, Resend para e-mail, Firebase Cloud Messaging para notificações push, Google para login com o Google, Sentry para diagnóstico de erros e Cloudflare para análise do site. Também podemos divulgar dados se a lei exigir."
 ]
