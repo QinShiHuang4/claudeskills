@@ -445,5 +445,9 @@
 "Conserviamo l’indirizzo IP e le informazioni sul browser o sull’app di una sessione di accesso per 90 giorni dopo la fine della sessione, poi li eliminiamo.",
 "Se un account viene chiuso perché il titolare ha meno di 18 anni, o eliminato mentre è bannato, conserviamo una versione codificata e irreversibile del suo indirizzo email, mai l’indirizzo stesso, così che non possa essere usato per iscriversi di nuovo. La conserviamo per 90 giorni dopo una chiusura per età e per sempre dopo un ban.",
 "",
-""
+"",
+"Ultimo aggiornamento il 23 novembre 2026",
+"Email, password (conservata come hash sicuro), metodo di accesso e l’ID del tuo account Google se accedi con Google",
+"Se accedi con Google, Google ci comunica il tuo indirizzo email verificato e l’ID del tuo account Google. Li usiamo per creare il tuo account e riconoscerti quando accedi di nuovo. Non riceviamo mai la tua password Google e non conserviamo i token di accesso di Google.",
+"Tra i fornitori ci sono Render per l’hosting, AWS per le foto, Resend per le email, Firebase Cloud Messaging per le notifiche push, Google per l’accesso con Google, Sentry per la diagnostica degli errori e Cloudflare per l’analisi del sito. Possiamo inoltre comunicare dati se richiesto dalla legge."
 ]
