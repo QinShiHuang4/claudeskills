@@ -449,5 +449,9 @@
 "Last updated: November 23, 2026",
 "Email, password (stored as a secure hash), sign-in method, and your Google account ID if you sign in with Google",
 "If you sign in with Google, Google shares your verified email address and your Google account ID with us. We use them to create your account and recognise you when you sign in again. We never receive your Google password and don’t keep Google sign-in tokens.",
-"Service providers include Render for hosting, AWS for photo storage, Resend for email, Firebase Cloud Messaging for push notifications, Google for sign-in with Google, Sentry for error diagnostics, and Cloudflare for website analytics. We may also disclose data when legally required."
+"Service providers include Render for hosting, AWS for photo storage, Resend for email, Firebase Cloud Messaging for push notifications, Google for sign-in with Google, Sentry for error diagnostics, and Cloudflare for website analytics. We may also disclose data when legally required.",
+"Last updated: November 25, 2026",
+"Email, password (stored as a secure hash), sign-in method, and your Google or Apple account ID if you sign in with Google or Apple",
+"If you sign in with Apple, Apple shares your Apple user ID and an email address with us. If you choose Hide My Email, that is an Apple private relay address that forwards to you. We use them to create your account and recognise you when you sign in again. We never receive your Apple ID password and don’t keep Apple sign-in tokens. When you delete your account and confirm with Apple, we ask Apple to end Meet Bundle’s Sign in with Apple access. You can also remove it in your Apple ID settings.",
+"Service providers include Render for hosting, AWS for photo storage, Resend for email, Firebase Cloud Messaging for push notifications, Google for sign-in with Google, Apple for Sign in with Apple, Sentry for error diagnostics, and Cloudflare for website analytics. We may also disclose data when legally required."
 ]

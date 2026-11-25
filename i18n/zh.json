@@ -449,5 +449,9 @@
 "最后更新：2026 年 11 月 23 日",
 "电子邮件地址、密码（以安全哈希值存储）、登录方式，以及使用 Google 登录时的 Google 账户 ID",
 "如果你使用 Google 登录，Google 会与我们共享你已验证的电子邮件地址和 Google 账户 ID。我们用它们来创建你的账户，并在你再次登录时识别你。我们绝不会收到你的 Google 密码，也不会保存 Google 登录令牌。",
-"服务提供商包括 Render（托管）、AWS（照片存储）、Resend（电子邮件）、Firebase Cloud Messaging（推送通知）、Google（使用 Google 登录）、Sentry（错误诊断）和 Cloudflare（网站分析）。如法律要求，我们也可能披露数据。"
+"服务提供商包括 Render（托管）、AWS（照片存储）、Resend（电子邮件）、Firebase Cloud Messaging（推送通知）、Google（使用 Google 登录）、Sentry（错误诊断）和 Cloudflare（网站分析）。如法律要求，我们也可能披露数据。",
+"最后更新：2026 年 11 月 25 日",
+"电子邮件地址、密码（以安全哈希值存储）、登录方式，以及使用 Google 或 Apple 登录时的 Google 或 Apple 账户 ID",
+"如果你通过 Apple 登录，Apple 会与我们共享你的 Apple 用户 ID 和一个电子邮件地址。如果你选择“隐藏邮件地址”，该地址是 Apple 的私密中转地址，会将邮件转发给你。我们用它们来创建你的账户，并在你再次登录时识别你。我们绝不会收到你的 Apple ID 密码，也不会保存 Apple 登录令牌。当你删除账户并在 Apple 处确认后，我们会请求 Apple 终止 Meet Bundle 的“通过 Apple 登录”访问权限。你也可以在 Apple ID 设置中移除该权限。",
+"服务提供商包括 Render（托管）、AWS（照片存储）、Resend（电子邮件）、Firebase Cloud Messaging（推送通知）、Google（使用 Google 登录）、Apple（通过 Apple 登录）、Sentry（错误诊断）和 Cloudflare（网站分析）。如法律要求，我们也可能披露数据。"
 ]
