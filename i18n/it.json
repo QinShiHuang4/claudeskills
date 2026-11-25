@@ -449,5 +449,9 @@
 "Ultimo aggiornamento il 23 novembre 2026",
 "Email, password (conservata come hash sicuro), metodo di accesso e l’ID del tuo account Google se accedi con Google",
 "Se accedi con Google, Google ci comunica il tuo indirizzo email verificato e l’ID del tuo account Google. Li usiamo per creare il tuo account e riconoscerti quando accedi di nuovo. Non riceviamo mai la tua password Google e non conserviamo i token di accesso di Google.",
-"Tra i fornitori ci sono Render per l’hosting, AWS per le foto, Resend per le email, Firebase Cloud Messaging per le notifiche push, Google per l’accesso con Google, Sentry per la diagnostica degli errori e Cloudflare per l’analisi del sito. Possiamo inoltre comunicare dati se richiesto dalla legge."
+"Tra i fornitori ci sono Render per l’hosting, AWS per le foto, Resend per le email, Firebase Cloud Messaging per le notifiche push, Google per l’accesso con Google, Sentry per la diagnostica degli errori e Cloudflare per l’analisi del sito. Possiamo inoltre comunicare dati se richiesto dalla legge.",
+"Ultimo aggiornamento il 25 novembre 2026",
+"Email, password (conservata come hash sicuro), metodo di accesso e l’ID del tuo account Google o Apple se accedi con Google o Apple",
+"Se accedi con Apple, Apple ci comunica il tuo ID utente Apple e un indirizzo email. Se scegli Nascondi la mia email, si tratta di un indirizzo privato di Apple che inoltra le email a te. Li usiamo per creare il tuo account e riconoscerti quando accedi di nuovo. Non riceviamo mai la password del tuo ID Apple e non conserviamo i token di accesso di Apple. Quando elimini il tuo account e confermi con Apple, chiediamo ad Apple di revocare l’accesso di Meet Bundle tramite Accedi con Apple. Puoi anche rimuoverlo nelle impostazioni del tuo ID Apple.",
+"Tra i fornitori ci sono Render per l’hosting, AWS per le foto, Resend per le email, Firebase Cloud Messaging per le notifiche push, Google per l’accesso con Google, Apple per Accedi con Apple, Sentry per la diagnostica degli errori e Cloudflare per l’analisi del sito. Possiamo inoltre comunicare dati se richiesto dalla legge."
 ]

@@ -449,5 +449,9 @@
 "最終更新日：2026年11月23日",
 "メールアドレス、パスワード（安全なハッシュとして保存）、ログイン方法、Googleでログインする場合はGoogleアカウントID",
 "Googleでログインすると、Googleから確認済みのメールアドレスとGoogleアカウントIDが共有されます。これらはアカウントの作成と、次回ログイン時の本人確認に使用します。Googleのパスワードを受け取ることはなく、Googleのログイントークンも保存しません。",
-"サービス提供事業者には、ホスティングのRender、写真保存のAWS、メールのResend、プッシュ通知のFirebase Cloud Messaging、GoogleログインのGoogle、エラー診断のSentry、ウェブ解析のCloudflareが含まれます。法令上必要な場合にもデータを開示することがあります。"
+"サービス提供事業者には、ホスティングのRender、写真保存のAWS、メールのResend、プッシュ通知のFirebase Cloud Messaging、GoogleログインのGoogle、エラー診断のSentry、ウェブ解析のCloudflareが含まれます。法令上必要な場合にもデータを開示することがあります。",
+"最終更新日：2026年11月25日",
+"メールアドレス、パスワード（安全なハッシュとして保存）、ログイン方法、GoogleまたはAppleでログインする場合はGoogleまたはAppleのアカウントID",
+"Appleでサインインすると、AppleからAppleのユーザーIDとメールアドレスが共有されます。「メールを非公開」を選んだ場合、このアドレスはあなたのメールに転送されるAppleのプライベートリレーアドレスです。これらはアカウントの作成と、次回ログイン時の本人確認に使用します。Apple IDのパスワードを受け取ることはなく、Appleのサインイントークンも保存しません。アカウントを削除してAppleで確認すると、「Appleでサインイン」によるMeet Bundleのアクセスを終了するようAppleに依頼します。Apple IDの設定から削除することもできます。",
+"サービス提供事業者には、ホスティングのRender、写真保存のAWS、メールのResend、プッシュ通知のFirebase Cloud Messaging、GoogleログインのGoogle、「Appleでサインイン」のApple、エラー診断のSentry、ウェブ解析のCloudflareが含まれます。法令上必要な場合にもデータを開示することがあります。"
 ]
