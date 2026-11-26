@@ -109,7 +109,7 @@ def build():
       pl=[c for c in avail if c in LIMITED.get(f,avail)]
       if code not in pl:continue
       src=open(os.path.join(DOCS,f)).read()
-      src=re.sub(r'\n?<!--i18n-->.*?<!--/i18n-->','',src,flags=re.S)  # strip previous injections on en
+      src=re.sub(r'\n?<!--i18n-->.*?<!--/i18n-->(?:\n(?=</head>))?','',src,flags=re.S)  # strip previous injections on en, incl. the newline the head block adds before </head>, so rebuilds are idempotent
       if code!='en':
         px=X();px.feed(src);need=[x for x in dict.fromkeys(px.out) if x not in SKIP and x not in M]
         if need:raise SystemExit(f'{code}: {f} needs translations for {len(need)} strings, e.g. {need[:3]}')
