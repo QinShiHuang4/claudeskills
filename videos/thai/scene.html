@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>Meet Bundle video scene (Thai)</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+:root{
+  --blue:#2f6bff; --blue-d:#1f4fd6; --red:#e2405a; --ink:#15171c; --muted:#6b7280;
+  --th:"Noto Sans Thai","Roboto",sans-serif;
+  --app:"Roboto","Noto Sans Thai",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#000;overflow:hidden}
+#stage{position:relative;overflow:hidden;background:#000;perspective:2600px;font-family:var(--th);color:#fff}
+.abs{position:absolute;left:0;top:0}
+svg.i{width:1em;height:1em;display:inline-block;vertical-align:middle;fill:currentColor}
+
+/* ---------- headline text ---------- */
+.title{position:absolute;left:0;top:0;transform-origin:0 0;font-weight:800;letter-spacing:-.01em;line-height:1.24;white-space:nowrap}
+.title .ln{display:block}
+.w{display:inline-block;will-change:transform,filter,opacity}
+.blue{color:#3d7bff}
+.cap{position:absolute;white-space:nowrap;font-weight:400;color:#fff}
+.cap b{font-weight:700}
+.cap span.dim{color:rgba(255,255,255,.82)}
+
+/* ---------- lockup ---------- */
+.lockup{position:absolute;left:0;top:0;display:flex;align-items:center;transform-origin:0 0;white-space:nowrap}
+.lockup img{display:block}
+.lockup .wm{font-family:"Roboto",sans-serif;font-weight:700;letter-spacing:-.015em;color:#fff}
+.lockup .wm span{display:inline-block}
+
+/* ---------- store badges ---------- */
+.badges{position:absolute;display:flex;gap:14px;transform-origin:0 0}
+.badge{display:flex;align-items:center;gap:10px;background:#fff;color:#000;border-radius:12px;padding:0 18px 0 14px;height:62px}
+.badge svg{width:30px;height:30px}
+.badge small{display:block;font:500 13px/1.1 var(--th);letter-spacing:0}
+.badge b{display:block;font:700 22px/1.1 "Roboto",sans-serif;letter-spacing:-.01em}
+
+/* ---------- phone ---------- */
+.phone{position:absolute;left:0;top:0;width:414px;height:868px;transform-style:preserve-3d;transform-origin:50% 50%}
+.face{position:absolute;inset:0;border-radius:58px;backface-visibility:hidden}
+.front{background:#11141b;padding:11px;transform:translateZ(7px);box-shadow:inset 0 0 0 2px #2a3040,inset 0 0 0 4px #0c0e13}
+.back{transform:rotateY(180deg) translateZ(7px);background:linear-gradient(135deg,#1b2130,#0d1017 55%,#1a2030);box-shadow:inset 0 0 0 2px #2a3040}
+.back .cam{position:absolute;left:34px;top:34px;width:120px;height:120px;border-radius:34px;background:#0a0c11;box-shadow:inset 0 0 0 2px #262c3a}
+.edge{position:absolute;top:56px;height:756px;width:14px;background:linear-gradient(90deg,#20263a,#3a4258 50%,#20263a)}
+.edge.l{left:0;transform-origin:0 50%;transform:translateZ(7px) rotateY(90deg)}
+.edge.r{right:0;transform-origin:100% 50%;transform:translateZ(7px) rotateY(-90deg)}
+.screen{position:relative;width:392px;height:846px;border-radius:47px;overflow:hidden;background:#fff;font-family:var(--app);color:var(--ink)}
+.gloss{position:absolute;inset:0;border-radius:47px;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,.0) 40%,rgba(255,255,255,.10) 48%,rgba(255,255,255,0) 58%)}
+.glow{position:absolute;left:0;top:0;width:520px;height:70px;border-radius:50%;background:radial-gradient(closest-side,rgba(47,107,255,.55),rgba(47,107,255,0));filter:blur(10px);transform-origin:50% 50%}
+
+/* ---------- app chrome ---------- */
+.scr{position:absolute;inset:0;background:#fff;overflow:hidden}
+.sb{position:absolute;left:0;right:0;top:0;height:44px;display:flex;align-items:center;justify-content:space-between;padding:6px 28px 0 34px;font:500 15px "Roboto";z-index:5}
+.sb .hole{position:absolute;left:50%;top:13px;width:22px;height:22px;margin-left:-11px;border-radius:50%;background:#0b0c10}
+.sb .ic{display:flex;gap:6px;align-items:center}
+.sig{display:flex;align-items:flex-end;gap:2px;height:12px}.sig i{display:block;width:3px;background:#111;border-radius:1px}
+.bat{width:24px;height:12px;border-radius:3px;background:#2ecc5a}
+.hdr{position:absolute;left:0;right:0;top:44px;height:56px;display:flex;align-items:center;justify-content:center;z-index:5;background:#fff}
+.hdr .l{position:absolute;left:22px;font-size:22px;color:#222;display:flex}
+.hdr .r{position:absolute;right:20px;display:flex;gap:16px;font-size:22px;color:#222}
+.alogo{display:flex;align-items:center;gap:5px;color:#2f6bff;font:700 22px "Roboto";letter-spacing:-.02em}
+.alogo img{width:28px;height:auto}
+.nav{position:absolute;left:0;right:0;bottom:0;height:78px;background:#fff;border-top:1px solid #eef0f4;display:flex;justify-content:space-around;padding-top:10px;z-index:6}
+.nav div{display:flex;flex-direction:column;align-items:center;gap:3px;font:500 11.5px var(--th);color:#6b7280;width:80px}
+.nav div svg{width:24px;height:24px}
+.nav div.on{color:#2f6bff;font-weight:700}
+.navbar{position:absolute;left:50%;bottom:6px;width:120px;height:4px;margin-left:-60px;border-radius:2px;background:#cfd3da;z-index:7}
+
+/* discover */
+.feed{position:absolute;left:0;right:0;top:100px;bottom:78px;overflow:hidden}
+.feedin{position:absolute;left:0;right:0;top:0}
+.card{position:relative;margin:0 12px 14px;height:560px;border-radius:24px;overflow:hidden;background:#ccc}
+.card .ph{position:absolute;inset:0;background-size:cover;background-position:center}
+.card .ph svg{width:100%;height:100%;display:block}
+.card .sh{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.42) 0,rgba(0,0,0,0) 26%,rgba(0,0,0,0) 62%,rgba(0,0,0,.5) 100%)}
+.prog{position:absolute;left:14px;right:14px;top:10px;display:flex;gap:6px}
+.prog i{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.45)}
+.prog i.on{background:#fff}
+.nm{position:absolute;left:16px;top:24px;color:#fff;font:600 27px var(--app);display:flex;align-items:center;gap:6px;text-shadow:0 1px 6px rgba(0,0,0,.25)}
+.nm svg{width:22px;height:22px}
+.loc{position:absolute;left:16px;top:64px;color:rgba(255,255,255,.95);font:400 13.5px var(--app);display:flex;align-items:center;gap:5px;text-shadow:0 1px 4px rgba(0,0,0,.3)}
+.loc svg{width:14px;height:14px}
+.cnt{position:absolute;right:14px;top:24px;background:rgba(0,0,0,.35);color:#fff;font:500 13px "Roboto";padding:4px 10px;border-radius:12px}
+.vp{position:absolute;left:16px;bottom:96px;color:#fff;font:500 14.5px var(--app)}
+.pill{position:absolute;left:14px;bottom:50px;color:#fff;font:500 13.5px var(--app);border:1px solid rgba(255,255,255,.55);background:rgba(0,0,0,.18);border-radius:20px;padding:7px 14px;display:flex;align-items:center;gap:6px}
+.pill svg{width:13px;height:13px}
+.wink{position:absolute;right:14px;bottom:60px;display:flex;flex-direction:column;align-items:center;gap:4px;color:#fff;font:500 12px "Roboto"}
+.wink .b{width:46px;height:46px;border-radius:50%;background:#fff;color:#2f6bff;display:grid;place-items:center;box-shadow:0 2px 10px rgba(0,0,0,.15)}
+.wink .b svg{width:28px;height:28px}
+.acts{position:absolute;left:0;right:0;bottom:84px;height:104px;z-index:4;display:flex;justify-content:center;align-items:flex-end;gap:34px}
+.act{display:flex;flex-direction:column;align-items:center;gap:6px;font:500 12.5px "Roboto";color:#6b7280}
+.act .b{display:grid;place-items:center;box-shadow:0 4px 14px rgba(0,0,0,.18)}
+.act.pass .b{width:62px;height:62px;border-radius:50%;background:#fff;color:#2f6bff}.act.pass .b svg{width:28px;height:28px}
+.act.spark .b{width:72px;height:72px;border-radius:20px;background:linear-gradient(180deg,#fff,#e7efff);box-shadow:0 4px 14px rgba(47,107,255,.35),inset 0 0 0 1.5px #cfdcff}
+.act.spark .b img{width:46px;height:46px}
+.act.spark{color:#2f6bff}
+.act.like .b{width:78px;height:78px;border-radius:50%;background:var(--red);color:#fff;box-shadow:0 0 0 5px #fff,0 6px 16px rgba(0,0,0,.25)}.act.like .b svg{width:34px;height:34px}
+.act.like{color:var(--red)}
+.ring{position:absolute;border-radius:50%;border:3px solid #6f9bff;pointer-events:none}
+
+/* spark sent card */
+.sparkcard{position:absolute;left:24px;right:24px;top:296px;background:#fff;border-radius:16px;padding:14px 16px 12px;box-shadow:0 10px 30px rgba(0,0,0,.25);z-index:3;font-family:var(--app)}
+.sparkcard .k{display:flex;align-items:center;gap:6px;color:#2f6bff;font:700 12px var(--app);letter-spacing:.03em}
+.sparkcard .k img{width:18px}
+.sparkcard .q{margin-top:6px;color:#1f3fae;font:500 16px/1.45 var(--app)}
+.sparkcard .s{margin-top:6px;color:#6b7280;font:400 12.5px var(--app)}
+.notif{position:absolute;left:12px;right:12px;top:52px;height:70px;background:#fff;border-radius:18px;box-shadow:0 8px 26px rgba(0,0,0,.22);z-index:8;display:flex;align-items:center;gap:12px;padding:0 16px}
+.notif img{width:44px;height:44px;border-radius:50%;object-fit:cover}
+.notif b{display:block;font:600 15.5px var(--app)}
+.notif small{display:block;font:400 13px var(--app);color:#6b7280;margin-top:2px}
+.notif svg{margin-left:auto;width:26px;height:26px;color:var(--red)}
+
+/* match */
+.match{background:radial-gradient(120% 70% at 50% 45%,#ffffff 0,#eef3ff 60%,#e4ecff 100%)}
+.pair{position:absolute;left:50%;top:300px;width:250px;height:130px;margin-left:-125px}
+.av{position:absolute;top:0;width:128px;height:128px;border-radius:50%;border:5px solid #fff;box-shadow:0 6px 20px rgba(47,107,255,.25);overflow:hidden;background:#ddd}
+.av img{width:100%;height:100%;object-fit:cover}
+.pair .a1{left:0}.pair .a2{right:0}
+.pair .mk{position:absolute;left:50%;top:76px;width:58px;height:58px;margin-left:-29px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 4px 14px rgba(47,107,255,.3)}
+.pair .mk img{width:38px}
+.mt{position:absolute;left:0;right:0;top:468px;text-align:center;font:700 34px var(--th);color:#15171c}
+.ms{position:absolute;left:0;right:0;top:526px;text-align:center;font:400 15.5px var(--th);color:#5b6270}
+.say{position:absolute;left:40px;right:40px;top:586px;height:54px;border-radius:27px;background:#2f6bff;color:#fff;display:grid;place-items:center;font:600 17px var(--th);box-shadow:0 8px 20px rgba(47,107,255,.35)}
+.keep{position:absolute;left:0;right:0;top:660px;text-align:center;font:500 15px var(--th);color:#5b6270}
+.ht{position:absolute;width:18px;height:18px}
+
+/* likes */
+.pt{position:absolute;left:22px;top:108px;font:700 31px var(--th);color:#15171c}
+.pc{position:absolute;right:24px;top:120px;font:500 19px "Roboto";color:#2f6bff}
+.grid{position:absolute;left:12px;right:12px;top:170px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.lk{position:relative;height:304px;border-radius:20px;overflow:hidden;background:#f3f5f9}
+.lk.w{box-shadow:inset 0 0 0 2.5px #2f6bff}
+.lk .ph{position:absolute;left:0;right:0;top:0;height:228px;overflow:hidden}
+.lk .ph svg{width:100%;height:100%;display:block}
+.lk .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(0,0,0,.45))}
+.lk .n{position:absolute;left:14px;top:168px;color:#fff;font:600 18px var(--app);z-index:2}
+.lk .c{position:absolute;left:14px;top:196px;color:rgba(255,255,255,.9);font:400 13px var(--th);z-index:2}
+.lk .ft{position:absolute;left:0;right:0;bottom:0;height:76px;display:flex;align-items:center;padding:0 10px;gap:8px}
+.lk .rm{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;color:#4b5160;font:400 12.5px var(--th)}
+.lk .rm svg{width:20px;height:20px}
+.lk .lb{width:88px;height:54px;border-radius:14px;background:var(--red);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font:600 13px "Roboto";gap:1px}
+.lk .lb svg{width:20px;height:20px}
+.chip{position:absolute;left:12px;top:12px;z-index:2;border-radius:16px;padding:5px 11px;font:500 12.5px var(--th);display:flex;align-items:center;gap:5px}
+.chip.wk{background:#2747a8;color:#fff}.chip.wk svg{width:15px;height:15px}
+.chip.pt2{background:#fff;color:#2f6bff}
+
+/* matches */
+.srch{position:absolute;left:16px;right:16px;top:168px;height:50px;border-radius:14px;background:#f1f3f8;display:flex;align-items:center;gap:10px;padding:0 16px;color:#6b7280;font:400 15.5px var(--th)}
+.srch svg{width:20px;height:20px}
+.rows{position:absolute;left:0;right:0;top:228px}
+.row{position:relative;height:80px;display:flex;align-items:center;padding:0 18px;gap:14px;border-bottom:1px solid #f0f1f4}
+.row .ra{width:52px;height:52px;border-radius:50%;overflow:hidden;flex:none;background:#e5e7eb}
+.row .ra img,.row .ra svg{width:100%;height:100%;object-fit:cover;display:block}
+.row b{display:block;font:600 16px var(--app);color:#15171c}
+.row small{display:block;margin-top:3px;font:400 14px var(--th);color:#4b5160}
+.row .dt{position:absolute;right:18px;top:22px;font:400 12.5px var(--th);color:#6b7280}
+.row .ub{position:absolute;right:20px;top:44px;width:22px;height:22px;border-radius:50%;background:#2f6bff;color:#fff;font:600 12px "Roboto";display:grid;place-items:center}
+
+/* chat */
+.ch{position:absolute;left:0;right:0;top:100px;height:70px;border-bottom:1px solid #eef0f4;display:flex;align-items:center;gap:12px;padding:0 18px}
+.ch .ra{width:46px;height:46px;border-radius:50%;overflow:hidden}
+.ch .ra svg{width:100%;height:100%;display:block}
+.ch b{display:block;font:600 17px var(--app)}
+.ch small{display:block;font:400 13px var(--th);color:#6b7280}
+.ch .dots{margin-left:auto;font-size:22px;color:#333;display:flex}
+.msgs{position:absolute;left:0;right:0;bottom:150px;display:flex;flex-direction:column;gap:12px;padding:0 14px}
+.bb{max-width:78%;padding:11px 15px;border-radius:20px;font:400 15px/1.45 var(--th)}
+.bb.in{align-self:flex-start;background:#f0f2f6;color:#15171c;border-bottom-left-radius:6px}
+.bb.out{align-self:flex-end;background:#2f6bff;color:#fff;border-bottom-right-radius:6px}
+.bb .tk{display:block;text-align:right;font-size:11px;opacity:.75;margin-top:2px}
+.cin{position:absolute;left:14px;right:72px;bottom:90px;height:50px;border-radius:25px;background:#f1f3f8;display:flex;align-items:center;padding:0 18px;color:#8a90a0;font:400 15px var(--th)}
+.snd{position:absolute;right:14px;bottom:90px;width:50px;height:50px;border-radius:50%;background:#2f6bff;color:#fff;display:grid;place-items:center}
+.snd svg{width:24px;height:24px}
+
+/* intro */
+#dark{background:radial-gradient(80% 80% at 50% 50%,#121a2c 0,#080b13 70%,#05070c 100%)}
+#blue{background:radial-gradient(120% 120% at 70% 30%,#2f6bff 0,#1f53e0 45%,#1640b8 100%)}
+.hp{position:absolute;opacity:.09}
+.sticker{position:absolute;width:132px;height:132px;border-radius:50%;background:#fff;box-shadow:0 10px 30px rgba(0,0,0,.25);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#2f6bff;transform-origin:50% 50%}
+.sticker b{font:800 38px/1 "Outfit";letter-spacing:-.02em}
+.sticker span{font:800 26px/1.1 var(--th)}
+.tag{position:absolute;white-space:nowrap;font:500 26px var(--th);color:rgba(255,255,255,.88);transform-origin:50% 0}
+.fade{position:absolute;inset:0;background:#080b13;pointer-events:none}
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<script>
+// ---------------------------------------------------------------------------
+// Query: ?comp=fd|intro&ar=169|916
+// ---------------------------------------------------------------------------
+const Q = new URLSearchParams(location.search);
+const COMP = Q.get('comp') || 'fd';
+const AR = Q.get('ar') || '169';
+const W = AR === '169' ? 1920 : 1080, H = AR === '169' ? 1080 : 1920;
+const DUR = COMP === 'fd' ? 15.5 : 9.6;
+window.DURATION = DUR; window.SIZE = [W, H];
+const stage = document.getElementById('stage');
+stage.style.width = W + 'px'; stage.style.height = H + 'px';
+
+// ---------- math ----------
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const lerp = (a, b, p) => a + (b - a) * p;
+const eo = p => 1 - Math.pow(1 - p, 3);
+const eio = p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+const eback = p => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); };
+const prog = (t, a, b, e = eo) => e(clamp((t - a) / (b - a)));
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const el = (html) => { const d = document.createElement('div'); d.innerHTML = html.trim(); return d.firstElementChild; };
+const ic = (id, cls = 'i') => `<svg class="${cls}"><use href="#${id}"/></svg>`;
+
+// ---------- cartoon avatars (flat style, matching the app's placeholder art) ----------
+let gid = 0;
+function toon(o) {
+  const id = 'g' + (gid++);
+  const s = o.skin, sd = o.skinD;
+  let hairBack = '', hairFront = '', extra = '';
+  if (o.hair === 'long') {
+    hairBack = `<path d="M84 190 C80 110 110 92 150 92 C190 92 222 112 216 190 L228 330 C200 344 100 344 72 330 Z" fill="${o.hc}"/>`;
+    hairFront = `<path d="M90 186 C88 128 116 104 150 104 C186 104 212 126 210 186 C196 150 176 132 150 130 C124 132 104 150 90 186Z" fill="${o.hc}"/>`;
+  } else if (o.hair === 'bob') {
+    hairBack = `<path d="M82 200 C76 116 112 94 150 94 C190 94 226 116 218 200 L216 262 C196 270 104 270 84 262 Z" fill="${o.hc}"/>`;
+    hairFront = `<path d="M90 184 C92 126 118 104 152 104 C188 106 212 130 208 182 C188 152 160 140 130 142 C112 146 98 160 90 184Z" fill="${o.hc}"/>`;
+  } else if (o.hair === 'bun') {
+    hairBack = `<circle cx="150" cy="96" r="30" fill="${o.hc}"/>`;
+    hairFront = `<path d="M90 182 C88 126 116 108 150 108 C186 108 212 126 210 182 C200 146 178 132 150 132 C122 132 100 146 90 182Z" fill="${o.hc}"/>`;
+  } else if (o.hair === 'short') {
+    hairFront = `<path d="M92 176 C88 120 118 106 152 106 C190 106 214 124 208 176 C204 150 190 140 172 138 C150 136 128 140 112 146 C100 152 94 162 92 176Z" fill="${o.hc}"/>`;
+  } else if (o.hair === 'cap') {
+    hairFront = `<path d="M94 168 C92 120 120 110 150 110 C182 110 208 120 206 168 C190 146 112 146 94 168Z" fill="${o.hc}"/>`;
+  }
+  if (o.beard) extra += `<path d="M98 196 C100 250 126 270 150 270 C174 270 200 250 202 196 C196 222 184 236 172 238 C160 230 140 230 128 238 C116 236 104 222 98 196Z" fill="${o.beard}"/>`;
+  if (o.glasses) extra += `<g fill="none" stroke="#3b3b3b" stroke-width="5"><circle cx="128" cy="194" r="15"/><circle cx="172" cy="194" r="15"/><path d="M143 194h14"/></g>`;
+  const blush = o.blush ? `<circle cx="116" cy="214" r="10" fill="#f19a9a" opacity=".45"/><circle cx="184" cy="214" r="10" fill="#f19a9a" opacity=".45"/>` : '';
+  return `<svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${o.bg1}"/><stop offset="1" stop-color="${o.bg2}"/></linearGradient>
+  <linearGradient id="${id}n" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${sd}"/><stop offset=".45" stop-color="${s}"/></linearGradient></defs>
+  <rect width="300" height="400" fill="url(#${id})"/>
+  <circle cx="${o.cx || 205}" cy="${o.cy || 95}" r="88" fill="#fff" opacity=".22"/>
+  ${hairBack}
+  <path d="M28 400 C34 330 92 300 150 300 C208 300 266 330 272 400Z" fill="${o.shirt}"/>
+  <rect x="131" y="236" width="38" height="76" rx="6" fill="url(#${id}n)"/>
+  <circle cx="94" cy="196" r="13" fill="${s}"/><circle cx="206" cy="196" r="13" fill="${s}"/>
+  <ellipse cx="150" cy="190" rx="58" ry="66" fill="${s}"/>
+  ${hairFront}${extra}${blush}
+  <circle cx="128" cy="192" r="5.5" fill="#2a2a2a"/><circle cx="172" cy="192" r="5.5" fill="#2a2a2a"/>
+  <path d="M152 198 C148 208 146 214 152 216" fill="none" stroke="${sd}" stroke-width="3" stroke-linecap="round"/>
+  <path d="M134 228 C142 236 158 236 166 228" fill="none" stroke="#8a3b3b" stroke-width="4" stroke-linecap="round"/>
+  </svg>`;
+}
+const T = {
+  noa:    {bg1:'#c9c4f2', bg2:'#8f86cf', skin:'#f2c9a6', skinD:'#cf9f7c', hair:'bob',  hc:'#5a3a26', shirt:'#4a3bb0', blush:1},
+  ido:    {bg1:'#cfe6f3', bg2:'#8fb9d2', skin:'#c98d62', skinD:'#a06a44', hair:'cap',  hc:'#3a3a3a', shirt:'#c0394b', beard:0},
+  shira:  {bg1:'#f6d3d6', bg2:'#e7a8ae', skin:'#9c6243', skinD:'#7a4630', hair:'bun',  hc:'#2a1b14', shirt:'#c58a1c', blush:1},
+  mayaT:  {bg1:'#e2dcf7', bg2:'#b8b0e0', skin:'#f6dcc4', skinD:'#d6b39a', hair:'long', hc:'#e2c27a', shirt:'#2453b8', blush:1},
+  daniel: {bg1:'#d6e6fb', bg2:'#8fb2e3', skin:'#e7b48c', skinD:'#c08b66', hair:'cap',  hc:'#4a4a4a', shirt:'#1d1f26', beard:'#3b3330'},
+  tamar:  {bg1:'#d4ecf4', bg2:'#9cc6d8', skin:'#e3ad85', skinD:'#bd8761', hair:'long', hc:'#5b4334', shirt:'#4a2f8c', blush:1},
+  yonatan:{bg1:'#e2efe4', bg2:'#a9c7ad', skin:'#f4d7c0', skinD:'#d4b097', hair:'short',hc:'#c89a5c', shirt:'#2e5e3e', glasses:1},
+  amit:   {bg1:'#ece4f7', bg2:'#c7b6e6', skin:'#efc5a3', skinD:'#cc9f7d', hair:'short',hc:'#3d2a1e', shirt:'#3f6fd0'},
+};
+
+// ---------- app screens (Thai UI) ----------
+const LOGO_APP = `<div class="alogo"><img src="assets/logo-192.png" alt="">Meet Bundle</div>`;
+const statusBar = (tm) => `<div class="sb"><span>${tm}</span><div class="hole"></div><div class="ic"><div class="sig"><i style="height:4px"></i><i style="height:7px"></i><i style="height:10px"></i><i style="height:12px;opacity:.3"></i></div><svg width="16" height="12" viewBox="0 0 16 12"><path d="M8 12 0 3.5C4.5-.8 11.5-.8 16 3.5Z" fill="#111"/></svg><div class="bat"></div></div></div>`;
+const nav = (on) => `<div class="nav">${[['compass', 'ค้นพบ'], ['heart-o', 'ถูกใจคุณ'], ['chats', 'แมตช์'], ['user', 'โปรไฟล์']].map(([i, l], k) => `<div class="${k === on ? 'on' : ''}">${ic(k === on ? (i === 'heart-o' ? 'heart' : i + '-f') : i)}${l}</div>`).join('')}</div><div class="navbar"></div>`;
+
+function feedCard(p) {
+  const ph = p.img ? `<div class="ph" style="background-image:url(${p.img});background-position:${p.pos || 'center'}"></div>` : `<div class="ph">${toon(T[p.toon])}</div>`;
+  return `<div class="card">${ph}<div class="sh"></div>
+  <div class="prog">${[0, 1, 2].map(i => `<i class="${i === (p.pg || 0) ? 'on' : ''}"></i>`).join('')}</div>
+  <div class="nm">${p.name}${p.ver ? ic('verified') : ''}</div>
+  <div class="loc">${ic('pin')}${p.loc}</div>
+  <div class="cnt">${(p.pg || 0) + 1} / 3</div>
+  <div class="vp">ดูโปรไฟล์</div>
+  <div class="pill">${p.pct}% · ความสนใจที่ตรงกัน ${ic('chev')}</div>
+  <div class="wink"><div class="b">${ic('smile')}</div>Wink</div></div>`;
+}
+const MAYA = {name: 'Maya, 26', ver: 1, loc: 'เทลอาวีฟ อิสราเอล · ห่างไปประมาณ 3 กม.', pct: 60, img: 'assets/maya-cafe.jpg', pos: '50% 30%'};
+function discover(id, cards, tm = '10:04') {
+  return `<div class="scr" id="${id}">${statusBar(tm)}
+  <div class="hdr"><div class="l">${ic('moon')}</div>${LOGO_APP}<div class="r">${ic('refresh')}${ic('tune')}</div></div>
+  <div class="feed"><div class="feedin">${cards.map(feedCard).join('')}</div>
+    <div class="sparkcard" style="opacity:0"><div class="k"><img src="assets/spark.png" alt="">SPARK ถึง MAYA</div>
+      <div class="q">“วิวหุบผานั่นสวยเกินจริงไปมาก ที่มิตซ์เป ราโมนใช่ไหม?”</div>
+      <div class="s">ส่งแล้ว ✓ · Spark จะถูกอ่านก่อนเสมอ</div></div>
+  </div>
+  <div class="acts"><div class="act pass"><div class="b">${ic('x')}</div>Pass</div><div class="act spark"><div class="b"><img src="assets/spark.png" alt=""></div>Spark</div><div class="act like"><div class="b">${ic('heart')}</div>Like</div></div>
+  <div class="notif" style="opacity:0"><img src="assets/maya-face.jpg" alt=""><div><b>Maya กด Like กลับแล้ว</b><small>Spark ของคุณได้ผล</small></div>${ic('heart')}</div>
+  ${nav(0)}</div>`;
+}
+function matchScreen(id) {
+  const hearts = [[60, 250, '#3d7bff'], [330, 270, '#e2405a'], [40, 420, '#3d7bff'], [345, 430, '#3d7bff'], [90, 520, '#e2405a'], [300, 560, '#3d7bff'], [180, 240, '#3d7bff'], [250, 470, '#e2405a']];
+  return `<div class="scr match" id="${id}">
+  ${hearts.map(([x, y, c]) => `<svg class="ht" style="left:${x}px;top:${y}px;color:${c}" viewBox="0 0 24 24"><use href="#heart" fill="${c}"/></svg>`).join('')}
+  <div class="pair"><div class="av a1"><img src="assets/shachar-face.jpg" alt=""></div><div class="av a2"><img src="assets/maya-face.jpg" alt=""></div><div class="mk"><img src="assets/logo-192.png" alt=""></div></div>
+  <div class="mt">แมตช์แล้ว!</div>
+  <div class="ms">คุณกับ Maya ถูกใจกันและกัน</div>
+  <div class="say">ทักทายเลย</div>
+  <div class="keep">เลื่อนดูต่อ</div></div>`;
+}
+function likesScreen(id) {
+  const P = [['mayaT', 'Maya, 29', 'ไฮฟา'], ['daniel', 'Daniel, 31', 'รามัตกัน', 'w'], ['tamar', 'Tamar, 27', 'เฮิร์ซลียา', 'p'], ['yonatan', 'Yonatan, 30', 'เนทันยา']];
+  return `<div class="scr" id="${id}">${statusBar('10:05')}
+  <div class="hdr"><div class="l">${ic('moon')}</div>${LOGO_APP}<div class="r">${ic('refresh')}</div></div>
+  <div class="pt">ถูกใจคุณ</div><div class="pc">14</div>
+  <div class="grid">${P.map(([t, n, c, f]) => `<div class="lk ${f === 'w' ? 'w' : ''}"><div class="ph">${toon(T[t])}</div>
+    ${f === 'w' ? `<div class="chip wk">${ic('smile')}ส่ง Wink ให้คุณ</div>` : ''}${f === 'p' ? `<div class="chip pt2">สัตว์เลี้ยง 🐾</div>` : ''}
+    <div class="n">${n}</div><div class="c">${c}</div>
+    <div class="ft"><div class="rm">${ic('x')}ลบ</div><div class="lb">${ic('heart')}Like</div></div></div>`).join('')}</div>
+  ${nav(1)}</div>`;
+}
+function matchesScreen(id) {
+  const R = [['img:assets/maya-face.jpg', 'Maya', 'ทักทายเลย คุณแมตช์กันแล้ว!', 'เมื่อวาน'], ['daniel', 'Daniel', '✓✓ เจอกันวันอาทิตย์', '10 พ.ย.'], ['shira', 'Shira', 'ฮ่าๆ ตกลง 😄', '', 2], ['ido', 'Ido', 'ทักทายเลย คุณแมตช์กันแล้ว!', '4 พ.ย.'], ['mayaT', 'Maya', '✓✓ หวัดดี', '2 พ.ย.'], ['amit', 'Amit', 'ทักทายเลย คุณแมตช์กันแล้ว!', '1 พ.ย.']];
+  return `<div class="scr" id="${id}">${statusBar('10:05')}
+  <div class="hdr"><div class="l">${ic('moon')}</div>${LOGO_APP}</div>
+  <div class="pt">แมตช์</div>
+  <div class="srch">${ic('search')}ค้นหาแมตช์</div>
+  <div class="rows">${R.map(([a, n, m, d, u]) => `<div class="row"><div class="ra">${a.startsWith('img:') ? `<img src="${a.slice(4)}" alt="">` : toon(T[a])}</div><div><b>${n}</b><small>${m}</small></div>${d ? `<div class="dt">${d}</div>` : ''}${u ? `<div class="ub">${u}</div>` : ''}</div>`).join('')}</div>
+  ${nav(2)}</div>`;
+}
+function chatScreen(id) {
+  return `<div class="scr" id="${id}">${statusBar('10:12')}
+  <div class="hdr"><div class="l">${ic('back')}</div>${LOGO_APP}</div>
+  <div class="ch"><div class="ra">${toon(T.daniel)}</div><div><b>Daniel</b><small>ออนไลน์</small></div><div class="dots">${ic('dots')}</div></div>
+  <div class="msgs">
+    <div class="bb in">เฮ้! Spark ของคุณทำเราขำเลย</div>
+    <div class="bb out">ฮ่า ดีใจที่ชอบนะ สัปดาห์นี้ไปกินกาแฟกันไหม?<span class="tk">✓✓</span></div>
+    <div class="bb in">เช้าวันอาทิตย์ ริมทะเลดีไหม?</div>
+    <div class="bb out">เจอกันวันอาทิตย์<span class="tk">✓✓</span></div>
+  </div>
+  <div class="cin">ข้อความ...</div><div class="snd">${ic('up')}</div>
+  ${nav(2)}</div>`;
+}
+
+// ---------- phone ----------
+function makePhone(screensHtml) {
+  const p = el(`<div class="phone"><div class="face back"><div class="cam"></div></div><div class="edge l"></div><div class="edge r"></div>
+  <div class="face front"><div class="screen">${screensHtml}<div class="gloss"></div></div></div></div>`);
+  return p;
+}
+function placePhone(p, cx, cy, s, rx, ry, rz, op = 1) {
+  p.style.transform = `translate3d(${cx - 207}px,${cy - 434}px,0) rotateX(${rx}deg) rotateY(${ry}deg) rotateZ(${rz}deg) scale(${s})`;
+  p.style.opacity = op;
+}
+
+// ---------- text helpers ----------
+function setWord(w, p, blur = 14, dy = 12) {
+  w.style.opacity = p;
+  w.style.filter = p >= 1 ? 'none' : `blur(${(1 - p) * blur}px)`;
+  w.style.transform = `translateY(${(1 - p) * dy}px)`;
+}
+function badges() {
+  return el(`<div class="badges"><div class="badge">${ic('apple')}<div><small>ดาวน์โหลดได้ที่</small><b>App Store</b></div></div><div class="badge">${ic('play')}<div><small>ดาวน์โหลดได้ที่</small><b>Google Play</b></div></div></div>`);
+}
+function lockup(px, glow) {
+  const name = 'Meet Bundle';
+  return el(`<div class="lockup"><img src="assets/logo-mark.png" style="width:${px * 1.35}px;margin-right:${px * .28}px;${glow ? `filter:drop-shadow(0 0 ${px * .35}px rgba(47,107,255,.75))` : ''}" alt=""><div class="wm" style="font-size:${px}px">${[...name].map(c => `<span>${c === ' ' ? '&nbsp;' : c}</span>`).join('')}</div></div>`);
+}
+
+// ===========================================================================
+// COMPOSITION 1: "Free dating for everyone" (3D phone)
+// ===========================================================================
+function buildFD() {
+  const L = AR === '169'
+    ? {fs: 112, open: {s: 1.6, cy: 470}, side: {x: 150, y: 330, s: 1}, end: {s: 1.22, y: 318}, capFs: 30, phone: {x: 1344, y: 553, s: 1.0}, logoFs: 40, logoY: 236, badgeS: 1.15}
+    : {fs: 100, open: {s: 1.35, cy: 900}, side: {cx: 1, y: 140, s: 1}, end: {s: 1.15, y: 700}, capFs: 34, phone: {x: 540, y: 1175, s: 1.2}, logoFs: 44, logoY: 612, badgeS: 1.25};
+  window.L = L;
+  const title = el(`<div class="title" style="font-size:${L.fs}px"><span class="ln"><span class="w">หาคู่</span><span class="w blue">ฟรี</span></span><span class="ln"><span class="w">สำหรับ</span><span class="w">ทุกคน</span></span></div>`);
+  const caps = [
+    ['<b>แค่เลื่อน</b> <span class="dim">ก็ได้เจอใครสักคน</span>', 2.85, 5.45],
+    ['<b>ไม่ใช่แค่ Like</b> <span class="dim">แต่เป็น Spark</span>', 5.75, 8.85],
+    ['<b>ชอบกันทั้งคู่</b> <span class="dim">แชตเปิดขึ้นทันที</span>', 9.05, 12.4],
+  ].map(([h, a, b]) => { const c = el(`<div class="cap" style="font-size:${L.capFs}px">${h}</div>`); c._a = a; c._b = b; return c; });
+  const glow = el(`<div class="glow"></div>`);
+  const phone = makePhone(
+    discover('sDisc', [
+      {name: 'Noa, 27', loc: 'รามัตกัน · ห่างไปประมาณ 5 กม.', pct: 40, toon: 'noa'},
+      {name: 'Ido, 29', loc: 'รามัตกัน · ห่างไปประมาณ 5 กม.', pct: 35, toon: 'ido'},
+      {name: 'Shira, 25', loc: 'จาฟฟา · ห่างไปประมาณ 4 กม.', pct: 45, toon: 'shira'},
+      MAYA,
+    ]) + matchScreen('sMatch'));
+  const logo = lockup(L.logoFs, true);
+  const bd = badges();
+  [glow, phone, title, ...caps, logo, bd].forEach(e => stage.appendChild(e));
+  const words = $$('.w', title);
+  return {title, words, caps, phone, glow, logo, bd};
+}
+
+function renderFD(t, S) {
+  const {title, words, caps, phone, glow, logo, bd} = S;
+  const tw = title.offsetWidth, th = title.offsetHeight;
+  // word reveal
+  [0.12, 0.42, 0.72, 1.02].forEach((a, i) => setWord(words[i], prog(t, a, a + .45)));
+  // title placement: open -> side (1.7..2.5) -> end (12.75..13.35)
+  const ps = prog(t, 1.7, 2.55, eio), pe = prog(t, 12.7, 13.35, eio);
+  const open = {s: L.open.s, x: (W - tw * L.open.s) / 2, y: L.open.cy - th * L.open.s / 2};
+  const side = L.side.cx ? {s: L.side.s, x: (W - tw * L.side.s) / 2, y: L.side.y} : {s: L.side.s, x: L.side.x, y: L.side.y};
+  const end = {s: L.end.s, x: (W - tw * L.end.s) / 2, y: L.end.y};
+  let s = lerp(open.s, side.s, ps), x = lerp(open.x, side.x, ps), y = lerp(open.y, side.y, ps);
+  s = lerp(s, end.s, pe); x = lerp(x, end.x, pe); y = lerp(y, end.y, pe);
+  title.style.transform = `translate(${x}px,${y}px) scale(${s})`;
+  // captions
+  const capY = side.y + th * side.s + (AR === '169' ? 34 : 40);
+  caps.forEach(c => {
+    const pin = prog(t, c._a, c._a + .4), pout = prog(t, c._b, c._b + .35);
+    const cw = c.offsetWidth;
+    const cx = AR === '169' ? side.x : (W - cw) / 2;
+    c.style.transform = `translate(${cx}px,${capY + (1 - pin) * 10}px)`;
+    c.style.opacity = pin * (1 - pout);
+    c.style.filter = pin < 1 ? `blur(${(1 - pin) * 8}px)` : pout > 0 ? `blur(${pout * 8}px)` : 'none';
+  });
+  // phone motion
+  const P = L.phone;
+  const pin = prog(t, 1.75, 2.75, eo);
+  const pout = prog(t, 12.2, 13.0, p => p * p);
+  const swing = t > 9.0 && t < 9.9 ? Math.sin(clamp((t - 9.0) / .9) * Math.PI * 2) * 34 * (1 - clamp((t - 9.0) / .9)) : 0;
+  const sway = Math.sin(t * .9) * 4;
+  let ry = lerp(-96, -14 + sway, pin) + swing + pout * 140;
+  let rx = 6 + Math.sin(t * .7) * 1.5;
+  let rz = lerp(-8, 2.5, pin) + Math.sin(t * .6) * .8;
+  let cx = lerp(AR === '169' ? 1020 : 540, P.x, pin) + (AR === '169' ? pout * 60 : 0);
+  let cy = P.y + lerp(AR === '169' ? 30 : 160, 0, pin) + Math.sin(t * 1.1) * 6;
+  let sc = P.s * lerp(.9, 1, pin) * lerp(1, .72, pout);
+  placePhone(phone, cx, cy, sc, rx, ry, rz, t < 1.75 ? 0 : clamp((t - 1.75) / .15) * (1 - prog(t, 12.6, 13.05, p => p)));
+  glow.style.transform = `translate(${cx - 260}px,${cy + 434 * sc + 6}px) scale(${sc * .9},1)`;
+  glow.style.opacity = (t < 1.75 ? 0 : pin) * (1 - pout) * .9;
+
+  // --- screen content ---
+  const feed = $('#sDisc .feedin', phone);
+  const cardH = 574; // 560 + 14 gap
+  // scroll: start partway into card 0, step to each next card
+  const steps = [[2.6, 3.25], [3.55, 4.2], [4.5, 5.15]];
+  let off = cardH * .45;
+  steps.forEach(([a, b], i) => { off += prog(t, a, b, eio) * (i === 0 ? cardH * .55 : cardH); });
+  feed.style.transform = `translateY(${-off}px)`;
+  // spark press 6.3..6.6
+  const sparkBtn = $('#sDisc .act.spark .b', phone);
+  const press = t > 6.25 && t < 6.75 ? Math.sin(clamp((t - 6.25) / .5) * Math.PI) : 0;
+  sparkBtn.style.transform = `scale(${1 - press * .12})`;
+  let ring = $('#sDisc .ring', phone);
+  if (!ring) { ring = el('<div class="ring"></div>'); $('#sDisc', phone).appendChild(ring); }
+  const rp = clamp((t - 6.35) / .6);
+  const rr = 40 + rp * 70;
+  ring.style.cssText += `;width:${rr * 2}px;height:${rr * 2}px;left:${196 - rr}px;bottom:${84 + 66 - rr + 6}px;opacity:${t > 6.35 && rp < 1 ? (1 - rp) : 0}`;
+  const sc2 = $('#sDisc .sparkcard', phone);
+  const sp = prog(t, 6.65, 7.15, eback);
+  sc2.style.opacity = clamp((t - 6.65) / .25);
+  sc2.style.transform = `translateY(${(1 - sp) * 40}px) scale(${lerp(.9, 1, sp)})`;
+  const nt = $('#sDisc .notif', phone);
+  const np = prog(t, 7.85, 8.3, eback), nout = prog(t, 9.0, 9.2);
+  nt.style.opacity = clamp((t - 7.85) / .15) * (1 - nout);
+  nt.style.transform = `translateY(${(1 - np) * -90}px)`;
+  // match screen
+  const ms = $('#sMatch', phone);
+  const mp = clamp((t - 9.2) / .3);
+  ms.style.opacity = mp;
+  $('#sDisc', phone).style.opacity = 1 - clamp((t - 9.35) / .2);
+  const ap = prog(t, 9.45, 10.0, eback);
+  $('.pair', ms).style.transform = `scale(${lerp(.6, 1, ap)})`;
+  $('.pair', ms).style.opacity = clamp((t - 9.45) / .2);
+  const tp = prog(t, 9.8, 10.2);
+  [$('.mt', ms), $('.ms', ms)].forEach((e, i) => { const q = prog(t, 9.8 + i * .12, 10.2 + i * .12); e.style.opacity = q; e.style.transform = `translateY(${(1 - q) * 14}px)`; });
+  const bp = prog(t, 10.35, 10.75, eback);
+  [$('.say', ms), $('.keep', ms)].forEach((e, i) => { e.style.opacity = clamp((t - 10.35 - i * .1) / .25); e.style.transform = `translateY(${(1 - bp) * 16}px)`; });
+  $$('.ht', ms).forEach((h, i) => {
+    const a = 9.55 + i * .09, q = clamp((t - a) / 2.2);
+    h.style.opacity = t < a ? 0 : Math.sin(q * Math.PI) * .9;
+    h.style.transform = `translateY(${-q * 60}px) scale(${.6 + q * .6})`;
+  });
+  // end card
+  const lp = prog(t, 13.05, 13.5);
+  const lw = logo.offsetWidth, lh = logo.offsetHeight;
+  logo.style.transform = `translate(${(W - lw) / 2}px,${L.logoY - lh / 2 + (1 - lp) * 12}px)`;
+  logo.style.opacity = lp;
+  const bpp = prog(t, 13.5, 13.95, eo);
+  const bw = bd.offsetWidth * L.badgeS;
+  const ty = end.y + th * end.s + (AR === '169' ? 40 : 46);
+  bd.style.transform = `translate(${(W - bw) / 2}px,${ty + (1 - bpp) * 16}px) scale(${L.badgeS})`;
+  bd.style.opacity = bpp;
+}
+
+// ===========================================================================
+// COMPOSITION 2: Intro ("A little spark. A real connection.")
+// ===========================================================================
+function buildIntro() {
+  const L = AR === '169'
+    ? {lockFs: 66, small: {x: 46, y: 34, s: .34}, h: {x: 92, y: 330, fs: 74}, phone: {x: 1460, y: 560, s: 1.03}, stick: {x: 1690, y: 760}, badges: {x: 92, y: 880, s: 1.0}, tagFs: 26}
+    : {lockFs: 76, small: {x: 56, y: 120, s: .3}, h: {x: 0, y: 262, fs: 76, center: 1}, phone: {x: 610, y: 1250, s: 1.22}, stick: {x: 170, y: 1430}, badges: {x: 60, y: 1770, s: 1.0}, tagFs: 30};
+  window.L = L;
+  const dark = el('<div class="abs" id="dark"></div>');
+  dark.style.width = W + 'px'; dark.style.height = H + 'px';
+  const blue = el('<div class="abs" id="blue"></div>');
+  blue.style.width = W + 'px'; blue.style.height = H + 'px';
+  // faint heart pattern
+  const rnd = (i) => { const x = Math.sin(i * 127.1) * 43758.5453; return x - Math.floor(x); };
+  for (let i = 0; i < 26; i++) {
+    const s = 60 + rnd(i + 3) * 120;
+    const im = el(`<img class="hp" src="assets/logo-mark.png" alt="">`);
+    im.style.width = s + 'px';
+    im._x = rnd(i) * W; im._y = rnd(i + 11) * H; im._r = (rnd(i + 7) - .5) * 50; im._v = 6 + rnd(i + 5) * 12;
+    blue.appendChild(im);
+  }
+  const lock = lockup(L.lockFs, true);
+  const h1 = el(`<div class="cap" style="font:800 ${L.h.fs}px/1.28 var(--th)">ประกายเล็กๆ</div>`);
+  const h2 = el(`<div class="cap" style="font:800 ${L.h.fs}px/1.28 var(--th)">ความสัมพันธ์ที่จริงใจ</div>`);
+  const glow = el(`<div class="glow" style="background:radial-gradient(closest-side,rgba(5,20,80,.55),rgba(5,20,80,0))"></div>`);
+  const phone = makePhone(discover('iDisc', [{...MAYA, pg: 1}]) + likesScreen('iLikes') + matchesScreen('iMatches') + chatScreen('iChat'));
+  const stick = el(`<div class="sticker"><b>100%</b><span>ฟรี</span></div>`);
+  const bd = badges();
+  const fade = el('<div class="fade"></div>');
+  const lock2 = lockup(L.lockFs * 1.0, true);
+  const tag = el(`<div class="tag" style="font-size:${L.tagFs}px">หาคู่ ฟรีจริง</div>`);
+  [dark, blue, glow, phone, h1, h2, stick, bd, lock, fade, lock2, tag].forEach(e => stage.appendChild(e));
+  return {dark, blue, lock, h1, h2, phone, glow, stick, bd, fade, lock2, tag};
+}
+
+function renderIntro(t, S) {
+  const {blue, lock, h1, h2, phone, glow, stick, bd, fade, lock2, tag} = S;
+  // lockup: heart fades in, letters type on
+  const img = $('img', lock), letters = $$('.wm span', lock);
+  const hp = prog(t, 0.05, .45, eback);
+  img.style.opacity = clamp((t - .05) / .25);
+  img.style.transform = `scale(${lerp(.5, 1, hp)})`;
+  letters.forEach((l, i) => { const a = .42 + i * .055; l.style.opacity = clamp((t - a) / .08); });
+  const lw = lock.offsetWidth, lh = lock.offsetHeight;
+  const c0 = {x: (W - lw) / 2, y: (H - lh) / 2, s: 1};
+  const mv = prog(t, 1.35, 1.95, eio);
+  const x = lerp(c0.x, L.small.x, mv), y = lerp(c0.y, L.small.y, mv), s = lerp(1, L.small.s, mv);
+  lock.style.transform = `translate(${x}px,${y}px) scale(${s})`;
+  lock.style.opacity = 1 - prog(t, 7.6, 7.9);
+  // blue circle wipe from right
+  const wp = prog(t, 1.3, 1.95, eio);
+  const R = Math.hypot(W, H) * 1.05;
+  blue.style.clipPath = `circle(${wp * R}px at ${AR === '169' ? W * .98 : W * .95}px ${AR === '169' ? H * .5 : H * .55}px)`;
+  $$('.hp', blue).forEach(im => { im.style.transform = `translate(${im._x}px,${im._y - t * im._v}px) rotate(${im._r}deg)`; });
+  // headline
+  const hx = (e) => L.h.center ? (W - e.offsetWidth) / 2 : L.h.x;
+  [[h1, 2.05], [h2, 2.35]].forEach(([e, a], i) => {
+    const p = prog(t, a, a + .45);
+    e.style.transform = `translate(${hx(e)}px,${L.h.y + i * L.h.fs * 1.28 + (1 - p) * 14}px)`;
+    e.style.opacity = p * (1 - prog(t, 7.6, 7.9));
+    e.style.filter = p < 1 ? `blur(${(1 - p) * 10}px)` : 'none';
+  });
+  // phone fly-in
+  const P = L.phone;
+  const pin = prog(t, 1.55, 2.3, eo);
+  const ry = lerp(-40, -16, pin) + Math.sin(t * .9) * 3;
+  const rz = lerp(14, 6, pin) + Math.sin(t * .7) * .8;
+  const cy = P.y + (1 - pin) * (AR === '169' ? 760 : 1100) + Math.sin(t * 1.2) * 5;
+  placePhone(phone, P.x, cy, P.s, 8, ry, rz, (t < 1.55 ? 0 : 1) * (1 - prog(t, 7.6, 7.9)));
+  glow.style.opacity = 0;
+  // screens: discover -> likes -> matches -> chat (horizontal push)
+  const sl = (a) => prog(t, a, a + .3, eio);
+  const s1 = sl(3.95), s2 = sl(5.05), s3 = sl(6.15);
+  const pos = [-s1, 1 - s1 - s2, 2 - s1 - s2 - s3, 3 - s1 - s2 - s3].map(v => Math.max(-1, Math.min(1, v)));
+  ['#iDisc', '#iLikes', '#iMatches', '#iChat'].forEach((id, i) => { $(id, phone).style.transform = `translateX(${pos[i] * 392}px)`; });
+  $$('#iChat .bb', phone).forEach((b, i) => {
+    const a = 6.35 + i * .25, q = prog(t, a, a + .3, eback);
+    b.style.opacity = clamp((t - a) / .15);
+    b.style.transform = `translateY(${(1 - q) * 18}px) scale(${lerp(.85, 1, q)})`;
+  });
+  // sticker
+  const sp = prog(t, 3.7, 4.1, eback);
+  stick.style.transform = `translate(${L.stick.x - 66}px,${L.stick.y - 66}px) rotate(${lerp(-40, -12, sp)}deg) scale(${sp})`;
+  stick.style.opacity = clamp((t - 3.7) / .1) * (1 - prog(t, 7.6, 7.9));
+  // badges
+  const bp = prog(t, 4.7, 5.1, eo);
+  bd.style.transform = `translate(${L.badges.x}px,${L.badges.y + (1 - bp) * 18}px) scale(${L.badges.s})`;
+  bd.style.opacity = bp * (1 - prog(t, 7.6, 7.9));
+  // fade to dark end card
+  fade.style.opacity = prog(t, 7.55, 8.0, p => p);
+  fade.style.background = `radial-gradient(80% 80% at 50% 50%,#121a2c 0,#080b13 70%,#05070c 100%)`;
+  const ep = prog(t, 7.95, 8.45, eo);
+  const l2w = lock2.offsetWidth, l2h = lock2.offsetHeight;
+  lock2.style.transform = `translate(${(W - l2w * lerp(.92, 1, ep)) / 2}px,${(H - l2h) / 2 - (AR === '169' ? 10 : 20)}px) scale(${lerp(.92, 1, ep)})`;
+  lock2.style.opacity = ep;
+  const tp = prog(t, 8.55, 9.0);
+  tag.style.transform = `translate(${(W - tag.offsetWidth) / 2}px,${H / 2 + l2h / 2 + (AR === '169' ? 4 : 10) + (1 - tp) * 10}px)`;
+  tag.style.opacity = tp;
+}
+
+// ---------- boot ----------
+window.ready = (async () => {
+  const svg = await (await fetch('assets/icons.svg')).text();
+  document.body.insertAdjacentHTML('afterbegin', svg);
+  const S = COMP === 'fd' ? buildFD() : buildIntro();
+  window.render = (t) => COMP === 'fd' ? renderFD(t, S) : renderIntro(t, S);
+  await document.fonts.ready;
+  await Promise.all([...document.images].map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; })));
+  // preload CSS background images
+  await Promise.all(['assets/maya-cafe.jpg'].map(src => new Promise(r => { const i = new Image(); i.onload = i.onerror = r; i.src = src; })));
+  window.render(0);
+  return true;
+})();
+</script>
+</body>
+</html>
