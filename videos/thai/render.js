@@ -2,6 +2,7 @@
 //
 //   node render.js <comp> <ar> [out.mp4]            full video, 30 fps
 //   node render.js <comp> <ar> --stills 1,2.5,9     PNG stills into ./stills
+//   add --v a for the Lina-first feed (fd only; default b = Nami first)
 //
 // comp: fd | intro    ar: 169 | 916
 'use strict';
@@ -30,15 +31,18 @@ function serve() {
 async function main() {
   const [comp, ar, ...rest] = process.argv.slice(2);
   if (!['fd', 'intro'].includes(comp) || !['169', '916'].includes(ar)) {
-    console.error('usage: node render.js <fd|intro> <169|916> [out.mp4 | --stills t1,t2]');
+    console.error('usage: node render.js <fd|intro> <169|916> [out.mp4 | --stills t1,t2] [--v a|b]');
     process.exit(2);
   }
   const stillsIdx = rest.indexOf('--stills');
   const stills = stillsIdx >= 0 ? rest[stillsIdx + 1].split(',').map(Number) : null;
-  const out = stills ? null : (rest[0] || path.join(ROOT, 'out', `${comp}-${ar}.mp4`));
+  const vIdx = rest.indexOf('--v');
+  const variant = vIdx >= 0 ? rest[vIdx + 1] : 'b';
+  if (!['a', 'b'].includes(variant)) { console.error('--v must be a or b'); process.exit(2); }
+  const out = stills ? null : (rest[0] && !rest[0].startsWith('--') ? rest[0] : path.join(ROOT, 'out', `${comp}-${ar}.mp4`));
 
   const srv = await serve();
-  const url = `http://127.0.0.1:${srv.address().port}/scene.html?comp=${comp}&ar=${ar}`;
+  const url = `http://127.0.0.1:${srv.address().port}/scene.html?comp=${comp}&ar=${ar}&v=${variant}`;
   const [W, H] = ar === '169' ? [1920, 1080] : [1080, 1920];
   const browser = await chromium.launch();
   try {

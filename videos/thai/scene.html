@@ -197,6 +197,7 @@ const COMP = Q.get('comp') || 'fd';
 const AR = Q.get('ar') || '169';
 const W = AR === '169' ? 1920 : 1080, H = AR === '169' ? 1080 : 1920;
 const DUR = COMP === 'fd' ? 15.5 : 9.6;
+const VARIANT = Q.get('v') || 'b'; // fd feed order: a = Lina, Nami, Maya; b = Nami, Lina, Maya
 window.DURATION = DUR; window.SIZE = [W, H];
 const stage = document.getElementById('stage');
 stage.style.width = W + 'px'; stage.style.height = H + 'px';
@@ -213,55 +214,14 @@ const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const el = (html) => { const d = document.createElement('div'); d.innerHTML = html.trim(); return d.firstElementChild; };
 const ic = (id, cls = 'i') => `<svg class="${cls}"><use href="#${id}"/></svg>`;
 
-// ---------- cartoon avatars (flat style, matching the app's placeholder art) ----------
-let gid = 0;
-function toon(o) {
-  const id = 'g' + (gid++);
-  const s = o.skin, sd = o.skinD;
-  let hairBack = '', hairFront = '', extra = '';
-  if (o.hair === 'long') {
-    hairBack = `<path d="M84 190 C80 110 110 92 150 92 C190 92 222 112 216 190 L228 330 C200 344 100 344 72 330 Z" fill="${o.hc}"/>`;
-    hairFront = `<path d="M90 186 C88 128 116 104 150 104 C186 104 212 126 210 186 C196 150 176 132 150 130 C124 132 104 150 90 186Z" fill="${o.hc}"/>`;
-  } else if (o.hair === 'bob') {
-    hairBack = `<path d="M82 200 C76 116 112 94 150 94 C190 94 226 116 218 200 L216 262 C196 270 104 270 84 262 Z" fill="${o.hc}"/>`;
-    hairFront = `<path d="M90 184 C92 126 118 104 152 104 C188 106 212 130 208 182 C188 152 160 140 130 142 C112 146 98 160 90 184Z" fill="${o.hc}"/>`;
-  } else if (o.hair === 'bun') {
-    hairBack = `<circle cx="150" cy="96" r="30" fill="${o.hc}"/>`;
-    hairFront = `<path d="M90 182 C88 126 116 108 150 108 C186 108 212 126 210 182 C200 146 178 132 150 132 C122 132 100 146 90 182Z" fill="${o.hc}"/>`;
-  } else if (o.hair === 'short') {
-    hairFront = `<path d="M92 176 C88 120 118 106 152 106 C190 106 214 124 208 176 C204 150 190 140 172 138 C150 136 128 140 112 146 C100 152 94 162 92 176Z" fill="${o.hc}"/>`;
-  } else if (o.hair === 'cap') {
-    hairFront = `<path d="M94 168 C92 120 120 110 150 110 C182 110 208 120 206 168 C190 146 112 146 94 168Z" fill="${o.hc}"/>`;
-  }
-  if (o.beard) extra += `<path d="M98 196 C100 250 126 270 150 270 C174 270 200 250 202 196 C196 222 184 236 172 238 C160 230 140 230 128 238 C116 236 104 222 98 196Z" fill="${o.beard}"/>`;
-  if (o.glasses) extra += `<g fill="none" stroke="#3b3b3b" stroke-width="5"><circle cx="128" cy="194" r="15"/><circle cx="172" cy="194" r="15"/><path d="M143 194h14"/></g>`;
-  const blush = o.blush ? `<circle cx="116" cy="214" r="10" fill="#f19a9a" opacity=".45"/><circle cx="184" cy="214" r="10" fill="#f19a9a" opacity=".45"/>` : '';
-  return `<svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-  <defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${o.bg1}"/><stop offset="1" stop-color="${o.bg2}"/></linearGradient>
-  <linearGradient id="${id}n" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${sd}"/><stop offset=".45" stop-color="${s}"/></linearGradient></defs>
-  <rect width="300" height="400" fill="url(#${id})"/>
-  <circle cx="${o.cx || 205}" cy="${o.cy || 95}" r="88" fill="#fff" opacity=".22"/>
-  ${hairBack}
-  <path d="M28 400 C34 330 92 300 150 300 C208 300 266 330 272 400Z" fill="${o.shirt}"/>
-  <rect x="131" y="236" width="38" height="76" rx="6" fill="url(#${id}n)"/>
-  <circle cx="94" cy="196" r="13" fill="${s}"/><circle cx="206" cy="196" r="13" fill="${s}"/>
-  <ellipse cx="150" cy="190" rx="58" ry="66" fill="${s}"/>
-  ${hairFront}${extra}${blush}
-  <circle cx="128" cy="192" r="5.5" fill="#2a2a2a"/><circle cx="172" cy="192" r="5.5" fill="#2a2a2a"/>
-  <path d="M152 198 C148 208 146 214 152 216" fill="none" stroke="${sd}" stroke-width="3" stroke-linecap="round"/>
-  <path d="M134 228 C142 236 158 236 166 228" fill="none" stroke="#8a3b3b" stroke-width="4" stroke-linecap="round"/>
-  </svg>`;
-}
-const T = {
-  noa:    {bg1:'#c9c4f2', bg2:'#8f86cf', skin:'#f2c9a6', skinD:'#cf9f7c', hair:'bob',  hc:'#5a3a26', shirt:'#4a3bb0', blush:1},
-  ido:    {bg1:'#cfe6f3', bg2:'#8fb9d2', skin:'#c98d62', skinD:'#a06a44', hair:'cap',  hc:'#3a3a3a', shirt:'#c0394b', beard:0},
-  shira:  {bg1:'#f6d3d6', bg2:'#e7a8ae', skin:'#9c6243', skinD:'#7a4630', hair:'bun',  hc:'#2a1b14', shirt:'#c58a1c', blush:1},
-  mayaT:  {bg1:'#e2dcf7', bg2:'#b8b0e0', skin:'#f6dcc4', skinD:'#d6b39a', hair:'long', hc:'#e2c27a', shirt:'#2453b8', blush:1},
-  daniel: {bg1:'#d6e6fb', bg2:'#8fb2e3', skin:'#e7b48c', skinD:'#c08b66', hair:'cap',  hc:'#4a4a4a', shirt:'#1d1f26', beard:'#3b3330'},
-  tamar:  {bg1:'#d4ecf4', bg2:'#9cc6d8', skin:'#e3ad85', skinD:'#bd8761', hair:'long', hc:'#5b4334', shirt:'#4a2f8c', blush:1},
-  yonatan:{bg1:'#e2efe4', bg2:'#a9c7ad', skin:'#f4d7c0', skinD:'#d4b097', hair:'short',hc:'#c89a5c', shirt:'#2e5e3e', glasses:1},
-  amit:   {bg1:'#ece4f7', bg2:'#c7b6e6', skin:'#efc5a3', skinD:'#cc9f7d', hair:'short',hc:'#3d2a1e', shirt:'#3f6fd0'},
+// ---------- avatar pool (real photos, rotated across every screen) ----------
+const PEOPLE = {
+  maya:    {img: 'assets/maya-cafe.jpg', face: 'assets/maya-face.jpg', pos: '50% 28%'},
+  lina:    {img: 'assets/lina.jpg', face: 'assets/lina-face.jpg', pos: '50% 22%'},
+  nami:    {img: 'assets/nami.jpg', face: 'assets/nami-face.jpg', pos: '50% 34%'},
+  shachar: {img: 'assets/shachar-face.jpg', face: 'assets/shachar-face.jpg', pos: '50% 40%'},
 };
+const photo = (who, cover) => `<img src="${cover ? PEOPLE[who].img : PEOPLE[who].face}" style="width:100%;height:100%;object-fit:cover;object-position:${cover ? PEOPLE[who].pos : 'center'};display:block" alt="">`;
 
 // ---------- app screens (Thai UI) ----------
 const LOGO_APP = `<div class="alogo"><img src="assets/logo-192.png" alt="">Meet Bundle</div>`;
@@ -269,7 +229,7 @@ const statusBar = (tm) => `<div class="sb"><span>${tm}</span><div class="hole"><
 const nav = (on) => `<div class="nav">${[['compass', 'ค้นพบ'], ['heart-o', 'ถูกใจคุณ'], ['chats', 'แมตช์'], ['user', 'โปรไฟล์']].map(([i, l], k) => `<div class="${k === on ? 'on' : ''}">${ic(k === on ? (i === 'heart-o' ? 'heart' : i + '-f') : i)}${l}</div>`).join('')}</div><div class="navbar"></div>`;
 
 function feedCard(p) {
-  const ph = p.img ? `<div class="ph" style="background-image:url(${p.img});background-position:${p.pos || 'center'}"></div>` : `<div class="ph">${toon(T[p.toon])}</div>`;
+  const ph = `<div class="ph">${photo(p.who, true)}</div>`;
   return `<div class="card">${ph}<div class="sh"></div>
   <div class="prog">${[0, 1, 2].map(i => `<i class="${i === (p.pg || 0) ? 'on' : ''}"></i>`).join('')}</div>
   <div class="nm">${p.name}${p.ver ? ic('verified') : ''}</div>
@@ -279,7 +239,9 @@ function feedCard(p) {
   <div class="pill">${p.pct}% · ความสนใจที่ตรงกัน ${ic('chev')}</div>
   <div class="wink"><div class="b">${ic('smile')}</div>Wink</div></div>`;
 }
-const MAYA = {name: 'Maya, 26', ver: 1, loc: 'เทลอาวีฟ อิสราเอล · ห่างไปประมาณ 3 กม.', pct: 60, img: 'assets/maya-cafe.jpg', pos: '50% 30%'};
+const MAYA = {name: 'Maya, 26', ver: 1, loc: 'เทลอาวีฟ อิสราเอล · ห่างไปประมาณ 3 กม.', pct: 60, who: 'maya'};
+const LINA = {name: 'Lina, 25', loc: 'จาฟฟา · ห่างไปประมาณ 4 กม.', pct: 45, who: 'lina'};
+const NAMI = {name: 'Nami, 24', loc: 'รามัตกัน · ห่างไปประมาณ 6 กม.', pct: 52, who: 'nami'};
 function discover(id, cards, tm = '10:04') {
   return `<div class="scr" id="${id}">${statusBar(tm)}
   <div class="hdr"><div class="l">${ic('moon')}</div>${LOGO_APP}<div class="r">${ic('refresh')}${ic('tune')}</div></div>
@@ -303,29 +265,29 @@ function matchScreen(id) {
   <div class="keep">เลื่อนดูต่อ</div></div>`;
 }
 function likesScreen(id) {
-  const P = [['mayaT', 'Maya, 29', 'ไฮฟา'], ['daniel', 'Daniel, 31', 'รามัตกัน', 'w'], ['tamar', 'Tamar, 27', 'เฮิร์ซลียา', 'p'], ['yonatan', 'Yonatan, 30', 'เนทันยา']];
+  const P = [['lina', 'Lina, 25', 'จาฟฟา'], ['shachar', 'Shachar, 31', 'รามัตกัน', 'w'], ['nami', 'Nami, 24', 'รามัตกัน', 'p'], ['maya', 'Maya, 26', 'เทลอาวีฟ']];
   return `<div class="scr" id="${id}">${statusBar('10:05')}
   <div class="hdr"><div class="l">${ic('moon')}</div>${LOGO_APP}<div class="r">${ic('refresh')}</div></div>
   <div class="pt">ถูกใจคุณ</div><div class="pc">14</div>
-  <div class="grid">${P.map(([t, n, c, f]) => `<div class="lk ${f === 'w' ? 'w' : ''}"><div class="ph">${toon(T[t])}</div>
+  <div class="grid">${P.map(([t, n, c, f]) => `<div class="lk ${f === 'w' ? 'w' : ''}"><div class="ph">${photo(t, true)}</div>
     ${f === 'w' ? `<div class="chip wk">${ic('smile')}ส่ง Wink ให้คุณ</div>` : ''}${f === 'p' ? `<div class="chip pt2">สัตว์เลี้ยง 🐾</div>` : ''}
     <div class="n">${n}</div><div class="c">${c}</div>
     <div class="ft"><div class="rm">${ic('x')}ลบ</div><div class="lb">${ic('heart')}Like</div></div></div>`).join('')}</div>
   ${nav(1)}</div>`;
 }
 function matchesScreen(id) {
-  const R = [['img:assets/maya-face.jpg', 'Maya', 'ทักทายเลย คุณแมตช์กันแล้ว!', 'เมื่อวาน'], ['daniel', 'Daniel', '✓✓ เจอกันวันอาทิตย์', '10 พ.ย.'], ['shira', 'Shira', 'ฮ่าๆ ตกลง 😄', '', 2], ['ido', 'Ido', 'ทักทายเลย คุณแมตช์กันแล้ว!', '4 พ.ย.'], ['mayaT', 'Maya', '✓✓ หวัดดี', '2 พ.ย.'], ['amit', 'Amit', 'ทักทายเลย คุณแมตช์กันแล้ว!', '1 พ.ย.']];
+  const R = [['maya', 'Maya', 'ทักทายเลย คุณแมตช์กันแล้ว!', 'เมื่อวาน'], ['shachar', 'Shachar', '✓✓ เจอกันวันอาทิตย์', '10 พ.ย.'], ['nami', 'Nami', 'ฮ่าๆ ตกลง 😄', '', 2], ['lina', 'Lina', 'ทักทายเลย คุณแมตช์กันแล้ว!', '4 พ.ย.']];
   return `<div class="scr" id="${id}">${statusBar('10:05')}
   <div class="hdr"><div class="l">${ic('moon')}</div>${LOGO_APP}</div>
   <div class="pt">แมตช์</div>
   <div class="srch">${ic('search')}ค้นหาแมตช์</div>
-  <div class="rows">${R.map(([a, n, m, d, u]) => `<div class="row"><div class="ra">${a.startsWith('img:') ? `<img src="${a.slice(4)}" alt="">` : toon(T[a])}</div><div><b>${n}</b><small>${m}</small></div>${d ? `<div class="dt">${d}</div>` : ''}${u ? `<div class="ub">${u}</div>` : ''}</div>`).join('')}</div>
+  <div class="rows">${R.map(([a, n, m, d, u]) => `<div class="row"><div class="ra">${photo(a)}</div><div><b>${n}</b><small>${m}</small></div>${d ? `<div class="dt">${d}</div>` : ''}${u ? `<div class="ub">${u}</div>` : ''}</div>`).join('')}</div>
   ${nav(2)}</div>`;
 }
 function chatScreen(id) {
   return `<div class="scr" id="${id}">${statusBar('10:12')}
   <div class="hdr"><div class="l">${ic('back')}</div>${LOGO_APP}</div>
-  <div class="ch"><div class="ra">${toon(T.daniel)}</div><div><b>Daniel</b><small>ออนไลน์</small></div><div class="dots">${ic('dots')}</div></div>
+  <div class="ch"><div class="ra">${photo('shachar')}</div><div><b>Shachar</b><small>ออนไลน์</small></div><div class="dots">${ic('dots')}</div></div>
   <div class="msgs">
     <div class="bb in">เฮ้! Spark ของคุณทำเราขำเลย</div>
     <div class="bb out">ฮ่า ดีใจที่ชอบนะ สัปดาห์นี้ไปกินกาแฟกันไหม?<span class="tk">✓✓</span></div>
@@ -377,12 +339,7 @@ function buildFD() {
   ].map(([h, a, b]) => { const c = el(`<div class="cap" style="font-size:${L.capFs}px">${h}</div>`); c._a = a; c._b = b; return c; });
   const glow = el(`<div class="glow"></div>`);
   const phone = makePhone(
-    discover('sDisc', [
-      {name: 'Noa, 27', loc: 'รามัตกัน · ห่างไปประมาณ 5 กม.', pct: 40, toon: 'noa'},
-      {name: 'Ido, 29', loc: 'รามัตกัน · ห่างไปประมาณ 5 กม.', pct: 35, toon: 'ido'},
-      {name: 'Shira, 25', loc: 'จาฟฟา · ห่างไปประมาณ 4 กม.', pct: 45, toon: 'shira'},
-      MAYA,
-    ]) + matchScreen('sMatch'));
+    discover('sDisc', VARIANT === 'a' ? [LINA, NAMI, MAYA] : [NAMI, LINA, MAYA]) + matchScreen('sMatch'));
   const logo = lockup(L.logoFs, true);
   const bd = badges();
   [glow, phone, title, ...caps, logo, bd].forEach(e => stage.appendChild(e));
@@ -433,9 +390,9 @@ function renderFD(t, S) {
   const feed = $('#sDisc .feedin', phone);
   const cardH = 574; // 560 + 14 gap
   // scroll: start partway into card 0, step to each next card
-  const steps = [[2.6, 3.25], [3.55, 4.2], [4.5, 5.15]];
-  let off = cardH * .45;
-  steps.forEach(([a, b], i) => { off += prog(t, a, b, eio) * (i === 0 ? cardH * .55 : cardH); });
+  const steps = [[3.25, 3.9], [4.45, 5.1]];
+  let off = 0;
+  steps.forEach(([a, b]) => { off += prog(t, a, b, eio) * cardH; });
   feed.style.transform = `translateY(${-off}px)`;
   // spark press 6.3..6.6
   const sparkBtn = $('#sDisc .act.spark .b', phone);
@@ -592,7 +549,7 @@ window.ready = (async () => {
   await document.fonts.ready;
   await Promise.all([...document.images].map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; })));
   // preload CSS background images
-  await Promise.all(['assets/maya-cafe.jpg'].map(src => new Promise(r => { const i = new Image(); i.onload = i.onerror = r; i.src = src; })));
+  await Promise.all(Object.values(PEOPLE).flatMap(p => [p.img, p.face]).map(src => new Promise(r => { const i = new Image(); i.onload = i.onerror = r; i.src = src; })));
   window.render(0);
   return true;
 })();
