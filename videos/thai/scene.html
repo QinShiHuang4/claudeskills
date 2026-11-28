@@ -365,6 +365,35 @@ svg.i{width:1em;height:1em;display:inline-block;vertical-align:middle;fill:curre
 .ctx .in2{position:absolute;left:12px;right:64px;bottom:26px;height:46px;border-radius:23px;background:#f1f3f8;color:#8a90a0;display:flex;align-items:center;padding:0 16px;font:400 14.5px var(--th)}
 .ctx .snd{position:absolute;right:12px;bottom:26px;width:46px;height:46px;border-radius:50%;background:#2f6bff;color:#fff;display:grid;place-items:center}
 .ctx .snd svg{width:22px;height:22px}
+/* store v2: tall screen (393x852 like a current iPhone) inside a 3D phone */
+.st-phone .scr2{height:852px}
+.st-phone .w2app{height:852px}
+.st-phone .w2card{height:540px}
+.st-phone .w2card .vp{top:426px}.st-phone .w2card .pill{top:463px}
+.st-phone .w2card .wk2{top:446px}.st-phone .w2card .wk2l{top:498px}
+.st-phone .w2pass,.st-phone .w2spark{top:612px}.st-phone .w2like{top:608px}
+.st-phone .w2lbl{transform:translate(-50%,139px)}
+.st-phone .w2nav{top:745px}
+.st-phone .w2heart{top:250px}.st-phone .w2lsent{top:520px}
+.st-phone .s2kb{top:573px}
+.st-phone .w2m .a{top:250px}.st-phone .w2m .mk{top:316px}.st-phone .w2m .t{top:410px}.st-phone .w2m .s{top:460px}.st-phone .w2m .b{top:502px}.st-phone .w2m .k{top:566px}
+.st-phone .w2m .ht{transform:translateY(80px)}
+.st-phone .w2sb{top:6px}
+/* the 3D device */
+.st-stage3{position:absolute;left:0;top:0;transform-origin:0 0;perspective:1500px}
+.st-dev{position:relative;width:432px;height:892px;transform-style:preserve-3d}
+.st-dev .fr{position:absolute;inset:0;border-radius:68px;transform:translateZ(11px);background:linear-gradient(135deg,#5b6170 0,#2a2e38 18%,#1a1d24 50%,#3b404c 82%,#6b7180 100%);padding:4px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
+.st-dev .bz{position:absolute;inset:4px;border-radius:64px;background:#050608;padding:16px}
+.st-dev .scr2{position:relative;width:393px;height:852px;border-radius:50px;overflow:hidden;background:#fff}
+.st-dev .island{position:absolute;left:50%;top:13px;width:118px;height:34px;margin-left:-59px;border-radius:20px;background:#050608;z-index:30}
+.st-dev .glare{position:absolute;inset:0;border-radius:50px;background:linear-gradient(115deg,rgba(255,255,255,.22) 0,rgba(255,255,255,.06) 22%,rgba(255,255,255,0) 38%,rgba(255,255,255,0) 70%,rgba(255,255,255,.05) 100%);pointer-events:none;z-index:31}
+.st-dev .bk{position:absolute;inset:0;border-radius:68px;transform:translateZ(-11px) rotateY(180deg);background:linear-gradient(135deg,#2b2f38,#14161b);backface-visibility:hidden}
+.st-dev .sd{position:absolute;top:70px;height:752px;width:22px;background:linear-gradient(90deg,#20242c,#6a7080 45%,#3a3f4a 55%,#1b1e24);backface-visibility:hidden}
+.st-dev .sd.r{right:-11px;transform:rotateY(90deg)}
+.st-dev .sd.l{left:-11px;transform:rotateY(-90deg)}
+.st-dev .btn{position:absolute;width:6px;border-radius:3px;background:linear-gradient(90deg,#2a2e36,#7a8090,#2a2e36);transform:translateZ(0)}
+.st-shadow{position:absolute;left:0;top:0;width:560px;height:90px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.75),rgba(0,0,0,0));filter:blur(18px);transform-origin:50% 50%}
+.st-glow{position:absolute;left:0;top:0;width:760px;height:760px;border-radius:50%;background:radial-gradient(closest-side,rgba(47,107,255,.28),rgba(47,107,255,0));filter:blur(30px)}
 /* likes */
 .pt{position:absolute;left:22px;top:108px;font:700 31px var(--th);color:#15171c}
 .pc{position:absolute;right:24px;top:120px;font:500 19px "Roboto";color:#2f6bff}
@@ -1415,13 +1444,13 @@ function renderFree(t, S) {
 // ===========================================================================
 const SHOT = +(Q.get('shot') || 1);
 const ST_COPY = {
-  1: {h: ['Dating.', 'Actually free.'], th: ['หาคู่', 'ฟรีจริง'], s: ['Meet, match and chat without paying.', 'ทำความรู้จัก แมตช์ และแชตได้โดยไม่ต้องจ่าย'], rot: -6, x: .14},
-  2: {h: ['Just scroll.', 'Meet someone.'], th: ['แค่เลื่อน', 'ก็ได้เจอใครสักคน'], s: ['Take control of your feed and scroll your way.', 'ควบคุมฟีดของคุณเอง แล้วเลื่อนในแบบของคุณ'], rot: 0, x: .5},
-  3: {h: ['Don’t just like.', 'Spark.'], th: ['ไม่ใช่แค่ Like', 'แต่เป็น Spark'], s: ['A Like with a message. It gets read first.', 'Like พร้อมข้อความ ที่จะถูกอ่านก่อน'], rot: 5, x: .86},
-  4: {h: ['Real people.', 'Reviewed photos.'], th: ['คนจริง', 'รูปผ่านการตรวจ'], s: ['Every photo is checked before anyone sees it.', 'ทุกรูปผ่านการตรวจก่อนที่ใครจะได้เห็น'], rot: -5, x: .16},
-  5: {h: ['Shared interests.', 'Real chemistry.'], th: ['ความสนใจร่วมกัน', 'เคมีที่ตรงกันจริง'], s: ['Pick what you love. Meet people who love it too.', 'เลือกสิ่งที่คุณรัก แล้วพบคนที่รักสิ่งเดียวกัน'], rot: 5, x: .86},
-  6: {h: ['It’s', 'mutual.'], th: ['ชอบกัน', 'ทั้งคู่'], s: ['Like back and your chat opens instantly.', 'กด Like กลับ แล้วแชตจะเปิดขึ้นทันที'], rot: -4, x: .5},
-  7: {h: ['From hey', 'to Saturday.'], th: ['จาก “สวัสดี”', 'สู่วันเสาร์'], s: ['Chat with read receipts the moment you match.', 'แชตได้ทันทีที่แมตช์ พร้อมสถานะอ่านแล้ว'], rot: 0, x: .5},
+  1: {t: {ry: 18, rx: 5, rz: -3}, h: ['Dating.', 'Actually free.'], th: ['หาคู่', 'ฟรีจริง'], s: ['Meet, match and chat without paying.', 'ทำความรู้จัก แมตช์ และแชตได้โดยไม่ต้องจ่าย'], rot: -6, x: .14},
+  2: {t: {ry: -14, rx: 5, rz: 2}, h: ['Just scroll.', 'Meet someone.'], th: ['แค่เลื่อน', 'ก็ได้เจอใครสักคน'], s: ['Take control of your feed and scroll your way.', 'ควบคุมฟีดของคุณเอง แล้วเลื่อนในแบบของคุณ'], rot: 0, x: .5},
+  3: {t: {ry: -18, rx: 5, rz: 3}, h: ['Don’t just like.', 'Spark.'], th: ['ไม่ใช่แค่ Like', 'แต่เป็น Spark'], s: ['A Like with a message. It gets read first.', 'Like พร้อมข้อความ ที่จะถูกอ่านก่อน'], rot: 5, x: .86},
+  4: {t: {ry: 18, rx: 5, rz: -3}, h: ['Real people.', 'Reviewed photos.'], th: ['คนจริง', 'รูปผ่านการตรวจ'], s: ['Every photo is checked before anyone sees it.', 'ทุกรูปผ่านการตรวจก่อนที่ใครจะได้เห็น'], rot: -5, x: .16},
+  5: {t: {ry: -18, rx: 5, rz: 3}, h: ['Shared interests.', 'Real chemistry.'], th: ['ความสนใจร่วมกัน', 'เคมีที่ตรงกันจริง'], s: ['Pick what you love. Meet people who love it too.', 'เลือกสิ่งที่คุณรัก แล้วพบคนที่รักสิ่งเดียวกัน'], rot: 5, x: .86},
+  6: {t: {ry: 14, rx: 5, rz: -2}, h: ['It’s', 'mutual.'], th: ['ชอบกัน', 'ทั้งคู่'], s: ['Like back and your chat opens instantly.', 'กด Like กลับ แล้วแชตจะเปิดขึ้นทันที'], rot: -4, x: .5},
+  7: {t: {ry: -12, rx: 5, rz: 1}, h: ['From hey', 'to Saturday.'], th: ['จาก “สวัสดี”', 'สู่วันเสาร์'], s: ['Chat with read receipts the moment you match.', 'แชตได้ทันทีที่แมตช์ พร้อมสถานะอ่านแล้ว'], rot: 0, x: .5},
 };
 const ST_LOC = () => tr('เทลอาวีฟ อิสราเอล · ห่างไปประมาณ 3 กม.', 'Tel Aviv, Israel · About 3 km away');
 function stScreen(n) {
@@ -1473,8 +1502,13 @@ function stScreen(n) {
     </div>
     <div class="in2">${tr('ข้อความ...', 'Message...')}</div><div class="snd">${ic('up')}</div></div></div>`;
 }
-function stPhone(n) {
-  return el(`<div class="st-phone"><div class="scr2"><div class="w2app">${stScreen(n)}</div></div></div>`);
+function stPhone(n, tilt) {
+  const t = tilt || {ry: -16, rx: 6, rz: 0};
+  return el(`<div class="st-stage3"><div class="st-dev st-phone" style="transform:rotateY(${t.ry}deg) rotateX(${t.rx}deg) rotateZ(${t.rz}deg)">
+    <div class="bk"></div><div class="sd l"></div><div class="sd r"></div>
+    <div class="fr"><div class="bz"><div class="scr2"><div class="w2app">${stScreen(n)}</div><div class="island"></div><div class="glare"></div></div></div></div>
+    <div class="btn" style="left:-3px;top:190px;height:46px"></div><div class="btn" style="left:-3px;top:262px;height:80px"></div><div class="btn" style="left:-3px;top:356px;height:80px"></div><div class="btn" style="right:-3px;top:282px;height:118px"></div>
+  </div></div>`);
 }
 function stFloat(n) {
   const card = {
@@ -1494,21 +1528,25 @@ function buildStore() {
   const hl = (th ? C.th : C.h);
   const h = el(`<div class="st-h${th ? ' th' : ''}" style="left:${56 * s}px;top:${150 * s}px;font-size:${(th ? 92 : 104) * s}px;font-family:${th ? 'var(--th)' : 'Outfit,sans-serif'}">${hl[0]}<span class="b">${hl[1]}</span></div>`);
   const sub = el(`<div class="st-sub" style="left:${58 * s}px;font-size:${32 * s}px;font-family:${th ? 'var(--th)' : 'Roboto,sans-serif'}">${th ? C.s[1] : C.s[0]}</div>`);
-  const ph = stPhone(SHOT), fl = stFloat(SHOT);
-  [lock, h, sub, ph].forEach(e => root.appendChild(e));
+  const ph = stPhone(SHOT, C.t), fl = stFloat(SHOT);
+  const glow = el(`<div class="st-glow"></div>`), shadow = el(`<div class="st-shadow"></div>`);
+  [lock, h, sub, glow, shadow, ph].forEach(e => root.appendChild(e));
   if (fl) root.appendChild(fl);
-  return {C, s, h, sub, ph, fl};
+  return {C, s, h, sub, ph, fl, glow, shadow};
 }
 function renderStore(t, S) {
   if (AR === 'fg') return;
-  const {C, s, h, sub, ph, fl} = S;
+  const {C, s, h, sub, ph, fl, glow, shadow} = S;
   sub.style.top = (h.offsetTop + h.offsetHeight + 22 * s) + 'px';
-  const top = h.offsetTop + h.offsetHeight + (AR === 'as' ? 200 : 150) * s;
-  const k = (AR === 'as' ? .84 : .66) * W / 416;
-  const pw = 416 * k, phH = 721 * k;
+  const top = h.offsetTop + h.offsetHeight + (AR === 'as' ? 190 : 120) * s;
+  const avail = H - top - (AR === 'as' ? 130 : 40) * s;
+  const k = Math.min((AR === 'as' ? .74 : .64) * W / 432, avail / 892);
+  const pw = 432 * k, phH = 892 * k;
   const cx = C.x * W;
-  const x = Math.min(Math.max(cx - pw / 2, .05 * W), W - pw - .05 * W);
-  ph.style.transform = `translate(${x}px,${top}px) rotate(${C.rot}deg) scale(${k})`;
+  const x = Math.min(Math.max(cx - pw / 2, .07 * W), W - pw - .07 * W);
+  ph.style.transform = `translate(${x}px,${top}px) scale(${k})`;
+  glow.style.transform = `translate(${x + pw / 2 - 380}px,${top + phH / 2 - 380}px) scale(${W / 1080})`;
+  shadow.style.transform = `translate(${x + pw / 2 - 280}px,${top + phH - 30 * s}px) scale(${pw / 560 * 1.1},1)`;
   if (fl) {
     const fs = 1.45 * s;
     const fx = Math.max(24 * s, C.x > .6 ? 36 * s : W - fl.offsetWidth * fs - 36 * s);
@@ -1523,11 +1561,11 @@ function buildFeature(root) {
   const h = el(`<div class="st-h${th ? ' th' : ''}" style="left:54px;top:128px;font-size:${th ? 56 : 66}px;font-family:${th ? 'var(--th)' : 'Outfit,sans-serif'}">${th ? 'ประกายเล็กๆ' : 'A little spark.'}<span class="b">${th ? 'ความสัมพันธ์ที่ยิ่งใหญ่' : 'Big connection.'}</span></div>`);
   const sub = el(`<div class="st-sub" style="left:56px;top:${th ? 300 : 300}px;font-size:22px;font-family:${th ? 'var(--th)' : 'Roboto,sans-serif'}">${tr('หาคู่ฟรี ด้วยความสนใจร่วมกันและโปรไฟล์จริง', 'Free dating with shared interests and real profiles.')}</div>`);
   const pills = el(`<div class="st-pills" style="left:56px;top:350px">${[tr('ฟรี', 'Free'), 'Sparks', tr('รูปผ่านการตรวจ', 'Reviewed photos')].map(x => `<i>${x}</i>`).join('')}</div>`);
-  const mk = (who, name) => el(`<div class="st-phone"><div class="scr2"><div class="w2app"><div class="w2l">${w2SB('10:04')}${w2HD()}${w2CARD(who, name, false, ST_LOC(), 60)}${w2ACTS()}${w2NAV()}</div></div></div></div>`);
-  const p1 = mk('shacharR', 'Shachar, 31'), p2 = mk('maya', 'Maya, 26');
+  const p1 = stPhone(1, {ry: 22, rx: 4, rz: -4}), p2 = stPhone(1, {ry: -16, rx: 4, rz: 3});
+  $('.w2app', p1).innerHTML = `<div class="w2l">${w2SB('10:04')}${w2HD()}${w2CARD('shacharR', 'Shachar, 31', false, ST_LOC(), 60)}${w2ACTS()}${w2NAV()}</div>`;
   [lock, h, sub, pills, p1, p2].forEach(e => root.appendChild(e));
-  p1.style.transform = 'translate(600px,92px) rotate(-6deg) scale(.6)';
-  p2.style.transform = 'translate(790px,36px) rotate(5deg) scale(.64)';
+  p1.style.transform = 'translate(612px,70px) scale(.5)';
+  p2.style.transform = 'translate(792px,34px) scale(.54)';
   return {};
 }
 

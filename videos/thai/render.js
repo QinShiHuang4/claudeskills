@@ -4,7 +4,8 @@
 //   node render.js <comp> <ar> --stills 1,2.5,9     PNG stills into ./stills
 //   add --v a for the Lina-first feed (fd only; default b = Nami first)
 //
-//   add --lang en for English (default th); add --shot N for the store screenshots (1-7)
+//   add --lang en for English (default th); add --shot N for the store screenshots (1-7);
+//   add --dpr 2 to render stills at 2x (supersample, then downscale)
 //
 // comp: fd | intro | spark | ... | store    ar: 169 | 916 | gp (Play 1080x1920) | as (App Store 1290x2796) | fg (feature graphic 1024x500)
 'use strict';
@@ -53,7 +54,9 @@ async function main() {
   const [W, H] = ({'169': [1920, 1080], '916': [1080, 1920], gp: [1080, 1920], as: [1290, 2796], fg: [1024, 500]})[ar];
   const browser = await chromium.launch();
   try {
-    const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: 1 });
+    const dIdx = rest.indexOf('--dpr');
+    const dpr = dIdx >= 0 ? +rest[dIdx + 1] : 1;
+    const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: dpr });
     page.on('pageerror', (e) => { console.error('page error:', e.message); process.exitCode = 1; });
     await page.goto(url);
     await page.evaluate(() => window.ready);
