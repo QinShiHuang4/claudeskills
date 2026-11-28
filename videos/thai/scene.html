@@ -381,7 +381,7 @@ const Q = new URLSearchParams(location.search);
 const COMP = Q.get('comp') || 'fd';
 const AR = Q.get('ar') || '169';
 const W = AR === '169' ? 1920 : 1080, H = AR === '169' ? 1080 : 1920;
-const DUR = {fd: 15.5, intro: 9.6, spark: 15, pattaya: 7, wink: 7.5, wink2: 8.4, spark2: 4.6, sparkout: 3.4, free: 6.0, freeout: 4.4}[COMP];
+const DUR = {fd: 15.5, intro: 9.6, spark: 15, pattaya: 7, wink: 7.5, wink2: 8.4, spark2: 4.6, sparkout: 3.4, free: 6.0, freeout: 4.4, ivout: 4.2}[COMP];
 const LANG = Q.get('lang') || 'th'; // spark comp: th | en (fd and intro are Thai only)
 const tr = (th, en) => LANG === 'en' ? en : th;
 const VARIANT = Q.get('v') || 'b'; // fd feed order: a = Lina, Nami, Maya; b = Nami, Lina, Maya
@@ -1243,6 +1243,7 @@ function renderSpark2(t, S) {
 
 const OUTRO_COPY = {
   sparkout: {l1: [['ค้นหา', 'Find your'], ['Spark', 'Spark', 1]], l2: [['ของคุณ', 'on Meet Bundle']], sub: ['ดาวน์โหลดฟรีบน iOS และ Android', 'Free on iOS and Android']},
+  ivout: {l1: [['เรื่องของคุณ', 'Your story']], l2: [['เริ่มที่', 'starts on'], ['Meet Bundle', 'Meet Bundle', 1]], sub: ['ดาวน์โหลดฟรีบน iOS และ Android', 'Free on iOS and Android']},
   freeout: {l1: [['ดูว่าใครถูกใจคุณ', 'See who likes you']], l2: [['ฟรี', 'free.', 1]], sub: ['ไม่ต้องจ่ายเพื่อดูว่าใครถูกใจคุณ', 'No paywall to see who likes you']},
 };
 function buildSparkOut() {
@@ -1358,8 +1359,8 @@ function renderFree(t, S) {
 window.ready = (async () => {
   const svg = await (await fetch('assets/icons.svg')).text();
   document.body.insertAdjacentHTML('afterbegin', svg);
-  const S = {fd: buildFD, intro: buildIntro, spark: buildSpark, pattaya: buildPattaya, wink: buildWink, wink2: buildWink2, spark2: buildSpark2, sparkout: buildSparkOut, free: buildFree, freeout: buildSparkOut}[COMP]();
-  const R = {fd: renderFD, intro: renderIntro, spark: renderSpark, pattaya: renderPattaya, wink: renderWink, wink2: renderWink2, spark2: renderSpark2, sparkout: renderSparkOut, free: renderFree, freeout: renderSparkOut}[COMP];
+  const S = {fd: buildFD, intro: buildIntro, spark: buildSpark, pattaya: buildPattaya, wink: buildWink, wink2: buildWink2, spark2: buildSpark2, sparkout: buildSparkOut, free: buildFree, freeout: buildSparkOut, ivout: buildSparkOut}[COMP]();
+  const R = {fd: renderFD, intro: renderIntro, spark: renderSpark, pattaya: renderPattaya, wink: renderWink, wink2: renderWink2, spark2: renderSpark2, sparkout: renderSparkOut, free: renderFree, freeout: renderSparkOut, ivout: renderSparkOut}[COMP];
   window.render = (t) => R(t, S);
   await document.fonts.ready;
   await Promise.all([...document.images].map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; })));
