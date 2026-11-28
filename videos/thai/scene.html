@@ -376,6 +376,7 @@ svg.i{width:1em;height:1em;display:inline-block;vertical-align:middle;fill:curre
 .st-phone .w2nav{top:745px}
 .st-phone .w2heart{top:250px}.st-phone .w2lsent{top:520px}
 .st-phone .s2kb{top:573px}
+.st-phone .s2sheet{top:52px;border-radius:22px}
 .st-phone .w2m .a{top:250px}.st-phone .w2m .mk{top:316px}.st-phone .w2m .t{top:410px}.st-phone .w2m .s{top:460px}.st-phone .w2m .b{top:502px}.st-phone .w2m .k{top:566px}
 .st-phone .w2m .ht{transform:translateY(80px)}
 .st-phone .w2sb{top:6px}
@@ -394,6 +395,18 @@ svg.i{width:1em;height:1em;display:inline-block;vertical-align:middle;fill:curre
 .st-dev .btn{position:absolute;width:6px;border-radius:3px;background:linear-gradient(90deg,#2a2e36,#7a8090,#2a2e36);transform:translateZ(0)}
 .st-shadow{position:absolute;left:0;top:0;width:560px;height:90px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.75),rgba(0,0,0,0));filter:blur(18px);transform-origin:50% 50%}
 .st-glow{position:absolute;left:0;top:0;width:760px;height:760px;border-radius:50%;background:radial-gradient(closest-side,rgba(47,107,255,.28),rgba(47,107,255,0));filter:blur(30px)}
+/* store v3: X-style black, big type, dopamine reaction chips */
+.st-root.x{background:#000}
+.st-root.x .st-sub{color:#8b98a5}
+.st-pop{position:absolute;left:0;top:0;transform-origin:0 0;display:flex;align-items:center;gap:14px;padding:16px 22px 16px 16px;border-radius:999px;background:rgba(22,24,28,.92);border:1.5px solid #2f3336;color:#e7e9ea;white-space:nowrap;box-shadow:0 18px 50px rgba(0,0,0,.6),0 0 40px rgba(29,155,240,.10);backdrop-filter:blur(8px)}
+.st-pop img{width:52px;height:52px;border-radius:50%;object-fit:cover;flex:none}
+.st-pop .ic2{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;flex:none;font-size:28px}
+.st-pop b{display:block;font:700 25px/1.2 var(--th);color:#e7e9ea}
+.st-pop span{display:block;font:400 21px/1.2 var(--th);color:#8b98a5;margin-top:3px}
+.st-pop.sq{border-radius:26px}
+.st-pop.match{background:linear-gradient(135deg,#2f6bff,#5b8cff);border-color:rgba(255,255,255,.25);color:#fff;padding:14px 26px;box-shadow:0 18px 50px rgba(47,107,255,.45)}
+.st-pop.match b{color:#fff;font-size:27px}
+.st-heart{position:absolute;left:0;top:0;width:44px;height:44px;filter:drop-shadow(0 0 14px currentColor)}
 /* likes */
 .pt{position:absolute;left:22px;top:108px;font:700 31px var(--th);color:#15171c}
 .pc{position:absolute;right:24px;top:120px;font:500 19px "Roboto";color:#2f6bff}
@@ -1444,14 +1457,21 @@ function renderFree(t, S) {
 // ===========================================================================
 const SHOT = +(Q.get('shot') || 1);
 const ST_COPY = {
-  1: {t: {ry: 18, rx: 5, rz: -3}, h: ['Dating.', 'Actually free.'], th: ['หาคู่', 'ฟรีจริง'], s: ['Meet, match and chat without paying.', 'ทำความรู้จัก แมตช์ และแชตได้โดยไม่ต้องจ่าย'], rot: -6, x: .14},
+  1: {t: {ry: 18, rx: 5, rz: -3}, h: ['Dating.', 'Actually free.'], th: ['หาคู่', 'ฟรีจริง'], s: ['Meet, match and chat without paying.', 'ทำความรู้จัก แมตช์ และแชตได้โดยไม่ต้องจ่าย'], rot: -6, x: .5},
   2: {t: {ry: -14, rx: 5, rz: 2}, h: ['Just scroll.', 'Meet someone.'], th: ['แค่เลื่อน', 'ก็ได้เจอใครสักคน'], s: ['Take control of your feed and scroll your way.', 'ควบคุมฟีดของคุณเอง แล้วเลื่อนในแบบของคุณ'], rot: 0, x: .5},
-  3: {t: {ry: -18, rx: 5, rz: 3}, h: ['Don’t just like.', 'Spark.'], th: ['ไม่ใช่แค่ Like', 'แต่เป็น Spark'], s: ['A Like with a message. It gets read first.', 'Like พร้อมข้อความ ที่จะถูกอ่านก่อน'], rot: 5, x: .86},
-  4: {t: {ry: 18, rx: 5, rz: -3}, h: ['Real people.', 'Reviewed photos.'], th: ['คนจริง', 'รูปผ่านการตรวจ'], s: ['Every photo is checked before anyone sees it.', 'ทุกรูปผ่านการตรวจก่อนที่ใครจะได้เห็น'], rot: -5, x: .16},
-  5: {t: {ry: -18, rx: 5, rz: 3}, h: ['Shared interests.', 'Real chemistry.'], th: ['ความสนใจร่วมกัน', 'เคมีที่ตรงกันจริง'], s: ['Pick what you love. Meet people who love it too.', 'เลือกสิ่งที่คุณรัก แล้วพบคนที่รักสิ่งเดียวกัน'], rot: 5, x: .86},
+  3: {t: {ry: -18, rx: 5, rz: 3}, h: ['Don’t just like.', 'Spark.'], th: ['ไม่ใช่แค่ Like', 'แต่เป็น Spark'], s: ['A Like with a message. It gets read first.', 'Like พร้อมข้อความ ที่จะถูกอ่านก่อน'], rot: 5, x: .5},
+  4: {t: {ry: 18, rx: 5, rz: -3}, h: ['Real people.', 'Reviewed photos.'], th: ['คนจริง', 'รูปผ่านการตรวจ'], s: ['Every photo is checked before anyone sees it.', 'ทุกรูปผ่านการตรวจก่อนที่ใครจะได้เห็น'], rot: -5, x: .5},
+  5: {t: {ry: -18, rx: 5, rz: 3}, h: ['Shared interests.', 'Real chemistry.'], th: ['ความสนใจร่วมกัน', 'เคมีที่ตรงกันจริง'], s: ['Pick what you love. Meet people who love it too.', 'เลือกสิ่งที่คุณรัก แล้วพบคนที่รักสิ่งเดียวกัน'], rot: 5, x: .5},
   6: {t: {ry: 14, rx: 5, rz: -2}, h: ['It’s', 'mutual.'], th: ['ชอบกัน', 'ทั้งคู่'], s: ['Like back and your chat opens instantly.', 'กด Like กลับ แล้วแชตจะเปิดขึ้นทันที'], rot: -4, x: .5},
   7: {t: {ry: -12, rx: 5, rz: 1}, h: ['From hey', 'to Saturday.'], th: ['จาก “สวัสดี”', 'สู่วันเสาร์'], s: ['Chat with read receipts the moment you match.', 'แชตได้ทันทีที่แมตช์ พร้อมสถานะอ่านแล้ว'], rot: 0, x: .5},
 };
+const ST_POPS = {
+  1: [{html: () => `<img src="${PEOPLE.maya.face}" alt=""><div><b>${tr('Maya กด Like กลับแล้ว ❤️', 'Maya liked you back ❤️')}</b><span>${tr('เมื่อสักครู่', 'now')}</span></div>`, x: .58, y: .16},
+      {html: () => `<b>${tr('แมตช์แล้ว! 🎉', 'It’s a match! 🎉')}</b>`, cls: 'match', x: -.08, y: .58}],
+  3: [{html: () => `<img src="${PEOPLE.shacharR.face}" alt=""><div><b>${tr('Shachar ส่ง Spark ✨', 'Shachar sent a Spark ✨')}</b><span>${tr('“ไปกินกาแฟกันไหม?”', '“Coffee this weekend?”')}</span></div>`, cls: 'sq', x: -.1, y: .6},
+      {html: () => `<div class="ic2" style="background:#16213f"><img src="assets/spark.png" alt="" style="width:40px;height:40px;border-radius:0"></div><div><b>${tr('ถูกอ่านก่อนเสมอ', 'Read first')}</b><span>${tr('Like พร้อมข้อความ', 'A Like with a message')}</span></div>`, x: .5, y: .74}],
+};
+const ST_HEARTS = [[.95, .08, '#e2405a', 1], [1.02, .3, '#3d7bff', .7], [-.06, .38, '#3d7bff', .8], [.9, .55, '#e2405a', .6]];
 const ST_LOC = () => tr('เทลอาวีฟ อิสราเอล · ห่างไปประมาณ 3 กม.', 'Tel Aviv, Israel · About 3 km away');
 function stScreen(n) {
   const disc = (who, name, pct, extra = '') => `<div class="w2l">${w2SB('10:04')}${w2HD()}${w2CARD(who, name, false, ST_LOC(), pct)}${w2ACTS()}${w2NAV()}${extra}</div>`;
@@ -1520,33 +1540,37 @@ function stFloat(n) {
   return card ? el(`<div class="st-float">${card}</div>`) : null;
 }
 function buildStore() {
-  const root = el(`<div class="st-root"></div>`);
+  const root = el(`<div class="st-root${AR === 'fg' ? '' : ' x'}"></div>`);
   stage.appendChild(root);
   if (AR === 'fg') return buildFeature(root);
   const C = ST_COPY[SHOT], s = W / 1080, th = LANG === 'th';
   const lock = el(`<div class="st-lock" style="font-size:${44 * s}px;left:${56 * s}px;top:${70 * s}px"><img src="assets/logo-mark.png" alt="">Meet Bundle</div>`);
   const hl = (th ? C.th : C.h);
-  const h = el(`<div class="st-h${th ? ' th' : ''}" style="left:${56 * s}px;top:${150 * s}px;font-size:${(th ? 92 : 104) * s}px;font-family:${th ? 'var(--th)' : 'Outfit,sans-serif'}">${hl[0]}<span class="b">${hl[1]}</span></div>`);
+  const h = el(`<div class="st-h${th ? ' th' : ''}" style="left:${56 * s}px;top:${150 * s}px;font-size:${(th ? 100 : 118) * s}px;font-family:${th ? 'var(--th)' : 'Outfit,sans-serif'}">${hl[0]}<span class="b">${hl[1]}</span></div>`);
   const sub = el(`<div class="st-sub" style="left:${58 * s}px;font-size:${32 * s}px;font-family:${th ? 'var(--th)' : 'Roboto,sans-serif'}">${th ? C.s[1] : C.s[0]}</div>`);
   const ph = stPhone(SHOT, C.t), fl = stFloat(SHOT);
   const glow = el(`<div class="st-glow"></div>`), shadow = el(`<div class="st-shadow"></div>`);
   [lock, h, sub, glow, shadow, ph].forEach(e => root.appendChild(e));
-  if (fl) root.appendChild(fl);
-  return {C, s, h, sub, ph, fl, glow, shadow};
+  const pops = (ST_POPS[SHOT] || []).map(pp => { const e = el(`<div class="st-pop ${pp.cls || ''}">${pp.html()}</div>`); e._p = pp; root.appendChild(e); return e; });
+  const hearts = ST_POPS[SHOT] ? ST_HEARTS.map(([x, y, c, sc]) => { const e = el(`<svg class="st-heart" viewBox="0 0 24 24" style="color:${c}"><use href="#heart" fill="${c}"/></svg>`); e._p = {x, y, sc}; root.appendChild(e); return e; }) : [];
+  if (fl && !ST_POPS[SHOT]) root.appendChild(fl);
+  return {C, s, h, sub, ph, fl: ST_POPS[SHOT] ? null : fl, glow, shadow, pops, hearts};
 }
 function renderStore(t, S) {
   if (AR === 'fg') return;
-  const {C, s, h, sub, ph, fl, glow, shadow} = S;
+  const {C, s, h, sub, ph, fl, glow, shadow, pops, hearts} = S;
   sub.style.top = (h.offsetTop + h.offsetHeight + 22 * s) + 'px';
-  const top = h.offsetTop + h.offsetHeight + (AR === 'as' ? 190 : 120) * s;
-  const avail = H - top - (AR === 'as' ? 130 : 40) * s;
-  const k = Math.min((AR === 'as' ? .74 : .64) * W / 432, avail / 892);
+  const top = h.offsetTop + h.offsetHeight + (AR === 'as' ? 190 : 110) * s;
+  const k = (AR === 'as' ? .8 : .78) * W / 432;
   const pw = 432 * k, phH = 892 * k;
   const cx = C.x * W;
   const x = Math.min(Math.max(cx - pw / 2, .07 * W), W - pw - .07 * W);
   ph.style.transform = `translate(${x}px,${top}px) scale(${k})`;
   glow.style.transform = `translate(${x + pw / 2 - 380}px,${top + phH / 2 - 380}px) scale(${W / 1080})`;
   shadow.style.transform = `translate(${x + pw / 2 - 280}px,${top + phH - 30 * s}px) scale(${pw / 560 * 1.1},1)`;
+  const ps = 1.25 * s;
+  pops.forEach(e => { const pp = e._p; let px = x + pp.x * pw; px = Math.min(Math.max(px, 30 * s), W - e.offsetWidth * ps - 30 * s); e.style.transform = `translate(${px}px,${top + pp.y * phH}px) scale(${ps})`; });
+  hearts.forEach(e => { const pp = e._p; e.style.transform = `translate(${x + pp.x * pw}px,${top + pp.y * phH}px) scale(${pp.sc * 1.4 * s})`; });
   if (fl) {
     const fs = 1.45 * s;
     const fx = Math.max(24 * s, C.x > .6 ? 36 * s : W - fl.offsetWidth * fs - 36 * s);
