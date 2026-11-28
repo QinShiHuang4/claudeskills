@@ -293,6 +293,25 @@ svg.i{width:1em;height:1em;display:inline-block;vertical-align:middle;fill:curre
 .s2sent .t{position:absolute;left:0;right:0;top:404px;text-align:center;font:700 26px var(--th);color:#15171c}
 .s2sent .s{position:absolute;left:0;right:0;top:446px;text-align:center;font:400 15px var(--th);color:#3b3f47}
 .s2sent .dot{position:absolute;width:8px;height:8px;border-radius:50%;background:#6f9bff}
+/* free: generic paywall app (deliberately unbranded) + shatter */
+.fpw{position:absolute;inset:0;background:#15131d;color:#fff;font-family:var(--th)}
+.fpw .tt{position:absolute;left:20px;top:58px;font:700 27px var(--th)}
+.fpw .tt i{font-style:normal;color:#b69cff}
+.fpw .g{position:absolute;left:12px;right:12px;top:110px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fpw .g div{position:relative;height:150px;border-radius:16px;overflow:hidden;background:#2a2638}
+.fpw .g img{width:100%;height:100%;object-fit:cover;filter:blur(16px) saturate(.7) brightness(.8);transform:scale(1.2)}
+.fpw .g svg{position:absolute;left:50%;top:50%;width:30px;height:30px;margin:-15px 0 0 -15px;color:#fff;opacity:.9}
+.fpw .sh2{position:absolute;left:0;right:0;bottom:0;height:300px;background:#211d2e;border-radius:26px 26px 0 0;box-shadow:0 -12px 30px rgba(0,0,0,.45);text-align:center}
+.fpw .lk{width:54px;height:54px;border-radius:50%;margin:22px auto 10px;background:#3a3354;display:grid;place-items:center}
+.fpw .lk svg{width:26px;height:26px;color:#cbb8ff}
+.fpw .h{font:700 21px var(--th)}
+.fpw .d{margin-top:6px;font:400 14px var(--th);color:#b8b2c9}
+.fpw .pr{margin-top:14px;font:800 34px "Roboto"}
+.fpw .pr small{font:500 15px var(--th);color:#b8b2c9}
+.fpw .bt{margin:14px 22px 0;height:50px;border-radius:25px;background:linear-gradient(90deg,#7b5cff,#a55cff);display:grid;place-items:center;font:700 16px var(--th)}
+.fpw .ca{margin-top:10px;font:400 12px var(--th);color:#8f89a3}
+.fshard{position:absolute;inset:0;z-index:20}
+.fcrack{position:absolute;inset:0;z-index:21;pointer-events:none}
 /* likes */
 .pt{position:absolute;left:22px;top:108px;font:700 31px var(--th);color:#15171c}
 .pc{position:absolute;right:24px;top:120px;font:500 19px "Roboto";color:#2f6bff}
@@ -362,7 +381,7 @@ const Q = new URLSearchParams(location.search);
 const COMP = Q.get('comp') || 'fd';
 const AR = Q.get('ar') || '169';
 const W = AR === '169' ? 1920 : 1080, H = AR === '169' ? 1080 : 1920;
-const DUR = {fd: 15.5, intro: 9.6, spark: 15, pattaya: 7, wink: 7.5, wink2: 8.4, spark2: 4.6, sparkout: 3.4}[COMP];
+const DUR = {fd: 15.5, intro: 9.6, spark: 15, pattaya: 7, wink: 7.5, wink2: 8.4, spark2: 4.6, sparkout: 3.4, free: 6.0, freeout: 4.4}[COMP];
 const LANG = Q.get('lang') || 'th'; // spark comp: th | en (fd and intro are Thai only)
 const tr = (th, en) => LANG === 'en' ? en : th;
 const VARIANT = Q.get('v') || 'b'; // fd feed order: a = Lina, Nami, Maya; b = Nami, Lina, Maya
@@ -1222,12 +1241,17 @@ function renderSpark2(t, S) {
   no.style.opacity = t < 3.55 ? 0 : 1; no.style.transform = `translateY(${(1 - ni) * -100}px)`;
 }
 
+const OUTRO_COPY = {
+  sparkout: {l1: [['ค้นหา', 'Find your'], ['Spark', 'Spark', 1]], l2: [['ของคุณ', 'on Meet Bundle']], sub: ['ดาวน์โหลดฟรีบน iOS และ Android', 'Free on iOS and Android']},
+  freeout: {l1: [['ดูว่าใครถูกใจคุณ', 'See who likes you']], l2: [['ฟรี', 'free.', 1]], sub: ['ไม่ต้องจ่ายเพื่อดูว่าใครถูกใจคุณ', 'No paywall to see who likes you']},
+};
 function buildSparkOut() {
-  const en = LANG === 'en';
+  const en = LANG === 'en', C = OUTRO_COPY[COMP];
   const ff = en ? 'font-family:Outfit,sans-serif;letter-spacing:-.02em;line-height:1.1' : '';
+  const words = (arr) => arr.map(([th, eng, blue], i) => `<span class="w${blue ? ' blue sparkw' : ''}"${i ? ' style="margin-left:.24em"' : ''}>${tr(th, eng)}</span>`).join('');
   const bg = el(`<div class="abs" style="width:${W}px;height:${H}px;background:radial-gradient(80% 60% at 50% 45%,#121a2c 0,#080b13 70%,#05070c 100%)"></div>`);
-  const e1 = el(`<div class="title" style="font-size:${en ? 100 : 92}px;text-align:center;${ff}"><span class="ln"><span class="w">${tr('ค้นหา', 'Find your')}</span><span class="w blue sparkw" style="margin-left:.24em">Spark</span></span><span class="ln"><span class="w">${tr('ของคุณ', 'on Meet Bundle')}</span></span></div>`);
-  const sub = el(`<div class="tag" style="font-size:34px">${tr('ดาวน์โหลดฟรีบน iOS และ Android', 'Free on iOS and Android')}</div>`);
+  const e1 = el(`<div class="title" style="font-size:${en ? 100 : 92}px;text-align:center;${ff}"><span class="ln">${words(C.l1)}</span><span class="ln">${words(C.l2)}</span></div>`);
+  const sub = el(`<div class="tag" style="font-size:34px">${tr(...C.sub)}</div>`);
   const logo = lockup(52, true), bd = badges();
   [bg, e1, sub, logo, bd].forEach(e => stage.appendChild(e));
   return {e1, w: $$('.w', e1), sub, logo, bd};
@@ -1246,12 +1270,96 @@ function renderSparkOut(t, S) {
   bd.style.transform = `translate(${(W - bd.offsetWidth * 1.25) / 2}px,${700 + e1.offsetHeight + 110 + (1 - bp) * 16}px) scale(1.25)`; bd.style.opacity = bp;
 }
 
+// ===========================================================================
+// COMPOSITION 9: "See who likes you, free": a generic paywall shatters into the real Likes grid
+// ===========================================================================
+const LOCK = `<svg viewBox="0 0 24 24"><path fill="currentColor" d="M7 10V8a5 5 0 0 1 10 0v2h1a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1h1Zm2 0h6V8a3 3 0 0 0-6 0v2Z"/></svg>`;
+function buildFree() {
+  const blurred = ['omer', 'shacharR', 'omerR', 'shachar', 'omer', 'shacharR'];
+  const paywall = () => `<div class="fpw">${w2SB('23:41').replace('class="w2sb"', 'class="w2sb" style="color:#fff"').replace('fill="#111"', 'fill="#fff"')}
+      <div class="tt">${tr('<i>99+</i> คนถูกใจคุณ', '<i>99+</i> people like you')}</div>
+      <div class="g">${blurred.map(w => `<div>${photo(w, true)}${LOCK}</div>`).join('')}</div>
+      <div class="sh2"><div class="lk">${LOCK}</div>
+        <div class="h">${tr('อยากรู้ว่าใครถูกใจคุณ?', 'Want to see who likes you?')}</div>
+        <div class="d">${tr('อัปเกรดเป็นพรีเมียมเพื่อปลดล็อก', 'Upgrade to Premium to unlock')}</div>
+        <div class="pr">฿599 <small>/ ${tr('เดือน', 'month')}</small></div>
+        <div class="bt">${tr('ปลดล็อกเลย', 'Unlock now')}</div>
+        <div class="ca">${tr('ต่ออายุอัตโนมัติ', 'Renews automatically')}</div></div></div>`;
+  // shards: a 4x6 grid of jittered points, two triangles per cell
+  const cols = 4, rows = 6, P = [];
+  for (let r = 0; r <= rows; r++) for (let c = 0; c <= cols; c++) {
+    const edge = r === 0 || r === rows || c === 0 || c === cols;
+    const j = (k) => edge ? 0 : (Math.sin((r * 7 + c * 13 + k) * 12.9898) * 43758.5453 % 1) * .35;
+    P.push([(c + j(1)) / cols * 100, (r + j(2)) / rows * 100]);
+  }
+  const at = (r, c) => P[r * (cols + 1) + c];
+  const tris = [];
+  for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+    tris.push([at(r, c), at(r, c + 1), at(r + 1, c)]);
+    tris.push([at(r, c + 1), at(r + 1, c + 1), at(r + 1, c)]);
+  }
+  const shards = tris.map(t => {
+    const cx = (t[0][0] + t[1][0] + t[2][0]) / 3, cy = (t[0][1] + t[1][1] + t[2][1]) / 3;
+    return `<div class="fshard" data-cx="${cx}" data-cy="${cy}" style="clip-path:polygon(${t.map(q => q[0] + '% ' + q[1] + '%').join(',')})">${paywall()}</div>`;
+  }).join('');
+  const crack = `<svg class="fcrack" viewBox="0 0 392 697" preserveAspectRatio="none"><g stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round" opacity=".9">
+      ${[[196, 560, 40, 380], [196, 560, 120, 260], [196, 560, 260, 200], [196, 560, 360, 330], [196, 560, 380, 640], [196, 560, 60, 690], [196, 560, 300, 697], [196, 560, 10, 560]].map(([x1, y1, x2, y2]) => `<path d="M${x1} ${y1} L${(x1 + x2) / 2 + 8} ${(y1 + y2) / 2 - 6} L${x2} ${y2}"/>`).join('')}</g></svg>`;
+  const lk = (who, name, x, y, chip) => `<div class="w2lk${chip ? ' sel' : ''}" style="left:${x}px;top:${y}px"><div class="ph">${photo(who, true)}</div>
+      ${chip ? `<div class="yw">😉 ${tr('ส่ง Wink ให้คุณ', 'Winked at you')}</div>` : ''}<div class="n">${name}</div><div class="c">${tr('กรุงเทพฯ', 'Bangkok')}</div>
+      <div class="ft"><div class="rm">${ic('x')}${tr('ลบ', 'Remove')}</div><div class="lb">${ic('heart')}Like</div></div></div>`;
+  const likes = `<div class="w2l" id="FL" style="opacity:1">${w2SB('23:42')}${w2HD(false)}<div class="w2pt">${tr('ถูกใจคุณ', 'Likes you')}<i>12</i></div>
+      ${lk('omerR', 'Omer, 25', 10, 156, 1)}${lk('shacharR', 'Shachar, 31', 202, 156)}
+      <div class="w2lk more" style="left:10px;top:428px;width:370px;height:150px">${tr('+10 คนถูกใจคุณ · ดูได้ทั้งหมด ฟรี', '+10 more · all visible, free')}</div>
+      <div class="w2tap"></div>${w2NAVL()}</div>`;
+  const hearts = [[60, 150, '#3d7bff'], [330, 160, '#e2405a'], [44, 330, '#3d7bff'], [345, 315, '#3d7bff'], [96, 300, '#e2405a'], [300, 300, '#e2405a'], [170, 370, '#3d7bff'], [240, 380, '#e2405a']];
+  const match = `<div class="w2l w2m" id="FM">
+      ${hearts.map(([x, y, c]) => `<svg class="ht" style="left:${x}px;top:${y}px" viewBox="0 0 24 24"><use href="#heart" fill="${c}"/></svg>`).join('')}
+      <div class="a a1" style="left:72px">${photo('linaR')}</div><div class="a a2" style="left:196px">${photo('omerR')}</div>
+      <div class="mk"><img src="assets/logo-192.png" alt=""></div>
+      <div class="t">${tr('แมตช์แล้ว!', 'It’s a match!')}</div>
+      <div class="s">${tr('คุณกับ Omer ถูกใจกันและกัน', 'You and Omer liked each other.')}</div>
+      <div class="b">${tr('ทักทายเลย', 'Say hello')}</div><div class="k">${tr('เลื่อนดูต่อ', 'Keep browsing')}</div></div>`;
+  const app = el(`<div class="w2app">${likes}${match}<div id="FP">${shards}</div>${crack}</div>`);
+  app.style.transform = `scale(${W / 392})`;
+  stage.appendChild(app);
+  return {app};
+}
+
+function renderFree(t, S) {
+  const {app} = S;
+  // 0-2.5: paywall holds, the price sheet nudges up; 2.45: crack; 2.6: shatter
+  const crack = $('.fcrack', app);
+  crack.style.opacity = t > 2.4 && t < 2.75 ? 1 : 0;
+  const sh = prog(t, 2.6, 3.4, p => p);
+  $$('.fshard', app).forEach((d, i) => {
+    const cx = +d.dataset.cx, cy = +d.dataset.cy;
+    const dx = (cx - 50) / 50, dy = (cy - 80) / 80;
+    const sp = 1 + (i % 5) * .25;
+    d.style.transform = `translate(${dx * 260 * sh * sp}px,${(dy * 200 + 520 * sh) * sh * sp}px) rotate(${(i % 2 ? 1 : -1) * 110 * sh * sp}deg) scale(${1 - sh * .35})`;
+    d.style.opacity = t < 2.6 ? 1 : 1 - prog(t, 2.9, 3.4);
+    d.style.transformOrigin = `${cx}% ${cy}%`;
+  });
+  $('.sh2', app) && $$('.fshard .sh2', app).forEach(x => { x.style.transform = `translateY(${(1 - prog(t, .2, .7, eo)) * 120}px)`; });
+  // Likes grid: tap Like on Omer at 4.0
+  const L = $('#FL', app);
+  const tq = clamp((t - 3.95) / .3);
+  $('.w2tap', L).style.cssText += `;left:${10 + 8 + 128 - 28}px;top:${156 + 216 + 18 - 28}px;opacity:${t > 3.95 && tq < 1 ? (1 - tq) * .8 : 0};transform:scale(${.5 + tq * .6})`;
+  // match
+  const D = $('#FM', app);
+  D.style.opacity = clamp((t - 4.4) / .2);
+  const mp = prog(t, 4.45, 4.8, eo);
+  $('.a1', D).style.transform = `translateX(${(1 - mp) * -160}px)`; $('.a2', D).style.transform = `translateX(${(1 - mp) * 160}px)`;
+  $('.mk', D).style.transform = `scale(${prog(t, 4.7, 4.95, eback)})`;
+  [['.t', 4.8], ['.s', 4.9], ['.b', 5.0], ['.k', 5.05]].forEach(([c, a]) => { const q = prog(t, a, a + .25); $(c, D).style.opacity = q; $(c, D).style.transform = `translateY(${(1 - q) * 12}px)`; });
+  $$('.ht', D).forEach((h, i) => { const a = 4.65 + i * .06, q = clamp((t - a) / 1.3); h.style.opacity = t < a ? 0 : Math.sin(q * Math.PI) * .9; h.style.transform = `translateY(${-q * 50}px) scale(${.6 + q * .6})`; });
+}
+
 // ---------- boot ----------
 window.ready = (async () => {
   const svg = await (await fetch('assets/icons.svg')).text();
   document.body.insertAdjacentHTML('afterbegin', svg);
-  const S = {fd: buildFD, intro: buildIntro, spark: buildSpark, pattaya: buildPattaya, wink: buildWink, wink2: buildWink2, spark2: buildSpark2, sparkout: buildSparkOut}[COMP]();
-  const R = {fd: renderFD, intro: renderIntro, spark: renderSpark, pattaya: renderPattaya, wink: renderWink, wink2: renderWink2, spark2: renderSpark2, sparkout: renderSparkOut}[COMP];
+  const S = {fd: buildFD, intro: buildIntro, spark: buildSpark, pattaya: buildPattaya, wink: buildWink, wink2: buildWink2, spark2: buildSpark2, sparkout: buildSparkOut, free: buildFree, freeout: buildSparkOut}[COMP]();
+  const R = {fd: renderFD, intro: renderIntro, spark: renderSpark, pattaya: renderPattaya, wink: renderWink, wink2: renderWink2, spark2: renderSpark2, sparkout: renderSparkOut, free: renderFree, freeout: renderSparkOut}[COMP];
   window.render = (t) => R(t, S);
   await document.fonts.ready;
   await Promise.all([...document.images].map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; })));
