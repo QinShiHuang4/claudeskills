@@ -140,6 +140,20 @@ svg.i{width:1em;height:1em;display:inline-block;vertical-align:middle;fill:curre
 .sendb{margin-top:16px;height:56px;border-radius:28px;background:#2f6bff;color:#fff;display:flex;align-items:center;justify-content:center;gap:8px;font:600 17px var(--th);box-shadow:0 8px 20px rgba(47,107,255,.35)}
 .sendb .st{width:20px;height:20px;display:inline-flex}.sendb .st svg{width:100%;height:100%}
 .spk{position:absolute;left:0;top:0;width:28px;height:28px;color:#7fb0ff;pointer-events:none}
+/* pattaya: home screen + toasts */
+.home{position:absolute;inset:0;background:radial-gradient(120% 80% at 30% 10%,#3a4a8c 0,#1a2147 55%,#0d1126 100%);color:#fff}
+.home .clk{position:absolute;left:0;right:0;top:92px;text-align:center;font:300 76px/1 "Roboto";letter-spacing:-.02em}
+.home .dt{position:absolute;left:0;right:0;top:176px;text-align:center;font:500 16px var(--th);opacity:.85}
+.apps{position:absolute;left:26px;right:26px;top:300px;display:grid;grid-template-columns:repeat(4,1fr);row-gap:26px;justify-items:center}
+.app{display:flex;flex-direction:column;align-items:center;gap:6px;font:500 11.5px var(--th);color:rgba(255,255,255,.9)}
+.app i{display:block;width:60px;height:60px;border-radius:16px}
+.app img{width:60px;height:60px;border-radius:16px;display:block}
+.tapr{position:absolute;width:90px;height:90px;border-radius:50%;background:rgba(255,255,255,.35);pointer-events:none}
+.toast{position:absolute;left:12px;right:12px;height:74px;background:#fff;border-radius:18px;box-shadow:0 10px 28px rgba(0,0,0,.25);z-index:8;display:flex;align-items:center;gap:12px;padding:0 14px;opacity:0}
+.toast img{width:46px;height:46px;border-radius:50%;object-fit:cover;flex:none}
+.toast b{display:block;font:600 15px var(--th);color:#15171c}
+.toast small{display:block;font:400 13px var(--th);color:#5b6270;margin-top:2px;white-space:nowrap}
+.endbg{position:absolute;inset:0;background:radial-gradient(80% 60% at 50% 45%,#121a2c 0,#080b13 70%,#05070c 100%);opacity:0}
 /* likes */
 .pt{position:absolute;left:22px;top:108px;font:700 31px var(--th);color:#15171c}
 .pc{position:absolute;right:24px;top:120px;font:500 19px "Roboto";color:#2f6bff}
@@ -209,7 +223,7 @@ const Q = new URLSearchParams(location.search);
 const COMP = Q.get('comp') || 'fd';
 const AR = Q.get('ar') || '169';
 const W = AR === '169' ? 1920 : 1080, H = AR === '169' ? 1080 : 1920;
-const DUR = {fd: 15.5, intro: 9.6, spark: 15}[COMP];
+const DUR = {fd: 15.5, intro: 9.6, spark: 15, pattaya: 7}[COMP];
 const LANG = Q.get('lang') || 'th'; // spark comp: th | en (fd and intro are Thai only)
 const tr = (th, en) => LANG === 'en' ? en : th;
 const VARIANT = Q.get('v') || 'b'; // fd feed order: a = Lina, Nami, Maya; b = Nami, Lina, Maya
@@ -235,6 +249,7 @@ const PEOPLE = {
   lina:    {img: 'assets/lina.jpg', face: 'assets/lina-face.jpg', pos: '50% 22%'},
   nami:    {img: 'assets/nami.jpg', face: 'assets/nami-face.jpg', pos: '50% 34%'},
   shachar: {img: 'assets/shachar-face.jpg', face: 'assets/shachar-face.jpg', pos: '50% 40%'},
+  her:     {img: 'assets/her-face.jpg', face: 'assets/her-face.jpg', pos: 'center'},
 };
 const photo = (who, cover) => `<img src="${cover ? PEOPLE[who].img : PEOPLE[who].face}" style="width:100%;height:100%;object-fit:cover;object-position:${cover ? PEOPLE[who].pos : 'center'};display:block" alt="">`;
 
@@ -271,11 +286,11 @@ function discover(id, cards, tm = '10:04', o = {}) {
   ${o.composer ? composer(o) : ''}
   ${nav(0)}</div>`;
 }
-function matchScreen(id, who = 'maya', name = 'Maya') {
+function matchScreen(id, who = 'maya', name = 'Maya', me = 'shachar') {
   const hearts = [[60, 250, '#3d7bff'], [330, 270, '#e2405a'], [40, 420, '#3d7bff'], [345, 430, '#3d7bff'], [90, 520, '#e2405a'], [300, 560, '#3d7bff'], [180, 240, '#3d7bff'], [250, 470, '#e2405a']];
   return `<div class="scr match" id="${id}">
   ${hearts.map(([x, y, c]) => `<svg class="ht" style="left:${x}px;top:${y}px;color:${c}" viewBox="0 0 24 24"><use href="#heart" fill="${c}"/></svg>`).join('')}
-  <div class="pair"><div class="av a1"><img src="assets/shachar-face.jpg" alt=""></div><div class="av a2"><img src="${PEOPLE[who].face}" alt=""></div><div class="mk"><img src="assets/logo-192.png" alt=""></div></div>
+  <div class="pair"><div class="av a1"><img src="${PEOPLE[me].face}" alt=""></div><div class="av a2"><img src="${PEOPLE[who].face}" alt=""></div><div class="mk"><img src="assets/logo-192.png" alt=""></div></div>
   <div class="mt">${tr('แมตช์แล้ว!', "It's a match!")}</div>
   <div class="ms">${tr(`คุณกับ ${name} ถูกใจกันและกัน`, `You and ${name} liked each other.`)}</div>
   <div class="say">${tr('ทักทายเลย', 'Say hello')}</div>
@@ -711,12 +726,79 @@ function renderSpark(t, S) {
   }
 }
 
+// ===========================================================================
+// COMPOSITION 4: Pattaya (plays after an AI-generated live-action clip; 9:16 only)
+// ===========================================================================
+function buildPattaya() {
+  const bg = el(`<div class="abs" style="width:${W}px;height:${H}px;background:url(assets/pattaya-bg.jpg) center/cover"></div>`);
+  const cap = el(`<div class="cap" style="font:800 60px/1.3 var(--th);text-align:center">จนกระทั่งเธอได้เจอ<br><span class="blue">Meet Bundle</span></div>`);
+  const colors = ['#ff9f43', '#54a0ff', '#1dd1a1', '#ee5253', '#5f27cd', '#feca57', '#48dbfb', '#ff6b6b', '#10ac84', '#8395a7', '#576574', '#2e86de', 'MB', '#f368e0', '#00d2d3', '#ff9ff3'];
+  const names = ['กล้อง', 'รูปภาพ', 'แผนที่', 'เพลง', 'ปฏิทิน', 'โน้ต', 'อากาศ', 'นาฬิกา', 'การเงิน', 'ตั้งค่า', 'ไฟล์', 'อีเมล', 'Meet Bundle', 'ร้านค้า', 'ข่าว', 'เกม'];
+  const home = `<div class="scr home" id="pHome">${statusBar('21:47').replace('class="sb"', 'class="sb" style="color:#fff"')}
+    <div class="clk">21:47</div><div class="dt">วันเสาร์ 28 พฤศจิกายน</div>
+    <div class="apps">${colors.map((c, i) => `<div class="app"${c === 'MB' ? ' id="mbIcon"' : ''}>${c === 'MB' ? '<img src="assets/app-icon.png" alt="">' : `<i style="background:linear-gradient(160deg,${c},${c}aa)"></i>`}${names[i]}</div>`).join('')}</div>
+    <div class="tapr" style="opacity:0"></div></div>`;
+  const toasts = [
+    ['shachar', 'แมตช์ใหม่!', 'Shachar ถูกใจคุณเหมือนกัน'],
+    ['shachar', 'Shachar ส่ง Spark ถึงคุณ', '“ดินเนอร์พรุ่งนี้ไหมครับ?”'],
+    ['logo', 'วันนี้คุณมี 3 แมตช์ใหม่', 'คนดีๆ กำลังรอคุณอยู่'],
+  ].map(([w, b, sm], i) => `<div class="toast" style="top:${52 + i * 84}px"><img src="${w === 'logo' ? 'assets/app-icon.png' : PEOPLE[w].face}" alt=""><div><b>${b}</b><small>${sm}</small></div></div>`).join('');
+  const phone = makePhone(home + matchScreen('pMatch', 'shachar', 'Shachar', 'her'));
+  const endbg = el(`<div class="endbg"></div>`);
+  const e1 = el(`<div class="title" style="font-size:84px;text-align:center"><span class="ln"><span class="w">ผู้ชายดีๆ</span><span class="w" style="margin-left:.24em">มีอยู่จริง</span></span><span class="ln"><span class="w">เจอได้</span><span class="w blue">ฟรี</span></span></div>`);
+  const logo = lockup(52, true), bd = badges();
+  [bg, phone, cap, endbg, e1, logo, bd].forEach(e => stage.appendChild(e));
+  $('#pMatch', phone).insertAdjacentHTML('beforeend', toasts);
+  return {cap, phone, endbg, e1, w: $$('.w', e1), logo, bd};
+}
+
+function renderPattaya(t, S) {
+  const {cap, phone, endbg, e1, w, logo, bd} = S;
+  const ci = prog(t, .1, .55), co = prog(t, 4.35, 4.7);
+  cap.style.transform = `translate(${(W - cap.offsetWidth) / 2}px,${150 + (1 - ci) * 14}px)`;
+  cap.style.opacity = ci * (1 - co);
+  cap.style.filter = ci < 1 ? `blur(${(1 - ci) * 10}px)` : 'none';
+  const pin = prog(t, 0, .6, eo), pout = prog(t, 4.3, 4.75, p => p * p);
+  const cy = 1180 + (1 - pin) * 900 + pout * 120 + Math.sin(t * 1.2) * 5;
+  placePhone(phone, 540, cy, 1.3 * lerp(1, .85, pout), 6, -8 + Math.sin(t * .9) * 3, 2 + Math.sin(t * .6) * .8, 1 - pout);
+  // home screen: the Meet Bundle icon glows, she taps it, the app opens on a match
+  const home = $('#pHome', phone), ico = $('#mbIcon', phone), tap = $('.tapr', home);
+  const ip = .5 + .5 * Math.sin(t * 8);
+  $('img', ico).style.boxShadow = t > .55 && t < 1.3 ? `0 0 0 ${3 + ip * 3}px rgba(77,139,255,.85),0 0 24px rgba(77,139,255,.8)` : 'none';
+  const ib = ico.offsetLeft + ico.offsetWidth / 2 + 26, it = ico.offsetTop + 30 + 300;
+  const tp = clamp((t - 1.05) / .35);
+  tap.style.cssText = `left:${ib - 45}px;top:${it - 45}px;opacity:${t > 1.05 && tp < 1 ? (1 - tp) * .9 : 0};transform:scale(${.4 + tp * .8})`;
+  ico.style.transform = `scale(${1 - (t > 1.0 && t < 1.3 ? Math.sin(clamp((t - 1.0) / .3) * Math.PI) * .12 : 0)})`;
+  const op = prog(t, 1.3, 1.65, eo);
+  const ms = $('#pMatch', phone);
+  ms.style.opacity = op;
+  ms.style.transformOrigin = `${ib}px ${it}px`;
+  ms.style.transform = `scale(${lerp(.15, 1, op)})`;
+  const ap = prog(t, 1.6, 2.1, eback);
+  $('.pair', ms).style.transform = `scale(${lerp(.6, 1, ap)})`;
+  $('.pair', ms).style.opacity = clamp((t - 1.6) / .2);
+  [$('.mt', ms), $('.ms', ms)].forEach((e, i) => { const q = prog(t, 1.85 + i * .12, 2.25 + i * .12); e.style.opacity = q; e.style.transform = `translateY(${(1 - q) * 14}px)`; });
+  [$('.say', ms), $('.keep', ms)].forEach((e, i) => { e.style.opacity = clamp((t - 2.2 - i * .1) / .25); });
+  $$('.ht', ms).forEach((hh, i) => { const a = 1.7 + i * .08, q = clamp((t - a) / 2); hh.style.opacity = t < a ? 0 : Math.sin(q * Math.PI) * .9; hh.style.transform = `translateY(${-q * 60}px) scale(${.6 + q * .6})`; });
+  $$('.toast', ms).forEach((e, i) => { const a = 2.55 + i * .45, q = prog(t, a, a + .4, eback); e.style.opacity = clamp((t - a) / .12); e.style.transform = `translateY(${(1 - q) * -60}px) scale(${lerp(.92, 1, q)})`; });
+  // end card
+  endbg.style.opacity = prog(t, 4.4, 4.85, p => p);
+  e1.style.transform = `translate(${(W - e1.offsetWidth) / 2}px,760px)`;
+  w.forEach((x, i) => setWord(x, prog(t, 4.75 + i * .14, 5.2 + i * .14)));
+  const lp = prog(t, 5.45, 5.85);
+  logo.style.transform = `translate(${(W - logo.offsetWidth) / 2}px,${620 + (1 - lp) * 12}px)`;
+  logo.style.opacity = lp;
+  const bp = prog(t, 5.75, 6.15, eo);
+  bd.style.transform = `translate(${(W - bd.offsetWidth * 1.25) / 2}px,${1040 + (1 - bp) * 16}px) scale(1.25)`;
+  bd.style.opacity = bp;
+}
+
 // ---------- boot ----------
 window.ready = (async () => {
   const svg = await (await fetch('assets/icons.svg')).text();
   document.body.insertAdjacentHTML('afterbegin', svg);
-  const S = {fd: buildFD, intro: buildIntro, spark: buildSpark}[COMP]();
-  const R = {fd: renderFD, intro: renderIntro, spark: renderSpark}[COMP];
+  const S = {fd: buildFD, intro: buildIntro, spark: buildSpark, pattaya: buildPattaya}[COMP]();
+  const R = {fd: renderFD, intro: renderIntro, spark: renderSpark, pattaya: renderPattaya}[COMP];
   window.render = (t) => R(t, S);
   await document.fonts.ready;
   await Promise.all([...document.images].map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; })));
