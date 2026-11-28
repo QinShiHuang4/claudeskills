@@ -15,7 +15,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Meet Bundle">
 <meta property="og:url" content="https://meetbundle.com/uk/">
-<meta property="og:title" content="Meet Bundle: Маленька іскра. Справжній зв’язок.">
+<meta property="og:title" content="Meet Bundle: Маленька іскра. Великий зв’язок.">
 <meta property="og:description" content="Знайомтеся з одним профілем за раз. Надішліть Wink, Like або Spark і почніть спілкуватися, щойно симпатія стане взаємною.">
 <meta property="og:image" content="https://meetbundle.com/og.png">
 <meta property="og:image:alt" content="Логотип Meet Bundle: синє серце на чорному тлі">
@@ -98,7 +98,7 @@ h1,h2,h3{font-family:var(--head);letter-spacing:-.02em;margin:0;text-wrap:balanc
 .top .side{width:72px;display:flex;gap:16px;align-items:center}
 .top .side.r{justify-content:flex-end}
 .top svg.i{width:24px;height:24px;color:var(--a-fg)}
-.wm{display:flex;align-items:center;gap:5px;color:var(--a-blue);font:700 24px var(--app);letter-spacing:-.03em}
+.wm{display:flex;align-items:center;gap:5px;color:var(--a-blue);font:700 21px var(--app);letter-spacing:-.03em;white-space:nowrap}
 .wm svg{width:26px;height:26px}
 .ttl{font:700 28px var(--app);letter-spacing:-.01em;padding:6px 18px 12px;display:flex;justify-content:space-between;align-items:baseline}
 .ttl span{font-size:15px;color:var(--a-blue);font-weight:500}
@@ -380,7 +380,7 @@ footer a:hover{color:var(--fg)}
   <div class="wrap hero-grid">
     <div class="hero-copy">
       <div class="eyebrow">Застосунок для знайомств на iOS та Android</div>
-      <h1 style="margin-top:14px">Маленька іскра.<br><span>Справжній зв’язок.</span></h1>
+      <h1 style="margin-top:14px">Маленька іскра.<br><span>Великий зв’язок.</span></h1>
       <p class="muted">Знайомтеся з одним профілем за раз. Надішліть Wink, Like або Spark із повідомленням і почніть спілкуватися, щойно симпатія стане взаємною.</p>
       <div class="stores">
         <a class="store" href="#download"><svg class="ico" aria-hidden="true"><use href="#apple"/></svg><span><small>Завантажте в</small><b>App Store</b></span></a>
@@ -539,7 +539,7 @@ const av=(n,cls='')=>`<div class="av ${cls}">${pic(n)}</div>`;
 
 /* ---------- app chrome ---------- */
 const st=t=>`<div class="st"><span>${t}</span><span class="cam"></span><span class="r"><svg width="18" height="12" viewBox="0 0 18 12"><g fill="#222"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1" opacity=".3"/></g></svg><svg width="16" height="12" viewBox="0 0 16 12"><path d="M8 11.5 1 4.2a10 10 0 0 1 14 0Z" fill="#222"/></svg><span class="bat"></span></span></div>`;
-const wm=`<div class="wm"><svg><use href="#mark"/></svg>bundle</div>`;
+const wm=`<div class="wm"><svg><use href="#mark"/></svg>Meet Bundle</div>`;
 const appTop=(l,r)=>`<div class="top"><div class="side">${l}</div>${wm}<div class="side r">${r}</div></div>`;
 const i=n=>`<svg class="i"><use href="#${n}"/></svg>`;
 function tabs(a){const t=[['Discover','compass'],['Likes','heart-o'],['Matches','chats'],['Profile','user']];
