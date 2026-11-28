@@ -127,6 +127,19 @@ svg.i{width:1em;height:1em;display:inline-block;vertical-align:middle;fill:curre
 .keep{position:absolute;left:0;right:0;top:660px;text-align:center;font:500 15px var(--th);color:#5b6270}
 .ht{position:absolute;width:18px;height:18px}
 
+/* spark composer */
+.sheetdim{position:absolute;inset:0;background:rgba(10,14,25,.45);z-index:9;opacity:0}
+.sheet{position:absolute;left:0;right:0;bottom:0;height:372px;background:#fff;border-radius:28px 28px 0 0;z-index:10;padding:12px 20px 0;transform:translateY(400px);box-shadow:0 -10px 30px rgba(0,0,0,.2)}
+.sheet .grab{width:44px;height:5px;border-radius:3px;background:#d6d9e0;margin:0 auto 16px}
+.sh1{display:flex;align-items:center;gap:12px}
+.sh1 img{width:48px;height:48px;border-radius:50%;object-fit:cover}
+.sh1 b{display:block;font:700 19px var(--th);color:#15171c}
+.sh1 small{display:block;font:400 13px var(--th);color:#6b7280;margin-top:2px}
+.field{margin-top:16px;height:132px;border-radius:18px;background:#f3f6ff;box-shadow:inset 0 0 0 2px #cfdcff;padding:14px 16px;font:500 17px/1.5 var(--th);color:#1f3fae}
+.caret{display:inline-block;width:2px;height:20px;background:#2f6bff;vertical-align:-3px;margin-left:1px}
+.sendb{margin-top:16px;height:56px;border-radius:28px;background:#2f6bff;color:#fff;display:flex;align-items:center;justify-content:center;gap:8px;font:600 17px var(--th);box-shadow:0 8px 20px rgba(47,107,255,.35)}
+.sendb .st{width:20px;height:20px;display:inline-flex}.sendb .st svg{width:100%;height:100%}
+.spk{position:absolute;left:0;top:0;width:28px;height:28px;color:#7fb0ff;pointer-events:none}
 /* likes */
 .pt{position:absolute;left:22px;top:108px;font:700 31px var(--th);color:#15171c}
 .pc{position:absolute;right:24px;top:120px;font:500 19px "Roboto";color:#2f6bff}
@@ -196,7 +209,9 @@ const Q = new URLSearchParams(location.search);
 const COMP = Q.get('comp') || 'fd';
 const AR = Q.get('ar') || '169';
 const W = AR === '169' ? 1920 : 1080, H = AR === '169' ? 1080 : 1920;
-const DUR = COMP === 'fd' ? 15.5 : 9.6;
+const DUR = {fd: 15.5, intro: 9.6, spark: 15}[COMP];
+const LANG = Q.get('lang') || 'th'; // spark comp: th | en (fd and intro are Thai only)
+const tr = (th, en) => LANG === 'en' ? en : th;
 const VARIANT = Q.get('v') || 'b'; // fd feed order: a = Lina, Nami, Maya; b = Nami, Lina, Maya
 window.DURATION = DUR; window.SIZE = [W, H];
 const stage = document.getElementById('stage');
@@ -226,7 +241,7 @@ const photo = (who, cover) => `<img src="${cover ? PEOPLE[who].img : PEOPLE[who]
 // ---------- app screens (Thai UI) ----------
 const LOGO_APP = `<div class="alogo"><img src="assets/logo-192.png" alt="">Meet Bundle</div>`;
 const statusBar = (tm) => `<div class="sb"><span>${tm}</span><div class="hole"></div><div class="ic"><div class="sig"><i style="height:4px"></i><i style="height:7px"></i><i style="height:10px"></i><i style="height:12px;opacity:.3"></i></div><svg width="16" height="12" viewBox="0 0 16 12"><path d="M8 12 0 3.5C4.5-.8 11.5-.8 16 3.5Z" fill="#111"/></svg><div class="bat"></div></div></div>`;
-const nav = (on) => `<div class="nav">${[['compass', 'ค้นพบ'], ['heart-o', 'ถูกใจคุณ'], ['chats', 'แมตช์'], ['user', 'โปรไฟล์']].map(([i, l], k) => `<div class="${k === on ? 'on' : ''}">${ic(k === on ? (i === 'heart-o' ? 'heart' : i + '-f') : i)}${l}</div>`).join('')}</div><div class="navbar"></div>`;
+const nav = (on) => `<div class="nav">${[['compass', tr('ค้นพบ', 'Discover')], ['heart-o', tr('ถูกใจคุณ', 'Likes')], ['chats', tr('แมตช์', 'Matches')], ['user', tr('โปรไฟล์', 'Profile')]].map(([i, l], k) => `<div class="${k === on ? 'on' : ''}">${ic(k === on ? (i === 'heart-o' ? 'heart' : i + '-f') : i)}${l}</div>`).join('')}</div><div class="navbar"></div>`;
 
 function feedCard(p) {
   const ph = `<div class="ph">${photo(p.who, true)}</div>`;
@@ -235,34 +250,36 @@ function feedCard(p) {
   <div class="nm">${p.name}${p.ver ? ic('verified') : ''}</div>
   <div class="loc">${ic('pin')}${p.loc}</div>
   <div class="cnt">${(p.pg || 0) + 1} / 3</div>
-  <div class="vp">ดูโปรไฟล์</div>
-  <div class="pill">${p.pct}% · ความสนใจที่ตรงกัน ${ic('chev')}</div>
+  <div class="vp">${tr('ดูโปรไฟล์', 'View profile')}</div>
+  <div class="pill">${p.pct}% · ${tr('ความสนใจที่ตรงกัน', 'Shared interests')} ${ic('chev')}</div>
   <div class="wink"><div class="b">${ic('smile')}</div>Wink</div></div>`;
 }
 const MAYA = {name: 'Maya, 26', ver: 1, loc: 'เทลอาวีฟ อิสราเอล · ห่างไปประมาณ 3 กม.', pct: 60, who: 'maya'};
 const LINA = {name: 'Lina, 25', loc: 'จาฟฟา · ห่างไปประมาณ 4 กม.', pct: 45, who: 'lina'};
 const NAMI = {name: 'Nami, 24', loc: 'รามัตกัน · ห่างไปประมาณ 6 กม.', pct: 52, who: 'nami'};
-function discover(id, cards, tm = '10:04') {
+function discover(id, cards, tm = '10:04', o = {}) {
+  o = {to: 'MAYA', who: 'maya', quote: '“วิวหุบผานั่นสวยเกินจริงไปมาก ที่มิตซ์เป ราโมนใช่ไหม?”', ...o};
   return `<div class="scr" id="${id}">${statusBar(tm)}
   <div class="hdr"><div class="l">${ic('moon')}</div>${LOGO_APP}<div class="r">${ic('refresh')}${ic('tune')}</div></div>
   <div class="feed"><div class="feedin">${cards.map(feedCard).join('')}</div>
-    <div class="sparkcard" style="opacity:0"><div class="k"><img src="assets/spark.png" alt="">SPARK ถึง MAYA</div>
-      <div class="q">“วิวหุบผานั่นสวยเกินจริงไปมาก ที่มิตซ์เป ราโมนใช่ไหม?”</div>
-      <div class="s">ส่งแล้ว ✓ · Spark จะถูกอ่านก่อนเสมอ</div></div>
+    <div class="sparkcard" style="opacity:0"><div class="k"><img src="assets/spark.png" alt="">${tr('SPARK ถึง ', 'SPARK TO ')}${o.to}</div>
+      <div class="q">${o.quote}</div>
+      <div class="s">${tr('ส่งแล้ว ✓ · Spark จะถูกอ่านก่อนเสมอ', 'Sent ✓ · Sparks get read first')}</div></div>
   </div>
   <div class="acts"><div class="act pass"><div class="b">${ic('x')}</div>Pass</div><div class="act spark"><div class="b"><img src="assets/spark.png" alt=""></div>Spark</div><div class="act like"><div class="b">${ic('heart')}</div>Like</div></div>
-  <div class="notif" style="opacity:0"><img src="assets/maya-face.jpg" alt=""><div><b>Maya กด Like กลับแล้ว</b><small>Spark ของคุณได้ผล</small></div>${ic('heart')}</div>
+  <div class="notif" style="opacity:0"><img src="${PEOPLE[o.who].face}" alt=""><div><b>${o.name || 'Maya'} ${tr('กด Like กลับแล้ว', 'liked you back')}</b><small>${tr('Spark ของคุณได้ผล', 'Your Spark landed')}</small></div>${ic('heart')}</div>
+  ${o.composer ? composer(o) : ''}
   ${nav(0)}</div>`;
 }
-function matchScreen(id) {
+function matchScreen(id, who = 'maya', name = 'Maya') {
   const hearts = [[60, 250, '#3d7bff'], [330, 270, '#e2405a'], [40, 420, '#3d7bff'], [345, 430, '#3d7bff'], [90, 520, '#e2405a'], [300, 560, '#3d7bff'], [180, 240, '#3d7bff'], [250, 470, '#e2405a']];
   return `<div class="scr match" id="${id}">
   ${hearts.map(([x, y, c]) => `<svg class="ht" style="left:${x}px;top:${y}px;color:${c}" viewBox="0 0 24 24"><use href="#heart" fill="${c}"/></svg>`).join('')}
-  <div class="pair"><div class="av a1"><img src="assets/shachar-face.jpg" alt=""></div><div class="av a2"><img src="assets/maya-face.jpg" alt=""></div><div class="mk"><img src="assets/logo-192.png" alt=""></div></div>
-  <div class="mt">แมตช์แล้ว!</div>
-  <div class="ms">คุณกับ Maya ถูกใจกันและกัน</div>
-  <div class="say">ทักทายเลย</div>
-  <div class="keep">เลื่อนดูต่อ</div></div>`;
+  <div class="pair"><div class="av a1"><img src="assets/shachar-face.jpg" alt=""></div><div class="av a2"><img src="${PEOPLE[who].face}" alt=""></div><div class="mk"><img src="assets/logo-192.png" alt=""></div></div>
+  <div class="mt">${tr('แมตช์แล้ว!', "It's a match!")}</div>
+  <div class="ms">${tr(`คุณกับ ${name} ถูกใจกันและกัน`, `You and ${name} liked each other.`)}</div>
+  <div class="say">${tr('ทักทายเลย', 'Say hello')}</div>
+  <div class="keep">${tr('เลื่อนดูต่อ', 'Keep browsing')}</div></div>`;
 }
 function likesScreen(id) {
   const P = [['lina', 'Lina, 25', 'จาฟฟา'], ['shachar', 'Shachar, 31', 'รามัตกัน', 'w'], ['nami', 'Nami, 24', 'รามัตกัน', 'p'], ['maya', 'Maya, 26', 'เทลอาวีฟ']];
@@ -298,6 +315,14 @@ function chatScreen(id) {
   ${nav(2)}</div>`;
 }
 
+function composer(o) {
+  return `<div class="sheetdim"></div><div class="sheet">
+    <div class="grab"></div>
+    <div class="sh1"><img src="${PEOPLE[o.who].face}" alt=""><div><b>${tr('ส่ง Spark ถึง ', 'Spark ')}${o.name}</b><small>${tr('Like พร้อมข้อความ ที่จะถูกอ่านก่อน', 'A Like with a message. It gets read first.')}</small></div></div>
+    <div class="field"><span class="typed"></span><i class="caret"></i></div>
+    <div class="sendb"><span class="st">${STAR}</span>${tr('ส่ง Spark', 'Send Spark')}</div></div>`;
+}
+
 // ---------- phone ----------
 function makePhone(screensHtml) {
   const p = el(`<div class="phone"><div class="face back"><div class="cam"></div></div><div class="edge l"></div><div class="edge r"></div>
@@ -309,6 +334,8 @@ function placePhone(p, cx, cy, s, rx, ry, rz, op = 1) {
   p.style.opacity = op;
 }
 
+const STAR = `<svg viewBox="0 0 24 24"><path d="M12 0c.8 6.4 5.6 11.2 12 12-6.4.8-11.2 5.6-12 12-.8-6.4-5.6-11.2-12-12C6.4 11.2 11.2 6.4 12 0Z" fill="currentColor"/></svg>`;
+
 // ---------- text helpers ----------
 function setWord(w, p, blur = 14, dy = 12) {
   w.style.opacity = p;
@@ -316,7 +343,7 @@ function setWord(w, p, blur = 14, dy = 12) {
   w.style.transform = `translateY(${(1 - p) * dy}px)`;
 }
 function badges() {
-  return el(`<div class="badges"><div class="badge">${ic('apple')}<div><small>ดาวน์โหลดได้ที่</small><b>App Store</b></div></div><div class="badge">${ic('play')}<div><small>ดาวน์โหลดได้ที่</small><b>Google Play</b></div></div></div>`);
+  return el(`<div class="badges"><div class="badge">${ic('apple')}<div><small>${tr('ดาวน์โหลดได้ที่', 'Download on the')}</small><b>App Store</b></div></div><div class="badge">${ic('play')}<div><small>${tr('ดาวน์โหลดได้ที่', 'Get it on')}</small><b>Google Play</b></div></div></div>`);
 }
 function lockup(px, glow) {
   const name = 'Meet Bundle';
@@ -540,12 +567,157 @@ function renderIntro(t, S) {
   tag.style.opacity = tp;
 }
 
+// ===========================================================================
+// COMPOSITION 3: Spark ("Sometimes, you just need a spark in your life. Stand out for free.")
+// ===========================================================================
+function lineHtml(chunks) {
+  // chunks: [text, isBlue, spaceAfter]
+  return chunks.map(([t, b, sp]) => `<span class="w${b ? ' blue sparkw' : ''}"${sp ? ' style="margin-right:.24em"' : ''}>${t}</span>`).join('');
+}
+function buildSpark() {
+  const en = LANG === 'en';
+  const L = AR === '169'
+    ? {fs: en ? 82 : 86, open: {s: 1.45}, side: {x: 150, y: 300, s: .86}, end: {s: 1.5, y: 300}, capFs: 30, phone: {x: 1400, y: 553, s: 1.0}, logoFs: 40, logoY: 226, badgeS: 1.15}
+    : {fs: en ? 66 : 68, open: {s: 1.3}, side: {cx: 1, y: 130, s: 1}, end: {s: 1.45, y: 690}, capFs: 32, phone: {x: 540, y: 1190, s: 1.2}, logoFs: 44, logoY: 600, badgeS: 1.25};
+  window.L = L;
+  const ff = en ? `font-family:Outfit,sans-serif;letter-spacing:-.02em;line-height:1.12` : '';
+  const h1 = el(`<div class="title" style="font-size:${L.fs}px;${ff}"><span class="ln">${lineHtml(en
+      ? [['Sometimes,', 0, 1], ['you', 0, 1], ['just', 0, 1], ['need', 0, 0]]
+      : [['บางที', 0, 1], ['ชีวิตก็แค่', 0, 0], ['ต้องการ', 0, 0]])}</span><span class="ln">${lineHtml(en
+      ? [['a', 0, 1], ['spark', 1, 1], ['in', 0, 1], ['your', 0, 1], ['life.', 0, 0]]
+      : [['Spark', 1, 1], ['สักนิด', 0, 0]])}</span></div>`);
+  const h2 = el(`<div class="title" style="font-size:${L.fs}px;${ff}"><span class="ln">${lineHtml(en
+      ? [['Stand', 0, 1], ['out', 0, 0]] : [['โดดเด่นกว่าใคร', 0, 0]])}</span><span class="ln">${lineHtml(en
+      ? [['for', 1, 1], ['free.', 1, 0]] : [['ได้', 0, 0], ['ฟรี', 1, 0]])}</span></div>`);
+  const caps = [
+    [tr('<b>Like พร้อมข้อความ</b> <span class="dim">ที่เธอจะเห็นก่อนใคร</span>', '<b>A Like with a message.</b> <span class="dim">She sees it first.</span>'), 3.3, 6.4],
+    [tr('<b>Spark จะถูกอ่านก่อนเสมอ</b> <span class="dim">และส่งได้ฟรี</span>', '<b>Sparks get read first.</b> <span class="dim">And they’re free.</span>'), 6.7, 9.35],
+    [tr('<b>ชอบกันทั้งคู่</b> <span class="dim">แชตเปิดขึ้นทันที</span>', '<b>It’s mutual.</b> <span class="dim">Chat opens instantly.</span>'), 9.6, 11.9],
+  ].map(([h, a, b]) => { const c = el(`<div class="cap" style="font-size:${L.capFs}px">${h}</div>`); c._a = a; c._b = b; return c; });
+  const NAMI_BKK = {name: 'Nami, 24', ver: 1, loc: tr('กรุงเทพฯ · ห่างไปประมาณ 4 กม.', 'Bangkok · About 4 km away'), pct: 64, who: 'nami'};
+  const LINA_BKK = {name: 'Lina, 25', loc: tr('กรุงเทพฯ · ห่างไปประมาณ 5 กม.', 'Bangkok · About 5 km away'), pct: 45, who: 'lina'};
+  const glow = el(`<div class="glow"></div>`);
+  const phone = makePhone(discover('sDisc', [NAMI_BKK, LINA_BKK], '10:04', {
+    to: 'NAMI', who: 'nami', name: 'Nami', composer: 1,
+    quote: tr('“รอยยิ้มนี้ทำให้วันนี้ดีขึ้นเลย สุดสัปดาห์นี้ไปกินกาแฟกันไหม?”', '“That smile just made my day. Coffee this weekend?”'),
+  }) + matchScreen('sMatch', 'nami', 'Nami'));
+  const logo = lockup(L.logoFs, true);
+  const bd = badges();
+  const bg = el(`<div class="abs" style="width:${W}px;height:${H}px;background:radial-gradient(60% 50% at 50% 45%,rgba(47,107,255,.16),rgba(47,107,255,0) 70%)"></div>`);
+  const stars = [...Array(16)].map((_, i) => { const e = el(`<div class="spk">${STAR}</div>`); e._a = (i / 16) * Math.PI * 2 + (i % 3) * .3; e._d = 90 + (i * 37 % 70); e._s = .5 + (i * 13 % 10) / 12; return e; });
+  [bg, glow, phone, h1, h2, ...caps, logo, bd, ...stars].forEach(e => stage.appendChild(e));
+  const seg = new Intl.Segmenter(LANG, {granularity: 'grapheme'});
+  const msg = tr('รอยยิ้มนี้ทำให้วันนี้ดีขึ้นเลย สุดสัปดาห์นี้ไปกินกาแฟกันไหม?', 'That smile just made my day. Coffee this weekend?');
+  return {h1, h2, w1: $$('.w', h1), w2: $$('.w', h2), caps, phone, glow, logo, bd, stars, graphemes: [...seg.segment(msg)].map(g => g.segment)};
+}
+
+function placeTitle(el_, st) { el_.style.transform = `translate(${st.x}px,${st.y}px) scale(${st.s})`; }
+function burst(stars, cx, cy, t0, t, scale = 1) {
+  stars.forEach(e => {
+    const q = clamp((t - t0) / 1.1);
+    const r = e._d * (.45 + .55 * eo(q)) * scale;
+    e.style.transform = `translate(${cx + Math.cos(e._a) * r - 14}px,${cy + Math.sin(e._a) * r * .7 - 14}px) scale(${e._s * scale * (1 - q * .6)}) rotate(${q * 90}deg)`;
+    e.style.opacity = t < t0 ? 0 : Math.sin(q * Math.PI);
+  });
+}
+
+function renderSpark(t, S) {
+  const {h1, h2, w1, w2, caps, phone, glow, logo, bd, stars, graphemes} = S;
+  const w = h1.offsetWidth, h = h1.offsetHeight;
+  // headline 1: word reveal, then move to the side, then fade out
+  w1.forEach((e, i) => setWord(e, prog(t, .15 + i * .14, .6 + i * .14)));
+  const ps = prog(t, 2.2, 3.0, eio);
+  const open = {s: L.open.s, x: (W - w * L.open.s) / 2, y: (H - h * L.open.s) / 2 - (AR === '169' ? 20 : 60)};
+  const side = L.side.cx ? {s: L.side.s, x: (W - w * L.side.s) / 2, y: L.side.y} : {s: L.side.s, x: L.side.x, y: L.side.y};
+  placeTitle(h1, {s: lerp(open.s, side.s, ps), x: lerp(open.x, side.x, ps), y: lerp(open.y, side.y, ps)});
+  const out1 = prog(t, 11.85, 12.25);
+  h1.style.opacity = 1 - out1; h1.style.filter = out1 > 0 ? `blur(${out1 * 10}px)` : 'none';
+  // the blue word glows; sparkles burst when it lands
+  const sw = $('.sparkw', h1);
+  const glowA = .35 + .25 * Math.sin(t * 3);
+  sw.style.textShadow = `0 0 ${24 * glowA}px rgba(61,123,255,.9)`;
+  const blueIdx = w1.indexOf(sw), tb = .15 + blueIdx * .14 + .25;
+  const r = sw.getBoundingClientRect();
+  burst(stars, r.left + r.width / 2, r.top + r.height / 2, tb, t, AR === '169' ? 1.6 : 1.3);
+  // captions
+  const capY = side.y + h * side.s + (AR === '169' ? 36 : 40);
+  caps.forEach(c => {
+    const pin = prog(t, c._a, c._a + .4), pout = prog(t, c._b, c._b + .35);
+    const cx = AR === '169' ? side.x : (W - c.offsetWidth) / 2;
+    c.style.transform = `translate(${cx}px,${capY + (1 - pin) * 10}px)`;
+    c.style.opacity = pin * (1 - pout);
+    c.style.filter = pin < 1 ? `blur(${(1 - pin) * 8}px)` : pout > 0 ? `blur(${pout * 8}px)` : 'none';
+  });
+  // phone
+  const P = L.phone;
+  const pin = prog(t, 2.25, 3.25, eo), pout = prog(t, 11.6, 12.4, p => p * p);
+  const swing = t > 9.25 && t < 10.15 ? Math.sin(clamp((t - 9.25) / .9) * Math.PI * 2) * 30 * (1 - clamp((t - 9.25) / .9)) : 0;
+  const ry = lerp(-96, -12 + Math.sin(t * .9) * 4, pin) + swing + pout * 140;
+  const rz = lerp(-8, 2.5, pin) + Math.sin(t * .6) * .8;
+  const cx = lerp(AR === '169' ? 1720 : 540, P.x, pin) + (AR === '169' ? pout * 60 : 0);
+  const cy = P.y + lerp(AR === '169' ? 30 : 160, 0, pin) + Math.sin(t * 1.1) * 6;
+  const sc = P.s * lerp(.9, 1, pin) * lerp(1, .72, pout);
+  placePhone(phone, cx, cy, sc, 6 + Math.sin(t * .7) * 1.5, ry, rz, t < 2.25 ? 0 : clamp((t - 2.25) / .15) * (1 - prog(t, 12.0, 12.45, p => p)));
+  glow.style.transform = `translate(${cx - 260}px,${cy + 434 * sc + 6}px) scale(${sc * .9},1)`;
+  glow.style.opacity = (t < 2.25 ? 0 : pin) * (1 - pout) * .9;
+  // screen: tap Spark, write the message, send, she likes back, match
+  const D = $('#sDisc', phone);
+  const press = (a) => t > a && t < a + .4 ? Math.sin(clamp((t - a) / .4) * Math.PI) : 0;
+  $('.act.spark .b', D).style.transform = `scale(${1 - press(3.75) * .14})`;
+  let ring = $('.ring', D);
+  if (!ring) { ring = el('<div class="ring"></div>'); D.appendChild(ring); }
+  const rp = clamp((t - 3.85) / .6), rr = 40 + rp * 70;
+  ring.style.cssText += `;width:${rr * 2}px;height:${rr * 2}px;left:${196 - rr}px;bottom:${150 - rr + 6}px;opacity:${t > 3.85 && rp < 1 ? (1 - rp) : 0}`;
+  const up = prog(t, 4.05, 4.45, eo), down = prog(t, 6.55, 6.9, p => p * p);
+  $('.sheet', D).style.transform = `translateY(${(1 - up) * 400 + down * 400}px)`;
+  $('.sheetdim', D).style.opacity = up * (1 - down);
+  const n = Math.floor(graphemes.length * clamp((t - 4.55) / 1.6));
+  $('.typed', D).textContent = graphemes.slice(0, n).join('');
+  $('.caret', D).style.opacity = (n < graphemes.length || Math.floor(t * 2.5) % 2 === 0) ? 1 : 0;
+  $('.sendb', D).style.transform = `scale(${1 - press(6.3) * .08})`;
+  const sc2 = $('.sparkcard', D), sp = prog(t, 6.85, 7.35, eback);
+  sc2.style.opacity = clamp((t - 6.85) / .25);
+  sc2.style.transform = `translateY(${(1 - sp) * 40}px) scale(${lerp(.9, 1, sp)})`;
+  const nt = $('.notif', D), np = prog(t, 8.25, 8.7, eback), nout = prog(t, 9.3, 9.5);
+  nt.style.opacity = clamp((t - 8.25) / .15) * (1 - nout);
+  nt.style.transform = `translateY(${(1 - np) * -90}px)`;
+  const ms = $('#sMatch', phone);
+  ms.style.opacity = clamp((t - 9.45) / .3);
+  D.style.opacity = 1 - clamp((t - 9.6) / .2);
+  const ap = prog(t, 9.7, 10.25, eback);
+  $('.pair', ms).style.transform = `scale(${lerp(.6, 1, ap)})`;
+  $('.pair', ms).style.opacity = clamp((t - 9.7) / .2);
+  [$('.mt', ms), $('.ms', ms)].forEach((e, i) => { const q = prog(t, 10.05 + i * .12, 10.45 + i * .12); e.style.opacity = q; e.style.transform = `translateY(${(1 - q) * 14}px)`; });
+  const bp = prog(t, 10.55, 10.95, eback);
+  [$('.say', ms), $('.keep', ms)].forEach((e, i) => { e.style.opacity = clamp((t - 10.55 - i * .1) / .25); e.style.transform = `translateY(${(1 - bp) * 16}px)`; });
+  $$('.ht', ms).forEach((hh, i) => {
+    const a = 9.8 + i * .09, q = clamp((t - a) / 2.2);
+    hh.style.opacity = t < a ? 0 : Math.sin(q * Math.PI) * .9;
+    hh.style.transform = `translateY(${-q * 60}px) scale(${.6 + q * .6})`;
+  });
+  // end card: "Stand out for free."
+  const w2w = h2.offsetWidth, h2h = h2.offsetHeight;
+  placeTitle(h2, {s: L.end.s, x: (W - w2w * L.end.s) / 2, y: L.end.y});
+  w2.forEach((e, i) => setWord(e, prog(t, 12.35 + i * .15, 12.8 + i * .15)));
+  const lp = prog(t, 13.1, 13.55);
+  logo.style.transform = `translate(${(W - logo.offsetWidth) / 2}px,${L.logoY - logo.offsetHeight / 2 + (1 - lp) * 12}px)`;
+  logo.style.opacity = lp;
+  const bpp = prog(t, 13.5, 13.95, eo);
+  bd.style.transform = `translate(${(W - bd.offsetWidth * L.badgeS) / 2}px,${L.end.y + h2h * L.end.s + (AR === '169' ? 40 : 46) + (1 - bpp) * 16}px) scale(${L.badgeS})`;
+  bd.style.opacity = bpp;
+  if (t > 12.3) {
+    const fw = $$('.blue', h2).pop().getBoundingClientRect();
+    burst(stars, fw.left + fw.width / 2, fw.top + fw.height / 2, 12.8, t, AR === '169' ? 1.8 : 1.4);
+  }
+}
+
 // ---------- boot ----------
 window.ready = (async () => {
   const svg = await (await fetch('assets/icons.svg')).text();
   document.body.insertAdjacentHTML('afterbegin', svg);
-  const S = COMP === 'fd' ? buildFD() : buildIntro();
-  window.render = (t) => COMP === 'fd' ? renderFD(t, S) : renderIntro(t, S);
+  const S = {fd: buildFD, intro: buildIntro, spark: buildSpark}[COMP]();
+  const R = {fd: renderFD, intro: renderIntro, spark: renderSpark}[COMP];
+  window.render = (t) => R(t, S);
   await document.fonts.ready;
   await Promise.all([...document.images].map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; })));
   // preload CSS background images

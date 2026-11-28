@@ -4,7 +4,9 @@
 //   node render.js <comp> <ar> --stills 1,2.5,9     PNG stills into ./stills
 //   add --v a for the Lina-first feed (fd only; default b = Nami first)
 //
-// comp: fd | intro    ar: 169 | 916
+//   add --lang en for English (spark only; default th)
+//
+// comp: fd | intro | spark    ar: 169 | 916
 'use strict';
 const http = require('http');
 const fs = require('fs');
@@ -30,8 +32,8 @@ function serve() {
 
 async function main() {
   const [comp, ar, ...rest] = process.argv.slice(2);
-  if (!['fd', 'intro'].includes(comp) || !['169', '916'].includes(ar)) {
-    console.error('usage: node render.js <fd|intro> <169|916> [out.mp4 | --stills t1,t2] [--v a|b]');
+  if (!['fd', 'intro', 'spark'].includes(comp) || !['169', '916'].includes(ar)) {
+    console.error('usage: node render.js <fd|intro|spark> <169|916> [out.mp4 | --stills t1,t2] [--v a|b] [--lang th|en]');
     process.exit(2);
   }
   const stillsIdx = rest.indexOf('--stills');
@@ -39,10 +41,13 @@ async function main() {
   const vIdx = rest.indexOf('--v');
   const variant = vIdx >= 0 ? rest[vIdx + 1] : 'b';
   if (!['a', 'b'].includes(variant)) { console.error('--v must be a or b'); process.exit(2); }
+  const lIdx = rest.indexOf('--lang');
+  const lang = lIdx >= 0 ? rest[lIdx + 1] : 'th';
+  if (!['th', 'en'].includes(lang)) { console.error('--lang must be th or en'); process.exit(2); }
   const out = stills ? null : (rest[0] && !rest[0].startsWith('--') ? rest[0] : path.join(ROOT, 'out', `${comp}-${ar}.mp4`));
 
   const srv = await serve();
-  const url = `http://127.0.0.1:${srv.address().port}/scene.html?comp=${comp}&ar=${ar}&v=${variant}`;
+  const url = `http://127.0.0.1:${srv.address().port}/scene.html?comp=${comp}&ar=${ar}&v=${variant}&lang=${lang}`;
   const [W, H] = ar === '169' ? [1920, 1080] : [1080, 1920];
   const browser = await chromium.launch();
   try {
@@ -57,7 +62,7 @@ async function main() {
       fs.mkdirSync(path.join(ROOT, 'stills'), { recursive: true });
       for (const t of stills) {
         await page.evaluate((t) => window.render(t), t);
-        await stage.screenshot({ path: path.join(ROOT, 'stills', `${comp}-${ar}-${t.toFixed(2)}.png`) });
+        await stage.screenshot({ path: path.join(ROOT, 'stills', `${comp}-${lang}-${ar}-${t.toFixed(2)}.png`) });
       }
       return;
     }

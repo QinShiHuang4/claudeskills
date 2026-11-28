@@ -11,6 +11,10 @@ frame with Playwright and ffmpeg. They match the originals' size, length and fra
 | `out/meet-bundle-3d-free-dating-9x16-th.mp4` | 1080×1920 | 15.5 s |
 | `out/meet-bundle-intro-16x9-th.mp4` | 1920×1080 | 9.6 s |
 | `out/meet-bundle-intro-9x16-th.mp4` | 1080×1920 | 9.6 s |
+| `out/meet-bundle-spark-16x9-th.mp4` / `-en.mp4` | 1920×1080 | 15 s |
+| `out/meet-bundle-spark-9x16-th.mp4` / `-en.mp4` | 1080×1920 | 15 s |
+
+The Spark video ("Sometimes, you just need a spark in your life. Stand out for free.") is in Thai and English.
 
 Re-render (needs Node, Playwright's Chromium and ffmpeg):
 
@@ -19,6 +23,10 @@ Re-render (needs Node, Playwright's Chromium and ffmpeg):
     node render.js fd 916 out/meet-bundle-3d-free-dating-9x16-th.mp4
     node render.js intro 169 out/meet-bundle-intro-16x9-th.mp4
     node render.js intro 916 out/meet-bundle-intro-9x16-th.mp4
+    node render.js spark 169 out/meet-bundle-spark-16x9-th.mp4
+    node render.js spark 916 out/meet-bundle-spark-9x16-th.mp4
+    node render.js spark 169 out/meet-bundle-spark-16x9-en.mp4 --lang en
+    node render.js spark 916 out/meet-bundle-spark-9x16-en.mp4 --lang en
 
 Preview single frames: `node render.js fd 169 --stills 3,7.5,11` (written to `stills/`, git-ignored).
 
