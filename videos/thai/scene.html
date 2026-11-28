@@ -772,6 +772,7 @@ function renderPattaya(t, S) {
   const op = prog(t, 1.3, 1.65, eo);
   const ms = $('#pMatch', phone);
   ms.style.opacity = op;
+  home.style.opacity = 1 - prog(t, 1.45, 1.7);
   ms.style.transformOrigin = `${ib}px ${it}px`;
   ms.style.transform = `scale(${lerp(.15, 1, op)})`;
   const ap = prog(t, 1.6, 2.1, eback);
