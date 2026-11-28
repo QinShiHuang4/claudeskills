@@ -40,3 +40,11 @@ so a fresh checkout cannot re-render frames 2, 4 and 6 or the feature graphic un
    **Version page:** Description, Keywords, Promotional text and the 7 screenshots (6.9″ display) per localization.
 3. The Thai screenshots show the app's interface in Thai. Check that the wording matches the
    app's real Thai strings before uploading, since both stores expect screenshots to show the actual app.
+
+## ASO notes (keep when editing)
+
+- **App Store indexes only Name, Subtitle and Keywords** (not the description). Words are combined across the three, so never repeat a word: the name already covers *meet, bundle, dating, social*, the subtitle covers *match, chat, find, love, free*, and the keywords field adds the rest. Comma separated, no spaces, singular forms, no competitor names.
+- **Google Play indexes the title, short description and full description.** Key terms (*dating app, free dating, singles, match, chat, date, love, relationship*) appear naturally a few times in the full description; don't add more repetition than that, since Play penalises keyword stuffing.
+- **Promotional text** (App Store) can be changed any time without a new version, so use it for timely messages (a season, a new feature).
+- **Thai**: both common spellings are covered: *แชต* (official, used in visible text) and *แชท*, *เดต* and *เดท*, *แอป* and *แอพ*.
+- Keyword choices are based on category terms, not measured search volume. Check them against real data (Apple Search Ads keyword popularity is free; AppTweak or Sensor Tower are paid) and swap low performers after a few weeks.
