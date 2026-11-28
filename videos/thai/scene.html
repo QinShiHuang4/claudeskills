@@ -384,7 +384,8 @@ svg.i{width:1em;height:1em;display:inline-block;vertical-align:middle;fill:curre
 .st-pop .chk{width:52px;height:52px;border-radius:50%;background:#1d9bf0;display:grid;place-items:center;flex:none}
 .st-pop .chk svg{width:30px;height:30px;color:#fff}
 .st-phone .w2m .a{top:250px}.st-phone .w2m .mk{top:316px}.st-phone .w2m .t{top:410px}.st-phone .w2m .s{top:460px}.st-phone .w2m .b{top:502px}.st-phone .w2m .k{top:566px}
-.st-phone .w2m .ht{transform:translateY(80px)}
+.st-phone .w2m .ht{transform:translateY(-30px)}
+.st-phone .w2m .ht:nth-of-type(n+7){display:none}
 .st-phone .w2sb{top:6px}
 /* the 3D device */
 .st-stage3{position:absolute;left:0;top:0;transform-origin:0 0;perspective:1500px}
@@ -1474,12 +1475,10 @@ const ST_COPY = {
 const ST_POPS = {
   1: [{html: () => `<img src="${PEOPLE.maya.face}" alt=""><div><b>${tr('Maya กด Like กลับแล้ว ❤️', 'Maya liked you back ❤️')}</b><span>${tr('เมื่อสักครู่', 'now')}</span></div>`, x: .58, y: .16},
       {html: () => `<b>${tr('แมตช์แล้ว! 🎉', 'It’s a match! 🎉')}</b>`, cls: 'match', x: -.08, y: .58}],
-  3: [{html: () => `<img src="${PEOPLE.shacharR.face}" alt=""><div><b>${tr('Shachar ส่ง Spark ✨', 'Shachar sent a Spark ✨')}</b><span>${tr('“ไปกินกาแฟกันไหม?”', '“Coffee this weekend?”')}</span></div>`, cls: 'sq', x: -.1, y: .6},
-      {html: () => `<div class="ic2" style="background:#16213f"><img src="assets/spark.png" alt="" style="width:40px;height:40px;border-radius:0"></div><div><b>${tr('ถูกอ่านก่อนเสมอ', 'Read first')}</b><span>${tr('Like พร้อมข้อความ', 'A Like with a message')}</span></div>`, x: .5, y: .74}],
+  3: [{html: () => `<img src="${PEOPLE.shacharR.face}" alt=""><div><b>${tr('Shachar ส่ง Spark ✨', 'Shachar sent a Spark ✨')}</b><span>${tr('“ไปกินกาแฟกันไหม?”', '“Coffee this weekend?”')}</span></div>`, cls: 'sq', x: -.1, y: .6}],
 };
 Object.assign(ST_POPS, {
-  2: [{html: () => `<img src="${PEOPLE.shacharR.face}" alt=""><div><b>${tr('Shachar ส่ง Wink ให้คุณ 😉', 'Shachar winked at you 😉')}</b><span>${tr('เมื่อสักครู่', 'now')}</span></div>`, x: .5, y: .2},
-      {html: () => `<b>${tr('+3 คนถูกใจคุณ', '+3 new likes')}</b>`, cls: 'match', x: -.06, y: .62}],
+  2: [{html: () => `<b>${tr('+3 คนถูกใจคุณ', '+3 new likes')}</b>`, cls: 'match', x: .62, y: .46}],
   4: [{html: () => `<div class="chk">${ic('shield')}</div><div><b>${tr('รูปผ่านการตรวจแล้ว', 'Photo reviewed')}</b><span>${tr('ก่อนที่ใครจะได้เห็น', 'before anyone sees it')}</span></div>`, x: .52, y: .18},
       {html: () => `<img src="${PEOPLE.shacharR.face}" alt=""><div><b>Shachar, 31 <span style="display:inline;color:#1d9bf0">✓</span></b><span>${tr('โปรไฟล์ยืนยันแล้ว', 'Verified profile')}</span></div>`, x: -.1, y: .6}],
   5: [{html: () => `<img src="${PEOPLE.maya.face}" alt=""><div><b>${tr('คุณกับ Maya', 'You & Maya')}</b><span>${tr('4 ความสนใจที่ตรงกัน', '4 shared interests')} ☕✈️🎵🥾</span></div>`, cls: 'sq', x: -.1, y: .66}],
@@ -1493,7 +1492,18 @@ const ST_LOC = () => tr('เทลอาวีฟ อิสราเอล · �
 function stScreen(n) {
   const disc = (who, name, pct, extra = '') => `<div class="w2l">${w2SB('10:04')}${w2HD()}${w2CARD(who, name, false, ST_LOC(), pct)}${w2ACTS()}${w2NAV()}${extra}</div>`;
   if (n === 1) return disc('maya', 'Maya, 26', 60);
-  if (n === 2) return disc('shacharR', 'Shachar, 31', 60, `<div class="w2heart" style="opacity:1">${ic('heart')}</div><div class="w2lsent" style="opacity:1">${tr('ส่ง Like แล้ว', 'Like sent')}</div>`);
+  if (n === 2) {
+    // mid-scroll: Omer (just liked) sliding up, Shachar coming in below
+    const c1 = w2CARD('omerR', 'Omer, 25', false, tr('กรุงเทพฯ · ห่างไปประมาณ 2 กม.', 'Bangkok · About 2 km away'), 60).replace('class="w2card"', 'class="w2card" style="top:-205px"');
+    const c2 = w2CARD('shacharR', 'Shachar, 31', false, ST_LOC(), 60).replace('class="w2card"', 'class="w2card" style="top:349px"').replace('<div class="cnt">1 / 3</div>', '<div class="cnt">2 / 3</div>');
+    const ph = [[60, -20, 30], [240, 10, 26], [270, 230, 24], [130, 270, 22], [300, 120, 18]].map(([x, y, w]) => `<svg style="position:absolute;left:${x}px;top:${y}px;width:${w}px;height:${w}px;color:#fff;z-index:5;filter:drop-shadow(0 2px 6px rgba(0,0,0,.3))"><use href="#heart"/></svg>`).join('');
+    return `<div class="w2l">${w2SB('10:04')}${w2HD()}
+      <div style="position:absolute;left:0;right:0;top:98px;bottom:107px;overflow:hidden">${c1}${c2}
+        <div class="w2heart" style="opacity:1;top:20px;left:86px;width:220px;height:220px">${ic('heart')}</div>${ph}
+        <div class="w2lsent" style="opacity:1;top:268px;left:140px">${tr('ส่ง Like แล้ว', 'Like sent')}</div>
+        <div style="position:absolute;right:4px;top:60px;width:4px;height:300px;border-radius:2px;background:#e3e6ec"><i style="display:block;margin-top:110px;height:80px;border-radius:2px;background:#2f6bff"></i></div>
+      </div>${w2NAV()}</div>`;
+  }
   if (n === 4) return disc('shacharR', 'Shachar, 31', 60);
   if (n === 3) {
     const rows = LANG === 'en' ? ['1234567890', 'qwertyuiop', 'asdfghjkl', 'zxcvbnm'] : ['ๅ/-ภถุึคตจ', 'ๆไำพะัีรนย', 'ฟหกดเ้่าสว', 'ผปแอิืทมใ'];
