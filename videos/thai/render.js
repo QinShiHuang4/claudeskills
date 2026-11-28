@@ -32,8 +32,8 @@ function serve() {
 
 async function main() {
   const [comp, ar, ...rest] = process.argv.slice(2);
-  if (!['fd', 'intro', 'spark', 'pattaya'].includes(comp) || !['169', '916'].includes(ar)) {
-    console.error('usage: node render.js <fd|intro|spark|pattaya> <169|916> [out.mp4 | --stills t1,t2] [--v a|b] [--lang th|en]');
+  if (!['fd', 'intro', 'spark', 'pattaya', 'wink'].includes(comp) || !['169', '916'].includes(ar)) {
+    console.error('usage: node render.js <fd|intro|spark|pattaya|wink> <169|916> [out.mp4 | --stills t1,t2] [--v a|b] [--lang th|en]');
     process.exit(2);
   }
   const stillsIdx = rest.indexOf('--stills');

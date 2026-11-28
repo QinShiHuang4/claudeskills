@@ -154,6 +154,24 @@ svg.i{width:1em;height:1em;display:inline-block;vertical-align:middle;fill:curre
 .toast b{display:block;font:600 15px var(--th);color:#15171c}
 .toast small{display:block;font:400 13px var(--th);color:#5b6270;margin-top:2px;white-space:nowrap}
 .endbg{position:absolute;inset:0;background:radial-gradient(80% 60% at 50% 45%,#121a2c 0,#080b13 70%,#05070c 100%);opacity:0}
+/* wink */
+.wfeat{position:absolute;left:14px;right:14px;top:170px;height:430px;border-radius:24px;overflow:hidden;background:#dfe6f5}
+.wfeat .ph{position:absolute;inset:0}
+.wfeat .sh{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(0,0,0,.6))}
+.wfeat .ring2{position:absolute;inset:0;border-radius:24px;box-shadow:inset 0 0 0 3px #3d7bff;pointer-events:none}
+.wfeat .n{position:absolute;left:18px;bottom:62px;color:#fff;font:600 26px var(--app)}
+.wfeat .c{position:absolute;left:18px;bottom:36px;color:rgba(255,255,255,.92);font:400 14px var(--th)}
+.wfeat .chip{left:14px;top:14px;opacity:0}
+.wfeat .lb2{position:absolute;right:16px;bottom:22px;width:64px;height:64px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;box-shadow:0 0 0 4px #fff,0 6px 16px rgba(0,0,0,.3)}
+.wfeat .lb2 svg{width:30px;height:30px}
+.wrow{position:absolute;left:14px;right:14px;top:616px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.wrow>div{height:140px;border-radius:18px;overflow:hidden;position:relative}
+.wrow .more{background:linear-gradient(160deg,#4d8bff,#2453d6);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font:800 34px "Outfit"}
+.wrow .more small{font:500 13px var(--th);opacity:.9}
+.wbub{position:absolute;left:50%;top:385px;width:150px;height:150px;margin:-75px 0 0 -75px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#6fa0ff,#2f6bff 60%,#1f4fd6);color:#fff;display:grid;place-items:center;box-shadow:0 0 40px rgba(61,123,255,.9);z-index:9;opacity:0}
+.wbub svg{width:92px;height:92px}
+.wrng{position:absolute;left:50%;top:385px;border-radius:50%;border:4px solid #6f9bff;z-index:8;opacity:0}
+.hburst{position:absolute;z-index:9;color:var(--red);opacity:0}
 /* likes */
 .pt{position:absolute;left:22px;top:108px;font:700 31px var(--th);color:#15171c}
 .pc{position:absolute;right:24px;top:120px;font:500 19px "Roboto";color:#2f6bff}
@@ -223,7 +241,7 @@ const Q = new URLSearchParams(location.search);
 const COMP = Q.get('comp') || 'fd';
 const AR = Q.get('ar') || '169';
 const W = AR === '169' ? 1920 : 1080, H = AR === '169' ? 1080 : 1920;
-const DUR = {fd: 15.5, intro: 9.6, spark: 15, pattaya: 7}[COMP];
+const DUR = {fd: 15.5, intro: 9.6, spark: 15, pattaya: 7, wink: 7.5}[COMP];
 const LANG = Q.get('lang') || 'th'; // spark comp: th | en (fd and intro are Thai only)
 const tr = (th, en) => LANG === 'en' ? en : th;
 const VARIANT = Q.get('v') || 'b'; // fd feed order: a = Lina, Nami, Maya; b = Nami, Lina, Maya
@@ -250,6 +268,7 @@ const PEOPLE = {
   nami:    {img: 'assets/nami.jpg', face: 'assets/nami-face.jpg', pos: '50% 34%'},
   shachar: {img: 'assets/shachar-face.jpg', face: 'assets/shachar-face.jpg', pos: '50% 40%'},
   her:     {img: 'assets/her-face.jpg', face: 'assets/her-face.jpg', pos: 'center'},
+  omer:    {img: 'assets/omer-club.jpg', face: 'assets/omer-face.jpg', pos: '50% 30%'},
 };
 const photo = (who, cover) => `<img src="${cover ? PEOPLE[who].img : PEOPLE[who].face}" style="width:100%;height:100%;object-fit:cover;object-position:${cover ? PEOPLE[who].pos : 'center'};display:block" alt="">`;
 
@@ -794,12 +813,97 @@ function renderPattaya(t, S) {
   bd.style.opacity = bp;
 }
 
+// ===========================================================================
+// COMPOSITION 5: Wink (plays after the AI nightclub shots; 9:16 only)
+// ===========================================================================
+function buildWink() {
+  const en = LANG === 'en';
+  const bg = el(`<div class="abs" style="width:${W}px;height:${H}px;background:url(assets/club-bg.jpg) center/cover"></div>`);
+  const scr = `<div class="scr" id="wLikes">${statusBar('01:24')}
+    <div class="hdr"><div class="l">${ic('moon')}</div>${LOGO_APP}<div class="r">${ic('refresh')}</div></div>
+    <div class="pt">${tr('ถูกใจคุณ', 'Likes you')}</div><div class="pc">14</div>
+    <div class="wfeat"><div class="ph">${photo('omer', true)}</div><div class="sh"></div><div class="ring2"></div>
+      <div class="chip wk">${ic('smile')}${tr('ส่ง Wink ให้คุณ', 'Winked at you')}</div>
+      <div class="n">Omer, 25</div><div class="c">${tr('ห่างไปไม่ถึง 1 กม.', 'Less than 1 km away')}</div>
+      <div class="lb2">${ic('heart')}</div></div>
+    <div class="wrow"><div>${photo('shachar', true)}</div><div class="more">+12<small>${tr('คนถูกใจคุณ', 'more likes')}</small></div></div>
+    ${[0, 1, 2].map(() => '<div class="wrng"></div>').join('')}
+    <div class="wbub">${ic('wink')}</div>
+    ${[...Array(7)].map(() => `<svg class="hburst" viewBox="0 0 24 24"><use href="#heart" fill="#e2405a"/></svg>`).join('')}
+    <div class="toast" style="top:52px"><img src="${PEOPLE.omer.face}" alt=""><div><b>${tr('Omer ส่ง Wink ให้คุณ', 'Omer winked at you')}</b><small>${tr('กด Like กลับ แล้วแมตช์กันเลย', 'Like back and it’s a match')}</small></div></div>
+    ${nav(1)}</div>`;
+  const phone = makePhone(scr);
+  const endbg = el(`<div class="endbg"></div>`);
+  const ff = en ? 'font-family:Outfit,sans-serif;letter-spacing:-.02em;line-height:1.1' : '';
+  const e1 = el(`<div class="title" style="font-size:${en ? 104 : 96}px;text-align:center;${ff}"><span class="ln"><span class="w">${tr('อยากเริ่มก่อน?', 'First move?')}</span></span><span class="ln"><span class="w">${tr('ส่ง', '')}</span><span class="w blue sparkw"${en ? '' : ' style="margin-left:.24em"'}>${tr('Wink', 'Wink.')}</span></span></div>`);
+  const sub = el(`<div class="tag" style="font-size:34px">${tr('ทักทายเบาๆ ไม่กดดัน และฟรี', 'A light hello. No pressure. Free.')}</div>`);
+  const logo = lockup(52, true), bd = badges();
+  [bg, phone, endbg, e1, sub, logo, bd].forEach(e => stage.appendChild(e));
+  return {phone, endbg, e1, w: $$('.w', e1), sub, logo, bd};
+}
+
+function renderWink(t, S) {
+  const {phone, endbg, e1, w, sub, logo, bd} = S;
+  const pin = prog(t, 0, .55, eo), pout = prog(t, 3.6, 4.05, p => p * p);
+  placePhone(phone, 540, 1010 + (1 - pin) * 260 + pout * 120 + Math.sin(t * 1.2) * 5, lerp(1.55, 1.42, pin) * lerp(1, .85, pout), 4, -6 + Math.sin(t * .9) * 2.5, 1.5, clamp(t / .25) * (1 - pout));
+  const D = $('#wLikes', phone);
+  // featured card arrives
+  const fc = $('.wfeat', D), fp = prog(t, .35, .8, eback);
+  fc.style.transform = `translateY(${(1 - fp) * -40}px) scale(${lerp(.92, 1, fp)})`;
+  fc.style.opacity = clamp((t - .35) / .2);
+  $('.ring2', D).style.boxShadow = `inset 0 0 0 3px #3d7bff,0 0 ${t > .8 ? 24 + 14 * Math.sin(t * 6) : 0}px rgba(61,123,255,.9)`;
+  $('.wrow', D).style.opacity = clamp((t - .5) / .3);
+  // wink bubble pops, rings ripple, then it shrinks into the chip
+  const bub = $('.wbub', D);
+  const bi = prog(t, .95, 1.35, eback), bo = prog(t, 1.85, 2.2, eio);
+  bub.style.opacity = t < .95 ? 0 : 1 - prog(t, 2.1, 2.2);
+  bub.style.transform = `translate(${bo * -118}px,${bo * -175}px) scale(${bi * lerp(1, .18, bo)}) rotate(${(1 - bi) * -30}deg)`;
+  $$('.wrng', D).forEach((r, i) => {
+    const q = clamp((t - 1.1 - i * .18) / .8), rr = 70 + q * 140;
+    r.style.width = r.style.height = rr * 2 + 'px';
+    r.style.margin = `${-rr}px 0 0 ${-rr}px`;
+    r.style.opacity = t > 1.1 + i * .18 && q < 1 ? (1 - q) * .9 : 0;
+  });
+  const chip = $('.chip', fc);
+  const cp = prog(t, 2.1, 2.4, eback);
+  chip.style.opacity = clamp((t - 2.1) / .15);
+  chip.style.transform = `scale(${lerp(.6, 1, cp)})`;
+  // notification
+  const to = $('.toast', D), tq = prog(t, 2.35, 2.75, eback);
+  to.style.opacity = clamp((t - 2.35) / .12) * (1 - prog(t, 3.45, 3.6));
+  to.style.transform = `translateY(${(1 - tq) * -70}px)`;
+  // she likes him back
+  const lb = $('.lb2', fc);
+  const pr = t > 2.95 && t < 3.3 ? Math.sin(clamp((t - 2.95) / .35) * Math.PI) : 0;
+  lb.style.transform = `scale(${1 - pr * .18})`;
+  $$('.hburst', D).forEach((h, i) => {
+    const a = (i / 7) * Math.PI * 2, q = clamp((t - 3.05) / .7), r = 20 + eo(q) * 110;
+    const x = 392 - 14 - 32 + Math.cos(a) * r - 14, y = 170 + 430 - 22 - 32 + Math.sin(a) * r - 14;
+    h.style.cssText = `left:${x}px;top:${y}px;width:${28 * (1 - q * .4)}px;height:${28 * (1 - q * .4)}px;opacity:${t > 3.05 && q < 1 ? 1 - q : 0}`;
+  });
+  // outro
+  endbg.style.opacity = prog(t, 3.7, 4.1, p => p);
+  e1.style.transform = `translate(${(W - e1.offsetWidth) / 2}px,700px)`;
+  w.forEach((x, i) => setWord(x, prog(t, 4.05 + i * .16, 4.5 + i * .16)));
+  const sw = $('.sparkw', e1);
+  sw.style.textShadow = `0 0 ${18 + 10 * Math.sin(t * 3)}px rgba(61,123,255,.8)`;
+  const sp = prog(t, 4.6, 5.0);
+  sub.style.transform = `translate(${(W - sub.offsetWidth) / 2}px,${700 + e1.offsetHeight + 24 + (1 - sp) * 10}px)`;
+  sub.style.opacity = sp;
+  const lp = prog(t, 4.8, 5.2);
+  logo.style.transform = `translate(${(W - logo.offsetWidth) / 2}px,${560 + (1 - lp) * 12}px)`;
+  logo.style.opacity = lp;
+  const bp = prog(t, 5.1, 5.5, eo);
+  bd.style.transform = `translate(${(W - bd.offsetWidth * 1.25) / 2}px,${700 + e1.offsetHeight + 110 + (1 - bp) * 16}px) scale(1.25)`;
+  bd.style.opacity = bp;
+}
+
 // ---------- boot ----------
 window.ready = (async () => {
   const svg = await (await fetch('assets/icons.svg')).text();
   document.body.insertAdjacentHTML('afterbegin', svg);
-  const S = {fd: buildFD, intro: buildIntro, spark: buildSpark, pattaya: buildPattaya}[COMP]();
-  const R = {fd: renderFD, intro: renderIntro, spark: renderSpark, pattaya: renderPattaya}[COMP];
+  const S = {fd: buildFD, intro: buildIntro, spark: buildSpark, pattaya: buildPattaya, wink: buildWink}[COMP]();
+  const R = {fd: renderFD, intro: renderIntro, spark: renderSpark, pattaya: renderPattaya, wink: renderWink}[COMP];
   window.render = (t) => R(t, S);
   await document.fonts.ready;
   await Promise.all([...document.images].map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; })));
