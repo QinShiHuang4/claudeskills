@@ -312,6 +312,59 @@ svg.i{width:1em;height:1em;display:inline-block;vertical-align:middle;fill:curre
 .fpw .ca{margin-top:10px;font:400 12px var(--th);color:#8f89a3}
 .fshard{position:absolute;inset:0;z-index:20}
 .fcrack{position:absolute;inset:0;z-index:21;pointer-events:none}
+/* store listing screenshots + feature graphic */
+.st-root{position:absolute;inset:0;background:radial-gradient(90% 55% at 50% 100%,#0b1530 0,#05070c 60%,#000 100%)}
+.st-lock{position:absolute;display:flex;align-items:center;gap:.28em;font:700 1em Roboto;color:#fff;letter-spacing:-.01em;white-space:nowrap}
+.st-lock img{height:1.05em}
+.st-h{position:absolute;color:#fff;font-weight:800;line-height:1.02;letter-spacing:-.03em;white-space:nowrap}
+.st-h .b{color:#3d7bff;display:block}
+.st-h.th{letter-spacing:-.01em;line-height:1.18}
+.st-sub{position:absolute;color:#9aa3b5;font-weight:400;white-space:nowrap}
+.st-phone{position:absolute;left:0;top:0;transform-origin:0 0;border-radius:58px;background:#0c0d10;padding:12px;box-shadow:0 0 0 2px #2b2f3a,0 40px 90px rgba(0,0,0,.6),0 0 120px rgba(47,107,255,.12)}
+.st-phone .scr2{position:relative;width:392px;height:697px;border-radius:46px;overflow:hidden;background:#fff}
+.st-phone .w2app{position:relative}
+.st-phone .w2l{opacity:1}
+.st-float{position:absolute;transform-origin:0 0;background:#0f1218;border:1.5px solid #2a3040;border-radius:28px;padding:22px 26px;color:#fff;display:flex;gap:18px;align-items:center;box-shadow:0 24px 60px rgba(0,0,0,.55);white-space:nowrap}
+.st-float img{width:64px;height:64px;border-radius:50%;object-fit:cover;flex:none}
+.st-float b{display:block;font:700 26px var(--th)}
+.st-float span{display:block;font:400 24px var(--th);color:#d5dbe8;margin-top:4px}
+.st-float em{display:block;font-style:normal;font:500 21px var(--th);color:#6f9bff;margin-top:8px}
+.st-float .ok{width:64px;height:64px;border-radius:50%;background:#2f6bff;display:grid;place-items:center;flex:none}
+.st-float .ok svg{width:36px;height:36px;color:#fff}
+.st-pills{position:absolute;display:flex;gap:12px}
+.st-pills i{font-style:normal;border:1.5px solid #3a4152;border-radius:999px;padding:10px 20px;color:#fff;font:500 22px var(--th)}
+/* interests screen */
+.isx{position:absolute;inset:0;background:#fff}
+.isx .bars{position:absolute;left:18px;right:18px;top:58px;display:flex;gap:6px}
+.isx .bars i{flex:1;height:5px;border-radius:3px;background:#e3e6ec}
+.isx .bars i.on{background:#2f6bff}
+.isx .eb{position:absolute;left:20px;top:86px;font:700 12.5px var(--th);color:#2f6bff;letter-spacing:.08em}
+.isx .hh{position:absolute;left:20px;right:20px;top:108px;font:800 30px/1.15 var(--th);color:#15171c}
+.isx .pp{position:absolute;left:20px;right:24px;top:196px;font:400 14.5px/1.5 var(--th);color:#5b6270}
+.isx .chips{position:absolute;left:16px;right:16px;top:258px;display:flex;flex-wrap:wrap;gap:10px}
+.isx .chips span{border-radius:20px;padding:9px 15px;font:600 15px var(--th);background:#f1f3f7;color:#3b3f47;box-shadow:inset 0 0 0 1.5px #e3e6ec}
+.isx .chips span.on{background:#2f6bff;color:#fff;box-shadow:none}
+.isx .cta{position:absolute;left:20px;right:20px;bottom:30px;height:52px;border-radius:26px;background:#2f6bff;color:#fff;display:grid;place-items:center;font:600 16.5px var(--th)}
+/* chat screen */
+.ctx{position:absolute;inset:0;background:#fff}
+.ctx .bar{position:absolute;left:0;right:0;top:44px;height:62px;border-bottom:1px solid #eef0f4;display:flex;align-items:center;gap:12px;padding:0 14px}
+.ctx .bar svg{width:24px;height:24px;color:#222}
+.ctx .bar img{width:40px;height:40px;border-radius:50%;object-fit:cover}
+.ctx .bar b{display:block;font:600 16.5px var(--app)}
+.ctx .bar small{display:block;font:400 12.5px var(--th);color:#22a55b}
+.ctx .bar .dt{margin-left:auto;display:flex}
+.ctx .day{position:absolute;left:0;right:0;top:122px;text-align:center;font:500 12px var(--th);color:#8a90a0}
+.ctx .msgs{position:absolute;left:12px;right:12px;top:150px;display:flex;flex-direction:column;gap:10px}
+.ctx .m{max-width:76%;padding:10px 14px;border-radius:20px;font:400 15px/1.45 var(--th)}
+.ctx .m.in{align-self:flex-start;background:#f0f2f6;color:#15171c;border-bottom-left-radius:6px}
+.ctx .m.out{align-self:flex-end;background:#2f6bff;color:#fff;border-bottom-right-radius:6px}
+.ctx .m.sp{align-self:flex-end;background:linear-gradient(135deg,#eaf1ff,#dbe7ff);color:#1f3fae;box-shadow:inset 0 0 0 1.5px #b9cdff;border-bottom-right-radius:6px}
+.ctx .m.sp small{display:flex;align-items:center;gap:5px;font:700 11px var(--th);letter-spacing:.04em;color:#2f6bff;margin-bottom:3px}
+.ctx .m.sp small img{width:14px}
+.ctx .rd{align-self:flex-end;font:500 11.5px var(--th);color:#8a90a0;margin-top:-4px}
+.ctx .in2{position:absolute;left:12px;right:64px;bottom:26px;height:46px;border-radius:23px;background:#f1f3f8;color:#8a90a0;display:flex;align-items:center;padding:0 16px;font:400 14.5px var(--th)}
+.ctx .snd{position:absolute;right:12px;bottom:26px;width:46px;height:46px;border-radius:50%;background:#2f6bff;color:#fff;display:grid;place-items:center}
+.ctx .snd svg{width:22px;height:22px}
 /* likes */
 .pt{position:absolute;left:22px;top:108px;font:700 31px var(--th);color:#15171c}
 .pc{position:absolute;right:24px;top:120px;font:500 19px "Roboto";color:#2f6bff}
@@ -380,8 +433,8 @@ svg.i{width:1em;height:1em;display:inline-block;vertical-align:middle;fill:curre
 const Q = new URLSearchParams(location.search);
 const COMP = Q.get('comp') || 'fd';
 const AR = Q.get('ar') || '169';
-const W = AR === '169' ? 1920 : 1080, H = AR === '169' ? 1080 : 1920;
-const DUR = {fd: 15.5, intro: 9.6, spark: 15, pattaya: 7, wink: 7.5, wink2: 8.4, spark2: 4.6, sparkout: 3.4, free: 6.0, freeout: 4.4, ivout: 4.2, wedout: 5.4}[COMP];
+const [W, H] = ({'169': [1920, 1080], '916': [1080, 1920], gp: [1080, 1920], as: [1290, 2796], fg: [1024, 500]})[AR];
+const DUR = {fd: 15.5, intro: 9.6, spark: 15, pattaya: 7, wink: 7.5, wink2: 8.4, spark2: 4.6, sparkout: 3.4, free: 6.0, freeout: 4.4, ivout: 4.2, wedout: 5.4, store: 1}[COMP];
 const LANG = Q.get('lang') || 'th'; // spark comp: th | en (fd and intro are Thai only)
 const tr = (th, en) => LANG === 'en' ? en : th;
 const VARIANT = Q.get('v') || 'b'; // fd feed order: a = Lina, Nami, Maya; b = Nami, Lina, Maya
@@ -1356,12 +1409,134 @@ function renderFree(t, S) {
   $$('.ht', D).forEach((h, i) => { const a = 4.65 + i * .06, q = clamp((t - a) / 1.3); h.style.opacity = t < a ? 0 : Math.sin(q * Math.PI) * .9; h.style.transform = `translateY(${-q * 50}px) scale(${.6 + q * .6})`; });
 }
 
+// ===========================================================================
+// COMPOSITION 10: store listing screenshots (Play 1080x1920, App Store 1290x2796) and the Play feature graphic (1024x500)
+// query: comp=store&ar=gp|as|fg&shot=1..7&lang=en|th
+// ===========================================================================
+const SHOT = +(Q.get('shot') || 1);
+const ST_COPY = {
+  1: {h: ['Dating.', 'Actually free.'], th: ['หาคู่', 'ฟรีจริง'], s: ['Meet, match and chat without paying.', 'ทำความรู้จัก แมตช์ และแชตได้โดยไม่ต้องจ่าย'], rot: -6, x: .14},
+  2: {h: ['Just scroll.', 'Meet someone.'], th: ['แค่เลื่อน', 'ก็ได้เจอใครสักคน'], s: ['Take control of your feed and scroll your way.', 'ควบคุมฟีดของคุณเอง แล้วเลื่อนในแบบของคุณ'], rot: 0, x: .5},
+  3: {h: ['Don’t just like.', 'Spark.'], th: ['ไม่ใช่แค่ Like', 'แต่เป็น Spark'], s: ['A Like with a message. It gets read first.', 'Like พร้อมข้อความ ที่จะถูกอ่านก่อน'], rot: 5, x: .86},
+  4: {h: ['Real people.', 'Reviewed photos.'], th: ['คนจริง', 'รูปผ่านการตรวจ'], s: ['Every photo is checked before anyone sees it.', 'ทุกรูปผ่านการตรวจก่อนที่ใครจะได้เห็น'], rot: -5, x: .16},
+  5: {h: ['Shared interests.', 'Real chemistry.'], th: ['ความสนใจร่วมกัน', 'เคมีที่ตรงกันจริง'], s: ['Pick what you love. Meet people who love it too.', 'เลือกสิ่งที่คุณรัก แล้วพบคนที่รักสิ่งเดียวกัน'], rot: 5, x: .86},
+  6: {h: ['It’s', 'mutual.'], th: ['ชอบกัน', 'ทั้งคู่'], s: ['Like back and your chat opens instantly.', 'กด Like กลับ แล้วแชตจะเปิดขึ้นทันที'], rot: -4, x: .5},
+  7: {h: ['From hey', 'to Saturday.'], th: ['จาก “สวัสดี”', 'สู่วันเสาร์'], s: ['Chat with read receipts the moment you match.', 'แชตได้ทันทีที่แมตช์ พร้อมสถานะอ่านแล้ว'], rot: 0, x: .5},
+};
+const ST_LOC = () => tr('เทลอาวีฟ อิสราเอล · ห่างไปประมาณ 3 กม.', 'Tel Aviv, Israel · About 3 km away');
+function stScreen(n) {
+  const disc = (who, name, pct, extra = '') => `<div class="w2l">${w2SB('10:04')}${w2HD()}${w2CARD(who, name, false, ST_LOC(), pct)}${w2ACTS()}${w2NAV()}${extra}</div>`;
+  if (n === 1) return disc('maya', 'Maya, 26', 60);
+  if (n === 2) return disc('shacharR', 'Shachar, 31', 60, `<div class="w2heart" style="opacity:1">${ic('heart')}</div><div class="w2lsent" style="opacity:1">${tr('ส่ง Like แล้ว', 'Like sent')}</div>`);
+  if (n === 4) return disc('shacharR', 'Shachar, 31', 60);
+  if (n === 3) {
+    const rows = LANG === 'en' ? ['1234567890', 'qwertyuiop', 'asdfghjkl', 'zxcvbnm'] : ['ๅ/-ภถุึคตจ', 'ๆไำพะัีรนย', 'ฟหกดเ้่าสว', 'ผปแอิืทมใ'];
+    const msg = tr('รอยยิ้มในรูปที่คาเฟ่ทำให้วันนี้ของผมดีขึ้นเลย สุดสัปดาห์นี้ไปกินกาแฟกันไหม?', 'Your smile in that café photo made my whole day. Coffee this weekend?');
+    return `<div class="w2l">${w2SB('10:05')}${w2HD()}${w2CARD('maya', 'Maya, 26', false, ST_LOC(), 60)}${w2ACTS()}${w2NAV()}
+      <div class="s2dim" style="opacity:1"></div>
+      <div class="s2sheet"><div class="tile"><img src="assets/spark.png" alt=""></div>
+        <div class="hl">${tr('มีบางอย่างในตัวคุณที่โดนใจ', 'Something about you clicked.')}</div><div class="dv"></div>
+        <div class="who"><img src="${PEOPLE.maya.face}" alt=""><div><b>Maya, 26</b><small>${tr('คำเชิญส่วนตัว', 'Personal invitation')}</small></div></div>
+        <div class="q">${tr('อะไรที่ทำให้คุณสนใจ?', 'What caught your attention?')}</div>
+        <div class="fld">${msg}<i class="car"></i></div>
+        <div class="cc"><span>${tr('10–140 ตัวอักษร', '10–140 characters')}</span><span>${[...msg].length}/140</span></div>
+        <div class="s2btn"><span class="ico"><img src="assets/spark.png" alt=""></span>${tr('ส่ง Spark', 'Send Spark')}</div></div>
+      <div class="s2kb">${rows.map((r, i) => `<div class="row" style="top:${12 + i * 50}px">${[...r].map(c => `<div class="k">${c}</div>`).join('')}</div>`).join('')}
+        <div class="row" style="top:212px"><div class="k w">?123</div><div class="k sp">${tr('เว้นวรรค', 'space')}</div><div class="k w">↵</div></div></div></div>`;
+  }
+  if (n === 5) {
+    const C = [['☕', 'กาแฟ', 'Coffee', 1], ['✈️', 'ท่องเที่ยว', 'Travel', 1], ['🎵', 'ดนตรี', 'Music', 1], ['🥾', 'เดินป่า', 'Hiking', 1], ['📷', 'ถ่ายภาพ', 'Photography'], ['🍳', 'ทำอาหาร', 'Cooking', 1], ['🎨', 'ศิลปะ', 'Art'], ['🧘', 'โยคะ', 'Yoga'], ['💃', 'เต้น', 'Dancing'], ['🎮', 'เกม', 'Gaming'], ['📚', 'อ่านหนังสือ', 'Reading'], ['🐶', 'สัตว์เลี้ยง', 'Pets']];
+    return `<div class="w2l"><div class="isx">${w2SB('10:03')}<div class="bars"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
+      <div class="eb">${tr('ความสนใจ', 'INTERESTS')}</div><div class="hh">${tr('คุณชอบอะไรบ้าง?', 'What are you into?')}</div>
+      <div class="pp">${tr('เลือก 5 ถึง 10 อย่าง แล้วเราจะแนะนำคนที่ชอบเหมือนกัน', 'Pick 5 to 10. We’ll show you people who share them.')}</div>
+      <div class="chips">${C.map(([e, t, en, on]) => `<span class="${on ? 'on' : ''}">${e} ${tr(t, en)}</span>`).join('')}</div>
+      <div class="cta">${tr('ต่อไป', 'Continue')}</div></div></div>`;
+  }
+  if (n === 6) {
+    const hearts = [[60, 150, '#3d7bff'], [330, 160, '#e2405a'], [44, 330, '#3d7bff'], [345, 315, '#3d7bff'], [96, 300, '#e2405a'], [300, 300, '#e2405a'], [170, 380, '#3d7bff'], [240, 390, '#e2405a']];
+    return `<div class="w2l w2m">${hearts.map(([x, y, c]) => `<svg class="ht" style="left:${x}px;top:${y}px" viewBox="0 0 24 24"><use href="#heart" fill="${c}"/></svg>`).join('')}
+      <div class="a a1" style="left:72px">${photo('shacharR')}</div><div class="a a2" style="left:196px">${photo('maya')}</div>
+      <div class="mk"><img src="assets/logo-192.png" alt=""></div>
+      <div class="t">${tr('แมตช์แล้ว!', 'It’s a match!')}</div><div class="s">${tr('คุณกับ Maya ถูกใจกันและกัน', 'You and Maya liked each other.')}</div>
+      <div class="b">${tr('ทักทายเลย', 'Say hello')}</div><div class="k">${tr('เลื่อนดูต่อ', 'Keep browsing')}</div></div>`;
+  }
+  // 7: chat
+  return `<div class="w2l"><div class="ctx">${w2SB('10:12')}
+    <div class="bar">${ic('back')}<img src="${PEOPLE.maya.face}" alt=""><div><b>Maya</b><small>${tr('ออนไลน์', 'Online')}</small></div><div class="dt">${ic('dots')}</div></div>
+    <div class="day">${tr('วันนี้', 'Today')}</div>
+    <div class="msgs">
+      <div class="m sp"><small><img src="assets/spark.png" alt="">SPARK</small>${tr('รอยยิ้มในรูปที่คาเฟ่ทำให้วันนี้ของผมดีขึ้นเลย', 'Your smile in that café photo made my whole day.')}</div>
+      <div class="m in">${tr('ฮ่าๆ ขอบคุณนะ! Spark ของคุณทำให้ยิ้มเลย', 'Haha thank you! Your Spark made me smile.')}</div>
+      <div class="m out">${tr('งั้นไปกินกาแฟกันไหม เสาร์นี้?', 'Coffee this Saturday, then?')}</div>
+      <div class="rd">${tr('อ่านแล้ว 10:11', 'Read 10:11')}</div>
+      <div class="m in">${tr('ได้เลย! เช้าวันเสาร์ ร้านริมหน้าต่างนะ ☕', 'Deal! Saturday morning, the café by the window ☕')}</div>
+    </div>
+    <div class="in2">${tr('ข้อความ...', 'Message...')}</div><div class="snd">${ic('up')}</div></div></div>`;
+}
+function stPhone(n) {
+  return el(`<div class="st-phone"><div class="scr2"><div class="w2app">${stScreen(n)}</div></div></div>`);
+}
+function stFloat(n) {
+  const card = {
+    3: `<img src="${PEOPLE.shacharR.face}" alt=""><div><b>Shachar · Spark ✨</b><span>${tr('“ไปกินกาแฟกันไหม สุดสัปดาห์นี้?”', '“Coffee this weekend?”')}</span><em>${tr('ถูกอ่านก่อนเสมอ', 'Gets read first')}</em></div>`,
+    4: `<div class="ok">${ic('shield')}</div><div><b>${tr('รูปผ่านการตรวจแล้ว', 'Photos reviewed')}</b><span>${tr('ก่อนที่ใครจะได้เห็น', 'Before anyone sees them')}</span></div>`,
+    5: `<img src="${PEOPLE.maya.face}" alt=""><div><b>${tr('คุณกับ Maya', 'You & Maya')}</b><span>${tr('มี 4 ความสนใจที่ตรงกัน', '4 shared interests')}</span><em>☕ ${tr('กาแฟ', 'Coffee')}  ✈️ ${tr('ท่องเที่ยว', 'Travel')}  🎵 ${tr('ดนตรี', 'Music')}  🥾 ${tr('เดินป่า', 'Hiking')}</em></div>`,
+    7: `<img src="${PEOPLE.maya.face}" alt=""><div><b>Maya · 10:12</b><span>${tr('เช้าวันเสาร์ ร้านริมหน้าต่างนะ ☕', 'Saturday morning, café by the window ☕')}</span></div>`,
+  }[n];
+  return card ? el(`<div class="st-float">${card}</div>`) : null;
+}
+function buildStore() {
+  const root = el(`<div class="st-root"></div>`);
+  stage.appendChild(root);
+  if (AR === 'fg') return buildFeature(root);
+  const C = ST_COPY[SHOT], s = W / 1080, th = LANG === 'th';
+  const lock = el(`<div class="st-lock" style="font-size:${44 * s}px;left:${56 * s}px;top:${70 * s}px"><img src="assets/logo-mark.png" alt="">Meet Bundle</div>`);
+  const hl = (th ? C.th : C.h);
+  const h = el(`<div class="st-h${th ? ' th' : ''}" style="left:${56 * s}px;top:${150 * s}px;font-size:${(th ? 92 : 104) * s}px;font-family:${th ? 'var(--th)' : 'Outfit,sans-serif'}">${hl[0]}<span class="b">${hl[1]}</span></div>`);
+  const sub = el(`<div class="st-sub" style="left:${58 * s}px;font-size:${32 * s}px;font-family:${th ? 'var(--th)' : 'Roboto,sans-serif'}">${th ? C.s[1] : C.s[0]}</div>`);
+  const ph = stPhone(SHOT), fl = stFloat(SHOT);
+  [lock, h, sub, ph].forEach(e => root.appendChild(e));
+  if (fl) root.appendChild(fl);
+  return {C, s, h, sub, ph, fl};
+}
+function renderStore(t, S) {
+  if (AR === 'fg') return;
+  const {C, s, h, sub, ph, fl} = S;
+  sub.style.top = (h.offsetTop + h.offsetHeight + 22 * s) + 'px';
+  const top = h.offsetTop + h.offsetHeight + (AR === 'as' ? 200 : 150) * s;
+  const k = (AR === 'as' ? .84 : .66) * W / 416;
+  const pw = 416 * k, phH = 721 * k;
+  const cx = C.x * W;
+  const x = Math.min(Math.max(cx - pw / 2, .05 * W), W - pw - .05 * W);
+  ph.style.transform = `translate(${x}px,${top}px) rotate(${C.rot}deg) scale(${k})`;
+  if (fl) {
+    const fs = 1.45 * s;
+    const fx = Math.max(24 * s, C.x > .6 ? 36 * s : W - fl.offsetWidth * fs - 36 * s);
+    const fy = Math.min(top + phH * .6, H - fl.offsetHeight * fs - 90 * s);
+    fl.style.transform = `translate(${fx}px,${fy}px) scale(${fs})`;
+  }
+}
+function buildFeature(root) {
+  const th = LANG === 'th';
+  root.style.background = 'radial-gradient(70% 90% at 80% 60%,#0b1530 0,#05070c 55%,#000 100%)';
+  const lock = el(`<div class="st-lock" style="font-size:30px;left:56px;top:58px"><img src="assets/logo-mark.png" alt="">Meet Bundle</div>`);
+  const h = el(`<div class="st-h${th ? ' th' : ''}" style="left:54px;top:128px;font-size:${th ? 56 : 66}px;font-family:${th ? 'var(--th)' : 'Outfit,sans-serif'}">${th ? 'ประกายเล็กๆ' : 'A little spark.'}<span class="b">${th ? 'ความสัมพันธ์ที่จริงใจ' : 'A real connection.'}</span></div>`);
+  const sub = el(`<div class="st-sub" style="left:56px;top:${th ? 300 : 300}px;font-size:22px;font-family:${th ? 'var(--th)' : 'Roboto,sans-serif'}">${tr('หาคู่ฟรี ด้วยความสนใจร่วมกันและโปรไฟล์จริง', 'Free dating with shared interests and real profiles.')}</div>`);
+  const pills = el(`<div class="st-pills" style="left:56px;top:350px">${[tr('ฟรี', 'Free'), 'Sparks', tr('รูปผ่านการตรวจ', 'Reviewed photos')].map(x => `<i>${x}</i>`).join('')}</div>`);
+  const mk = (who, name) => el(`<div class="st-phone"><div class="scr2"><div class="w2app"><div class="w2l">${w2SB('10:04')}${w2HD()}${w2CARD(who, name, false, ST_LOC(), 60)}${w2ACTS()}${w2NAV()}</div></div></div></div>`);
+  const p1 = mk('shacharR', 'Shachar, 31'), p2 = mk('maya', 'Maya, 26');
+  [lock, h, sub, pills, p1, p2].forEach(e => root.appendChild(e));
+  p1.style.transform = 'translate(600px,92px) rotate(-6deg) scale(.6)';
+  p2.style.transform = 'translate(790px,36px) rotate(5deg) scale(.64)';
+  return {};
+}
+
 // ---------- boot ----------
 window.ready = (async () => {
   const svg = await (await fetch('assets/icons.svg')).text();
   document.body.insertAdjacentHTML('afterbegin', svg);
-  const S = {fd: buildFD, intro: buildIntro, spark: buildSpark, pattaya: buildPattaya, wink: buildWink, wink2: buildWink2, spark2: buildSpark2, sparkout: buildSparkOut, free: buildFree, freeout: buildSparkOut, ivout: buildSparkOut, wedout: buildSparkOut}[COMP]();
-  const R = {fd: renderFD, intro: renderIntro, spark: renderSpark, pattaya: renderPattaya, wink: renderWink, wink2: renderWink2, spark2: renderSpark2, sparkout: renderSparkOut, free: renderFree, freeout: renderSparkOut, ivout: renderSparkOut, wedout: renderSparkOut}[COMP];
+  const S = {fd: buildFD, intro: buildIntro, spark: buildSpark, pattaya: buildPattaya, wink: buildWink, wink2: buildWink2, spark2: buildSpark2, sparkout: buildSparkOut, free: buildFree, freeout: buildSparkOut, ivout: buildSparkOut, wedout: buildSparkOut, store: buildStore}[COMP]();
+  const R = {fd: renderFD, intro: renderIntro, spark: renderSpark, pattaya: renderPattaya, wink: renderWink, wink2: renderWink2, spark2: renderSpark2, sparkout: renderSparkOut, free: renderFree, freeout: renderSparkOut, ivout: renderSparkOut, wedout: renderSparkOut, store: renderStore}[COMP];
   window.render = (t) => R(t, S);
   await document.fonts.ready;
   await Promise.all([...document.images].map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; })));

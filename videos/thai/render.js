@@ -4,9 +4,9 @@
 //   node render.js <comp> <ar> --stills 1,2.5,9     PNG stills into ./stills
 //   add --v a for the Lina-first feed (fd only; default b = Nami first)
 //
-//   add --lang en for English (spark only; default th)
+//   add --lang en for English (default th); add --shot N for the store screenshots (1-7)
 //
-// comp: fd | intro | spark    ar: 169 | 916
+// comp: fd | intro | spark | ... | store    ar: 169 | 916 | gp (Play 1080x1920) | as (App Store 1290x2796) | fg (feature graphic 1024x500)
 'use strict';
 const http = require('http');
 const fs = require('fs');
@@ -32,7 +32,7 @@ function serve() {
 
 async function main() {
   const [comp, ar, ...rest] = process.argv.slice(2);
-  if (!['fd', 'intro', 'spark', 'pattaya', 'wink', 'wink2', 'spark2', 'sparkout', 'free', 'freeout', 'ivout', 'wedout'].includes(comp) || !['169', '916'].includes(ar)) {
+  if (!['fd', 'intro', 'spark', 'pattaya', 'wink', 'wink2', 'spark2', 'sparkout', 'free', 'freeout', 'ivout', 'wedout', 'store'].includes(comp) || !['169', '916', 'gp', 'as', 'fg'].includes(ar)) {
     console.error('usage: node render.js <fd|intro|spark|pattaya|wink|wink2|spark2|sparkout|free|freeout|ivout|wedout> <169|916> [out.mp4 | --stills t1,t2] [--v a|b] [--lang th|en]');
     process.exit(2);
   }
@@ -44,11 +44,13 @@ async function main() {
   const lIdx = rest.indexOf('--lang');
   const lang = lIdx >= 0 ? rest[lIdx + 1] : 'th';
   if (!['th', 'en'].includes(lang)) { console.error('--lang must be th or en'); process.exit(2); }
+  const sIdx = rest.indexOf('--shot');
+  const shot = sIdx >= 0 ? rest[sIdx + 1] : '1';
   const out = stills ? null : (rest[0] && !rest[0].startsWith('--') ? rest[0] : path.join(ROOT, 'out', `${comp}-${ar}.mp4`));
 
   const srv = await serve();
-  const url = `http://127.0.0.1:${srv.address().port}/scene.html?comp=${comp}&ar=${ar}&v=${variant}&lang=${lang}`;
-  const [W, H] = ar === '169' ? [1920, 1080] : [1080, 1920];
+  const url = `http://127.0.0.1:${srv.address().port}/scene.html?comp=${comp}&ar=${ar}&v=${variant}&lang=${lang}&shot=${shot}`;
+  const [W, H] = ({'169': [1920, 1080], '916': [1080, 1920], gp: [1080, 1920], as: [1290, 2796], fg: [1024, 500]})[ar];
   const browser = await chromium.launch();
   try {
     const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: 1 });
@@ -62,7 +64,7 @@ async function main() {
       fs.mkdirSync(path.join(ROOT, 'stills'), { recursive: true });
       for (const t of stills) {
         await page.evaluate((t) => window.render(t), t);
-        await stage.screenshot({ path: path.join(ROOT, 'stills', `${comp}-${lang}-${ar}-${t.toFixed(2)}.png`) });
+        await stage.screenshot({ path: path.join(ROOT, 'stills', `${comp}-${lang}-${ar}${comp === 'store' ? '-' + shot : ''}-${t.toFixed(2)}.png`) });
       }
       return;
     }
