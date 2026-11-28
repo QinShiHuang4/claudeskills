@@ -1520,7 +1520,7 @@ function buildFeature(root) {
   const th = LANG === 'th';
   root.style.background = 'radial-gradient(70% 90% at 80% 60%,#0b1530 0,#05070c 55%,#000 100%)';
   const lock = el(`<div class="st-lock" style="font-size:30px;left:56px;top:58px"><img src="assets/logo-mark.png" alt="">Meet Bundle</div>`);
-  const h = el(`<div class="st-h${th ? ' th' : ''}" style="left:54px;top:128px;font-size:${th ? 56 : 66}px;font-family:${th ? 'var(--th)' : 'Outfit,sans-serif'}">${th ? 'ประกายเล็กๆ' : 'A little spark.'}<span class="b">${th ? 'ความสัมพันธ์ที่จริงใจ' : 'A real connection.'}</span></div>`);
+  const h = el(`<div class="st-h${th ? ' th' : ''}" style="left:54px;top:128px;font-size:${th ? 56 : 66}px;font-family:${th ? 'var(--th)' : 'Outfit,sans-serif'}">${th ? 'ประกายเล็กๆ' : 'A little spark.'}<span class="b">${th ? 'ความสัมพันธ์ที่ยิ่งใหญ่' : 'Big connection.'}</span></div>`);
   const sub = el(`<div class="st-sub" style="left:56px;top:${th ? 300 : 300}px;font-size:22px;font-family:${th ? 'var(--th)' : 'Roboto,sans-serif'}">${tr('หาคู่ฟรี ด้วยความสนใจร่วมกันและโปรไฟล์จริง', 'Free dating with shared interests and real profiles.')}</div>`);
   const pills = el(`<div class="st-pills" style="left:56px;top:350px">${[tr('ฟรี', 'Free'), 'Sparks', tr('รูปผ่านการตรวจ', 'Reviewed photos')].map(x => `<i>${x}</i>`).join('')}</div>`);
   const mk = (who, name) => el(`<div class="st-phone"><div class="scr2"><div class="w2app"><div class="w2l">${w2SB('10:04')}${w2HD()}${w2CARD(who, name, false, ST_LOC(), 60)}${w2ACTS()}${w2NAV()}</div></div></div></div>`);
