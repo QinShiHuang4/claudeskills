@@ -377,6 +377,12 @@ svg.i{width:1em;height:1em;display:inline-block;vertical-align:middle;fill:curre
 .st-phone .w2heart{top:250px}.st-phone .w2lsent{top:520px}
 .st-phone .s2kb{top:573px}
 .st-phone .s2sheet{top:52px;border-radius:22px}
+.st-phone .w2spark{background:none;box-shadow:none;width:96px;height:96px;left:142px;top:600px}
+.st-phone .w2spark img{width:96px}
+.st-phone .s2sheet .tile{background:none;box-shadow:none;width:76px;height:76px;margin-left:-38px;top:10px}
+.st-phone .s2sheet .tile img{width:76px}
+.st-pop .chk{width:52px;height:52px;border-radius:50%;background:#1d9bf0;display:grid;place-items:center;flex:none}
+.st-pop .chk svg{width:30px;height:30px;color:#fff}
 .st-phone .w2m .a{top:250px}.st-phone .w2m .mk{top:316px}.st-phone .w2m .t{top:410px}.st-phone .w2m .s{top:460px}.st-phone .w2m .b{top:502px}.st-phone .w2m .k{top:566px}
 .st-phone .w2m .ht{transform:translateY(80px)}
 .st-phone .w2sb{top:6px}
@@ -1471,6 +1477,17 @@ const ST_POPS = {
   3: [{html: () => `<img src="${PEOPLE.shacharR.face}" alt=""><div><b>${tr('Shachar ส่ง Spark ✨', 'Shachar sent a Spark ✨')}</b><span>${tr('“ไปกินกาแฟกันไหม?”', '“Coffee this weekend?”')}</span></div>`, cls: 'sq', x: -.1, y: .6},
       {html: () => `<div class="ic2" style="background:#16213f"><img src="assets/spark.png" alt="" style="width:40px;height:40px;border-radius:0"></div><div><b>${tr('ถูกอ่านก่อนเสมอ', 'Read first')}</b><span>${tr('Like พร้อมข้อความ', 'A Like with a message')}</span></div>`, x: .5, y: .74}],
 };
+Object.assign(ST_POPS, {
+  2: [{html: () => `<img src="${PEOPLE.shacharR.face}" alt=""><div><b>${tr('Shachar ส่ง Wink ให้คุณ 😉', 'Shachar winked at you 😉')}</b><span>${tr('เมื่อสักครู่', 'now')}</span></div>`, x: .5, y: .2},
+      {html: () => `<b>${tr('+3 คนถูกใจคุณ', '+3 new likes')}</b>`, cls: 'match', x: -.06, y: .62}],
+  4: [{html: () => `<div class="chk">${ic('shield')}</div><div><b>${tr('รูปผ่านการตรวจแล้ว', 'Photo reviewed')}</b><span>${tr('ก่อนที่ใครจะได้เห็น', 'before anyone sees it')}</span></div>`, x: .52, y: .18},
+      {html: () => `<img src="${PEOPLE.shacharR.face}" alt=""><div><b>Shachar, 31 <span style="display:inline;color:#1d9bf0">✓</span></b><span>${tr('โปรไฟล์ยืนยันแล้ว', 'Verified profile')}</span></div>`, x: -.1, y: .6}],
+  5: [{html: () => `<img src="${PEOPLE.maya.face}" alt=""><div><b>${tr('คุณกับ Maya', 'You & Maya')}</b><span>${tr('4 ความสนใจที่ตรงกัน', '4 shared interests')} ☕✈️🎵🥾</span></div>`, cls: 'sq', x: -.1, y: .66}],
+  6: [{html: () => `<b>${tr('แชตเปิดแล้ว 💬', 'Chat unlocked 💬')}</b>`, cls: 'match', x: .6, y: .62},
+      {html: () => `<img src="${PEOPLE.maya.face}" alt=""><div><b>${tr('Maya ถูกใจคุณด้วย', 'Maya likes you too')}</b><span>${tr('เมื่อสักครู่', 'just now')}</span></div>`, x: -.12, y: .16}],
+  7: [{html: () => `<img src="${PEOPLE.maya.face}" alt=""><div><b>Maya</b><span>${tr('เสาร์นี้ ☕ เจอกันนะ', 'Saturday ☕ see you there')}</span></div>`, x: .5, y: .72},
+      {html: () => `<b>${tr('อ่านแล้ว ✓✓', 'Read ✓✓')}</b>`, cls: 'match', x: -.06, y: .38}],
+});
 const ST_HEARTS = [[.95, .08, '#e2405a', 1], [1.02, .3, '#3d7bff', .7], [-.06, .38, '#3d7bff', .8], [.9, .55, '#e2405a', .6]];
 const ST_LOC = () => tr('เทลอาวีฟ อิสราเอล · ห่างไปประมาณ 3 กม.', 'Tel Aviv, Israel · About 3 km away');
 function stScreen(n) {
@@ -1522,11 +1539,12 @@ function stScreen(n) {
     </div>
     <div class="in2">${tr('ข้อความ...', 'Message...')}</div><div class="snd">${ic('up')}</div></div></div>`;
 }
+const stSparkBtn = (html) => html.replace(/<div class="w2spark"><img src="assets\/spark.png" alt=""><\/div>/g, '<div class="w2spark"><img src="assets/spark-button.png" alt=""></div>').replace(/<div class="tile"><img src="assets\/spark.png" alt=""><\/div>/g, '<div class="tile"><img src="assets/spark-button.png" alt=""></div>');
 function stPhone(n, tilt) {
   const t = tilt || {ry: -16, rx: 6, rz: 0};
   return el(`<div class="st-stage3"><div class="st-dev st-phone" style="transform:rotateY(${t.ry}deg) rotateX(${t.rx}deg) rotateZ(${t.rz}deg)">
     <div class="bk"></div><div class="sd l"></div><div class="sd r"></div>
-    <div class="fr"><div class="bz"><div class="scr2"><div class="w2app">${stScreen(n)}</div><div class="island"></div><div class="glare"></div></div></div></div>
+    <div class="fr"><div class="bz"><div class="scr2"><div class="w2app">${stSparkBtn(stScreen(n))}</div><div class="island"></div><div class="glare"></div></div></div></div>
     <div class="btn" style="left:-3px;top:190px;height:46px"></div><div class="btn" style="left:-3px;top:262px;height:80px"></div><div class="btn" style="left:-3px;top:356px;height:80px"></div><div class="btn" style="right:-3px;top:282px;height:118px"></div>
   </div></div>`);
 }
