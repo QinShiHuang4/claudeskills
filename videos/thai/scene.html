@@ -995,7 +995,7 @@ function renderWink(t, S) {
 function buildWink2() {
   const en = LANG === 'en';
   const SB = (tm) => `<div class="w2sb"><span class="tm">${tm}</span><div class="hole"></div><div class="ic"><div class="sig"><i style="height:4px"></i><i style="height:7px"></i><i style="height:10px"></i><i style="height:12px;opacity:.3"></i></div><svg width="16" height="12" viewBox="0 0 16 12"><path d="M8 12 0 3.5C4.5-.8 11.5-.8 16 3.5Z" fill="#111"/></svg><div class="bat"></div></div></div>`;
-  const HD = (tune = true) => `<div class="w2hd"><div class="l">${ic('moon')}</div><div class="w2logo"><img src="assets/logo-192.png" alt="">bundle</div><div class="r">${ic('refresh')}${tune ? ic('tune') : ''}</div></div>`;
+  const HD = (tune = true) => `<div class="w2hd"><div class="l">${ic('moon')}</div><div class="w2logo"><img src="assets/logo-192.png" alt="">Meet Bundle</div><div class="r">${ic('refresh')}${tune ? ic('tune') : ''}</div></div>`;
   const NAV = () => `<div class="w2nav">${[['compass-f', tr('ค้นพบ', 'Discover'), 1], ['heart-o', tr('ถูกใจคุณ', 'Likes')], ['chats', tr('แมตช์', 'Matches')], ['user', tr('โปรไฟล์', 'Profile')]].map(([i, l, on], k) => `<div class="it${on ? ' on' : ''}" style="left:${49 + k * 98}px">${ic(i)}${l}</div>`).join('')}
     <div class="sys"><i style="left:94px;width:0;height:0;border-style:solid;border-width:7px 12px 7px 0;border-color:transparent #3b3f47 transparent transparent;background:none"></i><i style="left:186px;width:16px;height:16px;border-radius:50%;top:-1px"></i><i style="left:285px;width:14px;height:14px;border-radius:2px"></i></div></div>`;
   const NAVL = () => NAV().replace('it on" style="left:49px"', 'it" style="left:49px"').replace(ic('compass-f'), ic('compass')).replace(`style="left:147px">${ic('heart-o')}`, `style="left:147px">${ic('heart')}`).replace(`<div class="it" style="left:147px">`, `<div class="it on" style="left:147px">`);
@@ -1023,7 +1023,7 @@ function buildWink2() {
   const herDiscover = `<div class="w2l" id="LB">${SB('9:42')}${HD()}${CARD('omerR', 'Omer, 25', true)}${ACTS()}
       <div class="w2heart">${ic('heart')}</div><div class="w2lsent">${tr('ส่ง Like แล้ว', 'Like sent')}</div>
       <div class="w2tap"></div>${NAV()}${WHO('linaR', 'Lina')}
-      <div class="w2not"><img src="assets/app-icon.png" alt=""><div><small>BUNDLE · ${tr('ตอนนี้', 'now')}</small><b>${tr('Omer ส่ง Wink ให้คุณ 😉', 'Omer winked at you 😉')}</b><span>${tr('ส่ง Wink กลับ, Like หรือ Spark', 'Wink back, Like or Spark')}</span></div></div></div>`;
+      <div class="w2not"><img src="assets/app-icon.png" alt=""><div><small>MEET BUNDLE · ${tr('ตอนนี้', 'now')}</small><b>${tr('Omer ส่ง Wink ให้คุณ 😉', 'Omer winked at you 😉')}</b><span>${tr('ส่ง Wink กลับ, Like หรือ Spark', 'Wink back, Like or Spark')}</span></div></div></div>`;
   const lk = (who, name, x, y, sel) => `<div class="w2lk${sel ? ' sel' : ''}" style="left:${x}px;top:${y}px"><div class="ph">${photo(who, true)}</div>
       ${sel ? `<div class="yw">😉 ${tr('คุณส่ง Wink ก่อน', 'You winked first')}</div>` : ''}<div class="n">${name}</div><div class="c">${tr('กรุงเทพฯ', 'Bangkok')}</div>
       <div class="ft"><div class="rm">${ic('x')}${tr('ลบ', 'Remove')}</div><div class="lb">${ic('heart')}Like</div></div></div>`;
