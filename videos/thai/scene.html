@@ -174,7 +174,7 @@ svg.i{width:1em;height:1em;display:inline-block;vertical-align:middle;fill:curre
 .hburst{position:absolute;z-index:9;color:var(--red);opacity:0}
 /* wink2: full-screen recreation of the real app's Wink flow (392x697 css, scaled to 1080x1920) */
 .w2app{position:absolute;left:0;top:0;width:392px;height:697px;transform-origin:0 0;overflow:hidden;background:#fff;font-family:var(--app);color:#15171c}
-.w2l{position:absolute;inset:0;background:#fff;opacity:0}
+.w2l{position:absolute;inset:0;background:#fff;opacity:0;isolation:isolate}
 .w2sb{position:absolute;left:0;right:0;top:0;height:42px;font:500 15px "Roboto";color:#111}
 .w2sb .tm{position:absolute;left:22px;top:12px}
 .w2sb .hole{position:absolute;left:50%;top:10px;width:22px;height:22px;margin-left:-11px;border-radius:50%;background:#0b0c10}
@@ -260,6 +260,39 @@ svg.i{width:1em;height:1em;display:inline-block;vertical-align:middle;fill:curre
 .w2intro .rg{position:absolute;left:50%;top:273px;border-radius:50%;border:2px solid rgba(255,255,255,.5)}
 .w2intro .t1,.w2intro .t2{position:absolute;left:0;right:0;text-align:center;color:#fff;font:800 28px/1.25 var(--th);white-space:nowrap}
 .w2intro .t2{color:#dbe6ff}
+/* spark2: Spark composer + Spark sent, recreated from the app recording */
+.s2dim{position:absolute;inset:0;background:rgba(60,64,72,.55);opacity:0;z-index:8}
+.s2sheet{position:absolute;left:10px;right:10px;top:0;height:410px;background:#fff;border-radius:0 0 22px 22px;z-index:9;box-shadow:0 8px 24px rgba(0,0,0,.15)}
+.s2sheet .tile{position:absolute;left:50%;top:20px;width:60px;height:60px;margin-left:-30px;border-radius:16px;background:linear-gradient(180deg,#fff,#e7efff);box-shadow:0 3px 10px rgba(47,107,255,.25),inset 0 0 0 1.5px #cfdcff;display:grid;place-items:center}
+.s2sheet .tile img{width:40px}
+.s2sheet .hl{position:absolute;left:0;right:0;top:88px;text-align:center;color:#2f6bff;font:600 17px var(--th)}
+.s2sheet .dv{position:absolute;left:22px;right:22px;top:124px;height:1px;background:#e6e8ee}
+.s2sheet .who{position:absolute;left:22px;top:142px;display:flex;gap:12px;align-items:center}
+.s2sheet .who img{width:40px;height:40px;border-radius:50%;object-fit:cover}
+.s2sheet .who b{display:block;font:600 15.5px var(--app);color:#15171c}
+.s2sheet .who small{display:block;font:400 13.5px var(--th);color:#5b6270;margin-top:2px}
+.s2sheet .q{position:absolute;left:22px;top:196px;font:400 13.5px var(--th);color:#4b5160}
+.s2sheet .fld{position:absolute;left:22px;right:22px;top:220px;height:84px;border-radius:12px;box-shadow:inset 0 0 0 2px #2f6bff;padding:10px 13px;font:400 16px/1.4 var(--th);color:#15171c}
+.s2sheet .fld .ph{color:#8a90a0}
+.s2sheet .car{display:inline-block;width:1.5px;height:18px;background:#15171c;vertical-align:-3px;margin-left:1px}
+.s2sheet .cc{position:absolute;left:22px;right:22px;top:316px;display:flex;justify-content:space-between;font:400 12px var(--th);color:#5b6270}
+.s2sheet .s2btn{position:absolute;left:22px;right:22px;top:342px;height:48px;border-radius:24px;background:#2f6bff;color:#fff;display:flex;align-items:center;justify-content:center;gap:8px;font:600 16.5px var(--th)}
+.s2sheet .s2btn .ico{width:22px;height:22px;border-radius:6px;background:#fff;display:grid;place-items:center}
+.s2sheet .s2btn .ico img{width:17px}
+.s2kb{position:absolute;left:0;right:0;top:418px;height:279px;background:#e9ebef;z-index:9}
+.s2kb .row{position:absolute;left:0;right:0;display:flex;justify-content:center;gap:6px}
+.s2kb .k{width:32px;height:38px;border-radius:7px;background:#fff;box-shadow:0 1px 0 rgba(0,0,0,.12);display:grid;place-items:center;font:400 17px var(--th);color:#15171c}
+.s2kb .k.on{background:#2f6bff;color:#fff}
+.s2kb .k.w{width:58px;background:#d6d9df;font-size:14px}
+.s2kb .k.sp{width:196px;font-size:14px}
+.s2sent{position:absolute;inset:0;z-index:10;opacity:0}
+.s2sent .veil{position:absolute;inset:0;background:rgba(255,255,255,.78)}
+.s2sent .ring{position:absolute;left:116px;top:220px;width:160px;height:160px;border-radius:50%;box-shadow:inset 0 0 0 2.5px #2f6bff;display:grid;place-items:center}
+.s2sent .ring .tile{width:96px;height:96px;border-radius:24px;background:linear-gradient(180deg,#fff,#e7efff);box-shadow:0 6px 18px rgba(47,107,255,.3),inset 0 0 0 1.5px #cfdcff;display:grid;place-items:center}
+.s2sent .ring .tile img{width:64px}
+.s2sent .t{position:absolute;left:0;right:0;top:404px;text-align:center;font:700 26px var(--th);color:#15171c}
+.s2sent .s{position:absolute;left:0;right:0;top:446px;text-align:center;font:400 15px var(--th);color:#3b3f47}
+.s2sent .dot{position:absolute;width:8px;height:8px;border-radius:50%;background:#6f9bff}
 /* likes */
 .pt{position:absolute;left:22px;top:108px;font:700 31px var(--th);color:#15171c}
 .pc{position:absolute;right:24px;top:120px;font:500 19px "Roboto";color:#2f6bff}
@@ -329,7 +362,7 @@ const Q = new URLSearchParams(location.search);
 const COMP = Q.get('comp') || 'fd';
 const AR = Q.get('ar') || '169';
 const W = AR === '169' ? 1920 : 1080, H = AR === '169' ? 1080 : 1920;
-const DUR = {fd: 15.5, intro: 9.6, spark: 15, pattaya: 7, wink: 7.5, wink2: 8.4}[COMP];
+const DUR = {fd: 15.5, intro: 9.6, spark: 15, pattaya: 7, wink: 7.5, wink2: 8.4, spark2: 4.6, sparkout: 3.4}[COMP];
 const LANG = Q.get('lang') || 'th'; // spark comp: th | en (fd and intro are Thai only)
 const tr = (th, en) => LANG === 'en' ? en : th;
 const VARIANT = Q.get('v') || 'b'; // fd feed order: a = Lina, Nami, Maya; b = Nami, Lina, Maya
@@ -359,6 +392,7 @@ const PEOPLE = {
   omer:    {img: 'assets/omer-club.jpg', face: 'assets/omer-face.jpg', pos: '50% 30%'},
   omerR:   {img: 'assets/omer-real.jpg', face: 'assets/omer-real-face.jpg', pos: '58% 40%'},
   linaR:   {img: 'assets/lina.jpg', face: 'assets/lina-face.jpg', pos: '50% 22%'},
+  shacharR:{img: 'assets/shachar-real.jpg', face: 'assets/shachar-real-face.jpg', pos: '47% 35%'},
 };
 const photo = (who, cover) => `<img src="${cover ? PEOPLE[who].img : PEOPLE[who].face}" style="width:100%;height:100%;object-fit:cover;object-position:${cover ? PEOPLE[who].pos : 'center'};display:block" alt="">`;
 
@@ -992,25 +1026,28 @@ function renderWink(t, S) {
 // COMPOSITION 6: Wink flow recreated from the real app recording (9:16 only)
 // intro -> his phone: Wink sent -> her phone: Winked at you, Like sent -> his Likes: like back -> match -> black outro
 // ===========================================================================
-function buildWink2() {
-  const en = LANG === 'en';
-  const SB = (tm) => `<div class="w2sb"><span class="tm">${tm}</span><div class="hole"></div><div class="ic"><div class="sig"><i style="height:4px"></i><i style="height:7px"></i><i style="height:10px"></i><i style="height:12px;opacity:.3"></i></div><svg width="16" height="12" viewBox="0 0 16 12"><path d="M8 12 0 3.5C4.5-.8 11.5-.8 16 3.5Z" fill="#111"/></svg><div class="bat"></div></div></div>`;
-  const HD = (tune = true) => `<div class="w2hd"><div class="l">${ic('moon')}</div><div class="w2logo"><img src="assets/logo-192.png" alt="">Meet Bundle</div><div class="r">${ic('refresh')}${tune ? ic('tune') : ''}</div></div>`;
-  const NAV = () => `<div class="w2nav">${[['compass-f', tr('ค้นพบ', 'Discover'), 1], ['heart-o', tr('ถูกใจคุณ', 'Likes')], ['chats', tr('แมตช์', 'Matches')], ['user', tr('โปรไฟล์', 'Profile')]].map(([i, l, on], k) => `<div class="it${on ? ' on' : ''}" style="left:${49 + k * 98}px">${ic(i)}${l}</div>`).join('')}
+// shared pieces of the real app's screens (392x697 css space)
+const w2SB = (tm) => `<div class="w2sb"><span class="tm">${tm}</span><div class="hole"></div><div class="ic"><div class="sig"><i style="height:4px"></i><i style="height:7px"></i><i style="height:10px"></i><i style="height:12px;opacity:.3"></i></div><svg width="16" height="12" viewBox="0 0 16 12"><path d="M8 12 0 3.5C4.5-.8 11.5-.8 16 3.5Z" fill="#111"/></svg><div class="bat"></div></div></div>`;
+const w2HD = (tune = true) => `<div class="w2hd"><div class="l">${ic('moon')}</div><div class="w2logo"><img src="assets/logo-192.png" alt="">Meet Bundle</div><div class="r">${ic('refresh')}${tune ? ic('tune') : ''}</div></div>`;
+const w2NAV = () => `<div class="w2nav">${[['compass-f', tr('ค้นพบ', 'Discover'), 1], ['heart-o', tr('ถูกใจคุณ', 'Likes')], ['chats', tr('แมตช์', 'Matches')], ['user', tr('โปรไฟล์', 'Profile')]].map(([i, l, on], k) => `<div class="it${on ? ' on' : ''}" style="left:${49 + k * 98}px">${ic(i)}${l}</div>`).join('')}
     <div class="sys"><i style="left:94px;width:0;height:0;border-style:solid;border-width:7px 12px 7px 0;border-color:transparent #3b3f47 transparent transparent;background:none"></i><i style="left:186px;width:16px;height:16px;border-radius:50%;top:-1px"></i><i style="left:285px;width:14px;height:14px;border-radius:2px"></i></div></div>`;
-  const NAVL = () => NAV().replace('it on" style="left:49px"', 'it" style="left:49px"').replace(ic('compass-f'), ic('compass')).replace(`style="left:147px">${ic('heart-o')}`, `style="left:147px">${ic('heart')}`).replace(`<div class="it" style="left:147px">`, `<div class="it on" style="left:147px">`);
-  const WHO = (who, name) => `<div class="w2who"><img src="${PEOPLE[who].face}" alt="">${tr(`โทรศัพท์ของ ${name}`, `${name}’s phone`)}</div>`;
-  const CARD = (who, name, winked) => `<div class="w2card${winked ? ' wk' : ''}"><div class="ph">${photo(who, true)}</div><div class="sh"></div>
+const w2NAVL = () => w2NAV().replace('it on" style="left:49px"', 'it" style="left:49px"').replace(ic('compass-f'), ic('compass')).replace(`style="left:147px">${ic('heart-o')}`, `style="left:147px">${ic('heart')}`).replace(`<div class="it" style="left:147px">`, `<div class="it on" style="left:147px">`);
+const w2WHO = (who, name) => `<div class="w2who"><img src="${PEOPLE[who].face}" alt="">${tr(`โทรศัพท์ของ ${name}`, `${name}’s phone`)}</div>`;
+const w2CARD = (who, name, winked, loc = tr('กรุงเทพฯ · ห่างไปประมาณ 1 กม.', 'Bangkok · About 1 km away'), pct = 52) => `<div class="w2card${winked ? ' wk' : ''}"><div class="ph">${photo(who, true)}</div><div class="sh"></div>
       <div class="prog"><i class="on"></i><i></i><i></i></div>
       <div class="nm">${name}${ic('verified')}</div>
-      <div class="loc">${ic('pin')}${tr('กรุงเทพฯ · ห่างไปประมาณ 1 กม.', 'Bangkok · About 1 km away')}</div>
+      <div class="loc">${ic('pin')}${loc}</div>
       <div class="cnt">1 / 3</div>
       ${winked ? `<div class="wchip">${ic('smile')}${tr('ส่ง Wink ให้คุณ', 'Winked at you')}</div>` : ''}
       <div class="vp">${tr('ดูโปรไฟล์', 'View profile')}</div>
-      <div class="pill">52% · ${tr('ความสนใจที่ตรงกัน', 'Shared interests')} ${ic('chev')}</div>
+      <div class="pill">${pct}% · ${tr('ความสนใจที่ตรงกัน', 'Shared interests')} ${ic('chev')}</div>
       <div class="wk2">${ic('smile')}</div><div class="wk2l">Wink</div></div>`;
-  const ACTS = () => `<div class="w2pass">${ic('x')}</div><div class="w2spark"><img src="assets/spark.png" alt=""></div><div class="w2like">${ic('heart')}</div>
+const w2ACTS = () => `<div class="w2pass">${ic('x')}</div><div class="w2spark"><img src="assets/spark.png" alt=""></div><div class="w2like">${ic('heart')}</div>
       <div class="w2lbl" style="left:88px;top:543px">Pass</div><div class="w2lbl" style="left:190px;top:558px;color:#2f6bff;font-weight:500">Spark</div><div class="w2lbl" style="left:298px;top:553px;color:#e2405a;font-weight:500">Like</div>`;
+
+function buildWink2() {
+  const en = LANG === 'en';
+  const SB = w2SB, HD = w2HD, NAV = w2NAV, NAVL = w2NAVL, WHO = w2WHO, CARD = w2CARD, ACTS = w2ACTS;
   const intro = `<div class="w2l" id="L0" style="opacity:1"><div class="w2intro">
       ${[0, 1].map(() => '<div class="rg"></div>').join('')}
       <div class="ic"><svg class="s1"><use href="#smile"/></svg><svg class="s2" style="opacity:0"><use href="#wink"/></svg></div>
@@ -1107,12 +1144,114 @@ function renderWink2(t, S) {
   bd.style.transform = `translate(${(W - bd.offsetWidth * 1.25) / 2}px,${700 + e1.offsetHeight + 110 + (1 - bpp) * 16}px) scale(1.25)`; bd.style.opacity = bpp;
 }
 
+// ===========================================================================
+// COMPOSITION 7: Spark flow (his phone: write and send a Spark; her phone: notification)
+// recreated from the app's Spark recording; COMPOSITION 8: Spark outro
+// ===========================================================================
+function buildSpark2() {
+  const msg = tr('รอยยิ้มในรูปที่คาเฟ่ทำให้วันนี้ของผมดีขึ้นเลย สุดสัปดาห์นี้ไปกินกาแฟกันไหม?', 'Your smile in that café photo made my whole day. Coffee this weekend?');
+  const seg = new Intl.Segmenter(LANG, {granularity: 'grapheme'});
+  const G = [...seg.segment(msg)].map(x => x.segment);
+  const rows = LANG === 'en'
+    ? ['1234567890', 'qwertyuiop', 'asdfghjkl', 'zxcvbnm']
+    : ['ๅ/-ภถุึคตจ', 'ๆไำพะัีรนย', 'ฟหกดเ้่าสว', 'ผปแอิืทมใ'];
+  const kb = `<div class="s2kb">${rows.map((r, i) => `<div class="row" style="top:${12 + i * 50}px">${[...r].map(c => `<div class="k" data-c="${c}">${c}</div>`).join('')}</div>`).join('')}
+      <div class="row" style="top:212px"><div class="k w">?123</div><div class="k sp">${tr('เว้นวรรค', 'space')}</div><div class="k w">↵</div></div></div>`;
+  const loc = tr('เทลอาวีฟ อิสราเอล · ห่างไปประมาณ 3 กม.', 'Tel Aviv, Israel · About 3 km away');
+  const his = `<div class="w2l" id="SA" style="opacity:1">${w2SB('10:04')}${w2HD()}${w2CARD('maya', 'Maya, 26', false, loc, 60)}${w2ACTS()}
+      <div class="w2tap"></div>${w2NAV()}${w2WHO('shacharR', 'Shachar')}
+      <div class="s2dim"></div>
+      <div class="s2sheet"><div class="tile"><img src="assets/spark.png" alt=""></div>
+        <div class="hl">${tr('มีบางอย่างในตัวคุณที่โดนใจ', 'Something about you clicked.')}</div><div class="dv"></div>
+        <div class="who"><img src="${PEOPLE.maya.face}" alt=""><div><b>Maya, 26</b><small>${tr('คำเชิญส่วนตัว', 'Personal invitation')}</small></div></div>
+        <div class="q">${tr('อะไรที่ทำให้คุณสนใจ?', 'What caught your attention?')}</div>
+        <div class="fld"><span class="txt"></span><i class="car"></i></div>
+        <div class="cc"><span>${tr('10–140 ตัวอักษร', '10–140 characters')}</span><span class="n">0/140</span></div>
+        <div class="s2btn"><span class="ico"><img src="assets/spark.png" alt=""></span>${tr('ส่ง Spark', 'Send Spark')}</div></div>
+      ${kb}
+      <div class="s2sent"><div class="veil"></div>${[...Array(10)].map(() => '<i class="dot"></i>').join('')}
+        <div class="ring"><div class="tile"><img src="assets/spark.png" alt=""></div></div>
+        <div class="t">${tr('ส่ง Spark แล้ว', 'Spark sent')}</div><div class="s">${tr('กล้าอีกนิด ได้ความสัมพันธ์ที่จริงใจ', 'A little courage. A real connection.')}</div></div></div>`;
+  const her = `<div class="w2l" id="SB">${w2SB('10:06')}${w2HD()}${w2CARD('shacharR', 'Shachar, 31', false, loc, 60)}${w2ACTS()}${w2NAV()}${w2WHO('maya', 'Maya')}
+      <div class="w2not" style="height:84px"><img src="assets/app-icon.png" alt=""><div><small>MEET BUNDLE · ${tr('ตอนนี้', 'now')}</small><b>${tr('Shachar ส่ง Spark ถึงคุณ ✨', 'Shachar sent you a Spark ✨')}</b><span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:300px">“${msg}”</span></div></div></div>`;
+  const app = el(`<div class="w2app">${his}${her}</div>`);
+  app.style.transform = `scale(${W / 392})`;
+  stage.appendChild(app);
+  return {app, G};
+}
+
+function renderSpark2(t, S) {
+  const {app, G} = S;
+  const A = $('#SA', app), B = $('#SB', app);
+  B.style.opacity = clamp((t - 3.35) / .2);
+  $('.w2who', A).style.opacity = 1 - prog(t, .5, .7);
+  // tap Spark
+  const tq = clamp((t - .35) / .3);
+  $('.w2tap', A).style.cssText += `;left:${190 - 28}px;top:${512 - 28}px;opacity:${t > .35 && tq < 1 ? (1 - tq) * .8 : 0};transform:scale(${.5 + tq * .6})`;
+  $('.w2spark', A).style.transform = `scale(${1 - (t > .35 && t < .6 ? Math.sin(clamp((t - .35) / .25) * Math.PI) * .1 : 0)})`;
+  // sheet + keyboard slide up
+  const up = prog(t, .55, .85, eo);
+  $('.s2dim', A).style.opacity = up;
+  $('.s2sheet', A).style.transform = `translateY(${(1 - up) * -430}px)`;
+  $('.s2kb', A).style.transform = `translateY(${(1 - up) * 290}px)`;
+  // typing
+  const n = Math.floor(G.length * clamp((t - .95) / 1.35));
+  const txt = G.slice(0, n).join('');
+  const fld = $('.fld .txt', A);
+  fld.textContent = n ? txt : '';
+  if (!n) fld.innerHTML = `<span class="ph">${tr('เขียนสักไม่กี่คำด้วยตัวคุณเอง…', 'Write a few words in your own voice…')}</span>`;
+  $('.cc .n', A).textContent = `${[...txt].length}/140`;
+  $('.car', A).style.opacity = (n < G.length || Math.floor(t * 2.5) % 2 === 0) ? 1 : 0;
+  const cur = n > 0 && n < G.length ? G[n - 1].toLowerCase() : '';
+  $$('.s2kb .k', A).forEach(k => k.classList.toggle('on', !!cur && k.dataset.c === cur[0]));
+  // send
+  const sp = t > 2.4 && t < 2.62 ? Math.sin(clamp((t - 2.4) / .22) * Math.PI) : 0;
+  $('.s2btn', A).style.transform = `scale(${1 - sp * .05})`;
+  // Spark sent
+  const so = $('.s2sent', A), si = prog(t, 2.55, 2.85, eo);
+  so.style.opacity = si;
+  $('.s2sheet', A).style.opacity = 1 - si; $('.s2kb', A).style.opacity = 1 - si; $('.s2dim', A).style.opacity = up * (1 - si);
+  const rp = prog(t, 2.6, 3.0, eback);
+  $('.ring', so).style.transform = `scale(${lerp(.5, 1, rp)})`;
+  $('.tile', so).style.transform = `scale(${lerp(.6, 1, prog(t, 2.7, 3.05, eback))})`;
+  [['.t', 2.8], ['.s', 2.9]].forEach(([c, a]) => { const q = prog(t, a, a + .25); $(c, so).style.opacity = q; $(c, so).style.transform = `translateY(${(1 - q) * 10}px)`; });
+  $$('.dot', so).forEach((d, i) => { const a = i / 10 * Math.PI * 2, q = clamp((t - 2.65) / 1.0), r = 90 + q * 60; d.style.left = 196 + Math.cos(a) * r * 1.1 - 4 + 'px'; d.style.top = 300 + Math.sin(a) * r - 4 + 'px'; d.style.opacity = t < 2.65 ? 0 : (1 - q) * .9; });
+  // her phone: notification
+  $('.w2who', B).style.opacity = 1 - prog(t, 4.2, 4.4);
+  const no = $('.w2not', B), ni = prog(t, 3.55, 3.85, eo);
+  no.style.opacity = t < 3.55 ? 0 : 1; no.style.transform = `translateY(${(1 - ni) * -100}px)`;
+}
+
+function buildSparkOut() {
+  const en = LANG === 'en';
+  const ff = en ? 'font-family:Outfit,sans-serif;letter-spacing:-.02em;line-height:1.1' : '';
+  const bg = el(`<div class="abs" style="width:${W}px;height:${H}px;background:radial-gradient(80% 60% at 50% 45%,#121a2c 0,#080b13 70%,#05070c 100%)"></div>`);
+  const e1 = el(`<div class="title" style="font-size:${en ? 100 : 92}px;text-align:center;${ff}"><span class="ln"><span class="w">${tr('ไม่ใช่แค่ Like', 'Don’t just like.')}</span></span><span class="ln"><span class="w">${tr('แต่เป็น', '')}</span><span class="w blue sparkw"${en ? '' : ' style="margin-left:.24em"'}>${tr('Spark', 'Spark.')}</span></span></div>`);
+  const sub = el(`<div class="tag" style="font-size:34px">${tr('Like พร้อมข้อความ ที่จะถูกอ่านก่อน', 'A Like with a message. It gets read first.')}</div>`);
+  const logo = lockup(52, true), bd = badges();
+  [bg, e1, sub, logo, bd].forEach(e => stage.appendChild(e));
+  return {e1, w: $$('.w', e1), sub, logo, bd};
+}
+
+function renderSparkOut(t, S) {
+  const {e1, w, sub, logo, bd} = S;
+  e1.style.transform = `translate(${(W - e1.offsetWidth) / 2}px,700px)`;
+  w.forEach((x, i) => setWord(x, prog(t, .15 + i * .16, .6 + i * .16)));
+  $('.sparkw', e1).style.textShadow = `0 0 ${18 + 10 * Math.sin(t * 3)}px rgba(61,123,255,.8)`;
+  const sp = prog(t, .7, 1.05);
+  sub.style.transform = `translate(${(W - sub.offsetWidth) / 2}px,${700 + e1.offsetHeight + 24 + (1 - sp) * 10}px)`; sub.style.opacity = sp;
+  const lp = prog(t, .75, 1.1);
+  logo.style.transform = `translate(${(W - logo.offsetWidth) / 2}px,${560 + (1 - lp) * 12}px)`; logo.style.opacity = lp;
+  const bp = prog(t, 1.0, 1.35, eo);
+  bd.style.transform = `translate(${(W - bd.offsetWidth * 1.25) / 2}px,${700 + e1.offsetHeight + 110 + (1 - bp) * 16}px) scale(1.25)`; bd.style.opacity = bp;
+}
+
 // ---------- boot ----------
 window.ready = (async () => {
   const svg = await (await fetch('assets/icons.svg')).text();
   document.body.insertAdjacentHTML('afterbegin', svg);
-  const S = {fd: buildFD, intro: buildIntro, spark: buildSpark, pattaya: buildPattaya, wink: buildWink, wink2: buildWink2}[COMP]();
-  const R = {fd: renderFD, intro: renderIntro, spark: renderSpark, pattaya: renderPattaya, wink: renderWink, wink2: renderWink2}[COMP];
+  const S = {fd: buildFD, intro: buildIntro, spark: buildSpark, pattaya: buildPattaya, wink: buildWink, wink2: buildWink2, spark2: buildSpark2, sparkout: buildSparkOut}[COMP]();
+  const R = {fd: renderFD, intro: renderIntro, spark: renderSpark, pattaya: renderPattaya, wink: renderWink, wink2: renderWink2, spark2: renderSpark2, sparkout: renderSparkOut}[COMP];
   window.render = (t) => R(t, S);
   await document.fonts.ready;
   await Promise.all([...document.images].map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; })));
