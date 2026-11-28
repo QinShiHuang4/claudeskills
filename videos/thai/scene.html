@@ -1226,8 +1226,8 @@ function buildSparkOut() {
   const en = LANG === 'en';
   const ff = en ? 'font-family:Outfit,sans-serif;letter-spacing:-.02em;line-height:1.1' : '';
   const bg = el(`<div class="abs" style="width:${W}px;height:${H}px;background:radial-gradient(80% 60% at 50% 45%,#121a2c 0,#080b13 70%,#05070c 100%)"></div>`);
-  const e1 = el(`<div class="title" style="font-size:${en ? 100 : 92}px;text-align:center;${ff}"><span class="ln"><span class="w">${tr('ไม่ใช่แค่ Like', 'Don’t just like.')}</span></span><span class="ln"><span class="w">${tr('แต่เป็น', '')}</span><span class="w blue sparkw"${en ? '' : ' style="margin-left:.24em"'}>${tr('Spark', 'Spark.')}</span></span></div>`);
-  const sub = el(`<div class="tag" style="font-size:34px">${tr('Like พร้อมข้อความ ที่จะถูกอ่านก่อน', 'A Like with a message. It gets read first.')}</div>`);
+  const e1 = el(`<div class="title" style="font-size:${en ? 100 : 92}px;text-align:center;${ff}"><span class="ln"><span class="w">${tr('ค้นหา', 'Find your')}</span><span class="w blue sparkw" style="margin-left:.24em">Spark</span></span><span class="ln"><span class="w">${tr('ของคุณ', 'on Meet Bundle')}</span></span></div>`);
+  const sub = el(`<div class="tag" style="font-size:34px">${tr('ดาวน์โหลดฟรีบน iOS และ Android', 'Free on iOS and Android')}</div>`);
   const logo = lockup(52, true), bd = badges();
   [bg, e1, sub, logo, bd].forEach(e => stage.appendChild(e));
   return {e1, w: $$('.w', e1), sub, logo, bd};
